@@ -38,6 +38,8 @@ out/
 .metadata
 bin/
 .settings/
+.classpath
+.project
 
 
 ### VS Code ###
