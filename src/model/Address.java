@@ -13,6 +13,17 @@ public class Address {
 
     private static LongGenerator idGenerator;
 
+    public Address(String street, long number, String city, String postalCode) {
+        this(idGenerator.next(), street, number, city, postalCode);
+    }
+
+    public Address(Long id, String street, long number, String city, String postalCode) {
+        this.id = id;
+        this.street = street;
+        this.number = number;
+        this.city = city;
+        this.postalCode = postalCode;
+    }
 
     public static void initGenerator() {
         Address.initGenerator(0L);
