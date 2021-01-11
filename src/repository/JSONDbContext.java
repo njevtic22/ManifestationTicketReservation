@@ -49,7 +49,7 @@ public class JSONDbContext {
         adminRepository = new AdminJSONRepository(adminFileSerializer);
     }
 
-    public Repository<Admin,Long> getAdminRepository() {
+    public UserRepository<Admin> getAdminRepository() {
         return adminRepository;
     }
 }

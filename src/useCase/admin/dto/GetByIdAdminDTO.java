@@ -2,7 +2,7 @@ package useCase.admin.dto;
 
 import model.Admin;
 
-public class GetAllAdminsDTO {
+public class GetByIdAdminDTO {
     public long id;
     public String name;
     public String surname;
@@ -10,8 +10,7 @@ public class GetAllAdminsDTO {
     public String dateOfBirth;
     public String gender;
 
-
-    public GetAllAdminsDTO(Admin admin, String parsedDate) {
+    public GetByIdAdminDTO(Admin admin, String parsedDate) {
         this.id = admin.getId();
         this.name = admin.getName();
         this.surname = admin.getSurname();

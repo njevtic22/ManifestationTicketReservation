@@ -1,6 +1,8 @@
 package program;
 
 import exception.AdminNotFoundException;
+import exception.ConstraintViolationException;
+import exception.UserNameTakenException;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +41,10 @@ public class Program {
         factory.buildAdminController();
 
         exception(AdminNotFoundException.class, factory.buildAdminNotFoundHandler());
+        exception(UserNameTakenException.class, factory.buildUserNameTakenHandler());
+        exception(ConstraintViolationException.class, factory.buildConstraintViolationHandler());
+
+        exception(IllegalArgumentException.class, factory.buildIllegalArgumentHandler());
         exception(ParseException.class, factory.buildParseHandler());
 
         exception(Exception.class, factory.buildExceptionHandler());

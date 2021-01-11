@@ -2,36 +2,58 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import model.Admin;
 import org.eclipse.jetty.http.HttpStatus;
 import request.AddAdminRequest;
+import request.UpdateAdminRequest;
+import request.UpdatePasswordRequest;
 import responseTransformer.GetAllAdminsTransformer;
+import responseTransformer.GetByIdAdminTransformer;
 import responseTransformer.dtoMappers.GetAllAdminsMapper;
+import responseTransformer.dtoMappers.GetByIdAdminMapper;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import useCase.admin.AddAdminUseCase;
+import useCase.admin.DeleteAdminUseCase;
 import useCase.admin.GetAllAdminsUseCase;
+import useCase.admin.GetByIdAdminUseCase;
+import useCase.admin.UpdateAdminUseCase;
+import useCase.admin.UpdatePasswordUseCase;
 import useCase.admin.command.AddAdminCommand;
+import useCase.admin.command.UpdateAdminCommand;
+import useCase.admin.command.UpdatePasswordCommand;
+import validation.SelfValidating;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 
+import static spark.Spark.delete;
 import static spark.Spark.get;
 import static spark.Spark.path;
 import static spark.Spark.post;
+import static spark.Spark.put;
 
 public class AdminController {
     private Gson gson;
     private final SimpleDateFormat formatter;
     private AddAdminUseCase addAdminUseCase;
     private GetAllAdminsUseCase getAllAdminsUseCase;
+    private GetByIdAdminUseCase getByIdAdminUseCase;
+    private UpdateAdminUseCase updateAdminUseCase;
+    private UpdatePasswordUseCase updatePasswordUseCase;
+    private DeleteAdminUseCase deleteAdminUseCase;
 
 
-    public AdminController(Gson gson, SimpleDateFormat formatter, AddAdminUseCase addAdminUseCase, GetAllAdminsUseCase getAllAdminsUseCase) {
+    public AdminController(Gson gson, SimpleDateFormat formatter, AddAdminUseCase addAdminUseCase, GetAllAdminsUseCase getAllAdminsUseCase, GetByIdAdminUseCase getByIdAdminUseCase, UpdateAdminUseCase updateAdminUseCase, UpdatePasswordUseCase updatePasswordUseCase, DeleteAdminUseCase deleteAdminUseCase) {
         this.gson = gson;
         this.formatter = formatter;
         this.addAdminUseCase = addAdminUseCase;
         this.getAllAdminsUseCase = getAllAdminsUseCase;
+        this.getByIdAdminUseCase = getByIdAdminUseCase;
+        this.updateAdminUseCase = updateAdminUseCase;
+        this.updatePasswordUseCase = updatePasswordUseCase;
+        this.deleteAdminUseCase = deleteAdminUseCase;
         this.setUpRoutes();
     }
 
@@ -40,6 +62,10 @@ public class AdminController {
             path("/admins", () -> {
                 post("", add);
                 get("", getAll, new GetAllAdminsTransformer(gson, new GetAllAdminsMapper(formatter)));
+                get("/:id", getById, new GetByIdAdminTransformer(gson, new GetByIdAdminMapper(formatter)));
+                put("/:id", update);
+                put("/:id/password", updatePassword);
+                delete("/:id", delete);
             });
         });
     }
@@ -49,7 +75,6 @@ public class AdminController {
         AddAdminRequest requestBody = gson.fromJson(request.body(), requestType);
 
         AddAdminCommand command = new AddAdminCommand(
-                requestBody.id,
                 requestBody.name,
                 requestBody.surname,
                 requestBody.username,
@@ -67,5 +92,49 @@ public class AdminController {
     public Route getAll = (Request request, Response response) -> {
         response.status(HttpStatus.OK_200);
         return getAllAdminsUseCase.getAllAdmins();
+    };
+
+    public Route getById = (Request request, Response response) -> {
+        Long id = SelfValidating.validId(request.params(":id"));
+        Admin admin = getByIdAdminUseCase.getByIdAdmin(id);
+        response.status(HttpStatus.OK_200);
+        return admin;
+    };
+
+    public Route update = (Request request, Response response) -> {
+        Type requestType = new TypeToken<UpdateAdminRequest>() {}.getType();
+        UpdateAdminRequest requestBody = gson.fromJson(request.body(), requestType);
+
+        UpdateAdminCommand command = new UpdateAdminCommand(
+                SelfValidating.validId(request.params(":id")),
+                requestBody.name,
+                requestBody.surname,
+                requestBody.username,
+                requestBody.dateOfBirth,
+                requestBody.gender
+        );
+        updateAdminUseCase.updateAdmin(command);
+        response.status(HttpStatus.OK_200);
+        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
+    };
+
+    public Route updatePassword = (Request request, Response response) -> {
+        Type requestType = new TypeToken<UpdatePasswordRequest>() {}.getType();
+        UpdatePasswordRequest requestBody = gson.fromJson(request.body(), requestType);
+
+        UpdatePasswordCommand command = new UpdatePasswordCommand(
+                SelfValidating.validId(request.params(":id")),
+                requestBody.password
+        );
+        updatePasswordUseCase.updatePassword(command);
+        response.status(HttpStatus.OK_200);
+        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
+    };
+
+    public Route delete = (Request request, Response response) -> {
+        Long id = SelfValidating.validId(request.params(":id"));
+        deleteAdminUseCase.deleteAdmin(id);
+        response.status(HttpStatus.OK_200);
+        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };
 }

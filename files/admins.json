@@ -1,3 +1,32 @@
 {
-
+  "1": {
+    "id": 1,
+    "name": "Petar",
+    "surname": "Petrović",
+    "username": "admin1",
+    "password": "123",
+    "dateOfBirth": "01.01.2010. 08:00:00",
+    "gender": "MALE",
+    "archived": false
+  },
+  "2": {
+    "id": 2,
+    "name": "Dejan",
+    "surname": "Dejanović",
+    "username": "admin2",
+    "password": "123",
+    "dateOfBirth": "01.02.2010. 08:00:00",
+    "gender": "MALE",
+    "archived": false
+  },
+  "3": {
+    "id": 3,
+    "name": "Jovan",
+    "surname": "Jovanović",
+    "username": "admin3",
+    "password": "123",
+    "dateOfBirth": "01.03.2010. 08:00:00",
+    "gender": "MALE",
+    "archived": false
+  }
 }

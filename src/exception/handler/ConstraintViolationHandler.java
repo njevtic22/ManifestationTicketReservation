@@ -1,13 +1,12 @@
 package exception.handler;
 
 import org.eclipse.jetty.http.HttpStatus;
-import program.ProgramFactory;
 import spark.ExceptionHandlerImpl;
 import spark.Request;
 import spark.Response;
 
-public class ParseHandler extends ExceptionHandlerImpl {
-    public ParseHandler(Class<? extends Exception> exceptionClass) {
+public class ConstraintViolationHandler extends ExceptionHandlerImpl {
+    public ConstraintViolationHandler(Class<? extends Exception> exceptionClass) {
         super(exceptionClass);
     }
 

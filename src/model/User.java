@@ -54,6 +54,10 @@ public abstract class User {
         return Objects.hash(id);
     }
 
+    public void archive() {
+        this.archived = true;
+    }
+
     public Long getId() {
         return id;
     }
