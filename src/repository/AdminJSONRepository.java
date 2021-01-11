@@ -66,10 +66,6 @@ public class AdminJSONRepository implements UserRepository<Admin>{
         return data.size();
     }
 
-    Map<Long, Admin> getData() {
-        return data;
-    }
-
     @Override
     public Optional<Admin> findByUserName(String userName) {
         for (Admin admin : data.values()) {
@@ -89,5 +85,9 @@ public class AdminJSONRepository implements UserRepository<Admin>{
                 return Optional.empty();
         }
         return adminOptional;
+    }
+
+    Map<Long, Admin> getData() {
+        return data;
     }
 }

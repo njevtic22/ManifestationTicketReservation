@@ -3,6 +3,7 @@ package program;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import controller.AdminController;
+import controller.SalesmanController;
 import exception.AdminNotFoundException;
 import exception.ConstraintViolationException;
 import exception.UserNameTakenException;
@@ -13,6 +14,7 @@ import exception.handler.ParseHandler;
 import exception.handler.UserNameTakenHandler;
 import repository.JSONDbContext;
 import service.AdminService;
+import service.SalesmanService;
 import spark.ExceptionHandler;
 
 import java.text.ParseException;
@@ -44,8 +46,10 @@ public class ProgramFactory {
     private JSONDbContext jsonDbContext;
 
     private AdminService adminService;
+    private SalesmanService salesmanService;
 
     private AdminController adminController;
+    private SalesmanController salesmanController;
 
     private ExceptionHandler adminNotFoundHandler;
     private ExceptionHandler userNameTakenHandler;
@@ -90,6 +94,21 @@ public class ProgramFactory {
             );
         }
         return adminController;
+    }
+
+    public SalesmanController buildSalesmanController() {
+        if (salesmanController == null) {
+            salesmanService = new SalesmanService(
+                    formatter,
+                    jsonDbContext.getSalesmanRepository()
+            );
+            salesmanController = new SalesmanController(
+                    gson,
+                    formatter,
+                    salesmanService
+            );
+        }
+        return salesmanController;
     }
 
     public ExceptionHandler buildAdminNotFoundHandler() {

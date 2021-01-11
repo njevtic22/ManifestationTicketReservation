@@ -39,6 +39,7 @@ public class Program {
         factory.buildDbContext();
 
         factory.buildAdminController();
+        factory.buildSalesmanController();
 
         exception(AdminNotFoundException.class, factory.buildAdminNotFoundHandler());
         exception(UserNameTakenException.class, factory.buildUserNameTakenHandler());

@@ -39,7 +39,7 @@ public class AdminService implements
     @Override
     public void addAdmin(AddAdminCommand command) throws ParseException {
         Optional<Admin> adminOptional = adminRepository.findByUserName(command.username);
-
+        // TODO: Implement checking if other type of users have same username
         if (adminOptional.isPresent())
             throw new UserNameTakenException(command.username);
 
