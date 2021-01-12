@@ -1,3 +1,68 @@
 {
-
+  "4": {
+    "manifestations": [],
+    "id": 4,
+    "name": "Ljubica",
+    "surname": "Ljubinčić",
+    "username": "salesman1",
+    "password": "123",
+    "dateOfBirth": "01.04.2010. 08:00:00",
+    "gender": "FEMALE",
+    "archived": false
+  },
+  "5": {
+    "manifestations": [],
+    "id": 5,
+    "name": "Marijana",
+    "surname": "Marijanović",
+    "username": "salesman2",
+    "password": "123",
+    "dateOfBirth": "01.05.2010. 08:00:00",
+    "gender": "FEMALE",
+    "archived": false
+  },
+  "6": {
+    "manifestations": [],
+    "id": 6,
+    "name": "Marina",
+    "surname": "Marinić",
+    "username": "salesman3",
+    "password": "123",
+    "dateOfBirth": "01.06.2010. 08:00:00",
+    "gender": "FEMALE",
+    "archived": false
+  },
+  "7": {
+    "manifestations": [],
+    "id": 7,
+    "name": "Dušan",
+    "surname": "Dušanović",
+    "username": "salesman4",
+    "password": "123",
+    "dateOfBirth": "01.07.2010. 08:00:00",
+    "gender": "MALE",
+    "archived": false
+  },
+  "8": {
+    "manifestations": [],
+    "id": 8,
+    "name": "Marko",
+    "surname": "Marković",
+    "username": "salesman5",
+    "password": "123",
+    "dateOfBirth": "01.08.2010. 08:00:00",
+    "gender": "MALE",
+    "archived": false
+  },
+  "9": {
+    "manifestations": [],
+    "id": 9,
+    "name": "Aljoša",
+    "surname": "Aljošić",
+    "username": "salesman6",
+    "password": "123",
+    "dateOfBirth": "01.09.2010. 08:00:00",
+    "gender": "MALE",
+    "archived": false
+  }
 }

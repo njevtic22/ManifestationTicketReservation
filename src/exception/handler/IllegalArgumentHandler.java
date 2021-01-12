@@ -14,6 +14,11 @@ public class IllegalArgumentHandler extends ExceptionHandlerImpl {
     public void handle(Exception e, Request request, Response response) {
         e.printStackTrace();
         response.status(HttpStatus.BAD_REQUEST_400);
-        response.body(e.getMessage());
+
+        String message = e.getMessage();
+        if (e.getMessage().startsWith("No enum constant model.Gender"))
+            message = "Invalid gender type. Allowed genders are MALE and FEMALE.";
+
+        response.body(message);
     }
 }

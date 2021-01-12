@@ -10,7 +10,6 @@ public class GetAllAdminsDTO {
     public String dateOfBirth;
     public String gender;
 
-
     public GetAllAdminsDTO(Admin admin, String parsedDate) {
         this.id = admin.getId();
         this.name = admin.getName();

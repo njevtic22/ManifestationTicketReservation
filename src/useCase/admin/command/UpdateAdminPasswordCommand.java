@@ -1,10 +1,10 @@
 package useCase.admin.command;
 
-public class UpdatePasswordCommand {
+public class UpdateAdminPasswordCommand {
     public Long id;
     public String password;
 
-    public UpdatePasswordCommand(Long id, String password) {
+    public UpdateAdminPasswordCommand(Long id, String password) {
         this.id = id;
         this.password = password;
     }

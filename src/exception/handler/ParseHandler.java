@@ -16,5 +16,18 @@ public class ParseHandler extends ExceptionHandlerImpl {
         e.printStackTrace();
         response.status(HttpStatus.BAD_REQUEST_400);
         response.body(e.getMessage());
+
+        String line = "=";
+        line = line.repeat(50);
+        System.out.println(line);
+        System.out.println(line);
+        System.out.println(line);
+        System.out.println(line);
+        System.out.println(line);
+        System.out.println(line);
+        System.out.println(line);
+        System.out.println(line);
+        System.out.println(line);
+        System.out.println(line);
     }
 }

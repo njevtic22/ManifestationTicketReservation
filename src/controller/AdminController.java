@@ -19,10 +19,10 @@ import useCase.admin.DeleteAdminUseCase;
 import useCase.admin.GetAllAdminsUseCase;
 import useCase.admin.GetByIdAdminUseCase;
 import useCase.admin.UpdateAdminUseCase;
-import useCase.admin.UpdatePasswordUseCase;
+import useCase.admin.UpdateAdminPasswordUseCase;
 import useCase.admin.command.AddAdminCommand;
 import useCase.admin.command.UpdateAdminCommand;
-import useCase.admin.command.UpdatePasswordCommand;
+import useCase.admin.command.UpdateAdminPasswordCommand;
 import validation.SelfValidating;
 
 import java.lang.reflect.Type;
@@ -41,18 +41,18 @@ public class AdminController {
     private GetAllAdminsUseCase getAllAdminsUseCase;
     private GetByIdAdminUseCase getByIdAdminUseCase;
     private UpdateAdminUseCase updateAdminUseCase;
-    private UpdatePasswordUseCase updatePasswordUseCase;
+    private UpdateAdminPasswordUseCase updateAdminPasswordUseCase;
     private DeleteAdminUseCase deleteAdminUseCase;
 
 
-    public AdminController(Gson gson, SimpleDateFormat formatter, AddAdminUseCase addAdminUseCase, GetAllAdminsUseCase getAllAdminsUseCase, GetByIdAdminUseCase getByIdAdminUseCase, UpdateAdminUseCase updateAdminUseCase, UpdatePasswordUseCase updatePasswordUseCase, DeleteAdminUseCase deleteAdminUseCase) {
+    public AdminController(Gson gson, SimpleDateFormat formatter, AddAdminUseCase addAdminUseCase, GetAllAdminsUseCase getAllAdminsUseCase, GetByIdAdminUseCase getByIdAdminUseCase, UpdateAdminUseCase updateAdminUseCase, UpdateAdminPasswordUseCase updateAdminPasswordUseCase, DeleteAdminUseCase deleteAdminUseCase) {
         this.gson = gson;
         this.formatter = formatter;
         this.addAdminUseCase = addAdminUseCase;
         this.getAllAdminsUseCase = getAllAdminsUseCase;
         this.getByIdAdminUseCase = getByIdAdminUseCase;
         this.updateAdminUseCase = updateAdminUseCase;
-        this.updatePasswordUseCase = updatePasswordUseCase;
+        this.updateAdminPasswordUseCase = updateAdminPasswordUseCase;
         this.deleteAdminUseCase = deleteAdminUseCase;
         this.setUpRoutes();
     }
@@ -122,11 +122,11 @@ public class AdminController {
         Type requestType = new TypeToken<UpdatePasswordRequest>() {}.getType();
         UpdatePasswordRequest requestBody = gson.fromJson(request.body(), requestType);
 
-        UpdatePasswordCommand command = new UpdatePasswordCommand(
+        UpdateAdminPasswordCommand command = new UpdateAdminPasswordCommand(
                 SelfValidating.validId(request.params(":id")),
                 requestBody.password
         );
-        updatePasswordUseCase.updatePassword(command);
+        updateAdminPasswordUseCase.updatePassword(command);
         response.status(HttpStatus.OK_200);
         return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };

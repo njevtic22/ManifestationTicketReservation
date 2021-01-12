@@ -4,16 +4,18 @@ import exception.AdminNotFoundException;
 import exception.UserNameTakenException;
 import model.Admin;
 import model.Gender;
+import model.Salesman;
+import model.User;
 import repository.UserRepository;
 import useCase.admin.AddAdminUseCase;
 import useCase.admin.DeleteAdminUseCase;
 import useCase.admin.GetAllAdminsUseCase;
 import useCase.admin.GetByIdAdminUseCase;
 import useCase.admin.UpdateAdminUseCase;
-import useCase.admin.UpdatePasswordUseCase;
+import useCase.admin.UpdateAdminPasswordUseCase;
 import useCase.admin.command.AddAdminCommand;
 import useCase.admin.command.UpdateAdminCommand;
-import useCase.admin.command.UpdatePasswordCommand;
+import useCase.admin.command.UpdateAdminPasswordCommand;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,23 +27,28 @@ public class AdminService implements
         GetAllAdminsUseCase,
         GetByIdAdminUseCase,
         UpdateAdminUseCase,
-        UpdatePasswordUseCase,
+        UpdateAdminPasswordUseCase,
         DeleteAdminUseCase {
     private final SimpleDateFormat formatter;
     private final UserRepository<Admin> adminRepository;
+    private final UserRepository<Salesman> salesmanRepository;
 
 
-    public AdminService(SimpleDateFormat formatter, UserRepository<Admin> adminRepository) {
+    public AdminService(SimpleDateFormat formatter, UserRepository<Admin> adminRepository, UserRepository<Salesman> salesmanRepository) {
         this.formatter = formatter;
         this.adminRepository = adminRepository;
+        this.salesmanRepository = salesmanRepository;
     }
 
     @Override
     public void addAdmin(AddAdminCommand command) throws ParseException {
-        Optional<Admin> adminOptional = adminRepository.findByUserName(command.username);
-        // TODO: Implement checking if other type of users have same username
-        if (adminOptional.isPresent())
+        if (isUsernameAdminTaken(command.username))
             throw new UserNameTakenException(command.username);
+
+        if (isUsernameSalesmanTaken(command.username))
+            throw new UserNameTakenException(command.username);
+
+        // TODO: Implement checking if customer have same username
 
         Admin admin = new Admin(
                 command.name,
@@ -70,9 +77,13 @@ public class AdminService implements
         Admin admin = adminRepository.findByIdAndArchivedFalse(command.id)
                 .orElseThrow(() -> new AdminNotFoundException(command.id));
 
-        Optional<Admin> adminOptional = adminRepository.findByUserName(command.username);
-        if (adminOptional.isPresent() && !adminOptional.get().getUsername().equals(admin.getUsername()))
+        if (isUsernameAdminTaken(command.username, admin))
             throw new UserNameTakenException(command.username);
+
+        if (isUsernameSalesmanTaken(command.username, admin))
+            throw new UserNameTakenException(command.username);
+
+        // TODO: Implement checking if customer have same username
 
         admin.setName(command.name);
         admin.setSurname(command.surname);
@@ -84,7 +95,7 @@ public class AdminService implements
     }
 
     @Override
-    public void updatePassword(UpdatePasswordCommand command) {
+    public void updatePassword(UpdateAdminPasswordCommand command) {
         Admin admin = adminRepository.findByIdAndArchivedFalse(command.id)
                 .orElseThrow(() -> new AdminNotFoundException(command.id));
 
@@ -101,5 +112,25 @@ public class AdminService implements
         admin.archive();
 
         adminRepository.save(admin);
+    }
+
+    private boolean isUsernameAdminTaken(String usernameToValidate) {
+        Optional<Admin> adminOptional = adminRepository.findByUserName(usernameToValidate);
+        return adminOptional.isPresent();
+    }
+
+    private boolean isUsernameAdminTaken(String usernameToValidate, User userToCheckIsSame) {
+        Optional<Admin> adminOptional = adminRepository.findByUserName(usernameToValidate);
+        return adminOptional.isPresent() && !adminOptional.get().getUsername().equals(userToCheckIsSame.getUsername());
+    }
+
+    private boolean isUsernameSalesmanTaken(String usernameToValidate) {
+        Optional<Salesman> salesmanOptional = salesmanRepository.findByUserName(usernameToValidate);
+        return salesmanOptional.isPresent();
+    }
+
+    private boolean isUsernameSalesmanTaken(String usernameToValidate, User userToCheckIsSame) {
+        Optional<Salesman> salesmanOptional = salesmanRepository.findByUserName(usernameToValidate);
+        return salesmanOptional.isPresent() && !salesmanOptional.get().getUsername().equals(userToCheckIsSame.getUsername());
     }
 }

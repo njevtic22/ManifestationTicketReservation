@@ -6,11 +6,13 @@ import controller.AdminController;
 import controller.SalesmanController;
 import exception.AdminNotFoundException;
 import exception.ConstraintViolationException;
+import exception.SalesmanNotFoundException;
 import exception.UserNameTakenException;
 import exception.handler.AdminNotFoundHandler;
 import exception.handler.ConstraintViolationHandler;
 import exception.handler.IllegalArgumentHandler;
 import exception.handler.ParseHandler;
+import exception.handler.SalesmanNotFoundHandler;
 import exception.handler.UserNameTakenHandler;
 import repository.JSONDbContext;
 import service.AdminService;
@@ -52,6 +54,7 @@ public class ProgramFactory {
     private SalesmanController salesmanController;
 
     private ExceptionHandler adminNotFoundHandler;
+    private ExceptionHandler salesmanNotFoundHandler;
     private ExceptionHandler userNameTakenHandler;
     private ExceptionHandler constraintViolationHandler;
 
@@ -80,7 +83,8 @@ public class ProgramFactory {
         if (adminController == null) {
             adminService = new AdminService(
                     formatter,
-                    jsonDbContext.getAdminRepository()
+                    jsonDbContext.getAdminRepository(),
+                    jsonDbContext.getSalesmanRepository()
             );
             adminController = new AdminController(
                     gson,
@@ -100,11 +104,17 @@ public class ProgramFactory {
         if (salesmanController == null) {
             salesmanService = new SalesmanService(
                     formatter,
-                    jsonDbContext.getSalesmanRepository()
+                    jsonDbContext.getSalesmanRepository(),
+                    jsonDbContext.getAdminRepository()
             );
             salesmanController = new SalesmanController(
                     gson,
                     formatter,
+                    salesmanService,
+                    salesmanService,
+                    salesmanService,
+                    salesmanService,
+                    salesmanService,
                     salesmanService
             );
         }
@@ -115,6 +125,12 @@ public class ProgramFactory {
         if (adminNotFoundHandler == null)
             adminNotFoundHandler = new AdminNotFoundHandler(AdminNotFoundException.class);
         return adminNotFoundHandler;
+    }
+
+    public ExceptionHandler buildSalesmanNotFoundHandler() {
+        if (salesmanNotFoundHandler == null)
+            salesmanNotFoundHandler = new SalesmanNotFoundHandler(SalesmanNotFoundException.class);
+        return salesmanNotFoundHandler;
     }
 
     public ExceptionHandler buildUserNameTakenHandler() {
