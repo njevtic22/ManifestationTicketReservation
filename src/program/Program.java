@@ -2,6 +2,7 @@ package program;
 
 import exception.AdminNotFoundException;
 import exception.ConstraintViolationException;
+import exception.CustomerNotFoundException;
 import exception.SalesmanNotFoundException;
 import exception.UserNameTakenException;
 
@@ -41,9 +42,11 @@ public class Program {
 
         factory.buildAdminController();
         factory.buildSalesmanController();
+        factory.buildCustomerController();
 
         exception(AdminNotFoundException.class, factory.buildAdminNotFoundHandler());
         exception(SalesmanNotFoundException.class, factory.buildSalesmanNotFoundHandler());
+        exception(CustomerNotFoundException.class, factory.buildCustomerNotFoundHandler());
         exception(UserNameTakenException.class, factory.buildUserNameTakenHandler());
         exception(ConstraintViolationException.class, factory.buildConstraintViolationHandler());
 

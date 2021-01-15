@@ -1,7 +1,5 @@
 package serializer.serializedModel.jsonModel;
 
-import model.Gender;
-
 import java.util.Date;
 
 public class JSONAdmin {
@@ -11,6 +9,6 @@ public class JSONAdmin {
     public String username;
     public String password;
     public Date dateOfBirth;
-    public Gender gender;
+    public String gender;
     public boolean archived;
 }

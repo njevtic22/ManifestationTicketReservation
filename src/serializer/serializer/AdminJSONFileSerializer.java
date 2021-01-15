@@ -20,7 +20,7 @@ public class AdminJSONFileSerializer implements FileSerializer<Admin, Long> {
     @Override
     public void save(Map<Long, Admin> data) {
         Gson gson = new GsonBuilder()
-                .setDateFormat(ProgramFactory.dateFormat)
+                .setDateFormat(ProgramFactory.DATE_FORMAT)
                 .setPrettyPrinting()
                 .serializeNulls()
                 .create();

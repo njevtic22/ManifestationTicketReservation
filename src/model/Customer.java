@@ -57,4 +57,36 @@ public class Customer extends User {
         this.tickets = new ArrayList<>();
         this.withdrawalHistory = new ArrayList<>();
     }
+
+    public double getPoints() {
+        return points;
+    }
+
+    public void setPoints(double points) {
+        this.points = points;
+    }
+
+    public CustomerType getType() {
+        return type;
+    }
+
+    public void setType(CustomerType type) {
+        this.type = type;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public List<WithdrawalHistory> getWithdrawalHistory() {
+        return withdrawalHistory;
+    }
+
+    public void setWithdrawalHistory(List<WithdrawalHistory> withdrawalHistory) {
+        this.withdrawalHistory = withdrawalHistory;
+    }
 }

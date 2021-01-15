@@ -33,4 +33,12 @@ public class Salesman extends User {
         super(id, name, surname, username, password, dateOfBirth, gender, archived);
         this.manifestations = new ArrayList<>();
     }
+
+    public List<Manifestation> getManifestations() {
+        return manifestations;
+    }
+
+    public void setManifestations(List<Manifestation> manifestations) {
+        this.manifestations = manifestations;
+    }
 }

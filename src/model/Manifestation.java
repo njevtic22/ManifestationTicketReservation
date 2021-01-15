@@ -3,6 +3,7 @@ package model;
 import utility.generator.LongGenerator;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Manifestation {
@@ -17,6 +18,7 @@ public class Manifestation {
 
     private Location location;
     private Image image;
+    private List<Ticket> tickets;
 
     private static LongGenerator idGenerator;
 
@@ -46,6 +48,36 @@ public class Manifestation {
         this.archived = archived;
         this.location = location;
         this.image = image;
+    }
+
+    public Manifestation(String name, long numberOfTickets, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image,  List<Ticket> tickets) {
+        this(
+                idGenerator.next(),
+                name,
+                numberOfTickets,
+                regularTicketPrice,
+                holdingDate,
+                status,
+                type,
+                archived,
+                location,
+                image,
+                tickets
+        );
+    }
+
+    public Manifestation(Long id, String name, long numberOfTickets, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image, List<Ticket> tickets) {
+        this.id = id;
+        this.name = name;
+        this.numberOfTickets = numberOfTickets;
+        this.regularTicketPrice = regularTicketPrice;
+        this.holdingDate = holdingDate;
+        this.status = status;
+        this.type = type;
+        this.archived = archived;
+        this.location = location;
+        this.image = image;
+        this.tickets = tickets;
     }
 
     public static void initGenerator() {

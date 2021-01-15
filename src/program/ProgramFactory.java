@@ -3,19 +3,23 @@ package program;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import controller.AdminController;
+import controller.CustomerController;
 import controller.SalesmanController;
 import exception.AdminNotFoundException;
 import exception.ConstraintViolationException;
+import exception.CustomerNotFoundException;
 import exception.SalesmanNotFoundException;
 import exception.UserNameTakenException;
 import exception.handler.AdminNotFoundHandler;
 import exception.handler.ConstraintViolationHandler;
+import exception.handler.CustomerNotFoundHandler;
 import exception.handler.IllegalArgumentHandler;
 import exception.handler.ParseHandler;
 import exception.handler.SalesmanNotFoundHandler;
 import exception.handler.UserNameTakenHandler;
 import repository.JSONDbContext;
 import service.AdminService;
+import service.CustomerService;
 import service.SalesmanService;
 import spark.ExceptionHandler;
 
@@ -33,28 +37,31 @@ public class ProgramFactory {
     public static final String TEXT_PLAIN = "text/plain; charset=UTF-8";
 
     // Date format
-    public static String dateFormat = "dd.MM.yyyy. hh:mm:ss";
+    public static final String DATE_FORMAT = "dd.MM.yyyy. hh:mm:ss";
 
     private static ProgramFactory instance;
 
     // Json reader/writer for communication with frontend
     private Gson gson = new GsonBuilder()
-            .setPrettyPrinting()
-            .setDateFormat(dateFormat)
+//            .setPrettyPrinting()
+            .setDateFormat(DATE_FORMAT)
             .create();
 
-    private SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+    private SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
 
     private JSONDbContext jsonDbContext;
 
     private AdminService adminService;
     private SalesmanService salesmanService;
+    private CustomerService customerService;
 
     private AdminController adminController;
     private SalesmanController salesmanController;
+    private CustomerController customerController;
 
     private ExceptionHandler adminNotFoundHandler;
     private ExceptionHandler salesmanNotFoundHandler;
+    private ExceptionHandler customerNotFoundHandler;
     private ExceptionHandler userNameTakenHandler;
     private ExceptionHandler constraintViolationHandler;
 
@@ -84,8 +91,8 @@ public class ProgramFactory {
             adminService = new AdminService(
                     formatter,
                     jsonDbContext.getAdminRepository(),
-                    jsonDbContext.getSalesmanRepository()
-            );
+                    jsonDbContext.getSalesmanRepository(),
+                    jsonDbContext.getCustomerRepository());
             adminController = new AdminController(
                     gson,
                     formatter,
@@ -105,8 +112,8 @@ public class ProgramFactory {
             salesmanService = new SalesmanService(
                     formatter,
                     jsonDbContext.getSalesmanRepository(),
-                    jsonDbContext.getAdminRepository()
-            );
+                    jsonDbContext.getAdminRepository(),
+                    jsonDbContext.getCustomerRepository());
             salesmanController = new SalesmanController(
                     gson,
                     formatter,
@@ -121,6 +128,27 @@ public class ProgramFactory {
         return salesmanController;
     }
 
+    public CustomerController buildCustomerController() {
+        if (customerController == null) {
+            customerService = new CustomerService(
+                    formatter,
+                    jsonDbContext.getCustomerRepository(),
+                    jsonDbContext.getSalesmanRepository(),
+                    jsonDbContext.getAdminRepository()
+            );
+            customerController = new CustomerController(
+                    gson,
+                    formatter,
+                    customerService,
+                    customerService,
+                    customerService,
+                    customerService,
+                    customerService,
+                    customerService);
+        }
+        return customerController;
+    }
+
     public ExceptionHandler buildAdminNotFoundHandler() {
         if (adminNotFoundHandler == null)
             adminNotFoundHandler = new AdminNotFoundHandler(AdminNotFoundException.class);
@@ -131,6 +159,12 @@ public class ProgramFactory {
         if (salesmanNotFoundHandler == null)
             salesmanNotFoundHandler = new SalesmanNotFoundHandler(SalesmanNotFoundException.class);
         return salesmanNotFoundHandler;
+    }
+
+    public ExceptionHandler buildCustomerNotFoundHandler() {
+        if (customerNotFoundHandler == null)
+            customerNotFoundHandler = new CustomerNotFoundHandler(CustomerNotFoundException.class);
+        return customerNotFoundHandler;
     }
 
     public ExceptionHandler buildUserNameTakenHandler() {

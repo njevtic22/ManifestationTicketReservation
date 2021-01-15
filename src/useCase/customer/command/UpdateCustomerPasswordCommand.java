@@ -1,16 +1,15 @@
-package useCase.salesman.command;
+package useCase.customer.command;
 
 import exception.ConstraintViolationException;
 import validation.SelfValidating;
 
-public class UpdateSalesmanPasswordCommand implements SelfValidating {
+public class UpdateCustomerPasswordCommand implements SelfValidating {
     public Long id;
     public String password;
 
-    public UpdateSalesmanPasswordCommand(Long id, String password) {
+    public UpdateCustomerPasswordCommand(Long id, String password) {
         this.id = id;
         this.password = password;
-        this.validateSelf();
     }
 
     @Override

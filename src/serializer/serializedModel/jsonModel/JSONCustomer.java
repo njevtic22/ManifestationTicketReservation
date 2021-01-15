@@ -3,7 +3,7 @@ package serializer.serializedModel.jsonModel;
 import java.util.Date;
 import java.util.List;
 
-public class JSONSalesman {
+public class JSONCustomer {
     public long id;
     public String name;
     public String surname;
@@ -12,5 +12,9 @@ public class JSONSalesman {
     public Date dateOfBirth;
     public String gender;
     public boolean archived;
-    public List<Long> manifestationIds;
+
+    public double points;
+    public String type;
+    public List<Long> ticketIds;
+    public List<Long> historyIds;
 }

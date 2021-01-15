@@ -3,9 +3,9 @@ package service;
 import exception.AdminNotFoundException;
 import exception.UserNameTakenException;
 import model.Admin;
+import model.Customer;
 import model.Gender;
 import model.Salesman;
-import model.User;
 import repository.UserRepository;
 import useCase.admin.AddAdminUseCase;
 import useCase.admin.DeleteAdminUseCase;
@@ -32,12 +32,14 @@ public class AdminService implements
     private final SimpleDateFormat formatter;
     private final UserRepository<Admin> adminRepository;
     private final UserRepository<Salesman> salesmanRepository;
+    private final UserRepository<Customer> customerRepository;
 
 
-    public AdminService(SimpleDateFormat formatter, UserRepository<Admin> adminRepository, UserRepository<Salesman> salesmanRepository) {
+    public AdminService(SimpleDateFormat formatter, UserRepository<Admin> adminRepository, UserRepository<Salesman> salesmanRepository, UserRepository<Customer> customerRepository) {
         this.formatter = formatter;
         this.adminRepository = adminRepository;
         this.salesmanRepository = salesmanRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -48,7 +50,8 @@ public class AdminService implements
         if (isUsernameSalesmanTaken(command.username))
             throw new UserNameTakenException(command.username);
 
-        // TODO: Implement checking if customer have same username
+        if (isUsernameCustomerTaken(command.username))
+            throw new UserNameTakenException(command.username);
 
         Admin admin = new Admin(
                 command.name,
@@ -80,10 +83,11 @@ public class AdminService implements
         if (isUsernameAdminTaken(command.username, admin))
             throw new UserNameTakenException(command.username);
 
-        if (isUsernameSalesmanTaken(command.username, admin))
+        if (isUsernameSalesmanTaken(command.username))
             throw new UserNameTakenException(command.username);
 
-        // TODO: Implement checking if customer have same username
+        if (isUsernameCustomerTaken(command.username))
+            throw new UserNameTakenException(command.username);
 
         admin.setName(command.name);
         admin.setSurname(command.surname);
@@ -119,7 +123,7 @@ public class AdminService implements
         return adminOptional.isPresent();
     }
 
-    private boolean isUsernameAdminTaken(String usernameToValidate, User userToCheckIsSame) {
+    private boolean isUsernameAdminTaken(String usernameToValidate, Admin userToCheckIsSame) {
         Optional<Admin> adminOptional = adminRepository.findByUserName(usernameToValidate);
         return adminOptional.isPresent() && !adminOptional.get().getUsername().equals(userToCheckIsSame.getUsername());
     }
@@ -129,8 +133,8 @@ public class AdminService implements
         return salesmanOptional.isPresent();
     }
 
-    private boolean isUsernameSalesmanTaken(String usernameToValidate, User userToCheckIsSame) {
-        Optional<Salesman> salesmanOptional = salesmanRepository.findByUserName(usernameToValidate);
-        return salesmanOptional.isPresent() && !salesmanOptional.get().getUsername().equals(userToCheckIsSame.getUsername());
+    private boolean isUsernameCustomerTaken(String usernameToValidate) {
+        Optional<Customer> customerOptional = customerRepository.findByUserName(usernameToValidate);
+        return customerOptional.isPresent();
     }
 }
