@@ -23,6 +23,7 @@ import useCase.customer.UpdateCustomerUseCase;
 import useCase.customer.command.AddCustomerCommand;
 import useCase.customer.command.UpdateCustomerCommand;
 import useCase.customer.command.UpdateCustomerPasswordCommand;
+import utility.RoleEnsure;
 import validation.SelfValidating;
 
 import java.lang.reflect.Type;
@@ -43,6 +44,10 @@ public class CustomerController {
     private UpdateCustomerUseCase updateCustomerUseCase;
     private UpdateCustomerPasswordUseCase updateCustomerPasswordUseCase;
     private DeleteCustomerUseCase deleteCustomerUseCase;
+
+    private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
+    private RoleEnsure ensureUserIsCustomer = AuthenticationController::ensureUserIsCustomer;
+    private RoleEnsure ensureUserIsAdminOrCustomer = AuthenticationController::ensureUserIsAdminOrCustomer;
 
     public CustomerController(Gson gson, SimpleDateFormat formatter, AddCustomerUseCase addCustomerUseCase, GetAllCustomersUseCase getAllCustomersUseCase, GetByIdCustomerUseCase getByIdCustomerUseCase, UpdateCustomerUseCase updateCustomerUseCase, UpdateCustomerPasswordUseCase updateCustomerPasswordUseCase, DeleteCustomerUseCase deleteCustomerUseCase) {
         this.gson = gson;
@@ -89,11 +94,15 @@ public class CustomerController {
     };
 
     public Route getAll = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
         response.status(HttpStatus.OK_200);
         return getAllCustomersUseCase.getAllCustomers();
     };
 
     public Route getById = (Request request, Response response) -> {
+        ensureUserIsCustomer.ensure(request);
+
         Long id = SelfValidating.validId(request.params(":id"));
         Customer customer = getByIdCustomerUseCase.getByIdCustomer(id);
         response.status(HttpStatus.OK_200);
@@ -101,6 +110,8 @@ public class CustomerController {
     };
 
     public Route update = (Request request, Response response) -> {
+        ensureUserIsCustomer.ensure(request);
+
         Type requestType = new TypeToken<UpdateCustomerRequest>() {}.getType();
         UpdateCustomerRequest requestBody = gson.fromJson(request.body(), requestType);
 
@@ -118,6 +129,8 @@ public class CustomerController {
     };
 
     public Route updatePassword = (Request request, Response response) -> {
+        ensureUserIsCustomer.ensure(request);
+
         Type requestType = new TypeToken<UpdatePasswordRequest>() {}.getType();
         UpdatePasswordRequest requestBody = gson.fromJson(request.body(), requestType);
 
@@ -131,6 +144,8 @@ public class CustomerController {
     };
 
     public Route delete = (Request request, Response response) -> {
+        ensureUserIsAdminOrCustomer.ensure(request);
+
         Long id = SelfValidating.validId(request.params(":id"));
         deleteCustomerUseCase.deleteCustomer(id);
         response.status(HttpStatus.OK_200);

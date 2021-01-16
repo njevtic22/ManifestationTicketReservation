@@ -3,6 +3,7 @@ package program;
 import exception.AdminNotFoundException;
 import exception.ConstraintViolationException;
 import exception.CustomerNotFoundException;
+import exception.InvalidRoleException;
 import exception.SalesmanNotFoundException;
 import exception.TokenNotFoundException;
 import exception.UserNameTakenException;
@@ -53,6 +54,7 @@ public class Program {
         exception(CustomerNotFoundException.class, factory.buildCustomerNotFoundHandler());
         exception(UserNameTakenException.class, factory.buildUserNameTakenHandler());
         exception(ConstraintViolationException.class, factory.buildConstraintViolationHandler());
+        exception(InvalidRoleException.class, factory.buildInvalidRoleHandler());
 
         exception(ExpiredJwtException.class, factory.buildExpiredJwtHandler());
         exception(SignatureException.class, factory.buildSignatureHandler());

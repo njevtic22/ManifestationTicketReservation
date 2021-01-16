@@ -9,6 +9,7 @@ import controller.SalesmanController;
 import exception.AdminNotFoundException;
 import exception.ConstraintViolationException;
 import exception.CustomerNotFoundException;
+import exception.InvalidRoleException;
 import exception.SalesmanNotFoundException;
 import exception.TokenNotFoundException;
 import exception.UserNameTakenException;
@@ -67,6 +68,7 @@ public class ProgramFactory {
     private ExceptionHandler customerNotFoundHandler;
     private ExceptionHandler userNameTakenHandler;
     private ExceptionHandler constraintViolationHandler;
+    private ExceptionHandler invalidRolehandler;
 
     private ExceptionHandler expiredJwtHandler;
     private ExceptionHandler signatureHandler;
@@ -203,6 +205,12 @@ public class ProgramFactory {
         if (constraintViolationHandler == null)
             constraintViolationHandler = new ConstraintViolationHandler(ConstraintViolationException.class);
         return constraintViolationHandler;
+    }
+
+    public ExceptionHandler buildInvalidRoleHandler() {
+        if (invalidRolehandler == null)
+            invalidRolehandler = new InvalidRoleHandler(InvalidRoleException.class);
+        return invalidRolehandler;
     }
 
     public ExceptionHandler buildExpiredJwtHandler() {

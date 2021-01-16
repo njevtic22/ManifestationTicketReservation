@@ -23,6 +23,7 @@ import useCase.admin.UpdateAdminPasswordUseCase;
 import useCase.admin.command.AddAdminCommand;
 import useCase.admin.command.UpdateAdminCommand;
 import useCase.admin.command.UpdateAdminPasswordCommand;
+import utility.RoleEnsure;
 import validation.SelfValidating;
 
 import java.lang.reflect.Type;
@@ -44,6 +45,7 @@ public class AdminController {
     private UpdateAdminPasswordUseCase updateAdminPasswordUseCase;
     private DeleteAdminUseCase deleteAdminUseCase;
 
+    private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
 
     public AdminController(Gson gson, SimpleDateFormat formatter, AddAdminUseCase addAdminUseCase, GetAllAdminsUseCase getAllAdminsUseCase, GetByIdAdminUseCase getByIdAdminUseCase, UpdateAdminUseCase updateAdminUseCase, UpdateAdminPasswordUseCase updateAdminPasswordUseCase, DeleteAdminUseCase deleteAdminUseCase) {
         this.gson = gson;
@@ -71,6 +73,8 @@ public class AdminController {
     }
 
     public Route add = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
         Type requestType = new TypeToken<AddAdminRequest>(){}.getType();
         AddAdminRequest requestBody = gson.fromJson(request.body(), requestType);
 
@@ -90,11 +94,15 @@ public class AdminController {
     };
 
     public Route getAll = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
         response.status(HttpStatus.OK_200);
         return getAllAdminsUseCase.getAllAdmins();
     };
 
     public Route getById = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
         Long id = SelfValidating.validId(request.params(":id"));
         Admin admin = getByIdAdminUseCase.getByIdAdmin(id);
         response.status(HttpStatus.OK_200);
@@ -102,6 +110,8 @@ public class AdminController {
     };
 
     public Route update = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
         Type requestType = new TypeToken<UpdateAdminRequest>() {}.getType();
         UpdateAdminRequest requestBody = gson.fromJson(request.body(), requestType);
 
@@ -119,6 +129,8 @@ public class AdminController {
     };
 
     public Route updatePassword = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
         Type requestType = new TypeToken<UpdatePasswordRequest>() {}.getType();
         UpdatePasswordRequest requestBody = gson.fromJson(request.body(), requestType);
 
@@ -132,6 +144,8 @@ public class AdminController {
     };
 
     public Route delete = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
         Long id = SelfValidating.validId(request.params(":id"));
         deleteAdminUseCase.deleteAdmin(id);
         response.status(HttpStatus.OK_200);

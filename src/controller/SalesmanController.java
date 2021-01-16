@@ -23,6 +23,7 @@ import useCase.salesman.UpdateSalesmanUseCase;
 import useCase.salesman.command.AddSalesmanCommand;
 import useCase.salesman.command.UpdateSalesmanCommand;
 import useCase.salesman.command.UpdateSalesmanPasswordCommand;
+import utility.RoleEnsure;
 import validation.SelfValidating;
 
 import java.lang.reflect.Type;
@@ -43,6 +44,10 @@ public class SalesmanController {
     private UpdateSalesmanUseCase updateSalesmanUseCase;
     private UpdateSalesmanPasswordUseCase updateSalesmanPasswordUseCase;
     private DeleteSalesmanUseCase deleteSalesmanUseCase;
+
+    private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
+    private RoleEnsure ensureUserIsSalesman = AuthenticationController::ensureUserIsSalesman;
+    private RoleEnsure ensureUserIsAdminOrSalesman = AuthenticationController::ensureUserIsAdminOrSalesman;
 
     public SalesmanController(Gson gson, SimpleDateFormat formatter, AddSalesmanUseCase addSalesmanUseCase, GetAllSalesmenUseCase getAllSalesmenUseCase, GetByIdSalesmanUseCase getByIdSalesmanUseCase, UpdateSalesmanUseCase updateSalesmanUseCase, UpdateSalesmanPasswordUseCase updateSalesmanPasswordUseCase, DeleteSalesmanUseCase deleteSalesmanUseCase) {
         this.gson = gson;
@@ -70,6 +75,8 @@ public class SalesmanController {
     }
 
     public Route add = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
         Type requestType = new TypeToken<AddSalesmanRequest>(){}.getType();
         AddSalesmanRequest requestBody = gson.fromJson(request.body(), requestType);
 
@@ -89,11 +96,15 @@ public class SalesmanController {
     };
 
     public Route getAll = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
         response.status(HttpStatus.OK_200);
         return getAllSalesmenUseCase.getAllSalesmen();
     };
 
     public Route getById = (Request request, Response response) -> {
+        ensureUserIsSalesman.ensure(request);
+
         Long id = SelfValidating.validId(request.params(":id"));
         Salesman salesman = getByIdSalesmanUseCase.getByIdSalesman(id);
         response.status(HttpStatus.OK_200);
@@ -101,6 +112,8 @@ public class SalesmanController {
     };
 
     public Route update = (Request request, Response response) -> {
+        ensureUserIsSalesman.ensure(request);
+
         Type requestType = new TypeToken<UpdateSalesmanRequest>() {}.getType();
         UpdateSalesmanRequest requestBody = gson.fromJson(request.body(), requestType);
 
@@ -118,6 +131,8 @@ public class SalesmanController {
     };
 
     public Route updatePassword = (Request request, Response response) -> {
+        ensureUserIsSalesman.ensure(request);
+
         Type requestType = new TypeToken<UpdatePasswordRequest>() {}.getType();
         UpdatePasswordRequest requestBody = gson.fromJson(request.body(), requestType);
 
@@ -131,6 +146,8 @@ public class SalesmanController {
     };
 
     public Route delete = (Request request, Response response) -> {
+        ensureUserIsAdminOrSalesman.ensure(request);
+
         Long id = SelfValidating.validId(request.params(":id"));
         deleteSalesmanUseCase.deleteSalesman(id);
         response.status(HttpStatus.OK_200);

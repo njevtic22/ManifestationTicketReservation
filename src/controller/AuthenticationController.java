@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import exception.InvalidRoleException;
 import exception.TokenNotFoundException;
 import model.Customer;
 import model.Salesman;
@@ -9,6 +10,8 @@ import org.eclipse.jetty.http.HttpStatus;
 import request.LogInRequest;
 import request.RegisterUserRequest;
 import spark.Filter;
+import spark.Request;
+import spark.Response;
 import spark.Route;
 import useCase.authentication.CreateTokenAuthenticationCase;
 import useCase.authentication.GetUserFromTokenAuthenticationCase;
@@ -56,12 +59,43 @@ public class AuthenticationController {
         });
     }
 
-    public Filter validateToken = (request, response) -> {
+    public static void ensureUserIsAdmin(Request request) {
+        User user = request.attribute("user");
+        if (!user.getClass().getSimpleName().toUpperCase().equals("ADMIN"))
+            throw new InvalidRoleException("User does not posses necessary role admin");
+    }
+
+    public static void ensureUserIsSalesman(Request request) {
+        User user = request.attribute("user");
+        if (!user.getClass().getSimpleName().toUpperCase().equals("SALESMAN"))
+            throw new InvalidRoleException("User does not posses necessary role salesman");
+    }
+
+    public static void ensureUserIsCustomer(Request request) {
+        User user = request.attribute("user");
+        if (!user.getClass().getSimpleName().toUpperCase().equals("CUSTOMER"))
+            throw new InvalidRoleException("User does not posses necessary role customer");
+    }
+
+    public static void ensureUserIsAdminOrSalesman(Request request) {
+        User user = request.attribute("user");
+        if (!user.getClass().getSimpleName().toUpperCase().equals("ADMIN") && !user.getClass().getSimpleName().toUpperCase().equals("SALESMAN"))
+            throw new InvalidRoleException("User does not posses necessary role admin or salesman");
+    }
+
+    public static void ensureUserIsAdminOrCustomer(Request request) {
+        User user = request.attribute("user");
+        if (!user.getClass().getSimpleName().toUpperCase().equals("ADMIN") && !user.getClass().getSimpleName().toUpperCase().equals("CUSTOMER"))
+            throw new InvalidRoleException("User does not posses necessary role admin or customer");
+    }
+
+    public Filter validateToken = (Request request, Response response) -> {
         String authorization = request.headers("Authorization");
 
         if (authorization == null || authorization.equals("Bearer null")) {
             // TODO: Add other routes to ignore
-            if (!request.uri().equals("/api/authentication/login") && !request.uri().equals("/api/authentication/registerCustomer")) {
+            if (!request.uri().equals("/api/authentication/login") &&
+                !request.uri().equals("/api/authentication/registerCustomer")) {
                 throw new TokenNotFoundException("No token id found");
             }
         } else {
@@ -79,7 +113,7 @@ public class AuthenticationController {
         }
     };
 
-    public Route logIn = (request, response) -> {
+    public Route logIn = (Request request, Response response) -> {
         LogInRequest requestBody = gson.fromJson(request.body(), LogInRequest.class);
         String jwt = createTokenAuthenticationCase.createToken(requestBody.username, requestBody.password);
 
@@ -90,7 +124,7 @@ public class AuthenticationController {
 
     };
 
-    public Route registerCustomer = (request, response) -> {
+    public Route registerCustomer = (Request request, Response response) -> {
         RegisterUserRequest requestBody = gson.fromJson(request.body(), RegisterUserRequest.class);
 
         RegisterUserCommand command = new RegisterUserCommand(
@@ -109,7 +143,9 @@ public class AuthenticationController {
         return gson.toJson(new TokenResponse(jwt, customer.getClass().getSimpleName().toUpperCase()));
     };
 
-    public Route registerSalesman = (request, response) -> {
+    public Route registerSalesman = (Request request, Response response) -> {
+        ensureUserIsAdmin(request);
+
         RegisterUserRequest requestBody = gson.fromJson(request.body(), RegisterUserRequest.class);
 
         RegisterUserCommand command = new RegisterUserCommand(
