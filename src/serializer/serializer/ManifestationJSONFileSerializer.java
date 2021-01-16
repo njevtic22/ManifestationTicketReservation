@@ -3,10 +3,15 @@ package serializer.serializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import model.Image;
+import model.Location;
 import model.Manifestation;
-import model.Salesman;
+import model.Ticket;
 import program.ProgramFactory;
-import serializer.gsonSerializer.ManifestationListSerializer;
+import serializer.gsonSerializer.ImageSerializer;
+import serializer.gsonSerializer.LocationSerializer;
+import serializer.gsonSerializer.TicketListSerializer;
+import serializer.gsonSerializer.WithdrawalHistoryListSerializer;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,22 +20,24 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
-public class SalesmanJSONFileSerializer  implements FileSerializer<Salesman, Long> {
+public class ManifestationJSONFileSerializer implements FileSerializer<Manifestation, Long> {
     private final String filePath;
 
-    public SalesmanJSONFileSerializer(String filePath) {
+    public ManifestationJSONFileSerializer(String filePath) {
         this.filePath = filePath;
     }
 
     @Override
-    public void save(Map<Long, Salesman> data) {
-        Type manifestationsType = new TypeToken<List<Manifestation>>() {}.getType();
+    public void save(Map<Long, Manifestation> data) {
+        Type ticketsType = new TypeToken<List<Ticket>>() {}.getType();
 
         Gson gson = new GsonBuilder()
                 .setDateFormat(ProgramFactory.DATE_FORMAT)
                 .setPrettyPrinting()
                 .serializeNulls()
-                .registerTypeAdapter(manifestationsType, new ManifestationListSerializer())
+                .registerTypeAdapter(Location.class, new LocationSerializer())
+                .registerTypeAdapter(Image.class, new ImageSerializer())
+                .registerTypeAdapter(ticketsType, new TicketListSerializer())
                 .create();
 
         try {

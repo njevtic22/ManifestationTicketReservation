@@ -58,6 +58,14 @@ public class Customer extends User {
         this.withdrawalHistory = new ArrayList<>();
     }
 
+    public void addTicket(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
+
+    public void addHistory(WithdrawalHistory history) {
+        this.withdrawalHistory.add(history);
+    }
+
     public double getPoints() {
         return points;
     }

@@ -13,32 +13,36 @@ public class WithdrawalHistory {
     private TicketType type;
     private boolean archived;
 
+    private Manifestation manifestation;
+
     private static LongGenerator idGenerator;
 
-    public WithdrawalHistory(Date withdrawalDate, String ticketId, double price, TicketType type, boolean archived) {
-        this(idGenerator.next(), withdrawalDate, ticketId, price, type, archived);
+    public WithdrawalHistory(Date withdrawalDate, String ticketId, double price, TicketType type, boolean archived, Manifestation manifestation) {
+        this(idGenerator.next(), withdrawalDate, ticketId, price, type, archived, manifestation);
     }
 
-    public WithdrawalHistory(Long id, Date withdrawalDate, String ticketId, double price, TicketType type, boolean archived) {
+    public WithdrawalHistory(Long id, Date withdrawalDate, String ticketId, double price, TicketType type, boolean archived, Manifestation manifestation) {
         this.id = id;
         this.withdrawalDate = withdrawalDate;
         this.ticketId = ticketId;
         this.price = price;
         this.type = type;
         this.archived = archived;
+        this.manifestation = manifestation;
     }
 
-    public WithdrawalHistory(Date withdrawalDate, Ticket ticket, boolean archived) {
-        this(idGenerator.next(), withdrawalDate, ticket, archived);
+    public WithdrawalHistory(Date withdrawalDate, Ticket ticket, boolean archived, Manifestation manifestation) {
+        this(idGenerator.next(), withdrawalDate, ticket, archived, manifestation);
     }
 
-    public WithdrawalHistory(Long id, Date withdrawalDate, Ticket ticket, boolean archived) {
+    public WithdrawalHistory(Long id, Date withdrawalDate, Ticket ticket, boolean archived, Manifestation manifestation) {
         this.id = id;
         this.withdrawalDate = withdrawalDate;
         this.ticketId = ticket.getAppId();
         this.price = ticket.getPrice();
         this.type = ticket.getType();
         this.archived = archived;
+        this.manifestation = manifestation;
     }
 
     public static void initGenerator() {
@@ -104,5 +108,13 @@ public class WithdrawalHistory {
 
     public void setArchived(boolean archived) {
         this.archived = archived;
+    }
+
+    public Manifestation getManifestation() {
+        return manifestation;
+    }
+
+    public void setManifestation(Manifestation manifestation) {
+        this.manifestation = manifestation;
     }
 }

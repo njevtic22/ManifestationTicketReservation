@@ -34,6 +34,10 @@ public class Salesman extends User {
         this.manifestations = new ArrayList<>();
     }
 
+    public void addManifestation(Manifestation manifestation) {
+        this.manifestations.add(manifestation);
+    }
+
     public List<Manifestation> getManifestations() {
         return manifestations;
     }

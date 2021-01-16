@@ -10,7 +10,6 @@ public interface SelfValidating {
         try {
             validId = Long.valueOf(strId);
         } catch (NumberFormatException e) {
-            e.printStackTrace();
             throw new ConstraintViolationException("Id must be positive number.", e);
         }
 

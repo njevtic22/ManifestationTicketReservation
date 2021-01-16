@@ -2,15 +2,8 @@ package serializer.deserializer;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import model.Admin;
-import model.Customer;
-import model.CustomerType;
-import model.Gender;
-import model.Salesman;
-import model.User;
-import serializer.serializedModel.jsonModel.JSONAdmin;
-import serializer.serializedModel.jsonModel.JSONCustomer;
-import serializer.serializedModel.jsonModel.JSONSalesman;
+import model.*;
+import serializer.serializedModel.jsonModel.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,22 +15,34 @@ public class JSONFileDeserializer implements FileDeserializer {
     private final Gson gson;
     private final Map<String, String> filePaths;
 
-    // Injected from adminRepository
+    // Injected from repository class
     private final Map<Long, Admin> adminRepository;
     private final Map<Long, Salesman> salesmanRepository;
     private final Map<Long, Customer> customerRepository;
+    private final Map<Long, Ticket> ticketRepository;
+    private final Map<Long, Manifestation> manifestationRepository;
+    private final Map<Long, WithdrawalHistory> withdrawalHistoryRepository;
+    private final Map<Long, Review> reviewRepository;
 
 
     private Map<Long, JSONAdmin> jsonAdmins;
     private Map<Long, JSONSalesman> jsonSalesmen;
     private Map<Long, JSONCustomer> jsonCustomers;
+    private Map<Long, JSONTicket> jsonTickets;
+    private Map<Long, JSONManifestation> jsonManifestations;
+    private Map<Long, JSONHistory> jsonHistories;
+    private Map<Long, JSONReview> jsonReviews;
 
-    public JSONFileDeserializer(Gson gson, Map<String, String> filePaths, Map<Long, Admin> adminRepository, Map<Long, Salesman> salesmanRepository, Map<Long, Customer> customerRepository) {
+    public JSONFileDeserializer(Gson gson, Map<String, String> filePaths, Map<Long, Admin> adminRepository, Map<Long, Salesman> salesmanRepository, Map<Long, Customer> customerRepository, Map<Long, Ticket> ticketRepository, Map<Long, Manifestation> manifestationRepository, Map<Long, WithdrawalHistory> withdrawalHistoryRepository, Map<Long, Review> reviewRepository) {
         this.gson = gson;
         this.filePaths = filePaths;
         this.adminRepository = adminRepository;
         this.salesmanRepository = salesmanRepository;
         this.customerRepository = customerRepository;
+        this.ticketRepository = ticketRepository;
+        this.manifestationRepository = manifestationRepository;
+        this.withdrawalHistoryRepository = withdrawalHistoryRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     public void loadData() {
@@ -45,12 +50,18 @@ public class JSONFileDeserializer implements FileDeserializer {
             loadAdmins();
             loadSalesmen();
             loadCustomers();
+
             User.initGenerator(
                     (long)
                             adminRepository.size() +
                             salesmanRepository.size() +
                             customerRepository.size()
             );
+
+            loadTickets();
+            loadManifestations();
+            loadWithdrawalHistory();
+            loadReviews();
             buildReferences();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -100,11 +111,114 @@ public class JSONFileDeserializer implements FileDeserializer {
     }
 
     @Override
-    public void buildReferences() {
-        // TODO: build reference between salesman and manifestation
+    public void loadTickets() throws FileNotFoundException {
+        Type jsonTicketType = new TypeToken<HashMap<Long, JSONTicket>>(){}.getType();
+        FileReader reader = new FileReader(filePaths.get("tickets"));
+        jsonTickets = gson.fromJson(reader, jsonTicketType);
 
-        // TODO: build reference between customer and ticket
-        // TODO: build reference between customer and history
+        jsonTickets.values().forEach(jsonTicket -> {
+            Ticket ticket = toModel(jsonTicket);
+            ticketRepository.put(ticket.getId(), ticket);
+        });
+
+        Ticket.initGenerator((long) ticketRepository.size());
+    }
+
+    @Override
+    public void loadManifestations() throws FileNotFoundException {
+        Type jsonManifestationType = new TypeToken<HashMap<Long, JSONManifestation>>(){}.getType();
+        FileReader reader = new FileReader(filePaths.get("manifestations"));
+        jsonManifestations = gson.fromJson(reader, jsonManifestationType);
+
+        jsonManifestations.values().forEach(jsonManifestation -> {
+            Manifestation manifestation = toModel(jsonManifestation);
+            manifestationRepository.put(manifestation.getId(), manifestation);
+        });
+
+        Manifestation.initGenerator((long) manifestationRepository.size());
+    }
+
+    @Override
+    public void loadWithdrawalHistory() throws FileNotFoundException {
+        Type jsonHistoryType = new TypeToken<HashMap<Long, JSONHistory>>() {}.getType();
+        FileReader reader = new FileReader(filePaths.get("histories"));
+        jsonHistories = gson.fromJson(reader, jsonHistoryType);
+
+        jsonHistories.values().forEach(jsonHistory -> {
+            WithdrawalHistory history = toModel(jsonHistory);
+            withdrawalHistoryRepository.put(history.getId(), history);
+        });
+
+        WithdrawalHistory.initGenerator((long) withdrawalHistoryRepository.size());
+    }
+
+    @Override
+    public void loadReviews() throws FileNotFoundException {
+        Type jsonReviewType = new TypeToken<HashMap<Long, JSONReview>>(){}.getType();
+        FileReader reader = new FileReader(filePaths.get("reviews"));
+        jsonReviews = gson.fromJson(reader, jsonReviewType);
+
+        jsonReviews.values().forEach(jsonReview -> {
+            Review review = toModel(jsonReview);
+            reviewRepository.put(review.getId(), review);
+        });
+
+        Review.initGenerator((long) reviewRepository.size());
+    }
+
+    @Override
+    public void buildReferences() {
+        // building reference between salesman and manifestation
+        jsonSalesmen.values().forEach(jsonSalesman -> {
+            Salesman salesman = salesmanRepository.get(jsonSalesman.id);
+
+            jsonSalesman.manifestations.forEach(manifestationId -> {
+                Manifestation manifestation = manifestationRepository.get(manifestationId);
+                salesman.addManifestation(manifestation);
+            });
+        });
+
+        // building reference between customer and ticket and history
+        jsonCustomers.values().forEach(jsonCustomer -> {
+            Customer customer = customerRepository.get(jsonCustomer.id);
+
+            jsonCustomer.tickets.forEach(ticketId -> {
+                Ticket ticket = ticketRepository.get(ticketId);
+                customer.addTicket(ticket);
+            });
+            jsonCustomer.withdrawalHistory.forEach(historyId -> {
+                WithdrawalHistory history = withdrawalHistoryRepository.get(historyId);
+                customer.addHistory(history);
+            });
+        });
+
+        // building reference between manifestation and ticket
+        jsonManifestations.values().forEach(jsonManifestation -> {
+            Manifestation manifestation = manifestationRepository.get(jsonManifestation.id);
+
+            jsonManifestation.tickets.forEach(ticketId -> {
+                Ticket ticket = ticketRepository.get(ticketId);
+                manifestation.addTicket(ticket);
+            });
+        });
+
+        // building reference between history and manifestation
+        jsonHistories.values().forEach(jsonHistory -> {
+            WithdrawalHistory history = withdrawalHistoryRepository.get(jsonHistory.id);
+            Manifestation manifestation = manifestationRepository.get(jsonHistory.manifestationId);
+
+            history.setManifestation(manifestation);
+        });
+
+        // building references between review and customer and manifestation
+        jsonReviews.values().forEach(jsonReview -> {
+            Review review = reviewRepository.get(jsonReview.id);
+            Customer customer = customerRepository.get(jsonReview.author);
+            Manifestation manifestation = manifestationRepository.get(jsonReview.manifestation);
+
+            review.setAuthor(customer);
+            review.setManifestation(manifestation);
+        });
     }
 
     private Admin toModel(JSONAdmin jsonAdmin) {
@@ -146,6 +260,94 @@ public class JSONFileDeserializer implements FileDeserializer {
                 jsonCustomer.archived,
                 jsonCustomer.points,
                 CustomerType.valueOf(jsonCustomer.type)
+        );
+    }
+
+    private WithdrawalHistory toModel(JSONHistory jsonHistory) {
+        return new WithdrawalHistory(
+                jsonHistory.id,
+                jsonHistory.withdrawalDate,
+                jsonHistory.ticketId,
+                jsonHistory.price,
+                TicketType.valueOf(jsonHistory.type),
+                jsonHistory.archived,
+                null
+//                manifestationRepository.get(jsonHistory.manifestationId)
+        );
+    }
+
+    private Manifestation toModel(JSONManifestation jsonManifestation) {
+        return new Manifestation(
+                jsonManifestation.id,
+                jsonManifestation.name,
+                jsonManifestation.numberOfTicketsLeft,
+                jsonManifestation.regularTicketPrice,
+                jsonManifestation.holdingDate,
+                ManifestationStatus.valueOf(jsonManifestation.status),
+                ManifestationType.valueOf(jsonManifestation.type),
+                jsonManifestation.archived,
+
+                toModel(jsonManifestation.location),
+                toModel(jsonManifestation.image)
+
+//                jsonManifestation.tickets
+//                        .stream()
+//                        .map(ticketRepository::get)
+//                        .collect(Collectors.toList())
+
+        );
+    }
+
+    private Location toModel(JSONLocation jsonLocation) {
+        return new Location(
+                jsonLocation.id,
+                jsonLocation.longitude,
+                jsonLocation.latitude,
+
+                toModel(jsonLocation.address)
+        );
+    }
+
+    private Address toModel(JSONAddress jsonAddress) {
+        return new Address(
+                jsonAddress.id,
+                jsonAddress.street,
+                jsonAddress.number,
+                jsonAddress.city,
+                jsonAddress.postalCode
+        );
+    }
+
+    private Image toModel(JSONImage jsonImage) {
+        return new Image(
+                jsonImage.id,
+                jsonImage.location
+        );
+    }
+
+    private Ticket toModel(JSONTicket jsonTicket) {
+        return new Ticket(
+                jsonTicket.id,
+                jsonTicket.appId,
+                jsonTicket.price,
+                TicketStatus.valueOf(jsonTicket.status),
+                TicketType.valueOf(jsonTicket.type),
+                jsonTicket.archived
+        );
+    }
+
+    private Review toModel(JSONReview jsonReview) {
+        return new Review(
+                jsonReview.id,
+                jsonReview.comment,
+                jsonReview.rating,
+                ReviewStatus.valueOf(jsonReview.status),
+                jsonReview.archived,
+
+                null,
+                null
+//                jsonReview.author,
+//                jsonReview.manifestation
         );
     }
 }

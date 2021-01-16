@@ -17,10 +17,10 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
-public class CustomerFileSerializer implements FileSerializer<Customer, Long> {
+public class CustomerJSONFileSerializer implements FileSerializer<Customer, Long> {
     private final String filePath;
 
-    public CustomerFileSerializer(String filePath) {
+    public CustomerJSONFileSerializer(String filePath) {
         this.filePath = filePath;
     }
 
@@ -43,7 +43,7 @@ public class CustomerFileSerializer implements FileSerializer<Customer, Long> {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

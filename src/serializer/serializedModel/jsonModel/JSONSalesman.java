@@ -12,5 +12,5 @@ public class JSONSalesman {
     public Date dateOfBirth;
     public String gender;
     public boolean archived;
-    public List<Long> manifestationIds;
+    public List<Long> manifestations;
 }

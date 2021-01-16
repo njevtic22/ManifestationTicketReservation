@@ -2,6 +2,7 @@ package model;
 
 import utility.generator.LongGenerator;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.Objects;
 public class Manifestation {
     private Long id;
     private String name;
-    private long numberOfTickets;
+    private long numberOfTicketsLeft;
     private double regularTicketPrice;
     private Date holdingDate;
     private ManifestationStatus status;
@@ -22,11 +23,11 @@ public class Manifestation {
 
     private static LongGenerator idGenerator;
 
-    public Manifestation(String name, long numberOfTickets, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image) {
+    public Manifestation(String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image) {
         this(
                 idGenerator.next(),
                 name,
-                numberOfTickets,
+                numberOfTicketsLeft,
                 regularTicketPrice,
                 holdingDate,
                 status,
@@ -37,10 +38,10 @@ public class Manifestation {
         );
     }
 
-    public Manifestation(Long id, String name, long numberOfTickets, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image) {
+    public Manifestation(Long id, String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image) {
         this.id = id;
         this.name = name;
-        this.numberOfTickets = numberOfTickets;
+        this.numberOfTicketsLeft = numberOfTicketsLeft;
         this.regularTicketPrice = regularTicketPrice;
         this.holdingDate = holdingDate;
         this.status = status;
@@ -48,13 +49,14 @@ public class Manifestation {
         this.archived = archived;
         this.location = location;
         this.image = image;
+        this.tickets = new ArrayList<>();
     }
 
-    public Manifestation(String name, long numberOfTickets, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image,  List<Ticket> tickets) {
+    public Manifestation(String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image, List<Ticket> tickets) {
         this(
                 idGenerator.next(),
                 name,
-                numberOfTickets,
+                numberOfTicketsLeft,
                 regularTicketPrice,
                 holdingDate,
                 status,
@@ -66,10 +68,10 @@ public class Manifestation {
         );
     }
 
-    public Manifestation(Long id, String name, long numberOfTickets, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image, List<Ticket> tickets) {
+    public Manifestation(Long id, String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image, List<Ticket> tickets) {
         this.id = id;
         this.name = name;
-        this.numberOfTickets = numberOfTickets;
+        this.numberOfTicketsLeft = numberOfTicketsLeft;
         this.regularTicketPrice = regularTicketPrice;
         this.holdingDate = holdingDate;
         this.status = status;
@@ -101,6 +103,10 @@ public class Manifestation {
         return Objects.hash(id);
     }
 
+    public void addTicket(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
+
     public Long getId() {
         return id;
     }
@@ -113,12 +119,12 @@ public class Manifestation {
         this.name = name;
     }
 
-    public long getNumberOfTickets() {
-        return numberOfTickets;
+    public long getNumberOfTicketsLeft() {
+        return numberOfTicketsLeft;
     }
 
-    public void setNumberOfTickets(long numberOfTickets) {
-        this.numberOfTickets = numberOfTickets;
+    public void setNumberOfTicketsLeft(long numberOfTicketsLeft) {
+        this.numberOfTicketsLeft = numberOfTicketsLeft;
     }
 
     public double getRegularTicketPrice() {
@@ -175,5 +181,13 @@ public class Manifestation {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

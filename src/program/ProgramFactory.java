@@ -6,6 +6,7 @@ import controller.AdminController;
 import controller.AuthenticationController;
 import controller.CustomerController;
 import controller.SalesmanController;
+import controller.WithdrawalHistoryController;
 import exception.AdminNotFoundException;
 import exception.ConstraintViolationException;
 import exception.CustomerNotFoundException;
@@ -22,6 +23,7 @@ import service.AdminService;
 import service.AuthenticationService;
 import service.CustomerService;
 import service.SalesmanService;
+import service.WithdrawalHistoryService;
 import spark.ExceptionHandler;
 
 import java.security.SignatureException;
@@ -57,11 +59,13 @@ public class ProgramFactory {
     private AdminService adminService;
     private SalesmanService salesmanService;
     private CustomerService customerService;
+    private WithdrawalHistoryService withdrawalHistoryService;
 
     private AuthenticationController authenticationController;
     private AdminController adminController;
     private SalesmanController salesmanController;
     private CustomerController customerController;
+    private WithdrawalHistoryController withdrawalHistoryController;
 
     private ExceptionHandler adminNotFoundHandler;
     private ExceptionHandler salesmanNotFoundHandler;
@@ -175,6 +179,21 @@ public class ProgramFactory {
                     customerService);
         }
         return customerController;
+    }
+
+    public WithdrawalHistoryController buildHistoryController() {
+        if (withdrawalHistoryController == null) {
+            withdrawalHistoryService = new WithdrawalHistoryService(
+
+                    formatter,
+                    jsonDbContext.getHistoryRepository(),
+                    jsonDbContext.getManifestationRepository()
+            );
+            withdrawalHistoryController = new WithdrawalHistoryController(
+
+            );
+        }
+        return withdrawalHistoryController;
     }
 
     public ExceptionHandler buildAdminNotFoundHandler() {

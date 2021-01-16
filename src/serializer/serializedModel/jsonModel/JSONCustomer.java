@@ -15,6 +15,6 @@ public class JSONCustomer {
 
     public double points;
     public String type;
-    public List<Long> ticketIds;
-    public List<Long> historyIds;
+    public List<Long> tickets;
+    public List<Long> withdrawalHistory;
 }
