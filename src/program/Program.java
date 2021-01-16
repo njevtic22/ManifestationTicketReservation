@@ -4,10 +4,13 @@ import exception.AdminNotFoundException;
 import exception.ConstraintViolationException;
 import exception.CustomerNotFoundException;
 import exception.SalesmanNotFoundException;
+import exception.TokenNotFoundException;
 import exception.UserNameTakenException;
+import io.jsonwebtoken.ExpiredJwtException;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.SignatureException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +43,7 @@ public class Program {
 
         factory.buildDbContext();
 
+        factory.buildAuthenticationController();
         factory.buildAdminController();
         factory.buildSalesmanController();
         factory.buildCustomerController();
@@ -49,6 +53,10 @@ public class Program {
         exception(CustomerNotFoundException.class, factory.buildCustomerNotFoundHandler());
         exception(UserNameTakenException.class, factory.buildUserNameTakenHandler());
         exception(ConstraintViolationException.class, factory.buildConstraintViolationHandler());
+
+        exception(ExpiredJwtException.class, factory.buildExpiredJwtHandler());
+        exception(SignatureException.class, factory.buildSignatureHandler());
+        exception(TokenNotFoundException.class, factory.buildTokenNotFoundHandler());
 
         exception(IllegalArgumentException.class, factory.buildIllegalArgumentHandler());
         exception(ParseException.class, factory.buildParseHandler());

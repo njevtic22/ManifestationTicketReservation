@@ -17,7 +17,7 @@ public class JSONDbContext {
     private AdminJSONRepository adminRepository;
     private SalesmanJSONRepository salesmanRepository;
     private CustomerJSONRepository customerRepository;
-
+    private AuthenticationJSONRepository authenticationRepository;
 
     private FileSerializer<Admin, Long> adminFileSerializer;
     private FileSerializer<Salesman, Long> salesmanFileSerializer;
@@ -63,6 +63,11 @@ public class JSONDbContext {
         adminRepository = new AdminJSONRepository(adminFileSerializer);
         salesmanRepository = new SalesmanJSONRepository(salesmanFileSerializer);
         customerRepository = new CustomerJSONRepository(customerFileSerializer);
+        authenticationRepository = new AuthenticationJSONRepository(
+                adminRepository,
+                salesmanRepository,
+                customerRepository
+        );
     }
 
     public UserRepository<Admin> getAdminRepository() {
@@ -75,5 +80,9 @@ public class JSONDbContext {
 
     public UserRepository<Customer> getCustomerRepository() {
         return customerRepository;
+    }
+
+    public AuthenticationRepository getAuthenticationRepository() {
+        return authenticationRepository;
     }
 }

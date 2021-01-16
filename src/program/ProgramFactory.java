@@ -3,34 +3,35 @@ package program;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import controller.AdminController;
+import controller.AuthenticationController;
 import controller.CustomerController;
 import controller.SalesmanController;
 import exception.AdminNotFoundException;
 import exception.ConstraintViolationException;
 import exception.CustomerNotFoundException;
 import exception.SalesmanNotFoundException;
+import exception.TokenNotFoundException;
 import exception.UserNameTakenException;
-import exception.handler.AdminNotFoundHandler;
-import exception.handler.ConstraintViolationHandler;
-import exception.handler.CustomerNotFoundHandler;
-import exception.handler.IllegalArgumentHandler;
-import exception.handler.ParseHandler;
-import exception.handler.SalesmanNotFoundHandler;
-import exception.handler.UserNameTakenHandler;
+import exception.handler.*;
+import io.jsonwebtoken.ExpiredJwtException;
 import repository.JSONDbContext;
+import security.NoOpPasswordEncoder;
+import security.TokenUtils;
 import service.AdminService;
+import service.AuthenticationService;
 import service.CustomerService;
 import service.SalesmanService;
 import spark.ExceptionHandler;
 
+import java.security.SignatureException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class ProgramFactory {
     // Paths to folders and files
-    public static final String workingDir = "."; /*System.getProperty("user.dir");*/
-    public static final String fileSeparator = System.getProperty("file.separator");
-    public static final String filesPath = workingDir + fileSeparator + "files";
+    public static final String WORKING_DIR = "."; /*System.getProperty("user.dir");*/
+    public static final String FILE_SEPARATOR = System.getProperty("file.separator");
+    public static final String FILES_PATH = WORKING_DIR + FILE_SEPARATOR + "files";
 
     // Content types
     public static final String APPLICATION_JSON = "application/json; charset=UTF-8";
@@ -51,10 +52,12 @@ public class ProgramFactory {
 
     private JSONDbContext jsonDbContext;
 
+    private AuthenticationService authenticationService;
     private AdminService adminService;
     private SalesmanService salesmanService;
     private CustomerService customerService;
 
+    private AuthenticationController authenticationController;
     private AdminController adminController;
     private SalesmanController salesmanController;
     private CustomerController customerController;
@@ -64,6 +67,10 @@ public class ProgramFactory {
     private ExceptionHandler customerNotFoundHandler;
     private ExceptionHandler userNameTakenHandler;
     private ExceptionHandler constraintViolationHandler;
+
+    private ExceptionHandler expiredJwtHandler;
+    private ExceptionHandler signatureHandler;
+    private ExceptionHandler tokenNotFoundHandler;
 
     private ExceptionHandler illegalArgumentHandler;
     private ExceptionHandler parseHandler;
@@ -82,8 +89,27 @@ public class ProgramFactory {
 
     public JSONDbContext buildDbContext() {
         if (jsonDbContext == null)
-            jsonDbContext = new JSONDbContext(gson, ProgramFactory.filesPath, ProgramFactory.fileSeparator);
+            jsonDbContext = new JSONDbContext(gson, ProgramFactory.FILES_PATH, ProgramFactory.FILE_SEPARATOR);
         return jsonDbContext;
+    }
+
+    public AuthenticationController buildAuthenticationController() {
+        if (authenticationController == null) {
+            authenticationService = new AuthenticationService(
+                    formatter,
+                    new TokenUtils(),
+                    new NoOpPasswordEncoder(),
+                    jsonDbContext.getAuthenticationRepository()
+            );
+            authenticationController = new AuthenticationController(
+                    gson,
+                    authenticationService,
+                    authenticationService,
+                    authenticationService,
+                    authenticationService
+            );
+        }
+        return authenticationController;
     }
 
     public AdminController buildAdminController() {
@@ -177,6 +203,24 @@ public class ProgramFactory {
         if (constraintViolationHandler == null)
             constraintViolationHandler = new ConstraintViolationHandler(ConstraintViolationException.class);
         return constraintViolationHandler;
+    }
+
+    public ExceptionHandler buildExpiredJwtHandler() {
+        if (expiredJwtHandler == null)
+            expiredJwtHandler = new ExpiredJwtHandler(ExpiredJwtException.class);
+        return expiredJwtHandler;
+    }
+
+    public ExceptionHandler buildSignatureHandler() {
+        if (signatureHandler == null)
+            signatureHandler = new SignatureHandler(SignatureException.class);
+        return signatureHandler;
+    }
+
+    public ExceptionHandler buildTokenNotFoundHandler() {
+        if (tokenNotFoundHandler == null)
+            tokenNotFoundHandler = new TokenNotFoundHandler(TokenNotFoundException.class);
+        return tokenNotFoundHandler;
     }
 
     public ExceptionHandler buildIllegalArgumentHandler() {
