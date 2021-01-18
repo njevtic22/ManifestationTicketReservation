@@ -1,6 +1,6 @@
 package security;
 
-public class NoOpPasswordEncoder implements PasswordEncoder{
+public class NoOpPasswordEncoder implements PasswordEncoder {
     @Override
     public String encode(CharSequence rawPassword) {
         return rawPassword.toString();

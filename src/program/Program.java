@@ -1,12 +1,6 @@
 package program;
 
-import exception.AdminNotFoundException;
-import exception.ConstraintViolationException;
-import exception.CustomerNotFoundException;
-import exception.InvalidRoleException;
-import exception.SalesmanNotFoundException;
-import exception.TokenNotFoundException;
-import exception.UserNameTakenException;
+import exception.*;
 import io.jsonwebtoken.ExpiredJwtException;
 
 import java.io.File;
@@ -49,13 +43,19 @@ public class Program {
         factory.buildSalesmanController();
         factory.buildCustomerController();
         factory.buildHistoryController();
+        factory.buildManifestationController();
+        factory.buildReviewController();
+        factory.buildTicketController();
 
         exception(AdminNotFoundException.class, factory.buildAdminNotFoundHandler());
         exception(SalesmanNotFoundException.class, factory.buildSalesmanNotFoundHandler());
         exception(CustomerNotFoundException.class, factory.buildCustomerNotFoundHandler());
+        exception(ManifestationNotFoundException.class, factory.buildManifestationNotFoundHandler());
+        exception(TicketNotFoundException.class, factory.buildTicketNotFoundHandler());
         exception(UserNameTakenException.class, factory.buildUserNameTakenHandler());
         exception(ConstraintViolationException.class, factory.buildConstraintViolationHandler());
         exception(InvalidRoleException.class, factory.buildInvalidRoleHandler());
+        exception(PlaceAndDateTakenException.class, factory.buildPlaceAndDateTakenHandler());
 
         exception(ExpiredJwtException.class, factory.buildExpiredJwtHandler());
         exception(SignatureException.class, factory.buildSignatureHandler());

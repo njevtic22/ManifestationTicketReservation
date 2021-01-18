@@ -94,8 +94,19 @@ public class AuthenticationController {
 
         if (authorization == null || authorization.equals("Bearer null")) {
             // TODO: Add other routes to ignore
-            if (!request.uri().equals("/api/authentication/login") &&
-                !request.uri().equals("/api/authentication/registerCustomer")) {
+            if (request.uri().equals("/api/authentication/login")) {
+
+            } else if (request.uri().equals("/api/authentication/registerCustomer")) {
+
+            } else if (request.uri().equals("/api/manifestations")) {
+                if (!request.requestMethod().equals("GET")) {
+                    throw new TokenNotFoundException("No token id found");
+                }
+            } else if (request.uri().startsWith("/api/manifestations")) {
+                if (!request.requestMethod().equals("GET")) {
+                    throw new TokenNotFoundException("No token id found");
+                }
+            } else {
                 throw new TokenNotFoundException("No token id found");
             }
         } else {

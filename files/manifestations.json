@@ -1,3 +1,1122 @@
 {
-
+  "1": {
+    "id": 1,
+    "name": "Concert 1: Joey Tribbiani",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 1000.0,
+    "holdingDate": "01.06.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 1,
+      "longitude": 44.8166636,
+      "latitude": 20.3995262,
+      "address": {
+        "id": 1,
+        "street": "Bulevar Milutina Milankovića",
+        "number": 23,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 1,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "2": {
+    "id": 2,
+    "name": "Festival 2: Chandler Bing",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 1000.0,
+    "holdingDate": "02.06.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 3,
+      "longitude": 44.8241056,
+      "latitude": 20.4587845,
+      "address": {
+        "id": 3,
+        "street": "Cara Dušana",
+        "number": 19,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 3,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "3": {
+    "id": 3,
+    "name": "Theater 3: Ross Geller",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 1500.0,
+    "holdingDate": "03.06.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 4,
+      "longitude": 44.8060619,
+      "latitude": 20.4547841,
+      "address": {
+        "id": 4,
+        "street": "Savska",
+        "number": 13,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 4,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "4": {
+    "id": 4,
+    "name": "Concert 4: Monica Geller",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 1500.0,
+    "holdingDate": "04.06.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 5,
+      "longitude": 44.8022327,
+      "latitude": 20.4659012,
+      "address": {
+        "id": 5,
+        "street": "Nemanjina",
+        "number": 74,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 5,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "5": {
+    "id": 5,
+    "name": "Festival 5: Rachel Green",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 1500.0,
+    "holdingDate": "05.06.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 7,
+      "longitude": 44.792635,
+      "latitude": 20.4724955,
+      "address": {
+        "id": 7,
+        "street": "Južni bulevar",
+        "number": 21,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 7,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "6": {
+    "id": 6,
+    "name": "Theater 6: Phoebe Buffay",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 2000.0,
+    "holdingDate": "06.06.2021. 08:00:00",
+    "status": "CREATED",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 6,
+      "longitude": 45.2418004,
+      "latitude": 19.8319182,
+      "address": {
+        "id": 6,
+        "street": "Bulevar cara Lazara",
+        "number": 72,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 6,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "7": {
+    "id": 7,
+    "name": "Concert 7: Estelle Leonard",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 2000.0,
+    "holdingDate": "07.06.2021. 08:00:00",
+    "status": "CREATED",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 7,
+      "longitude": 45.2358711,
+      "latitude": 19.8348293,
+      "address": {
+        "id": 7,
+        "street": "Bulevar despota Stefana",
+        "number": 42,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 7,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "8": {
+    "id": 8,
+    "name": "Festival 8: Paul Stevens",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 2500.0,
+    "holdingDate": "08.06.2021. 08:00:00",
+    "status": "CREATED",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 8,
+      "longitude": 45.2448271,
+      "latitude": 19.8195107,
+      "address": {
+        "id": 8,
+        "street": "Bulevar Evrope",
+        "number": 28,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 8,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "9": {
+    "id": 9,
+    "name": "Theater 9: Tag Jones",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 2500.0,
+    "holdingDate": "09.06.2021. 08:00:00",
+    "status": "CREATED",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 9,
+      "longitude": 45.2645469,
+      "latitude": 19.8309387,
+      "address": {
+        "id": 9,
+        "street": "Bulevar Jaše Tomića",
+        "number": 25,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 9,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "10": {
+    "id": 10,
+    "name": "Concert 10: Emma Geller",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 2500.0,
+    "holdingDate": "10.06.2021. 08:00:00",
+    "status": "CREATED",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 10,
+      "longitude": 45.2482582,
+      "latitude": 19.7898652,
+      "address": {
+        "id": 10,
+        "street": "Bulevar Jovana Dučića",
+        "number": 76,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 10,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "11": {
+    "id": 11,
+    "name": "Festival 11: Emma Geller",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 3000.0,
+    "holdingDate": "11.06.2021. 08:00:00",
+    "status": "REJECTED",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 11,
+      "longitude": 43.3090706,
+      "latitude": 21.9367705,
+      "address": {
+        "id": 11,
+        "street": "Bulevar Šabana Bajramovića",
+        "number": 68,
+        "city": "Niš",
+        "postalCode": "18000"
+      }
+    },
+    "image": {
+      "id": 11,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "12": {
+    "id": 12,
+    "name": "Theater 12: Erica Bing",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 3000.0,
+    "holdingDate": "12.06.2021. 08:00:00",
+    "status": "REJECTED",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 12,
+      "longitude": 43.3105076,
+      "latitude": 21.9011146,
+      "address": {
+        "id": 12,
+        "street": "Trg Nikole Dražića",
+        "number": 29,
+        "city": "Niš",
+        "postalCode": "18000"
+      }
+    },
+    "image": {
+      "id": 12,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "13": {
+    "id": 13,
+    "name": "Concert 13: Marcel",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 3500.0,
+    "holdingDate": "13.06.2021. 08:00:00",
+    "status": "REJECTED",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 13,
+      "longitude": 43.3184092,
+      "latitude": 21.9101393,
+      "address": {
+        "id": 13,
+        "street": "Bulevar dr Zorana Đinđića",
+        "number": 23,
+        "city": "Niš",
+        "postalCode": "18000"
+      }
+    },
+    "image": {
+      "id": 13,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "14": {
+    "id": 14,
+    "name": "Festival 14: Kathy",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 3500.0,
+    "holdingDate": "14.06.2021. 08:00:00",
+    "status": "REJECTED",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 14,
+      "longitude": 43.3106002,
+      "latitude": 21.9352019,
+      "address": {
+        "id": 14,
+        "street": "Bulevar Medijana",
+        "number": 59,
+        "city": "Niš",
+        "postalCode": "18000"
+      }
+    },
+    "image": {
+      "id": 14,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "15": {
+    "id": 15,
+    "name": "Theater 15: Jack Geller",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 3500.0,
+    "holdingDate": "15.06.2021. 08:00:00",
+    "status": "REJECTED",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 15,
+      "longitude": 43.3186633,
+      "latitude": 21.9218438,
+      "address": {
+        "id": 15,
+        "street": "Bulevar Nemanjića",
+        "number": 67,
+        "city": "Niš",
+        "postalCode": "18000"
+      }
+    },
+    "image": {
+      "id": 15,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "16": {
+    "id": 16,
+    "name": "Concert 16: Julie",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 4000.0,
+    "holdingDate": "27.01.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 17,
+      "longitude": 44.7717184,
+      "latitude": 20.45446,
+      "address": {
+        "id": 17,
+        "street": "Bulevar kneza Aleksandra Karađorđevića",
+        "number": 67,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 17,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "17": {
+    "id": 17,
+    "name": "Festival 17: Erica",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 4000.0,
+    "holdingDate": "28.01.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 18,
+      "longitude": 44.7876073,
+      "latitude": 20.4580272,
+      "address": {
+        "id": 18,
+        "street": "Dr Milutina Ivkovića",
+        "number": 62,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 18,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "18": {
+    "id": 18,
+    "name": "Theater 18: Mike Hannigan",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 4500.0,
+    "holdingDate": "29.01.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 19,
+      "longitude": 44.7806632,
+      "latitude": 20.4720994,
+      "address": {
+        "id": 19,
+        "street": "Vojvode Stepe",
+        "number": 86,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 19,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "19": {
+    "id": 19,
+    "name": "Concert 19: Emma Geller",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 4500.0,
+    "holdingDate": "30.01.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 20,
+      "longitude": 44.8033584,
+      "latitude": 20.3863543,
+      "address": {
+        "id": 20,
+        "street": "Jurija Gagarina",
+        "number": 32,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 20,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "20": {
+    "id": 20,
+    "name": "Festival 20: Nora Tyler Bing",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 4500.0,
+    "holdingDate": "31.01.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 21,
+      "longitude": 44.8064208,
+      "latitude": 20.3865865,
+      "address": {
+        "id": 21,
+        "street": "Gandijeva",
+        "number": 63,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 21,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "21": {
+    "id": 21,
+    "name": "Theater 21: Ben",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 5000.0,
+    "holdingDate": "21.06.2021. 08:00:00",
+    "status": "CREATED",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 21,
+      "longitude": 45.2525939,
+      "latitude": 19.7897746,
+      "address": {
+        "id": 21,
+        "street": "Bulevar kneza Miloša",
+        "number": 41,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 21,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "22": {
+    "id": 22,
+    "name": "Concert 22: Leonard Green",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 5000.0,
+    "holdingDate": "22.06.2021. 08:00:00",
+    "status": "CREATED",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 22,
+      "longitude": 45.2592398,
+      "latitude": 19.8253732,
+      "address": {
+        "id": 22,
+        "street": "Bulevar kralja Petra I",
+        "number": 82,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 22,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "23": {
+    "id": 23,
+    "name": "Festival 23: David",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 5500.0,
+    "holdingDate": "23.06.2021. 08:00:00",
+    "status": "CREATED",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 23,
+      "longitude": 45.2542382,
+      "latitude": 19.8534565,
+      "address": {
+        "id": 23,
+        "street": "Bulevar Mihajla Pupina",
+        "number": 55,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 23,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "24": {
+    "id": 24,
+    "name": "Theater 24: Gary",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 5500.0,
+    "holdingDate": "24.06.2021. 08:00:00",
+    "status": "CREATED",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 24,
+      "longitude": 45.2571034,
+      "latitude": 19.8342137,
+      "address": {
+        "id": 24,
+        "street": "Bulevar oslobođenja",
+        "number": 54,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 24,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "25": {
+    "id": 25,
+    "name": "Concert 25: Gavin Mitchell",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 5500.0,
+    "holdingDate": "25.06.2021. 08:00:00",
+    "status": "CREATED",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 25,
+      "longitude": 45.2407254,
+      "latitude": 19.8086407,
+      "address": {
+        "id": 25,
+        "street": "Bulevar Patrijarha Pavla",
+        "number": 42,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 25,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "26": {
+    "id": 26,
+    "name": "Festival 26: Richard Burke",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 6000.0,
+    "holdingDate": "26.06.2021. 08:00:00",
+    "status": "REJECTED",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 26,
+      "longitude": 43.3082873,
+      "latitude": 21.9478829,
+      "address": {
+        "id": 26,
+        "street": "Bulevar svetog cara Konstantina",
+        "number": 10,
+        "city": "Niš",
+        "postalCode": "18000"
+      }
+    },
+    "image": {
+      "id": 26,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "27": {
+    "id": 27,
+    "name": "Theater 27: Charlie Wheeler",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 6000.0,
+    "holdingDate": "27.06.2021. 08:00:00",
+    "status": "REJECTED",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 27,
+      "longitude": 43.3147083,
+      "latitude": 21.8953347,
+      "address": {
+        "id": 27,
+        "street": "Trg 14. oktobra",
+        "number": 41,
+        "city": "Niš",
+        "postalCode": "18000"
+      }
+    },
+    "image": {
+      "id": 27,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "28": {
+    "id": 28,
+    "name": "Concert 28: Mr. Heckles",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 6500.0,
+    "holdingDate": "28.06.2021. 08:00:00",
+    "status": "REJECTED",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 28,
+      "longitude": 43.3177111,
+      "latitude": 21.8907904,
+      "address": {
+        "id": 28,
+        "street": "Trg kralja Aleksandra Ujedinitelja",
+        "number": 59,
+        "city": "Niš",
+        "postalCode": "18000"
+      }
+    },
+    "image": {
+      "id": 28,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "29": {
+    "id": 29,
+    "name": "Festival 29: Ugly Naked Guy",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 6500.0,
+    "holdingDate": "29.06.2021. 08:00:00",
+    "status": "REJECTED",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 29,
+      "longitude": 43.322031,
+      "latitude": 21.8954013,
+      "address": {
+        "id": 29,
+        "street": "Trg kralja Milana",
+        "number": 62,
+        "city": "Niš",
+        "postalCode": "18000"
+      }
+    },
+    "image": {
+      "id": 29,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "30": {
+    "id": 30,
+    "name": "Theater 30: Janice Goralnik",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 6500.0,
+    "holdingDate": "30.06.2021. 08:00:00",
+    "status": "REJECTED",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 30,
+      "longitude": 43.3168781,
+      "latitude": 21.8940141,
+      "address": {
+        "id": 30,
+        "street": "Trg Pavla Stojkovića",
+        "number": 38,
+        "city": "Niš",
+        "postalCode": "18000"
+      }
+    },
+    "image": {
+      "id": 30,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "31": {
+    "id": 31,
+    "name": "Concert 31: Bonnie",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 7000.0,
+    "holdingDate": "01.07.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 31,
+      "longitude": 44.8298341,
+      "latitude": 20.3999094,
+      "address": {
+        "id": 31,
+        "street": "Pariske komune",
+        "number": 40,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 31,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "32": {
+    "id": 32,
+    "name": "Festival 32: Missy Goldberg",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 7000.0,
+    "holdingDate": "02.07.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 32,
+      "longitude": 44.822305,
+      "latitude": 20.4268969,
+      "address": {
+        "id": 32,
+        "street": "Bulevar Nikole Tesle",
+        "number": 82,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 32,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "33": {
+    "id": 33,
+    "name": "Theater 33: Miss Chanandler Bong",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 7500.0,
+    "holdingDate": "03.07.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 33,
+      "longitude": 44.8165625,
+      "latitude": 20.4200803,
+      "address": {
+        "id": 33,
+        "street": "Bulevar Zorana Đinđića",
+        "number": 74,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 33,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "34": {
+    "id": 34,
+    "name": "Concert 34: Terry",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 7500.0,
+    "holdingDate": "04.07.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 34,
+      "longitude": 44.8094977,
+      "latitude": 20.429995,
+      "address": {
+        "id": 34,
+        "street": "Milentija Popovića",
+        "number": 46,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 34,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "35": {
+    "id": 35,
+    "name": "Festival 35: Frances Buffay",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 7500.0,
+    "holdingDate": "05.07.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 35,
+      "longitude": 44.8167549,
+      "latitude": 20.4656701,
+      "address": {
+        "id": 35,
+        "street": "Bulevar Despota Stefana",
+        "number": 17,
+        "city": "Beograd",
+        "postalCode": "11000"
+      }
+    },
+    "image": {
+      "id": 35,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "36": {
+    "id": 36,
+    "name": "Theater 36: Chandler Bing",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 8000.0,
+    "holdingDate": "27.01.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 36,
+      "longitude": 45.2570001,
+      "latitude": 19.8016793,
+      "address": {
+        "id": 36,
+        "street": "Bulevar Slobodana Jovanovića",
+        "number": 62,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 36,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "37": {
+    "id": 37,
+    "name": "Concert 37: Joey Tribbiani",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 8000.0,
+    "holdingDate": "28.01.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 37,
+      "longitude": 45.2592666,
+      "latitude": 19.8043879,
+      "address": {
+        "id": 37,
+        "street": "Bulevar vojvode Stepe",
+        "number": 8,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 37,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "38": {
+    "id": 38,
+    "name": "Festival 38: Ross Geller",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 8500.0,
+    "holdingDate": "29.01.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "FESTIVAL",
+    "archived": false,
+    "location": {
+      "id": 38,
+      "longitude": 45.2556639,
+      "latitude": 19.8272431,
+      "address": {
+        "id": 38,
+        "street": "Trg 1. maja",
+        "number": 50,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 38,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "39": {
+    "id": 39,
+    "name": "Theater 39: Monica Geller",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 8500.0,
+    "holdingDate": "30.01.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "THEATER",
+    "archived": false,
+    "location": {
+      "id": 39,
+      "longitude": 45.2750377,
+      "latitude": 19.8371086,
+      "address": {
+        "id": 39,
+        "street": "Trg 23. oktobra",
+        "number": 49,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 39,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  },
+  "40": {
+    "id": 40,
+    "name": "Concert 40: Rachel Green",
+    "numberOfTicketsLeft": 0,
+    "regularTicketPrice": 8500.0,
+    "holdingDate": "31.01.2021. 08:00:00",
+    "status": "ACTIVE",
+    "type": "CONCERT",
+    "archived": false,
+    "location": {
+      "id": 40,
+      "longitude": 45.2439778,
+      "latitude": 19.8254728,
+      "address": {
+        "id": 40,
+        "street": "Trg 27. marta",
+        "number": 76,
+        "city": "Novi Sad",
+        "postalCode": "21000"
+      }
+    },
+    "image": {
+      "id": 40,
+      "location": "D:\\Images\\no image 2.png"
+    },
+    "tickets": [],
+    "reviews": []
+  }
 }

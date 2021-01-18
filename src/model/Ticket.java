@@ -12,19 +12,24 @@ public class Ticket {
     private TicketType type;
     private boolean archived;
 
+    private Customer customer;
+    private Manifestation manifestation;
+
     private static LongGenerator idGenerator;
 
-    public Ticket(String appId, double price, TicketStatus status, TicketType type, boolean archived) {
-        this(idGenerator.next(), appId, price, status, type, archived);
+    public Ticket(String appId, double price, TicketStatus status, TicketType type, boolean archived, Manifestation manifestation, Customer customer) {
+        this(idGenerator.next(), appId, price, status, type, archived, customer, manifestation);
     }
 
-    public Ticket(Long id, String appId, double price, TicketStatus status, TicketType type, boolean archived) {
+    public Ticket(Long id, String appId, double price, TicketStatus status, TicketType type, boolean archived, Customer customer, Manifestation manifestation) {
         this.id = id;
         this.appId = appId;
         this.price = price;
         this.status = status;
         this.type = type;
         this.archived = archived;
+        this.customer = customer;
+        this.manifestation = manifestation;
     }
 
     public static void initGenerator() {
@@ -60,8 +65,9 @@ public class Ticket {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice(double regularPrice) {
+        int multiplyBy = this.type.getMultiplyBy();
+        this.price = regularPrice * multiplyBy;
     }
 
     public TicketStatus getStatus() {
@@ -86,5 +92,21 @@ public class Ticket {
 
     public void setArchived(boolean archived) {
         this.archived = archived;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Manifestation getManifestation() {
+        return manifestation;
+    }
+
+    public void setManifestation(Manifestation manifestation) {
+        this.manifestation = manifestation;
     }
 }

@@ -20,6 +20,7 @@ public class Manifestation {
     private Location location;
     private Image image;
     private List<Ticket> tickets;
+    private List<Review> reviews;
 
     private static LongGenerator idGenerator;
 
@@ -50,9 +51,10 @@ public class Manifestation {
         this.location = location;
         this.image = image;
         this.tickets = new ArrayList<>();
+        this.reviews = new ArrayList<>();
     }
 
-    public Manifestation(String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image, List<Ticket> tickets) {
+    public Manifestation(String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image, List<Ticket> tickets, List<Review> reviews) {
         this(
                 idGenerator.next(),
                 name,
@@ -64,11 +66,12 @@ public class Manifestation {
                 archived,
                 location,
                 image,
-                tickets
+                tickets,
+                reviews
         );
     }
 
-    public Manifestation(Long id, String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image, List<Ticket> tickets) {
+    public Manifestation(Long id, String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image, List<Ticket> tickets, List<Review> reviews) {
         this.id = id;
         this.name = name;
         this.numberOfTicketsLeft = numberOfTicketsLeft;
@@ -80,6 +83,7 @@ public class Manifestation {
         this.location = location;
         this.image = image;
         this.tickets = tickets;
+        this.reviews = reviews;
     }
 
     public static void initGenerator() {
@@ -103,8 +107,16 @@ public class Manifestation {
         return Objects.hash(id);
     }
 
+    public void archive() {
+        this.archived = true;
+    }
+
     public void addTicket(Ticket ticket) {
         this.tickets.add(ticket);
+    }
+
+    public void addReview(Review review) {
+        this.reviews.add(review);
     }
 
     public Long getId() {
@@ -189,5 +201,13 @@ public class Manifestation {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

@@ -5,15 +5,12 @@ import com.google.gson.GsonBuilder;
 import controller.AdminController;
 import controller.AuthenticationController;
 import controller.CustomerController;
+import controller.ManifestationController;
+import controller.ReviewController;
 import controller.SalesmanController;
+import controller.TicketController;
 import controller.WithdrawalHistoryController;
-import exception.AdminNotFoundException;
-import exception.ConstraintViolationException;
-import exception.CustomerNotFoundException;
-import exception.InvalidRoleException;
-import exception.SalesmanNotFoundException;
-import exception.TokenNotFoundException;
-import exception.UserNameTakenException;
+import exception.*;
 import exception.handler.*;
 import io.jsonwebtoken.ExpiredJwtException;
 import repository.JSONDbContext;
@@ -22,7 +19,10 @@ import security.TokenUtils;
 import service.AdminService;
 import service.AuthenticationService;
 import service.CustomerService;
+import service.ManifestationService;
+import service.ReviewService;
 import service.SalesmanService;
+import service.TicketService;
 import service.WithdrawalHistoryService;
 import spark.ExceptionHandler;
 
@@ -60,19 +60,28 @@ public class ProgramFactory {
     private SalesmanService salesmanService;
     private CustomerService customerService;
     private WithdrawalHistoryService withdrawalHistoryService;
+    private ManifestationService manifestationService;
+    private ReviewController reviewController;
+    private TicketController ticketController;
 
     private AuthenticationController authenticationController;
     private AdminController adminController;
     private SalesmanController salesmanController;
     private CustomerController customerController;
     private WithdrawalHistoryController withdrawalHistoryController;
+    private ManifestationController manifestationController;
+    private ReviewService reviewService;
+    private TicketService ticketService;
 
     private ExceptionHandler adminNotFoundHandler;
     private ExceptionHandler salesmanNotFoundHandler;
     private ExceptionHandler customerNotFoundHandler;
+    private ExceptionHandler manifestationNotFoundHandler;
+    private ExceptionHandler ticketNotFoundHandler;
     private ExceptionHandler userNameTakenHandler;
     private ExceptionHandler constraintViolationHandler;
-    private ExceptionHandler invalidRolehandler;
+    private ExceptionHandler invalidRoleHandler;
+    private ExceptionHandler placeAndDateTakenHandler;
 
     private ExceptionHandler expiredJwtHandler;
     private ExceptionHandler signatureHandler;
@@ -196,6 +205,52 @@ public class ProgramFactory {
         return withdrawalHistoryController;
     }
 
+    public ManifestationController buildManifestationController() {
+        if (manifestationController == null) {
+            manifestationService = new ManifestationService(
+                    formatter,
+                    jsonDbContext.getManifestationRepository(),
+                    jsonDbContext.getTicketRepository(),
+                    jsonDbContext.getSalesmanRepository()
+            );
+            manifestationController = new ManifestationController(
+                    gson,
+                    formatter,
+                    manifestationService,
+                    manifestationService,
+                    manifestationService,
+                    manifestationService,
+                    manifestationService,
+                    manifestationService
+            );
+        }
+        return manifestationController;
+    }
+
+    public ReviewController buildReviewController() {
+        if (reviewController == null) {
+            reviewService = new ReviewService(
+
+            );
+            reviewController = new ReviewController(
+
+            );
+        }
+        return reviewController;
+    }
+
+    public TicketController buildTicketController() {
+        if (ticketController == null) {
+            ticketService = new TicketService(
+
+            );
+            ticketController = new TicketController(
+
+            );
+        }
+        return ticketController;
+    }
+
     public ExceptionHandler buildAdminNotFoundHandler() {
         if (adminNotFoundHandler == null)
             adminNotFoundHandler = new AdminNotFoundHandler(AdminNotFoundException.class);
@@ -214,6 +269,18 @@ public class ProgramFactory {
         return customerNotFoundHandler;
     }
 
+    public ExceptionHandler buildManifestationNotFoundHandler() {
+        if (manifestationNotFoundHandler == null)
+            manifestationNotFoundHandler = new ManifestationNotFoundHandler(ManifestationNotFoundException.class);
+        return manifestationNotFoundHandler;
+    }
+
+    public ExceptionHandler buildTicketNotFoundHandler() {
+        if (ticketNotFoundHandler == null)
+            ticketNotFoundHandler = new TicketNotFoundHandler(TicketNotFoundException.class);
+        return ticketNotFoundHandler;
+    }
+
     public ExceptionHandler buildUserNameTakenHandler() {
         if (userNameTakenHandler == null)
             userNameTakenHandler = new UserNameTakenHandler(UserNameTakenException.class);
@@ -227,9 +294,15 @@ public class ProgramFactory {
     }
 
     public ExceptionHandler buildInvalidRoleHandler() {
-        if (invalidRolehandler == null)
-            invalidRolehandler = new InvalidRoleHandler(InvalidRoleException.class);
-        return invalidRolehandler;
+        if (invalidRoleHandler == null)
+            invalidRoleHandler = new InvalidRoleHandler(InvalidRoleException.class);
+        return invalidRoleHandler;
+    }
+
+    public ExceptionHandler buildPlaceAndDateTakenHandler() {
+        if (placeAndDateTakenHandler == null)
+            placeAndDateTakenHandler = new PlaceAndDateTakenHandler(PlaceAndDateTakenException.class);
+        return placeAndDateTakenHandler;
     }
 
     public ExceptionHandler buildExpiredJwtHandler() {

@@ -2,8 +2,12 @@ package serializer.serializer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import model.Customer;
+import model.Manifestation;
 import model.Ticket;
 import program.ProgramFactory;
+import serializer.gsonSerializer.CustomerSerializer;
+import serializer.gsonSerializer.ManifestationSerializer;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,6 +27,8 @@ public class TicketJSONFileSerializer implements FileSerializer<Ticket, Long> {
                 .setDateFormat(ProgramFactory.DATE_FORMAT)
                 .setPrettyPrinting()
                 .serializeNulls()
+                .registerTypeAdapter(Customer.class, new CustomerSerializer())
+                .registerTypeAdapter(Manifestation.class, new ManifestationSerializer())
                 .create();
 
         try {

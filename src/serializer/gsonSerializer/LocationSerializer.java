@@ -24,6 +24,7 @@ public class LocationSerializer implements JsonSerializer<Location> {
         jsonAddress.addProperty("number", address.getNumber());
         jsonAddress.addProperty("city", address.getCity());
         jsonAddress.addProperty("postalCode", address.getPostalCode());
+        jsonLocation.add("address", jsonAddress);
 
         return jsonLocation;
     }

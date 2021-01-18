@@ -49,7 +49,7 @@ public class TokenUtils {
                 .setIssuedAt(calendar.getTime())
                 .setExpiration(generateExpirationDate())
                 // .claim("key", value) //moguce je postavljanje proizvoljnih podataka u telo JWT tokena
-                .signWith(SECRET_KEY, SIGNATURE_ALGORITHM)
+                .signWith(SECRET_KEY)
                 .compact();
     }
 
@@ -60,7 +60,7 @@ public class TokenUtils {
         return  Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())
-                .signWith(SECRET_KEY, SIGNATURE_ALGORITHM)
+                .signWith(SECRET_KEY)
                 .compact();
     }
 

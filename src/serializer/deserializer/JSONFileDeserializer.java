@@ -135,7 +135,11 @@ public class JSONFileDeserializer implements FileDeserializer {
             manifestationRepository.put(manifestation.getId(), manifestation);
         });
 
-        Manifestation.initGenerator((long) manifestationRepository.size());
+        long initCount = manifestationRepository.size();
+        Manifestation.initGenerator(initCount);
+        Location.initGenerator(initCount);
+        Address.initGenerator(initCount);
+        Image.initGenerator(initCount);
     }
 
     @Override
@@ -185,6 +189,7 @@ public class JSONFileDeserializer implements FileDeserializer {
             jsonCustomer.tickets.forEach(ticketId -> {
                 Ticket ticket = ticketRepository.get(ticketId);
                 customer.addTicket(ticket);
+                ticket.setCustomer(customer);
             });
             jsonCustomer.withdrawalHistory.forEach(historyId -> {
                 WithdrawalHistory history = withdrawalHistoryRepository.get(historyId);
@@ -199,6 +204,7 @@ public class JSONFileDeserializer implements FileDeserializer {
             jsonManifestation.tickets.forEach(ticketId -> {
                 Ticket ticket = ticketRepository.get(ticketId);
                 manifestation.addTicket(ticket);
+                ticket.setManifestation(manifestation);
             });
         });
 
@@ -218,6 +224,7 @@ public class JSONFileDeserializer implements FileDeserializer {
 
             review.setAuthor(customer);
             review.setManifestation(manifestation);
+            manifestation.addReview(review);
         });
     }
 
@@ -332,7 +339,9 @@ public class JSONFileDeserializer implements FileDeserializer {
                 jsonTicket.price,
                 TicketStatus.valueOf(jsonTicket.status),
                 TicketType.valueOf(jsonTicket.type),
-                jsonTicket.archived
+                jsonTicket.archived,
+                null,
+                null
         );
     }
 

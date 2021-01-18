@@ -7,4 +7,7 @@ public class JSONTicket {
     public String status;
     public String type;
     public boolean archived;
+
+    public Long customer;
+    public Long manifestation;
 }

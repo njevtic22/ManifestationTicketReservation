@@ -16,4 +16,5 @@ public class JSONManifestation {
     public JSONLocation location;
     public JSONImage image;
     public List<Long> tickets;
+    public List<Long> reviews;
 }
