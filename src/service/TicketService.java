@@ -128,8 +128,7 @@ public class TicketService implements
         WithdrawalHistory history = new WithdrawalHistory(
                 new Date(),
                 ticket,
-                false,
-                ticket.getManifestation()
+                false
         );
         historyRepository.save(history);
         customer.addHistory(history);

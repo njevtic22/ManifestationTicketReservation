@@ -31,18 +31,18 @@ public class WithdrawalHistory {
         this.manifestation = manifestation;
     }
 
-    public WithdrawalHistory(Date withdrawalDate, Ticket ticket, boolean archived, Manifestation manifestation) {
-        this(idGenerator.next(), withdrawalDate, ticket, archived, manifestation);
+    public WithdrawalHistory(Date withdrawalDate, Ticket ticket, boolean archived) {
+        this(idGenerator.next(), withdrawalDate, ticket, archived);
     }
 
-    public WithdrawalHistory(Long id, Date withdrawalDate, Ticket ticket, boolean archived, Manifestation manifestation) {
+    public WithdrawalHistory(Long id, Date withdrawalDate, Ticket ticket, boolean archived) {
         this.id = id;
         this.withdrawalDate = withdrawalDate;
         this.ticketId = ticket.getAppId();
         this.price = ticket.getPrice();
         this.type = ticket.getType();
         this.archived = archived;
-        this.manifestation = manifestation;
+        this.manifestation = ticket.getManifestation();
     }
 
     public static void initGenerator() {

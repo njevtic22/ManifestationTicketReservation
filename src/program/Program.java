@@ -42,6 +42,7 @@ public class Program {
         factory.buildAdminController();
         factory.buildSalesmanController();
         factory.buildCustomerController();
+        factory.buildHistoryController();
         factory.buildManifestationController();
         factory.buildReviewController();
         factory.buildTicketController();
