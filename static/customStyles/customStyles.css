@@ -1,0 +1,201 @@
+.login-center {
+    position: fixed; /* or absolute */
+    width: 18rem;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.error-center {
+    position: fixed; /* or absolute */
+    width: 19rem;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+}
+
+.logout-sidebar-button {
+    position: absolute;
+    bottom: 0;
+}
+
+.logo-table {
+    width: 75px;
+    height: 75px;
+}
+
+body {
+    height: 100%;
+    font-size: 0.875rem;
+    background-color: #d7dde2;
+    background-image: linear-gradient(270deg, #aeb2b6 0%, #f7f6f5 30%);
+    /* background-image: -webkit-linear-gradient(right, #aeb2b6 0%, #f7f6f5 10%); */
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+
+.sidebar .nav-link.active {
+    color: #007bff;
+}
+
+/*
+ * Content
+ */
+
+[role="main"] {
+    padding-top: 48px; /* Space for fixed navbar */
+}
+
+/*
+ * Navbar
+ */
+
+.navbar-brand {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+}
+
+.emp-profile {
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+    /* background-image: linear-gradient(270deg, #aeb2b6 0%, #f7f6f5 50%); */
+}
+.profile-img {
+    text-align: center;
+}
+.profile-img img {
+    width: 50%;
+    height: 50%;
+}
+
+.profile-head h1 {
+    color: #333;
+}
+.profile-head h4 {
+    color: #0062cc;
+}
+.profile-edit-btn {
+    border: none;
+    border-radius: 1.5rem;
+    width: 100%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.profile-work {
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p {
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a {
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul {
+    list-style: none;
+}
+.profile-tab label {
+    font-weight: 600;
+    font-size: 16px;
+}
+.profile-tab p {
+    font-weight: 600;
+    font-size: 16px;
+    color: #0062cc;
+}
+
+.category-label {
+    margin-right: 10px;
+}
+
+.category-input {
+    width: 70px;
+    margin-right: 25px;
+}
+
+.scrollable-list {
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+/* Switch button */
+.switch-button {
+    margin: 10px 0;
+}
+
+.switch-button-control {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.switch-button-control .switch-button {
+    height: 1.6em;
+    width: calc(1.6em * 2);
+    border: 2px solid #006400;
+    box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.33);
+    border-radius: 1.6em;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.switch-button-control .switch-button .button {
+    height: calc(1.6em - (2 * 2px));
+    width: calc(1.6em - (2 * 2px));
+    border: 2px solid #006400;
+    border-radius: calc(1.6em - (2 * 2px));
+    background: #006400;
+    transition: all 0.3s ease-in-out;
+}
+.switch-button-control .switch-button.enabled {
+    background-color: #006400;
+    box-shadow: none;
+}
+.switch-button-control .switch-button.enabled .button {
+    background: white;
+    transform: translateX(calc(calc(1.6em - (2 * 2px)) + (2 * 2px)));
+}
+.switch-button-control .switch-button-label {
+    margin-left: 10px;
+}
