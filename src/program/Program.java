@@ -53,6 +53,7 @@ public class Program {
         exception(ManifestationNotFoundException.class, factory.buildManifestationNotFoundHandler());
         exception(TicketNotFoundException.class, factory.buildTicketNotFoundHandler());
         exception(TicketReservedException.class, factory.buildTicketReservedHandler());
+        exception(ReviewNotFoundException.class, factory.buildReviewNotFoundHandler());
         exception(UserNameTakenException.class, factory.buildUserNameTakenHandler());
         exception(ConstraintViolationException.class, factory.buildConstraintViolationHandler());
         exception(InvalidRoleException.class, factory.buildInvalidRoleHandler());

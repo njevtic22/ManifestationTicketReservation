@@ -113,9 +113,8 @@ public class ManifestationController {
 
     public Route getById = (Request request, Response response) -> {
         Long id = SelfValidating.validId(request.params(":id"));
-        Manifestation manifestation = getByIdManifestationUseCase.getByIdManifestation(id);
         response.status(HttpStatus.OK_200);
-        return manifestation;
+        return getByIdManifestationUseCase.getByIdManifestation(id);
     };
 
     public Route updateManifestation = (Request request, Response response) -> {

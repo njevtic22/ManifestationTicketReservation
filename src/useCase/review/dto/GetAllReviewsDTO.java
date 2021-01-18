@@ -1,8 +1,8 @@
-package useCase.manifestation.dto;
+package useCase.review.dto;
 
 import model.Review;
 
-public class GetAllReviewsForManifestationDTO {
+public class GetAllReviewsDTO {
     public Long id;
     public String comment;
     public float rating;
@@ -14,7 +14,8 @@ public class GetAllReviewsForManifestationDTO {
     public String manifestation;
     public Long manifestationId;
 
-    public GetAllReviewsForManifestationDTO(Review review) {
+
+    public GetAllReviewsDTO(Review review) {
         this.id = review.getId();
         this.comment = review.getComment();
         this.rating = review.getRating();

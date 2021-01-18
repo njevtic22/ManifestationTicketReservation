@@ -79,6 +79,7 @@ public class ProgramFactory {
     private ExceptionHandler manifestationNotFoundHandler;
     private ExceptionHandler ticketNotFoundHandler;
     private ExceptionHandler ticketReservedHandler;
+    private ExceptionHandler reviewNotFoundHandler;
     private ExceptionHandler userNameTakenHandler;
     private ExceptionHandler constraintViolationHandler;
     private ExceptionHandler invalidRoleHandler;
@@ -230,10 +231,16 @@ public class ProgramFactory {
     public ReviewController buildReviewController() {
         if (reviewController == null) {
             reviewService = new ReviewService(
-
+                    jsonDbContext.getReviewRepository(),
+                    jsonDbContext.getManifestationRepository(),
+                    jsonDbContext.getCustomerRepository()
             );
             reviewController = new ReviewController(
-
+                    gson,
+                    reviewService,
+                    reviewService,
+                    reviewService,
+                    reviewService
             );
         }
         return reviewController;
@@ -295,6 +302,12 @@ public class ProgramFactory {
         if (ticketReservedHandler == null)
             ticketReservedHandler = new TicketReservedHandler(TicketReservedException.class);
         return ticketReservedHandler;
+    }
+
+    public ExceptionHandler buildReviewNotFoundHandler() {
+        if (reviewNotFoundHandler == null)
+            reviewNotFoundHandler = new ReviewNotFoundHandler(ReviewNotFoundException.class);
+        return reviewNotFoundHandler;
     }
 
     public ExceptionHandler buildUserNameTakenHandler() {

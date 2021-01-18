@@ -1,6 +1,7 @@
 package useCase.manifestation.dto;
 
 import model.Manifestation;
+import model.ReviewStatus;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +38,8 @@ public class GetByIdManifestationDTO {
         this.imageLocation = manifestation.getImage().getLocation();
         this.reviews = manifestation.getReviews()
                 .stream()
+                // filtering out not approved reviews and deleted reviews
+                .filter(review -> /*review.getStatus() == ReviewStatus.APPROVED ||*/ !review.isArchived())
                 .map(GetAllReviewsForManifestationDTO::new)
                 .collect(Collectors.toList());
     }

@@ -51,6 +51,10 @@ public class Review {
         return Objects.hash(id);
     }
 
+    public void archive() {
+        this.archived = true;
+    }
+
     public Long getId() {
         return id;
     }
