@@ -1,14 +1,14 @@
 package model;
 
 public enum CustomerType {
-    BRONZE(0, 0),
-    SILVER(3000, 20),
-    GOLD(4000, 30);
+    BRONZE(0, 0.0F),
+    SILVER(2500, 0.25F),
+    GOLD(5000, 0.50F);
 
     private int minPoints;
-    private int discount;
+    private float discount;
 
-    CustomerType(int minPoints, int discount) {
+    CustomerType(int minPoints, float discount) {
         this.minPoints = minPoints;
         this.discount = discount;
     }
@@ -17,7 +17,7 @@ public enum CustomerType {
         return minPoints;
     }
 
-    public int getDiscount() {
+    public float getDiscount() {
         return discount;
     }
 }

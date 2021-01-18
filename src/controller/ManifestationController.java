@@ -106,16 +106,9 @@ public class ManifestationController {
     };
 
     public Route getAll = (Request request, Response response) -> {
-        Collection<Manifestation> allManifestations;
         User user = request.attribute("user");
-        if (user instanceof Salesman)
-            allManifestations = ((Salesman) user).getManifestations();
-        else
-            allManifestations = getAllManifestationsUseCase.getAllManifestations();
-
-
         response.status(HttpStatus.OK_200);
-        return allManifestations;
+        return getAllManifestationsUseCase.getAllManifestations(user);
     };
 
     public Route getById = (Request request, Response response) -> {

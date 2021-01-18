@@ -42,7 +42,6 @@ public class Program {
         factory.buildAdminController();
         factory.buildSalesmanController();
         factory.buildCustomerController();
-        factory.buildHistoryController();
         factory.buildManifestationController();
         factory.buildReviewController();
         factory.buildTicketController();
@@ -52,6 +51,7 @@ public class Program {
         exception(CustomerNotFoundException.class, factory.buildCustomerNotFoundHandler());
         exception(ManifestationNotFoundException.class, factory.buildManifestationNotFoundHandler());
         exception(TicketNotFoundException.class, factory.buildTicketNotFoundHandler());
+        exception(TicketReservedException.class, factory.buildTicketReservedHandler());
         exception(UserNameTakenException.class, factory.buildUserNameTakenHandler());
         exception(ConstraintViolationException.class, factory.buildConstraintViolationHandler());
         exception(InvalidRoleException.class, factory.buildInvalidRoleHandler());

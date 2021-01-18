@@ -24,12 +24,31 @@ public class Ticket {
     public Ticket(Long id, String appId, double price, TicketStatus status, TicketType type, boolean archived, Customer customer, Manifestation manifestation) {
         this.id = id;
         this.appId = appId;
-        this.price = price;
+        setPrice(price);
         this.status = status;
         this.type = type;
         this.archived = archived;
         this.customer = customer;
         this.manifestation = manifestation;
+    }
+
+    public Ticket(double price, TicketStatus status, TicketType type, boolean archived, Manifestation manifestation, Customer customer) {
+        this(idGenerator.next(), price, status, type, archived, customer, manifestation);
+    }
+
+    public Ticket(Long id, double price, TicketStatus status, TicketType type, boolean archived, Customer customer, Manifestation manifestation) {
+        this.id = id;
+        setPrice(price);
+        this.status = status;
+        this.type = type;
+        this.archived = archived;
+        this.customer = customer;
+        this.manifestation = manifestation;
+
+        String strId = id.toString();
+        String zero = "0";
+        int zeroToRepeat = 10 - strId.length();
+        this.appId = zero.repeat(zeroToRepeat) + strId;
     }
 
     public static void initGenerator() {
@@ -68,6 +87,10 @@ public class Ticket {
     public void setPrice(double regularPrice) {
         int multiplyBy = this.type.getMultiplyBy();
         this.price = regularPrice * multiplyBy;
+    }
+
+    public void setPriceDiscount(double discount) {
+        this.price -= (this.price * discount);
     }
 
     public TicketStatus getStatus() {

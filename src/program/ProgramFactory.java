@@ -9,7 +9,6 @@ import controller.ManifestationController;
 import controller.ReviewController;
 import controller.SalesmanController;
 import controller.TicketController;
-import controller.WithdrawalHistoryController;
 import exception.*;
 import exception.handler.*;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -23,7 +22,6 @@ import service.ManifestationService;
 import service.ReviewService;
 import service.SalesmanService;
 import service.TicketService;
-import service.WithdrawalHistoryService;
 import spark.ExceptionHandler;
 
 import java.security.SignatureException;
@@ -59,7 +57,6 @@ public class ProgramFactory {
     private AdminService adminService;
     private SalesmanService salesmanService;
     private CustomerService customerService;
-    private WithdrawalHistoryService withdrawalHistoryService;
     private ManifestationService manifestationService;
     private ReviewController reviewController;
     private TicketController ticketController;
@@ -68,7 +65,6 @@ public class ProgramFactory {
     private AdminController adminController;
     private SalesmanController salesmanController;
     private CustomerController customerController;
-    private WithdrawalHistoryController withdrawalHistoryController;
     private ManifestationController manifestationController;
     private ReviewService reviewService;
     private TicketService ticketService;
@@ -78,6 +74,7 @@ public class ProgramFactory {
     private ExceptionHandler customerNotFoundHandler;
     private ExceptionHandler manifestationNotFoundHandler;
     private ExceptionHandler ticketNotFoundHandler;
+    private ExceptionHandler ticketReservedHandler;
     private ExceptionHandler userNameTakenHandler;
     private ExceptionHandler constraintViolationHandler;
     private ExceptionHandler invalidRoleHandler;
@@ -190,21 +187,6 @@ public class ProgramFactory {
         return customerController;
     }
 
-    public WithdrawalHistoryController buildHistoryController() {
-        if (withdrawalHistoryController == null) {
-            withdrawalHistoryService = new WithdrawalHistoryService(
-
-                    formatter,
-                    jsonDbContext.getHistoryRepository(),
-                    jsonDbContext.getManifestationRepository()
-            );
-            withdrawalHistoryController = new WithdrawalHistoryController(
-
-            );
-        }
-        return withdrawalHistoryController;
-    }
-
     public ManifestationController buildManifestationController() {
         if (manifestationController == null) {
             manifestationService = new ManifestationService(
@@ -242,10 +224,18 @@ public class ProgramFactory {
     public TicketController buildTicketController() {
         if (ticketController == null) {
             ticketService = new TicketService(
-
+                    formatter,
+                    jsonDbContext.getTicketRepository(),
+                    jsonDbContext.getManifestationRepository(),
+                    jsonDbContext.getHistoryRepository(),
+                    jsonDbContext.getCustomerRepository()
             );
             ticketController = new TicketController(
-
+                    gson, formatter,
+                    ticketService,
+                    ticketService,
+                    ticketService,
+                    ticketService
             );
         }
         return ticketController;
@@ -279,6 +269,12 @@ public class ProgramFactory {
         if (ticketNotFoundHandler == null)
             ticketNotFoundHandler = new TicketNotFoundHandler(TicketNotFoundException.class);
         return ticketNotFoundHandler;
+    }
+
+    public ExceptionHandler buildTicketReservedHandler() {
+        if (ticketReservedHandler == null)
+            ticketReservedHandler = new TicketReservedHandler(TicketReservedException.class);
+        return ticketReservedHandler;
     }
 
     public ExceptionHandler buildUserNameTakenHandler() {

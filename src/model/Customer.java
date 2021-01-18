@@ -66,6 +66,30 @@ public class Customer extends User {
         this.withdrawalHistory.add(history);
     }
 
+    public void addPoints(double points) {
+        this.points += points;
+
+        if (points >= CustomerType.GOLD.getMinPoints()) {
+            this.type = CustomerType.GOLD;
+        } else if (points >= CustomerType.SILVER.getMinPoints()) {
+            this.type = CustomerType.SILVER;
+        } else if (points >= CustomerType.BRONZE.getMinPoints()) {
+            this.type = CustomerType.BRONZE;
+        }
+    }
+
+    public void subtractPoints(double points) {
+        this.points -= points;
+
+        if (points >= CustomerType.GOLD.getMinPoints()) {
+            this.type = CustomerType.GOLD;
+        } else if (points >= CustomerType.SILVER.getMinPoints()) {
+            this.type = CustomerType.SILVER;
+        } else if (points >= CustomerType.BRONZE.getMinPoints()) {
+            this.type = CustomerType.BRONZE;
+        }
+    }
+
     public double getPoints() {
         return points;
     }

@@ -6,6 +6,7 @@ public class GetAllManifestationsDTO {
     public long id;
     public String name;
     public long numberOfTicketsLeft;
+    public long maxNumberOfTickets;
     public double regularTicketPrice;
     public String holdingDate;
     public String status;
@@ -23,6 +24,7 @@ public class GetAllManifestationsDTO {
         this.id = manifestation.getId();
         this.name = manifestation.getName();
         this.numberOfTicketsLeft = manifestation.getNumberOfTicketsLeft();
+        this.maxNumberOfTickets = manifestation.getTickets().size();
         this.regularTicketPrice = manifestation.getRegularTicketPrice();
         this.holdingDate = parsedDate;
         this.status = manifestation.getStatus().toString();

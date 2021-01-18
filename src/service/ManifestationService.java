@@ -3,15 +3,7 @@ package service;
 import exception.ManifestationNotFoundException;
 import exception.PlaceAndDateTakenException;
 import exception.SalesmanNotFoundException;
-import model.Address;
-import model.Image;
-import model.Location;
-import model.Manifestation;
-import model.ManifestationStatus;
-import model.ManifestationType;
-import model.Salesman;
-import model.Ticket;
-import model.TicketStatus;
+import model.*;
 import repository.Repository;
 import repository.UserRepository;
 import useCase.manifestation.AddManifestationUseCase;
@@ -30,6 +22,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.stream.Collectors;
 
 public class ManifestationService implements
         AddManifestationUseCase,
@@ -86,8 +79,18 @@ public class ManifestationService implements
     }
 
     @Override
-    public Collection<Manifestation> getAllManifestations() {
-        return manifestationRepository.findAllByArchivedFalse();
+    public Collection<Manifestation> getAllManifestations(User user) {
+        Collection<Manifestation> allManifestations;
+
+        if (user instanceof Salesman)
+            allManifestations = ((Salesman) user).getManifestations()
+                    .stream()
+                    .filter(manifestation -> !manifestation.isArchived())
+                    .collect(Collectors.toList());
+        else
+            allManifestations = manifestationRepository.findAllByArchivedFalse();
+
+        return allManifestations;
     }
 
     @Override
@@ -154,6 +157,9 @@ public class ManifestationService implements
                 if (!manifestationToCheck.getId().equals(manifestation.getId())) {
                     if (isSamePlaceAndDate(manifestation, manifestationToCheck)) {
                         Manifestation.initGenerator(manifestationRepository.count());
+                        Location.initGenerator(manifestationRepository.count());
+                        Address.initGenerator(manifestationRepository.count());
+                        Image.initGenerator(manifestationRepository.count());
                         throw new PlaceAndDateTakenException();
                     }
                 }
