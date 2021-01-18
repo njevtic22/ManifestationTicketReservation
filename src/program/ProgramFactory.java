@@ -194,14 +194,13 @@ public class ProgramFactory {
     public WithdrawalHistoryController buildHistoryController() {
         if (withdrawalHistoryController == null) {
             withdrawalHistoryService = new WithdrawalHistoryService(
-
-                    formatter,
-                    jsonDbContext.getHistoryRepository(),
-                    jsonDbContext.getManifestationRepository()
+                    jsonDbContext.getHistoryRepository()
             );
             withdrawalHistoryController = new WithdrawalHistoryController(
-
-                    gson, formatter, getHistoriesUseCase);
+                    gson,
+                    formatter,
+                    withdrawalHistoryService
+            );
         }
         return withdrawalHistoryController;
     }
@@ -252,6 +251,7 @@ public class ProgramFactory {
             ticketController = new TicketController(
                     gson,
                     formatter,
+                    ticketService,
                     ticketService,
                     ticketService,
                     ticketService,

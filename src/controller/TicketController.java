@@ -11,6 +11,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import useCase.ticket.AddTicketUseCase;
+import useCase.ticket.DeleteTicketUseCase;
 import useCase.ticket.GetAllTicketsUseCase;
 import useCase.ticket.ReserveTicketUseCase;
 import useCase.ticket.WithdrawTicketUseCase;
@@ -22,6 +23,7 @@ import validation.SelfValidating;
 
 import java.text.SimpleDateFormat;
 
+import static spark.Spark.delete;
 import static spark.Spark.get;
 import static spark.Spark.path;
 import static spark.Spark.post;
@@ -33,6 +35,7 @@ public class TicketController {
     private GetAllTicketsUseCase getAllTicketsUseCase;
     private ReserveTicketUseCase reserveTicketUseCase;
     private WithdrawTicketUseCase withdrawTicketUseCase;
+    private DeleteTicketUseCase deleteTicketUseCase;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
     private RoleEnsure ensureUserIsSalesman = AuthenticationController::ensureUserIsSalesman;
@@ -40,13 +43,14 @@ public class TicketController {
     private RoleEnsure ensureUserIsAdminOrSalesman = AuthenticationController::ensureUserIsAdminOrSalesman;
     private RoleEnsure ensureUserIsAdminOrCustomer = AuthenticationController::ensureUserIsAdminOrCustomer;
 
-    public TicketController(Gson gson, SimpleDateFormat formatter, AddTicketUseCase addTicketUseCase, GetAllTicketsUseCase getAllTicketsUseCase, ReserveTicketUseCase reserveTicketUseCase, WithdrawTicketUseCase withdrawTicketUseCase) {
+    public TicketController(Gson gson, SimpleDateFormat formatter, AddTicketUseCase addTicketUseCase, GetAllTicketsUseCase getAllTicketsUseCase, ReserveTicketUseCase reserveTicketUseCase, WithdrawTicketUseCase withdrawTicketUseCase, DeleteTicketUseCase deleteTicketUseCase) {
         this.gson = gson;
         this.formatter = formatter;
         this.addTicketUseCase = addTicketUseCase;
         this.getAllTicketsUseCase = getAllTicketsUseCase;
         this.reserveTicketUseCase = reserveTicketUseCase;
         this.withdrawTicketUseCase = withdrawTicketUseCase;
+        this.deleteTicketUseCase = deleteTicketUseCase;
         this.setUpRoutes();
     }
 
@@ -57,6 +61,7 @@ public class TicketController {
                 post("/:id", reserve);
                 post("/:id", withdraw);
                 get("", getAll, new GetAllTicketsTransformer(gson, new GetAllTicketsMapper(formatter)));
+                delete("/:id", delete);
             });
         });
     }
@@ -110,5 +115,14 @@ public class TicketController {
         User user = request.attribute("user");
         response.status(HttpStatus.OK_200);
         return getAllTicketsUseCase.getAllTickets(user);
+    };
+
+    public Route delete = (Request request, Response response) -> {
+        ensureUserIsSalesman.ensure(request);
+
+        Long id = SelfValidating.validId(request.params(":id"));
+        deleteTicketUseCase.deleteTicket(id);
+        response.status(HttpStatus.OK_200);
+        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };
 }

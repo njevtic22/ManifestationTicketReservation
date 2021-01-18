@@ -16,6 +16,7 @@ import model.WithdrawalHistory;
 import repository.Repository;
 import repository.UserRepository;
 import useCase.ticket.AddTicketUseCase;
+import useCase.ticket.DeleteTicketUseCase;
 import useCase.ticket.GetAllTicketsUseCase;
 import useCase.ticket.ReserveTicketUseCase;
 import useCase.ticket.WithdrawTicketUseCase;
@@ -32,7 +33,8 @@ public class TicketService implements
         AddTicketUseCase,
         GetAllTicketsUseCase,
         ReserveTicketUseCase,
-        WithdrawTicketUseCase {
+        WithdrawTicketUseCase,
+        DeleteTicketUseCase {
     private final SimpleDateFormat formatter;
     private final Repository<Ticket, Long> ticketRepository;
     private final Repository<Manifestation, Long> manifestationRepository;
@@ -77,14 +79,14 @@ public class TicketService implements
         else if (user instanceof Salesman) {
             Salesman salesman = (Salesman) user;
             for (Manifestation salesmanManifestations : salesman.getManifestations()) {
-                tickets.addAll(salesmanManifestations.getTickets());
+//                 TODO: Change to this if deleting tickets is not implemented
+//                tickets.addAll(salesmanManifestations.getTickets());
 
-                // TODO: Change to this is deleting tickets is implemented
-//                for (Ticket salesmanTicket : salesmanManifestations.getTickets()) {
-//                    if (!salesmanTicket.isArchived()) {
-//                        tickets.add(salesmanTicket);
-//                    }
-//                }
+                for (Ticket salesmanTicket : salesmanManifestations.getTickets()) {
+                    if (!salesmanTicket.isArchived()) {
+                        tickets.add(salesmanTicket);
+                    }
+                }
             }
         } else {
             Customer customer = (Customer) user;
@@ -145,5 +147,15 @@ public class TicketService implements
 
         ticketRepository.save(ticket);
         customerRepository.save(customer);
+    }
+
+    @Override
+    public void deleteTicket(Long id) {
+        Ticket ticket = ticketRepository.findByIdAndArchivedFalse(id)
+                .orElseThrow(() -> new TicketNotFoundException(id));
+
+        ticket.archive();
+
+        ticketRepository.save(ticket);
     }
 }
