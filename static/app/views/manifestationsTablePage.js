@@ -1,8 +1,8 @@
-Vue.component("base", {
+Vue.component("manifestationsTablePage", {
     template: `
-    <div>
-
-    </div>
+    <baseLayout>
+        <h1>manifestationsTablePage</h1>
+    </baseLayout>
     `,
 
     data: function() {

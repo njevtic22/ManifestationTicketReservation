@@ -1,12 +1,112 @@
+const LoginPage = { template: "<logInPage></logInPage>" };
+const NotFoundPage = { template: "<notFoundPage></notFoundPage>" };
+const ForbiddenPage = { template: "<forbiddenPage></forbiddenPage>" };
+const UnauthorizedPage = { template: "<unauthorizedPage></unauthorizedPage>" };
+const ManifestationsTablePage = {
+    template: "<manifestationsTablePage></manifestationsTablePage>"
+};
+
 const router = new VueRouter({
     mode: "hash",
-    routes: []
+    routes: [
+        {
+            path: "/login",
+            name: "LogInPage",
+            component: LoginPage,
+            meta: { title: "Login page", requiresAuth: false }
+        },
+        {
+            path: "/",
+            name: "ManifestationsTablePage",
+            component: ManifestationsTablePage,
+            meta: { title: "Manifestations page", requiresAuth: false }
+        },
+
+        {
+            path: "/401",
+            name: "UnauthorizedPage",
+            component: UnauthorizedPage,
+            meta: {
+                title: "Unauthorized",
+                requiresAuth: true,
+                allow: ["ADMIN", "SALESMAN", "CUSTOMER"]
+            }
+        },
+        {
+            path: "/403",
+            name: "ForbiddenPage",
+            component: ForbiddenPage,
+            meta: {
+                title: "Forbidden",
+                requiresAuth: true,
+                allow: ["ADMIN", "SALESMAN", "CUSTOMER"]
+            }
+        },
+        {
+            path: "/404",
+            name: "NotFoundPage",
+            alias: "*",
+            component: NotFoundPage,
+            meta: {
+                title: "Not Found",
+                requiresAuth: true,
+                allow: ["ADMIN", "SALESMAN", "CUSTOMER"]
+            }
+        }
+    ]
 });
 
-router.beforeEach((to, from, next) => {});
+router.beforeEach((to, from, next) => {
+    let userRole = localStorage.getItem("role");
+
+    let isUserLoggedIn = function() {
+        return userRole !== null;
+    };
+
+    if (!isUserLoggedIn()) {
+        // user is not logged in
+
+        if (!to.meta.requiresAuth) {
+            next();
+        } else {
+            next({
+                name: "ManifestationsTablePage"
+            });
+        }
+    } else {
+        console.log("nemanja");
+
+        // user is logged in
+        if (!to.meta.requiresAuth) {
+            if (to.name === "LogInPage") {
+                next({
+                    name: "ManifestationsTablePage"
+                });
+            } else {
+                next();
+            }
+        } else {
+            if (to.meta.allow.includes(userRole)) {
+                next();
+            } else {
+                next({
+                    name: "NotFoundPage"
+                });
+                // toast("Serious error. This should not happen");
+                // next(from.name);
+            }
+        }
+    }
+});
 
 var app = new Vue({
     el: "#ManifestationTicketReservation",
+    template: `
+    <div>
+        <myToast></myToast>
+        <router-view />
+    </div>
+    `,
     router,
 
     methods: {
@@ -20,6 +120,10 @@ var app = new Vue({
 
         isCustomer: function() {
             return localStorage.getItem("role") == "CUSTOMER";
+        },
+
+        isUserLoggedIn: function() {
+            return localStorage.getItem("role") !== null;
         },
 
         clearStorageAndHeader: function() {

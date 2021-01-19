@@ -13,7 +13,6 @@
         <link href="bootstrap/css/toast.css" rel="stylesheet" />
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
         <link rel="stylesheet" href="bootstrap/css/bootstrap-select.css" />
-        <link rel="stylesheet" href="bootstrap/css/style.css" />
 
         <!-- Bootstrap js -->
         <script src="bootstrap/js/bootstrap.js"></script>
@@ -25,15 +24,33 @@
         <link rel="icon" href="/images/Cloud Logo Wide.png" />
     </head>
     <body>
-        <div id="ManifestationTicketReservation">
-            <router-view />
-        </div>
+        <div id="ManifestationTicketReservation"></div>
 
         <!-- necessary js -->
         <script src="js/toast.js"></script>
         <script src="js/vue.js"></script>
         <script src="js/vue-router.js"></script>
         <script src="js/axios.js"></script>
+
+        <!-- Shared components -->
+        <script src="app/components/shared/myToast.js"></script>
+        <script src="app/components/shared/logOutButton.js"></script>
+        <script src="app/components/shared/navBar.js"></script>
+        <script src="app/components/shared/sideBar.js"></script>
+        <script src="app/components/shared/baseLayout.js"></script>
+
+        <!-- Shared components -->
+        <script src="app/components/shared/forms/textInput.js"></script>
+        <script src="app/components/shared/forms/passwordInput.js"></script>
+
+        <!-- Error pages -->
+        <script src="app/views/unauthorizedPage.js"></script>
+        <script src="app/views/forbiddenPage.js"></script>
+        <script src="app/views/notFoundPage.js"></script>
+
+        <!-- Views -->
+        <script src="app/views/logInPage.js"></script>
+        <script src="app/views/manifestationsTablePage.js"></script>
 
         <script src="app/app.js"></script>
     </body>

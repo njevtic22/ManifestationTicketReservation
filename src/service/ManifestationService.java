@@ -20,8 +20,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ManifestationService implements
@@ -89,6 +91,8 @@ public class ManifestationService implements
                     .collect(Collectors.toList());
         else
             allManifestations = manifestationRepository.findAllByArchivedFalse();
+
+        Collections.sort((List<Manifestation>) allManifestations);
 
         return allManifestations;
     }

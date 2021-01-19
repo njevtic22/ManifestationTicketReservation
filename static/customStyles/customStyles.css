@@ -1,7 +1,7 @@
 .login-center {
     position: fixed; /* or absolute */
     width: 18rem;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
