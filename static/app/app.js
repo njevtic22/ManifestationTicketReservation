@@ -74,8 +74,6 @@ router.beforeEach((to, from, next) => {
             });
         }
     } else {
-        console.log("nemanja");
-
         // user is logged in
         if (!to.meta.requiresAuth) {
             if (to.name === "LogInPage") {
@@ -103,8 +101,8 @@ var app = new Vue({
     el: "#ManifestationTicketReservation",
     template: `
     <div>
-        <myToast></myToast>
         <router-view />
+        <myToast></myToast>
     </div>
     `,
     router,

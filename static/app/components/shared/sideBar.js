@@ -1,9 +1,9 @@
 Vue.component("sideBar", {
     template: `
-    <nav class="col-md-2 bg-light sidebar">
+    <nav class="bg-light list-group list-group-flush"> 
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <router-link class="nav-link text-dark" to="/profile">
               Profile
             </router-link>
@@ -15,13 +15,13 @@ Vue.component("sideBar", {
             </router-link>
           </li>
 
-          <li class="nav-item" v-if="$root.isSuperAdmin()">
+          <li class="nav-item">
             <router-link class="nav-link text-dark" to="/organizations">
               Organizations
             </router-link>
           </li>
 
-          <li class="nav-item" v-if="!$root.isRegularUser()">
+          <li class="nav-item">
             <router-link class="nav-link text-dark" to="/usersPage">
               Users
             </router-link>
@@ -33,13 +33,14 @@ Vue.component("sideBar", {
             </router-link>
           </li>
           
-          <li class="nav-item" v-if="$root.isSuperAdmin()">
+          <li class="nav-item">
             <router-link class="nav-link text-dark" to="/categoriesPage">
               Categories
             </router-link>
-          </li> -->
+          </li>
+          
+            <logOutButton class="logout-sidebar-button"></logOutButton>
 
-          <logOutButton v-if="$root.isUserLoggedIn()" class="logout-sidebar-button"></logOutButton>
         </ul> 
       </div>
     </nav>

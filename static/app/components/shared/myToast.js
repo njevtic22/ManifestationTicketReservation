@@ -4,7 +4,6 @@ Vue.component("myToast", {
         aria-live="polite"
         aria-atomic="true"
         class="d-flex justify-content-center align-items-center"
-        style="min-height: 200px;"
     >
         <!-- Then put toasts within -->
         <div
