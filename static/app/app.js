@@ -80,6 +80,10 @@ router.beforeEach((to, from, next) => {
                 next({
                     name: "ManifestationsTablePage"
                 });
+            // } else if (to.name === "RegisterPage") {
+            //     next({
+            //         name: "ManifestationsTablePage"
+            //     });
             } else {
                 next();
             }

@@ -1,6 +1,6 @@
 Vue.component("logInPage", {
     template: `
-    <div>
+    <baseLayout>
         <div class="login-center text-center">
             <form 
                 id="loginForm" 
@@ -11,7 +11,6 @@ Vue.component("logInPage", {
                 <hr>
 
                 <textInput
-                    id="userNameInput"
                     name="username"
                     v-model="username"
                     v-bind:errorMessage="userNameErrorMessage"
@@ -22,7 +21,6 @@ Vue.component("logInPage", {
                 >
                 </textInput>
                 <passwordInput
-                    id="passwordInput"
                     name="password"
                     v-model="password"
                     v-bind:errorMessage="passwordErrorMessage"
@@ -44,7 +42,7 @@ Vue.component("logInPage", {
                 -->
             </form>
         </div>
-    </div>
+    </baseLayout>
     `,
 
     data: function() {
@@ -138,10 +136,8 @@ Vue.component("logInPage", {
                     })
                     .catch(error => {
                         if (error.response.data == "Invalid username") {
-                            console.log("Invalid username");
                             this.showInvalidUserNameError(error.response.data);
                         } else if (error.response.data == "Invalid password") {
-                            console.log("Invalid password");
                             this.showInvalidPasswordError(error.response.data);
                         } else {
                             this.$root.defaultCatchError(error);

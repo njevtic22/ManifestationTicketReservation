@@ -1,7 +1,7 @@
 Vue.component("passwordInput", {
     template: `
         <div class="form-group">
-            <label v-bind:for="name">
+            <label v-if="showLabel" v-bind:for="name">
                 <slot></slot>
             </label>
             <div class="input-group">
@@ -25,6 +25,10 @@ Vue.component("passwordInput", {
         name: String,
         value: String,
         errorMessage: String,
+        showLabel: {
+            type: Boolean,
+            default: false
+        },
         isInvalid: {
             type: Boolean,
             default: false
