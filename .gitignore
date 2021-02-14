@@ -68,3 +68,7 @@ bin/
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+
+
+# documentation
+doc/
