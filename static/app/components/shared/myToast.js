@@ -12,8 +12,10 @@ Vue.component("myToast", {
             role="alert"
             aria-live="assertive"
             aria-atomic="true"
-            data-delay="5000"
             data-animation="true"
+            
+            v-bind:data-delay="delayTime"
+            v-bind:data-autohide="toAutoHide"
         >
             <div class="toast-header bg-success">
                 <strong class="mr-auto text-dark">Message</strong>
@@ -33,19 +35,27 @@ Vue.component("myToast", {
     </div>
     `,
 
-    data: function() {
+    data: function () {
         return {
-            toastMessage: ""
+            toastMessage: "",
+            delayTime: 5000,
+            toAutoHide: true
         };
     },
 
-    methods: {},
+    methods: {
+        removeBgColors: function() {
+            $(".toast-header").removeClass("bg-danger");
+            $(".toast-header").removeClass("bg-success");
+            $(".toast-header").removeClass("bg-primary");
+        }
+    },
 
     mounted() {
         this.$root.$on("toastSuccess", message => {
             this.toastMessage = message;
 
-            $(".toast-header").removeClass("bg-danger");
+            this.removeBgColors();
             $(".toast-header").addClass("bg-success");
             $("#appToast").toast("show");
         });
@@ -53,8 +63,16 @@ Vue.component("myToast", {
         this.$root.$on("toastFailure", message => {
             this.toastMessage = message;
 
-            $(".toast-header").removeClass("bg-success");
+            this.removeBgColors();
             $(".toast-header").addClass("bg-danger");
+            $("#appToast").toast("show");
+        });
+
+        this.$root.$on("toastInfo", message => {
+            this.toastMessage = message;
+
+            this.removeBgColors();
+            $(".toast-header").addClass("bg-primary");
             $("#appToast").toast("show");
         });
     },
@@ -62,5 +80,6 @@ Vue.component("myToast", {
     destroyed() {
         this.$root.$off("toastSuccess");
         this.$root.$off("toastFailure");
+        this.$root.$off("toastInfo");
     }
 });

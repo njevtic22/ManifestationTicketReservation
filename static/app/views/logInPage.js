@@ -1,7 +1,6 @@
 Vue.component("logInPage", {
     template: `
     <div>
-    <navBar></navBar>
         <div class="login-center text-center">
             <form 
                 id="loginForm" 
@@ -16,6 +15,7 @@ Vue.component("logInPage", {
                     name="username"
                     v-model="username"
                     v-bind:errorMessage="userNameErrorMessage"
+                    v-bind:isInvalid="isUsernameInvalid"
                     placeholder="Username"
                     required
                     autofocus
@@ -26,6 +26,7 @@ Vue.component("logInPage", {
                     name="password"
                     v-model="password"
                     v-bind:errorMessage="passwordErrorMessage"
+                    v-bind:isInvalid="isPasswordInvalid"
                     placeholder="Password"
                     required
                 >
@@ -36,9 +37,11 @@ Vue.component("logInPage", {
                 <button type="button" value="Log in" v-on:click="login($event)" class="btn btn-lg btn-primary btn-block">Log in</button>	
                 <p class="mt-5 mb-3 text-muted">© Manifestation service</p>
 
+                <!--
                 <button type="button" value="Log in" v-on:click="failureToast" class="btn btn-lg btn-danger btn-block">Failure toast</button>	
                 <button type="button" value="Log in" v-on:click="successToast" class="btn btn-lg btn-success btn-block">Success toast</button>	
-	
+                <button type="button" value="Log in" v-on:click="infoToast" class="btn btn-lg btn-primary btn-block">Info toast</button>	
+                -->
             </form>
         </div>
     </div>
@@ -50,7 +53,10 @@ Vue.component("logInPage", {
             password: "",
 
             userNameErrorMessage: "",
-            passwordErrorMessage: ""
+            passwordErrorMessage: "",
+
+            isUsernameInvalid: false,
+            isPasswordInvalid: false
         };
     },
 
@@ -63,32 +69,28 @@ Vue.component("logInPage", {
             this.$root.$emit("toastSuccess", "This toast succeeded");
         },
 
+        infoToast: function() {
+            this.$root.$emit("toastInfo", "This toast informed");
+        },
+
         showInvalidUserNameError: function(message) {
             this.userNameErrorMessage = message;
-            var userNameInput = $("#userNameInput");
-            var input = userNameInput.children().children();
-            input.addClass("is-invalid");
+            this.isUsernameInvalid = true;
         },
 
         removeInvalidUserNameError: function() {
             this.userNameErrorMessage = "Username must not be empty";
-            var userNameInput = $("#userNameInput");
-            var input = userNameInput.children().children();
-            input.removeClass("is-invalid");
+            this.isUsernameInvalid = false;
         },
 
         showInvalidPasswordError: function(message) {
             this.passwordErrorMessage = message;
-            var userNameInput = $("#passwordInput");
-            var input = userNameInput.children().children();
-            input.addClass("is-invalid");
+            this.isPasswordInvalid = true;
         },
 
         removeInvalidPasswordError: function() {
             this.passwordErrorMessage = "Username must not be empty";
-            var userNameInput = $("#passwordInput");
-            var input = userNameInput.children().children();
-            input.removeClass("is-invalid");
+            this.isPasswordInvalid = false;
         },
 
         validateForm: function() {
@@ -136,8 +138,10 @@ Vue.component("logInPage", {
                     })
                     .catch(error => {
                         if (error.response.data == "Invalid username") {
+                            console.log("Invalid username");
                             this.showInvalidUserNameError(error.response.data);
                         } else if (error.response.data == "Invalid password") {
+                            console.log("Invalid password");
                             this.showInvalidPasswordError(error.response.data);
                         } else {
                             this.$root.defaultCatchError(error);

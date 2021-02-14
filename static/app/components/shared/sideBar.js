@@ -1,6 +1,8 @@
 Vue.component("sideBar", {
     template: `
     <nav class="bg-light list-group list-group-flush"> 
+      <h5 class="sidebar-heading titleBottom"><a href="#/" id="mainAnchor">Manifestation service</a></h5>
+      
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">

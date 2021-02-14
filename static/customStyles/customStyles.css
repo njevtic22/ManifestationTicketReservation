@@ -69,7 +69,7 @@ body {
  */
 
 [role="main"] {
-    padding-top: 48px; /* Space for fixed navbar */
+    padding-top: 30px; /* Space for fixed navbar */
 }
 
 /*
@@ -81,7 +81,7 @@ body {
     padding-bottom: 0.75rem;
     font-size: 1rem;
     background-color: rgba(0, 0, 0, 0.25);
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25);
+    box-shadow: -1px 0 0 rgba(0, 0, 0, 0.25);
 }
 
 .emp-profile {
@@ -145,6 +145,7 @@ body {
     color: #0062cc;
 }
 
+/*
 .category-label {
     margin-right: 10px;
 }
@@ -160,8 +161,10 @@ body {
     overflow: hidden;
     overflow-y: scroll;
 }
+*/
 
 /* Switch button */
+/*
 .switch-button {
     margin: 10px 0;
 }
@@ -199,7 +202,7 @@ body {
 .switch-button-control .switch-button-label {
     margin-left: 10px;
 }
-
+*/
 /* ***************************** */
 /*!
  * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template/simple-sidebar)
