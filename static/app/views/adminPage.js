@@ -48,6 +48,5 @@ Vue.component("adminPage", {
     },
 
     mounted() {
-      console.log("Admin page mounted");
     }
 });

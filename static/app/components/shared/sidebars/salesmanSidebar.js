@@ -44,7 +44,8 @@ Vue.component("salesmanSidebar", {
     methods: {
     },
 
-    mounted() {},
+    mounted() {
+    },
 
     destroyed() {}
 });

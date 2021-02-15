@@ -1,7 +1,7 @@
 Vue.component("adminSidebar", {
     template: `
     <nav class="bg-light list-group list-group-flush sidebar"> 
-        <h5 class="sidebar-heading titleBottom"><a href="#/" id="mainAnchor">Manifestation service</a></h5>
+        <h5 class="sidebar-heading titleBottom"><a href="#/admin/manifestations/table" id="mainAnchor">Manifestation service</a></h5>
     
         <div class="sidebar-sticky">
             <ul class="nav flex-column">
@@ -44,7 +44,8 @@ Vue.component("adminSidebar", {
     methods: {
     },
 
-    mounted() {},
+    mounted() {
+    },
 
     destroyed() {}
 });

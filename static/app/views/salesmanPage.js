@@ -48,6 +48,5 @@ Vue.component("salesmanPage", {
     },
 
     mounted() {
-      console.log("Salesman page mounted");
     }
 });

@@ -15,6 +15,5 @@ Vue.component("sideBar", {
     methods: {},
 
     mounted() {
-        console.log("Sidebar mounted");
     }
 });

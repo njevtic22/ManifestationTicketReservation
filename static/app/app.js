@@ -18,6 +18,68 @@ const UserRoles = Object.freeze({
     ANONYMOUS: "ANONYMOUS"
 });
 
+
+const isAdminRoute = (to, from, next) => {
+    console.log("adminRouter");
+    if (localStorage.getItem("role") === UserRoles.ADMIN) {
+        next();
+        return;
+    }
+    next({
+        name: "UnauthorizedPage"
+    })
+};
+
+const isSalesmanRoute = (to, from, next) => {
+    if (localStorage.getItem("role") === UserRoles.SALESMAN) {
+        next();
+        return;
+    }
+    next({
+        name: "UnauthorizedPage"
+    })
+};
+
+const isCustomerRoute = (to, from, next) => {
+    if (localStorage.getItem("role") === UserRoles.CUSTOMER) {
+        next();
+        return;
+    }
+    next({
+        name: "UnauthorizedPage"
+    })
+};
+
+const isLogOut = (to, from, next) => {
+    if (!localStorage.getItem("role")) {
+        next();
+        return;
+    }
+    next({
+        name: "UnauthorizedPage"
+    })
+};
+
+const isLogIn = (to, from, next) => {
+    if (localStorage.getItem("role")) {
+        next();
+        return;
+    }
+    next({
+        name: "UnauthorizedPage"
+    })
+};
+
+const errorPageUserCheck = (to, from, next) => {
+    if (localStorage.getItem("role")) {
+        next();
+        return;
+    }
+    next({
+        name: "LogInPage"
+    })
+};
+
 const router = new VueRouter({
     mode: "hash",
     routes: [
@@ -25,42 +87,33 @@ const router = new VueRouter({
             path: "/login",
             name: "LogInPage",
             component: LoginPage,
-            meta: { 
-                title: "Login page",
-                allow: [UserRoles.ANONYMOUS]
-         }
+            beforeEnter: isLogOut,
+            meta: { title: "Login" }
         },
         {
             path: "/register",
             name: "RegisterPage",
             component: RegisterPage,
-            meta: { 
-                title: "Register page",
-                allow: [UserRoles.ANONYMOUS]
-            }
+            beforeEnter: isLogOut,
+            meta: { title: "Register" }
         },
         {
             path: "/",
             name: "ManifestationsPage",
             component: ManifestationsPage,
+            beforeEnter: isLogOut,
             children: [
                 {
                     path: "manifestations/table",
                     name: "AnonymousManifestationsTable",
                     component: ManifestationsTable,
-                    meta: { 
-                        title: "Manifestations table",
-                        allow: [UserRoles.ANONYMOUS]
-                    }
+                    meta: { title: "Manifestations table" }
                 },
                 {
                     path: "manifestations/map",
                     name: "AnonymousManifestationsMap",
                     component: ManifestationsMap,
-                    meta: { 
-                        title: "Manifestations map",
-                        allow: [UserRoles.ANONYMOUS]
-                    }
+                    meta: { title: "Manifestations map" }
                 }
             ],
         },
@@ -68,33 +121,25 @@ const router = new VueRouter({
             path: "/admin",
             name: "AdminPage",
             component: AdminPage,
+            beforeEnter: isAdminRoute,
             children: [
                 {
                     path: "profile",
                     name: "AdminProfile",
                     component: Profile,
-                    meta: { 
-                        title: "Profile",
-                        allow: [UserRoles.ADMIN]
-                    }
+                    meta: { title: "Profile" }
                 },
                 {
                     path: "manifestations/table",
                     name: "AdminManifestationsTable",
                     component: ManifestationsTable,
-                    meta: { 
-                        title: "Manifestations table",
-                        allow: [UserRoles.ADMIN]
-                    }
+                    meta: { title: "Manifestations table" }
                 },
                 {
                     path: "manifestations/map",
                     name: "AdminManifestationsMap",
                     component: ManifestationsMap,
-                    meta: { 
-                        title: "Manifestations map",
-                        allow: [UserRoles.ADMIN]
-                    }
+                    meta: { title: "Manifestations map" }
                 }
             ],
         },
@@ -102,33 +147,25 @@ const router = new VueRouter({
             path: "/salesman",
             name: "SalesmanPage",
             component: SalesmanPage,
+            beforeEnter: isSalesmanRoute,
             children: [
                 {
                     path: "profile",
                     name: "SalesmanProfile",
                     component: Profile,
-                    meta: { 
-                        title: "Profile",
-                        allow: [UserRoles.SALESMAN]
-                    }
+                    meta: { title: "Profile" }
                 },
                 {
                     path: "manifestations/table",
                     name: "SalesmanManifestationsTable",
                     component: ManifestationsTable,
-                    meta: { 
-                        title: "Manifestations table",
-                        allow: [UserRoles.SALESMAN]
-                    }
+                    meta: { title: "Manifestations table" }
                 },
                 {
                     path: "manifestations/map",
                     name: "SalesmanManifestationsMap",
                     component: ManifestationsMap,
-                    meta: { 
-                        title: "Manifestations map",
-                        allow: [UserRoles.SALESMAN]
-                    }
+                    meta: { title: "Manifestations map" }
                 }
             ]
         },
@@ -136,33 +173,25 @@ const router = new VueRouter({
             path: "/customer",
             name: "CustomerPage",
             component: CustomerPage,
+            beforeEnter: isCustomerRoute,
             children: [
                 {
                     path: "profile",
                     name: "CustomerProfile",
                     component: Profile,
-                    meta: { 
-                        title: "Profile",
-                        allow: [UserRoles.CUSTOMER]
-                    }
+                    meta: { title: "Profile" }
                 },
                 {
                     path: "manifestations/table",
                     name: "CustomerManifestationsTable",
                     component: ManifestationsTable,
-                    meta: { 
-                        title: "Manifestations table",
-                        allow: [UserRoles.CUSTOMER]
-                    }
+                    meta: { title: "Manifestations table" }
                 },
                 {
                     path: "manifestations/map",
                     name: "CustomerManifestationsMap",
                     component: ManifestationsMap,
-                    meta: { 
-                        title: "Manifestations map",
-                        allow: [UserRoles.CUSTOMER]
-                    }
+                    meta: { title: "Manifestations map" }
                 }
             ]
         },
@@ -170,51 +199,46 @@ const router = new VueRouter({
             path: "/401",
             name: "UnauthorizedPage",
             component: UnauthorizedPage,
-            meta: {
-                title: "Unauthorized",
-                allow: [UserRoles.ADMIN, UserRoles.SALESMAN, UserRoles.CUSTOMER]
-            }
+            beforeEnter: errorPageUserCheck,
+            meta: { title: "Unauthorized" }
         },
         {
             path: "/403",
             name: "ForbiddenPage",
             component: ForbiddenPage,
-            meta: {
-                title: "Forbidden",
-                allow: [UserRoles.ADMIN, UserRoles.SALESMAN, UserRoles.CUSTOMER]
-            }
+            beforeEnter: errorPageUserCheck,
+            meta: { title: "Forbidden" }
         },
         {
             path: "/404",
             name: "NotFoundPage",
             alias: "*",
             component: NotFoundPage,
-            meta: {
-                title: "Not Found",
-                allow: [UserRoles.ADMIN, UserRoles.SALESMAN, UserRoles.CUSTOMER]
-            }
+            beforeEnter: errorPageUserCheck,
+            meta: { title: "Not Found" }
         }
     ]
 });
 
-router.beforeEach((to, from, next) => {
-    let userRole = localStorage.getItem("role");
-    if (userRole == null) {
-        userRole = "ANONYMOUS";
-    }
+// router.beforeEach((to, from, next) => {
+//     // let userRole = localStorage.getItem("role");
+//     // if (userRole == null) {
+//     //     userRole = "ANONYMOUS";
+//     // }
 
-    if (to.meta.allow == null) {
-        next({
-            name: "NotFoundPage"
-        });
-    } else if (to.meta.allow.includes(userRole)) {
-        next();
-    } else {
-        next({
-            name: "NotFoundPage"
-        });
-    }
-});
+//     // if (to.meta.allow == null) {
+//     //     next({
+//     //         name: "NotFoundPage"
+//     //     });
+//     // } else if (to.meta.allow.includes(userRole)) {
+//     //     next();
+//     // } else {
+//     //     next({
+//     //         name: "NotFoundPage"
+//     //     });
+//     // }
+//     next();
+// });
 
 var app = new Vue({
     el: "#ManifestationTicketReservation",

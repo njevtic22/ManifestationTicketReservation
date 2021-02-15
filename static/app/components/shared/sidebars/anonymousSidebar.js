@@ -52,7 +52,6 @@ Vue.component("anonymousSidebar", {
     },
 
     mounted() {
-        console.log("anonymousSidebar mounted");
     },
 
     destroyed() {}

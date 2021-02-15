@@ -44,7 +44,8 @@ Vue.component("customerSidebar", {
     methods: {
     },
 
-    mounted() {},
+    mounted() {
+    },
 
     destroyed() {}
 });

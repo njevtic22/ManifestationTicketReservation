@@ -48,6 +48,5 @@ Vue.component("customerPage", {
     },
 
     mounted() {
-      console.log("Customer page mounted");
     }
 });
