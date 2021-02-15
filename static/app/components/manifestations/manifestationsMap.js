@@ -1,7 +1,7 @@
-Vue.component("manifestationsTable", {
+Vue.component("manifestationsMap", {
     template: `
     <div>
-        <h1>Manifestations table</h1>
+        <h1>Manifestations map</h1>
     </div>
     `,
 

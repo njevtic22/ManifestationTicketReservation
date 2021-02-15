@@ -1,10 +1,10 @@
-Vue.component("manifestationsPage", {
+Vue.component("adminPage", {
     template: `
     <div class="d-flex" id="wrapper" v-bind:class="{toggled: isToggled}">
 
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <anonymousSidebar></anonymousSidebar>
+            <adminSidebar></adminSidebar>
         </div>
         <!-- /#sidebar-wrapper -->
 
@@ -31,10 +31,9 @@ Vue.component("manifestationsPage", {
 
     </div>
     `,
-
     data: function() {
         return {
-            isToggled: false
+          isToggled: false
         };
     },
 
@@ -49,7 +48,6 @@ Vue.component("manifestationsPage", {
     },
 
     mounted() {
-    },
-
-    destroyed() {}
+      console.log("Admin page mounted");
+    }
 });

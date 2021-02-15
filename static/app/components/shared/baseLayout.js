@@ -48,6 +48,6 @@ Vue.component("baseLayout", {
     },
 
     mounted() {
-      console.log("Base Layout mounted");
+    //   console.log("Base Layout mounted");
     }
 });

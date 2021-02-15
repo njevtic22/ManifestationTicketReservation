@@ -3,9 +3,13 @@ const RegisterPage = { template: "<registerPage></registerPage>" };
 const NotFoundPage = { template: "<notFoundPage></notFoundPage>" };
 const ForbiddenPage = { template: "<forbiddenPage></forbiddenPage>" };
 const UnauthorizedPage = { template: "<unauthorizedPage></unauthorizedPage>" };
-const ManifestationsPage = {
-    template: "<manifestationsPage></manifestationsPage>"
-};
+const ManifestationsPage = { template: "<manifestationsPage></manifestationsPage>" };
+const ManifestationsTable = { template: "<manifestationsTable></manifestationsTable>" };
+const ManifestationsMap = { template: "<manifestationsMap></manifestationsMap>" };
+const AdminPage = { template: "<adminPage></adminPage>" };
+const SalesmanPage = { template: "<salesmanPage></salesmanPage>" };
+const CustomerPage = { template: "<customerPage></customerPage>" };
+const Profile = { template: "<profile></profile>" }
 
 const UserRoles = Object.freeze({
     ADMIN: "ADMIN",
@@ -39,10 +43,128 @@ const router = new VueRouter({
             path: "/",
             name: "ManifestationsPage",
             component: ManifestationsPage,
-            meta: { 
-                title: "Manifestations page",
-                allow: [UserRoles.ANONYMOUS, UserRoles.ADMIN, UserRoles.SALESMAN, UserRoles.CUSTOMER]
-            }
+            children: [
+                {
+                    path: "manifestations/table",
+                    name: "AnonymousManifestationsTable",
+                    component: ManifestationsTable,
+                    meta: { 
+                        title: "Manifestations table",
+                        allow: [UserRoles.ANONYMOUS]
+                    }
+                },
+                {
+                    path: "manifestations/map",
+                    name: "AnonymousManifestationsMap",
+                    component: ManifestationsMap,
+                    meta: { 
+                        title: "Manifestations map",
+                        allow: [UserRoles.ANONYMOUS]
+                    }
+                }
+            ],
+        },
+        {
+            path: "/admin",
+            name: "AdminPage",
+            component: AdminPage,
+            children: [
+                {
+                    path: "profile",
+                    name: "AdminProfile",
+                    component: Profile,
+                    meta: { 
+                        title: "Profile",
+                        allow: [UserRoles.ADMIN]
+                    }
+                },
+                {
+                    path: "manifestations/table",
+                    name: "AdminManifestationsTable",
+                    component: ManifestationsTable,
+                    meta: { 
+                        title: "Manifestations table",
+                        allow: [UserRoles.ADMIN]
+                    }
+                },
+                {
+                    path: "manifestations/map",
+                    name: "AdminManifestationsMap",
+                    component: ManifestationsMap,
+                    meta: { 
+                        title: "Manifestations map",
+                        allow: [UserRoles.ADMIN]
+                    }
+                }
+            ],
+        },
+        {
+            path: "/salesman",
+            name: "SalesmanPage",
+            component: SalesmanPage,
+            children: [
+                {
+                    path: "profile",
+                    name: "SalesmanProfile",
+                    component: Profile,
+                    meta: { 
+                        title: "Profile",
+                        allow: [UserRoles.SALESMAN]
+                    }
+                },
+                {
+                    path: "manifestations/table",
+                    name: "SalesmanManifestationsTable",
+                    component: ManifestationsTable,
+                    meta: { 
+                        title: "Manifestations table",
+                        allow: [UserRoles.SALESMAN]
+                    }
+                },
+                {
+                    path: "manifestations/map",
+                    name: "SalesmanManifestationsMap",
+                    component: ManifestationsMap,
+                    meta: { 
+                        title: "Manifestations map",
+                        allow: [UserRoles.SALESMAN]
+                    }
+                }
+            ]
+        },
+        {
+            path: "/customer",
+            name: "CustomerPage",
+            component: CustomerPage,
+            children: [
+                {
+                    path: "profile",
+                    name: "CustomerProfile",
+                    component: Profile,
+                    meta: { 
+                        title: "Profile",
+                        allow: [UserRoles.CUSTOMER]
+                    }
+                },
+                {
+                    path: "manifestations/table",
+                    name: "CustomerManifestationsTable",
+                    component: ManifestationsTable,
+                    meta: { 
+                        title: "Manifestations table",
+                        allow: [UserRoles.CUSTOMER]
+                    }
+                },
+                {
+                    path: "manifestations/map",
+                    name: "CustomerManifestationsMap",
+                    component: ManifestationsMap,
+                    meta: { 
+                        title: "Manifestations map",
+                        allow: [UserRoles.CUSTOMER]
+                    }
+                }
+            ]
         },
         {
             path: "/401",
@@ -76,15 +198,16 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log("nemanja");
-    console.log(to);
     let userRole = localStorage.getItem("role");
     if (userRole == null) {
         userRole = "ANONYMOUS";
     }
 
-
-    if (to.meta.allow.includes(userRole)) {
+    if (to.meta.allow == null) {
+        next({
+            name: "NotFoundPage"
+        });
+    } else if (to.meta.allow.includes(userRole)) {
         next();
     } else {
         next({
@@ -118,6 +241,32 @@ var app = new Vue({
 
         isUserLoggedIn: function() {
             return localStorage.getItem("role") !== null;
+        },
+
+        redirectToUserPage: function() {
+            if (!this.isUserLoggedIn()) {
+                this.$router.push({
+                    name: "ManifestationsPage"
+                })
+            } else if (this.isAdmin()) {
+                this.$router.push({
+                    name: "AdminManifestationsTable"
+                })
+            } else if (this.isSalesman()) {
+                this.$router.push({
+                    name: "SalesmanManifestationsTable"
+                })
+            } else if (this.isCustomer()) {
+                this.$router.push({
+                    name: "CustomerManifestationsTable"
+                })
+            } else {
+                alert("Serious error. This should not happen");
+                this.clearStorageAndHeader();
+                this.$router.push({
+                    name: "LogInPage"
+                })
+            }
         },
 
         clearStorageAndHeader: function() {

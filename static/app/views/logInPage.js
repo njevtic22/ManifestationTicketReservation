@@ -164,9 +164,7 @@ Vue.component("logInPage", {
                         axios.defaults.headers.common["Authorization"] =
                             "Bearer " + token;
 
-                        this.$router.push({
-                            name: "ManifestationsPage"
-                        });
+                        this.$root.redirectToUserPage();
                     })
                     .catch(error => {
                         if (error.response.data == "Invalid username") {
