@@ -1,10 +1,18 @@
 const LoginPage = { template: "<logInPage></logInPage>" };
+const RegisterPage = { template: "<registerPage></registerPage>" };
 const NotFoundPage = { template: "<notFoundPage></notFoundPage>" };
 const ForbiddenPage = { template: "<forbiddenPage></forbiddenPage>" };
 const UnauthorizedPage = { template: "<unauthorizedPage></unauthorizedPage>" };
-const ManifestationsTablePage = {
-    template: "<manifestationsTablePage></manifestationsTablePage>"
+const ManifestationsPage = {
+    template: "<manifestationsPage></manifestationsPage>"
 };
+
+const UserRoles = Object.freeze({
+    ADMIN: "ADMIN",
+    SALESMAN: "SALESMAN",
+    CUSTOMER: "CUSTOMER",
+    ANONYMOUS: "ANONYMOUS"
+});
 
 const router = new VueRouter({
     mode: "hash",
@@ -13,23 +21,36 @@ const router = new VueRouter({
             path: "/login",
             name: "LogInPage",
             component: LoginPage,
-            meta: { title: "Login page", requiresAuth: false }
+            meta: { 
+                title: "Login page",
+                allow: [UserRoles.ANONYMOUS]
+         }
+        },
+        {
+            path: "/register",
+            name: "RegisterPage",
+            component: RegisterPage,
+            meta: { 
+                title: "Register page",
+                allow: [UserRoles.ANONYMOUS]
+            }
         },
         {
             path: "/",
-            name: "ManifestationsTablePage",
-            component: ManifestationsTablePage,
-            meta: { title: "Manifestations page", requiresAuth: false }
+            name: "ManifestationsPage",
+            component: ManifestationsPage,
+            meta: { 
+                title: "Manifestations page",
+                allow: [UserRoles.ANONYMOUS, UserRoles.ADMIN, UserRoles.SALESMAN, UserRoles.CUSTOMER]
+            }
         },
-
         {
             path: "/401",
             name: "UnauthorizedPage",
             component: UnauthorizedPage,
             meta: {
                 title: "Unauthorized",
-                requiresAuth: true,
-                allow: ["ADMIN", "SALESMAN", "CUSTOMER"]
+                allow: [UserRoles.ADMIN, UserRoles.SALESMAN, UserRoles.CUSTOMER]
             }
         },
         {
@@ -38,8 +59,7 @@ const router = new VueRouter({
             component: ForbiddenPage,
             meta: {
                 title: "Forbidden",
-                requiresAuth: true,
-                allow: ["ADMIN", "SALESMAN", "CUSTOMER"]
+                allow: [UserRoles.ADMIN, UserRoles.SALESMAN, UserRoles.CUSTOMER]
             }
         },
         {
@@ -49,55 +69,27 @@ const router = new VueRouter({
             component: NotFoundPage,
             meta: {
                 title: "Not Found",
-                requiresAuth: true,
-                allow: ["ADMIN", "SALESMAN", "CUSTOMER"]
+                allow: [UserRoles.ADMIN, UserRoles.SALESMAN, UserRoles.CUSTOMER]
             }
         }
     ]
 });
 
 router.beforeEach((to, from, next) => {
+    console.log("nemanja");
+    console.log(to);
     let userRole = localStorage.getItem("role");
+    if (userRole == null) {
+        userRole = "ANONYMOUS";
+    }
 
-    let isUserLoggedIn = function() {
-        return userRole !== null;
-    };
 
-    if (!isUserLoggedIn()) {
-        // user is not logged in
-
-        if (!to.meta.requiresAuth) {
-            next();
-        } else {
-            next({
-                name: "ManifestationsTablePage"
-            });
-        }
+    if (to.meta.allow.includes(userRole)) {
+        next();
     } else {
-        // user is logged in
-        if (!to.meta.requiresAuth) {
-            if (to.name === "LogInPage") {
-                next({
-                    name: "ManifestationsTablePage"
-                });
-            // } else if (to.name === "RegisterPage") {
-            //     next({
-            //         name: "ManifestationsTablePage"
-            //     });
-            } else {
-                next();
-            }
-        } else {
-            if (to.meta.allow.includes(userRole)) {
-                next();
-            } else {
-                next({
-                    name: "NotFoundPage"
-                });
-                // toast("Serious error. This should not happen");
-                // next(from.name);
-            }
-        }
+        next({
+            name: "NotFoundPage"
+        });
     }
 });
 

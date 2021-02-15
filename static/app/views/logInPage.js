@@ -1,48 +1,76 @@
 Vue.component("logInPage", {
     template: `
-    <baseLayout>
-        <div class="login-center text-center">
-            <form 
-                id="loginForm" 
-                name="Login form"
-            >
-                <img src="/images/Cloud Logo Wide.png" alt="No image" width="280" height="210">
-                <h3>Please log in</h3>
-                <hr>
+    <div class="d-flex" id="wrapper" v-bind:class="{toggled: isToggled}">
 
-                <textInput
-                    name="username"
-                    v-model="username"
-                    v-bind:errorMessage="userNameErrorMessage"
-                    v-bind:isInvalid="isUsernameInvalid"
-                    placeholder="Username"
-                    required
-                    autofocus
-                >
-                </textInput>
-                <passwordInput
-                    name="password"
-                    v-model="password"
-                    v-bind:errorMessage="passwordErrorMessage"
-                    v-bind:isInvalid="isPasswordInvalid"
-                    placeholder="Password"
-                    required
-                >
-                </passwordInput>
-                
-                
-                <br>
-                <button type="button" value="Log in" v-on:click="login($event)" class="btn btn-lg btn-primary btn-block">Log in</button>	
-                <p class="mt-5 mb-3 text-muted">© Manifestation service</p>
-
-                <!--
-                <button type="button" value="Log in" v-on:click="failureToast" class="btn btn-lg btn-danger btn-block">Failure toast</button>	
-                <button type="button" value="Log in" v-on:click="successToast" class="btn btn-lg btn-success btn-block">Success toast</button>	
-                <button type="button" value="Log in" v-on:click="infoToast" class="btn btn-lg btn-primary btn-block">Info toast</button>	
-                -->
-            </form>
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <anonymousSidebar></anonymousSidebar>
         </div>
-    </baseLayout>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+                <button class="btn btn-outline-light" id="menu-toggle" v-on:click="toggleSidebar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>
+                </button>
+
+                <h5 class="px-3 text-light pageTitle">{{$route.meta.title}}</h5>
+            </nav>
+
+            <div class="container-fluid">
+                <main role="main">
+
+                    <div class="login-center text-center">
+                        <form 
+                            id="loginForm" 
+                            name="Login form"
+                        >
+                            <img src="/images/Cloud Logo Wide.png" alt="No image" width="280" height="210"/>
+                            <h3>Please log in</h3>
+                            <hr>
+
+                            <textInput
+                                name="username"
+                                v-model="username"
+                                v-bind:errorMessage="userNameErrorMessage"
+                                v-bind:isInvalid="isUsernameInvalid"
+                                placeholder="Username"
+                                required
+                            >
+                            </textInput>
+                            <passwordInput
+                                name="password"
+                                v-model="password"
+                                v-bind:errorMessage="passwordErrorMessage"
+                                v-bind:isInvalid="isPasswordInvalid"
+                                placeholder="Password"
+                                required
+                            >
+                            </passwordInput>
+
+
+                            <br>
+                            <button type="button" value="Log in" v-on:click="login($event)" class="btn btn-lg btn-primary btn-block">Log in</button>	
+                            <p class="mt-5 mb-3 text-muted">© Manifestation service</p>
+
+                            <!--
+                            <button type="button" value="Log in" v-on:click="failureToast" class="btn btn-lg btn-danger btn-block">Failure toast</button>	
+                            <button type="button" value="Log in" v-on:click="successToast" class="btn btn-lg btn-success btn-block">Success toast</button>	
+                            <button type="button" value="Log in" v-on:click="infoToast" class="btn btn-lg btn-primary btn-block">Info toast</button>	
+                            -->
+                        </form>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
     `,
 
     data: function() {
@@ -54,22 +82,28 @@ Vue.component("logInPage", {
             passwordErrorMessage: "",
 
             isUsernameInvalid: false,
-            isPasswordInvalid: false
+            isPasswordInvalid: false,
+
+            isToggled: false
         };
     },
 
     methods: {
-        failureToast: function() {
-            this.$root.$emit("toastFailure", "This toast failed");
+        toggleSidebar: function() {
+            this.isToggled = !this.isToggled;
         },
 
-        successToast: function() {
-            this.$root.$emit("toastSuccess", "This toast succeeded");
-        },
+        // failureToast: function() {
+        //     this.$root.$emit("toastFailure", "This toast failed");
+        // },
 
-        infoToast: function() {
-            this.$root.$emit("toastInfo", "This toast informed");
-        },
+        // successToast: function() {
+        //     this.$root.$emit("toastSuccess", "This toast succeeded");
+        // },
+
+        // infoToast: function() {
+        //     this.$root.$emit("toastInfo", "This toast informed");
+        // },
 
         showInvalidUserNameError: function(message) {
             this.userNameErrorMessage = message;
@@ -131,7 +165,7 @@ Vue.component("logInPage", {
                             "Bearer " + token;
 
                         this.$router.push({
-                            name: "ManifestationsTablePage"
+                            name: "ManifestationsPage"
                         });
                     })
                     .catch(error => {
@@ -144,7 +178,11 @@ Vue.component("logInPage", {
                         }
                     });
             }
-        }
+        },
+
+        // toggleSidebar: function() {
+        //     $("#wrapper").toggleClass("toggled");
+        // }
     },
 
     mounted() {

@@ -1,6 +1,5 @@
-Vue.component("notFoundPage", {
-    template:
-    `
+Vue.component("manifestationsPage", {
+    template: `
     <div class="d-flex" id="wrapper" v-bind:class="{toggled: isToggled}">
 
         <!-- Sidebar -->
@@ -24,15 +23,7 @@ Vue.component("notFoundPage", {
 
             <div class="container-fluid">
                 <main role="main">
-                  
-                <div class="error-center">
-                    <img 
-                    src="/images/404 error.png" 
-                    alt="Even image is not found" 
-                    width="280" height="210"/>
-                    <h1 class="text-danger">Page not found</h1>
-                </div>
-
+                    <h1>manifestationsPage</h1>
                 </main>
             </div>
         </div>
@@ -43,7 +34,7 @@ Vue.component("notFoundPage", {
 
     data: function() {
         return {
-          isToggled: false
+            isToggled: false
         };
     },
 
@@ -58,5 +49,7 @@ Vue.component("notFoundPage", {
     },
 
     mounted() {
-    }
-})
+    },
+
+    destroyed() {}
+});

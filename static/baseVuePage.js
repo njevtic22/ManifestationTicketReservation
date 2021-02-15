@@ -12,7 +12,7 @@ Vue.component("base", {
     methods: {
         myFunction: function() {
             axios
-                .method("/rest/", param)
+                .method("/api/", param)
                 .then(response => {})
                 .catch(err => {
                     this.$root.defaultCatchError(err);

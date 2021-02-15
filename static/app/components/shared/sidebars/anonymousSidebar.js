@@ -1,12 +1,11 @@
-Vue.component("sideBar", {
+Vue.component("anonymousSidebar", {
     template: `
     <nav class="bg-light list-group list-group-flush sidebar"> 
       <h5 class="sidebar-heading titleBottom"><a href="#/" id="mainAnchor">Manifestation service</a></h5>
-      
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
 
-          <li class="nav-item" v-if="!$root.isUserLoggedIn()">
+          <li class="nav-item">
             <router-link class="nav-link" to="/login">
               <span class="sidebar-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
@@ -18,7 +17,7 @@ Vue.component("sideBar", {
             </router-link>
           </li>
 
-          <li class="nav-item" v-if="!$root.isUserLoggedIn()">
+          <li class="nav-item">
             <router-link class="nav-link" to="/register">
               <span class="sidebar-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
@@ -27,20 +26,6 @@ Vue.component("sideBar", {
                 </svg>
               </span>
               Register
-            </router-link>
-          </li>
-
-          <li class="nav-item" v-if="$root.isUserLoggedIn()">
-            <router-link class="nav-link" to="/profile">
-            
-            <span class="sidebar-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-              </svg>
-            </span>
-
-              Profile
             </router-link>
           </li>
 
@@ -54,10 +39,6 @@ Vue.component("sideBar", {
               Manifestations
             </router-link>
           </li>
-
-          
-
-          <logOutButton v-if="$root.isUserLoggedIn()" class="logout-sidebar-button"></logOutButton>
         </ul> 
       </div>
     </nav>
@@ -67,7 +48,20 @@ Vue.component("sideBar", {
         return {};
     },
 
-    methods: {},
+    methods: {
+        myFunction: function() {
+            axios
+                .method("/api/", param)
+                .then(response => {})
+                .catch(err => {
+                    this.$root.defaultCatchError(err);
+                });
+        }
+    },
 
-    mounted() {}
+    mounted() {
+        console.log("anonymousSidebar mounted");
+    },
+
+    destroyed() {}
 });

@@ -1,11 +1,10 @@
-Vue.component("notFoundPage", {
-    template:
-    `
+Vue.component("registerPage", {
+    template: `
     <div class="d-flex" id="wrapper" v-bind:class="{toggled: isToggled}">
 
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <sideBar></sideBar>
+            <anonymousSidebar></anonymousSidebar>
         </div>
         <!-- /#sidebar-wrapper -->
 
@@ -24,14 +23,8 @@ Vue.component("notFoundPage", {
 
             <div class="container-fluid">
                 <main role="main">
-                  
-                <div class="error-center">
-                    <img 
-                    src="/images/404 error.png" 
-                    alt="Even image is not found" 
-                    width="280" height="210"/>
-                    <h1 class="text-danger">Page not found</h1>
-                </div>
+                
+                    <h1>Register page</h1>
 
                 </main>
             </div>
@@ -43,7 +36,7 @@ Vue.component("notFoundPage", {
 
     data: function() {
         return {
-          isToggled: false
+            isToggled: false
         };
     },
 
@@ -52,11 +45,12 @@ Vue.component("notFoundPage", {
             this.isToggled = !this.isToggled;
         },
 
-        // toggleSidebarr: function() {
+        // toggleSidebar: function() {
         //     $("#wrapper").toggleClass("toggled");
         // }
     },
 
-    mounted() {
-    }
-})
+    mounted() {},
+
+    destroyed() {}
+});
