@@ -2,10 +2,9 @@ Vue.component("loginForm", {
     template: `
     <baseForm 
         id="loginForm" 
-        class="text-center"
+        class="login-center text-center"
         ref="loginForm"
     >
-        <!-- class="login-center" -->
         <img src="/images/Cloud Logo Wide.png" alt="No image" width="280" height="210"/>
         <h3>Please log in</h3>
         <hr>
