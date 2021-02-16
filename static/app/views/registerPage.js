@@ -23,9 +23,7 @@ Vue.component("registerPage", {
 
             <div class="container-fluid">
                 <main role="main">
-                
-                    <h1>Register page</h1>
-
+                    <registerForm></registerForm>
                 </main>
             </div>
         </div>

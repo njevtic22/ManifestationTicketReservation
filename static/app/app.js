@@ -20,7 +20,6 @@ const UserRoles = Object.freeze({
 
 
 const isAdminRoute = (to, from, next) => {
-    console.log("adminRouter");
     if (localStorage.getItem("role") === UserRoles.ADMIN) {
         next();
         return;

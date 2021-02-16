@@ -70,6 +70,7 @@ body {
 
 [role="main"] {
     padding-top: 30px; /* Space for fixed navbar */
+    padding-left: 30px; /* Space for fixed navbar */
 }
 
 /*
