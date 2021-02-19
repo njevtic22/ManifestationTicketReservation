@@ -1,9 +1,17 @@
 .login-center {
-    position: fixed; /* or absolute */
+    position: relative; /* or absolute */
     width: 18rem;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-55%, 0%);
+}
+
+.register-center {
+    position: relative; /* or absolute */
+    width: 25rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-55%, 0%);
 }
 
 .error-center {

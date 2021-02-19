@@ -266,6 +266,19 @@ var app = new Vue({
             return localStorage.getItem("role") !== null;
         },
 
+        getTimeFormat: function() {
+            return "HH:mm:ss";
+        },
+
+        getDateFormat: function() {
+            return "DD.MM.YYYY.";
+        },
+
+
+        getDateTimeFormat: function() {
+            return "DD.MM.YYYY. HH:mm:ss";
+        },
+
         redirectToUserPage: function() {
             if (!this.isUserLoggedIn()) {
                 this.$router.push({

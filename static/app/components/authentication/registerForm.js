@@ -2,84 +2,177 @@ Vue.component("registerForm", {
     template: `
     <baseForm
         id="registerForm" 
-        class="login-center text-center"
+        class="register-center"
         ref="registerForm"
     >
-        <div class="form-row">
-            <div class="form-group col-md-6">
-            <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control" id="inputEmail4">
+        <div class="card border-dark">
+            <div class="card-header bg-primary text-white">
+                <h3>Register</h3>
             </div>
-            <div class="form-group col-md-6">
-            <label for="inputPassword4">Password</label>
-            <input type="password" class="form-control" id="inputPassword4">
+            <div class="card-body">
+            
+                <div>
+                    {{ JSON.stringify(newCustomer) }}
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <textInput
+                            name="name"
+                            v-model="newCustomer.name"
+                            v-bind:errorMessage="nameErrorMessage"
+                            v-bind:isInvalid="isNameInvalid"
+                            showLabel
+                            required
+                        >
+                            Name
+                        </textInput>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <textInput
+                            name="surname"
+                            v-model="newCustomer.surname"
+                            v-bind:errorMessage="surnameErrorMessage"
+                            v-bind:isInvalid="isSurnameInvalid"
+                            showLabel
+                            required
+                        >
+                            Surname
+                        </textInput>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <textInput
+                            name="username"
+                            v-model="newCustomer.username"
+                            v-bind:errorMessage="usernameErrorMessage"
+                            v-bind:isInvalid="isUsernameInvalid"
+                            showLabel
+                            required
+                        >
+                            Username
+                        </textInput>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <classicDateInput
+                            name="date"
+                            v-model="newCustomer.dateOfBirth"
+                            v-bind:errorMessage="dateErrorMessage"
+                            v-bind:isInvalid="isDateInvalid"
+                            v-bind:maxDate="new Date()"
+                            showLabel
+                            required
+                        >
+                            Date
+                        </classicDateInput>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <textInput
+                            name="password"
+                            v-model="newCustomer.password"
+                            v-bind:errorMessage="passwordErrorMessage"
+                            v-bind:isInvalid="isPasswordInvalid"
+                            showLabel
+                            required
+                        >
+                            Password
+                        </textInput>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <textInput
+                            name="passwordRepeat"
+                            v-model="newCustomer.passwordRepeat"
+                            v-bind:errorMessage="pasRepErrorMessage"
+                            v-bind:isInvalid="isPasRepInvalid"
+                            showLabel
+                            required
+                        >
+                            Repeat password
+                        </textInput>
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <fieldset class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <legend>Gender</legend>
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="genderMale" v-bind:value="Genders.MALE" v-model="newCustomer.gender"/>{{ Genders.MALE }}
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="genderFemale" v-bind:value="Genders.FEMALE" v-model="newCustomer.gender"/>{{ Genders.FEMALE }}
+                        </label>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="card-footer text-muted text-center">
+                <button type="button" class="btn btn-success" v-on:click="registerCustomer">Register</button>
             </div>
         </div>
-        <div class="form-group">
-            <label for="inputAddress">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-            <label for="inputCity">City</label>
-            <input type="text" class="form-control" id="inputCity">
-            </div>
-            <div class="form-group col-md-4">
-            <label for="inputState">State</label>
-            <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
-            </select>
-            </div>
-            <div class="form-group col-md-2">
-            <label for="inputZip">Zip</label>
-            <input type="text" class="form-control" id="inputZip">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck">
-            <label class="form-check-label" for="gridCheck">
-                Check me out
-            </label>
-            </div>
-        </div>
-        <button type="button" class="btn btn-primary">Sign in</button>
+    
     </baseForm>
     `,
-
     data: function() {
         return {
-            name: "",
-            surname: "",
-            username: "",
-            password: "",
-            passwordRepeat: "",
-            dateOfBirth: "",
-            gender: ""
+            newCustomer: {
+                name: "",
+                surname: "",
+                username: "",
+                password: "",
+                passwordRepeat: "",
+                dateOfBirth: "",
+                gender: ""
+            },
+
+            Genders: Object.freeze({
+                MALE: "MALE",
+                FEMALE: "FEMALE"
+            }),
+
+
+            nameErrorMessage: "Name must not be empty",
+            surnameErrorMessage: "Surname must not be empty",
+            usernameErrorMessage: "Username must not be empty",
+            passwordErrorMessage: "Password must not be empty",
+            pasRepErrorMessage: "Password must not be repeated",
+            dateErrorMessage: "Date must not be empty",
+
+            isNameInvalid: false,
+            isSurnameInvalid: false,
+            isUsernameInvalid: false,
+            isPasswordInvalid: false,
+            isPasRepInvalid: false,
+            isDateInvalid: false
+            
         };
     },
 
     methods: {
-        myFunction: function() {
-            axios
-                .method("/api/", param)
-                .then(response => {})
-                .catch(err => {
-                    this.$root.defaultCatchError(err);
-                });
-        },
+        registerCustomer: function() {
+            
 
-        onClick: function() {
-            console.log("clicked");
+            this.newCustomer.dateOfBirth += " 08:00:00";
+            // axios
+            //     .post("/api/authentication/registerCustomer", this.newCustomer)
+            //     .then(response => {
+            //         console.log(response);
+            //     })
+            //     .catch(err => {
+            //         this.$root.defaultCatchError(err);
+            //     });
         }
     },
 
-    mounted() {},
+    mounted() {
+        this.newCustomer.gender = this.Genders.MALE;
+    },
 
     destroyed() {}
 });

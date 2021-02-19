@@ -1,6 +1,6 @@
 Vue.component("textInput", {
     template: `
-        <div class="form-group">
+        <div v-bind:class="[componentClass]">
             <label v-if="showLabel" v-bind:for="name">
                 <slot></slot>
             </label>
@@ -46,6 +46,12 @@ Vue.component("textInput", {
         disabled: {
             type: Boolean,
             default: false
+        },
+        componentClass: {
+            type: String,
+            default: ""
         }
-    }
+    },
+
+    mounted() { }
 });

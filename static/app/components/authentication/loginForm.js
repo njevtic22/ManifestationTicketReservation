@@ -14,6 +14,7 @@ Vue.component("loginForm", {
             v-model="username"
             v-bind:errorMessage="userNameErrorMessage"
             v-bind:isInvalid="isUsernameInvalid"
+            componentClass="form-group"
             placeholder="Username"
             required
         >
@@ -23,6 +24,7 @@ Vue.component("loginForm", {
             v-model="password"
             v-bind:errorMessage="passwordErrorMessage"
             v-bind:isInvalid="isPasswordInvalid"
+            componentClass="form-group"
             placeholder="Password"
             required
         >

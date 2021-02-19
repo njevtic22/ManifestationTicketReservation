@@ -41,7 +41,7 @@ public class ProgramFactory {
     public static final String TEXT_PLAIN = "text/plain; charset=UTF-8";
 
     // Date format
-    public static final String DATE_FORMAT = "dd.MM.yyyy. hh:mm:ss";
+    public static final String DATE_FORMAT = "dd.MM.yyyy. HH:mm:ss";
 
     private static ProgramFactory instance;
 
