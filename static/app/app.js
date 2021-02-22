@@ -1,15 +1,61 @@
+const ManifestationsTable = { template: "<manifestationsTable></manifestationsTable>" };
+const ManifestationsMap = { template: "<manifestationsMap></manifestationsMap>" };
+const Profile = { template: "<profile></profile>" };
 const LoginPage = { template: "<logInPage></logInPage>" };
 const RegisterPage = { template: "<registerPage></registerPage>" };
 const NotFoundPage = { template: "<notFoundPage></notFoundPage>" };
 const ForbiddenPage = { template: "<forbiddenPage></forbiddenPage>" };
 const UnauthorizedPage = { template: "<unauthorizedPage></unauthorizedPage>" };
-const ManifestationsPage = { template: "<manifestationsPage></manifestationsPage>" };
-const ManifestationsTable = { template: "<manifestationsTable></manifestationsTable>" };
-const ManifestationsMap = { template: "<manifestationsMap></manifestationsMap>" };
-const AdminPage = { template: "<adminPage></adminPage>" };
-const SalesmanPage = { template: "<salesmanPage></salesmanPage>" };
-const CustomerPage = { template: "<customerPage></customerPage>" };
-const Profile = { template: "<profile></profile>" }
+
+
+const beforeRouteEnterAndUpdateForUserPages = (to, from, next, pathToCheck) => {
+    if (to.path === `${pathToCheck}` || to.path === `${pathToCheck}/`) {
+        next(`${pathToCheck}/manifestations/table`);
+        return;
+    }
+    if (to.path.startsWith(`${pathToCheck}`)) {
+        next();
+        return;
+    }
+    next(`${pathToCheck}/manifestations/table`);
+}; 
+
+const ManifestationsPage = { 
+    template: "<manifestationsPage></manifestationsPage>",
+    beforeRouteEnter (to, from, next) {
+        beforeRouteEnterAndUpdateForUserPages(to, from, next, "");
+    },
+    beforeRouteUpdate (to, from, next) {
+        beforeRouteEnterAndUpdateForUserPages(to, from, next, "");
+    }
+};
+const AdminPage = { 
+    template: "<adminPage></adminPage>",
+    beforeRouteEnter (to, from, next) {
+        beforeRouteEnterAndUpdateForUserPages(to, from, next, "/admin");
+    },
+    beforeRouteUpdate (to, from, next) {
+        beforeRouteEnterAndUpdateForUserPages(to, from, next, "/admin");
+    }
+};
+const SalesmanPage = { 
+    template: "<salesmanPage></salesmanPage>",
+    beforeRouteEnter (to, from, next) {
+        beforeRouteEnterAndUpdateForUserPages(to, from, next, "/salesman");
+    },
+    beforeRouteUpdate (to, from, next) {
+        beforeRouteEnterAndUpdateForUserPages(to, from, next, "/salesman");
+    }
+};
+const CustomerPage = { 
+    template: "<customerPage></customerPage>",
+    beforeRouteEnter (to, from, next) {
+        beforeRouteEnterAndUpdateForUserPages(to, from, next, "/customer");
+    },
+    beforeRouteUpdate (to, from, next) {
+        beforeRouteEnterAndUpdateForUserPages(to, from, next, "/customer");
+    }
+};
 
 const UserRoles = Object.freeze({
     ADMIN: "ADMIN",
@@ -70,6 +116,7 @@ const isLogIn = (to, from, next) => {
 };
 
 const errorPageUserCheck = (to, from, next) => {
+    console.log("errorPageUserCheck");
     if (localStorage.getItem("role")) {
         next();
         return;
@@ -274,9 +321,8 @@ var app = new Vue({
             return "DD.MM.YYYY.";
         },
 
-
         getDateTimeFormat: function() {
-            return "DD.MM.YYYY. HH:mm:ss";
+            return this.getDateFormat() + " " + this.getTimeFormat();
         },
 
         redirectToUserPage: function() {

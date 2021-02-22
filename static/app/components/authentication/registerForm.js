@@ -10,10 +10,6 @@ Vue.component("registerForm", {
                 <h3>Register</h3>
             </div>
             <div class="card-body">
-            
-                <div>
-                    {{ JSON.stringify(newCustomer) }}
-                </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <textInput
@@ -141,8 +137,8 @@ Vue.component("registerForm", {
             surnameErrorMessage: "Surname must not be empty",
             usernameErrorMessage: "Username must not be empty",
             passwordErrorMessage: "Password must not be empty",
-            pasRepErrorMessage: "Password must not be repeated",
-            dateErrorMessage: "Date must not be empty",
+            pasRepErrorMessage: "Password must be repeated",
+            dateErrorMessage: "Date must be in format " + this.$root.getDateFormat(),
 
             isNameInvalid: false,
             isSurnameInvalid: false,
@@ -154,19 +150,147 @@ Vue.component("registerForm", {
         };
     },
 
-    methods: {
-        registerCustomer: function() {
-            
+    // watch: {
+    //     // whenever question changes, this function will run
+    //     usernameErrorMessage: function (newMessage, oldMessage) {
+    //       console.log(newMessage);
+    //       console.log(oldMessage);
+    //     }
+    //   },
 
-            this.newCustomer.dateOfBirth += " 08:00:00";
-            // axios
-            //     .post("/api/authentication/registerCustomer", this.newCustomer)
-            //     .then(response => {
-            //         console.log(response);
-            //     })
-            //     .catch(err => {
-            //         this.$root.defaultCatchError(err);
-            //     });
+    methods: {
+        showInvalidNameError: function(message) {
+            this.nameErrorMessage = message;
+            this.isNameInvalid = true;
+        },
+
+        removeInvalidNameError: function() {
+            this.nameErrorMessage = "Name must not be empty";
+            this.isNameInvalid = false;
+        },
+
+        showInvalidSurnameError: function(message) {
+            this.surnameErrorMessage = message;
+            this.isSurnameInvalid = true;
+        },
+
+        removeInvalidSurnameError: function() {
+            this.surnameErrorMessage = "Surname must not be empty";
+            this.isSurnameInvalid = false;
+        },
+
+        showInvalidUserNameError: function(message) {
+            this.userNameErrorMessage = message;
+            console.log(this.userNameErrorMessage);
+            this.isUsernameInvalid = true;
+        },
+
+        removeInvalidUserNameError: function() {
+            this.userNameErrorMessage = "Username must not be empty";
+            this.isUsernameInvalid = false;
+        },
+
+        showInvalidDateError: function(message) {
+            this.dateErrorMessage = message;
+            this.isDateInvalid = true;
+        },
+
+        removeInvalidDateError: function() {
+            this.dateErrorMessage = "Date must be in format " + this.$root.getDateFormat();
+            this.isDateInvalid = false;
+        },
+
+        showInvalidPasswordError: function(message) {
+            this.passwordErrorMessage = message;
+            this.isPasswordInvalid = true;
+        },
+
+        removeInvalidPasswordError: function() {
+            this.passwordErrorMessage = "Password must not be empty";
+            this.isPasswordInvalid = false;
+        },
+
+        showInvalidRepPasError: function(message) {
+            this.pasRepErrorMessage = message;
+            this.isPasRepInvalid = true;
+        },
+
+        removeInvalidRepPasError: function() {
+            this.pasRepErrorMessage = "Password must not be repeated";
+            this.isPasRepInvalid = false;
+        },
+
+        validateForm: function() {
+            // var form = $("#registerForm");
+            // // var form = document.getElementById("registerForm");
+
+            // form.addClass("was-validated");
+            // // form.classList.add("was-validated");
+            // return form[0].checkValidity();
+
+            var isValid = this.$refs.registerForm.validateForm();
+
+            if (this.newCustomer.password === "") {
+                this.showInvalidPasswordError("Password must not be empty");
+                isValid = false;
+            }
+            if (this.newCustomer.passwordRepeat === "") {
+                this.showInvalidRepPasError("Password must not be empty");
+                isValid = false;
+            }
+        
+            if (this.newCustomer.password !== this.newCustomer.passwordRepeat) {
+                this.showInvalidRepPasError("Passowrds do not match");
+                this.showInvalidPasswordError("Passowrds do not match");
+                isValid = false;
+            }
+
+            return isValid;
+        },
+
+        removeValidation: function() {
+            // var form = $("#registerForm");
+            // form.removeClass("was-validated");
+            this.$refs.registerForm.removeValidation();
+
+            this.removeInvalidNameError();
+            this.removeInvalidSurnameError();
+            this.removeInvalidUserNameError();
+            this.removeInvalidDateError();
+            this.removeInvalidPasswordError();
+            this.removeInvalidRepPasError();
+        },
+
+        registerCustomer: function() {
+            if (this.validateForm()) {
+                this.newCustomer.dateOfBirth += " 08:00:00";
+
+                axios
+                    .post("/api/authentication/registerCustomer", this.newCustomer)
+                    .then(response => {
+                        const token = response.data.token;
+                        const role = response.data.role;
+
+                        localStorage.setItem("token", token);
+                        localStorage.setItem("role", role);
+
+                        // make axios send token as default header
+                        axios.defaults.headers.common["Authorization"] =
+                            "Bearer " + token;
+
+                        this.$root.redirectToUserPage();
+                    })
+                    .catch(error => {
+                        console.log(error.response.data);
+                        if (error.response.data === "Username " + this.newCustomer.username + " is taken.") {
+                            this.showInvalidUserNameError(error.response.data);
+                        } else if (error.response.data.startsWith("Unparseable date:")) {
+                            this.showInvalidDateError("Date must be in format " + this.$root.getDateFormat());
+                        } else {
+                            this.$root.defaultCatchError(error);
+                        }
+                    });
+            }
         }
     },
 

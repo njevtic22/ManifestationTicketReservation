@@ -110,8 +110,8 @@ Vue.component("loginForm", {
 
         login: function(e) {
             e.preventDefault();
+            this.removeValidation();
             if (this.validateForm()) {
-                this.removeValidation();
 
                 var userData = {
                     username: this.username,
