@@ -1,6 +1,8 @@
 const ManifestationsTable = { template: "<manifestationsTable></manifestationsTable>" };
 const ManifestationsMap = { template: "<manifestationsMap></manifestationsMap>" };
 const Profile = { template: "<profile></profile>" };
+const AllUserstable = { template: "<allUsersTable></allUsersTable>" }
+
 const LoginPage = { template: "<logInPage></logInPage>" };
 const RegisterPage = { template: "<registerPage></registerPage>" };
 const NotFoundPage = { template: "<notFoundPage></notFoundPage>" };
@@ -186,6 +188,12 @@ const router = new VueRouter({
                     name: "AdminManifestationsMap",
                     component: ManifestationsMap,
                     meta: { title: "Manifestations map" }
+                },
+                {
+                    path: "users",
+                    name: "UsersTable",
+                    component: AllUserstable,
+                    meta: { title: "Users" }
                 }
             ],
         },

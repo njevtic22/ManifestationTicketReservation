@@ -28,11 +28,9 @@ Vue.component("salesmanSidebar", {
                         Manifestations
                     </router-link>
                 </li>
-    
-    
-    
-                <logOutButton class="logout-sidebar-button"></logOutButton>
-            </ul> 
+            </ul>
+
+            <logOutButton class="logout-sidebar-button"></logOutButton>
         </div>
     </nav>
     `,
