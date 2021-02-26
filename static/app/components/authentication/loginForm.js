@@ -32,8 +32,11 @@ Vue.component("loginForm", {
 
 
         <br>
-        <button type="button" value="Log in" v-on:click="login($event)" class="btn btn-lg btn-primary btn-block">Log in</button>	
+        <button type="button" value="Log in" v-on:click="login" class="btn btn-lg btn-primary btn-block">Log in</button>	
         <p class="mt-5 mb-3 text-muted">© Manifestation service</p>
+
+
+        <authenticationService ref="authService"></authenticationService>
 
         <!--
         <button type="button" value="Log in" v-on:click="failureToast" class="btn btn-lg btn-danger btn-block">Failure toast</button>	
@@ -48,8 +51,8 @@ Vue.component("loginForm", {
             username: "",
             password: "",
 
-            userNameErrorMessage: "",
-            passwordErrorMessage: "",
+            userNameErrorMessage: "Username must not be empty",
+            passwordErrorMessage: "Password must not be empty",
 
             isUsernameInvalid: false,
             isPasswordInvalid: false
@@ -85,7 +88,7 @@ Vue.component("loginForm", {
         },
 
         removeInvalidPasswordError: function() {
-            this.passwordErrorMessage = "Username must not be empty";
+            this.passwordErrorMessage = "Password must not be empty";
             this.isPasswordInvalid = false;
         },
 
@@ -108,18 +111,18 @@ Vue.component("loginForm", {
             this.removeInvalidPasswordError();
         },
 
-        login: function(e) {
-            e.preventDefault();
-            this.removeValidation();
+        login: function() {
             if (this.validateForm()) {
+                this.removeValidation();
 
-                var userData = {
+                const userData = {
                     username: this.username,
                     password: this.password
                 };
-                axios
-                    .post("/api/authentication/login", userData)
-                    .then(response => {
+
+                this.$refs.authService.login(
+                    userData,
+                    (response) => {
                         const token = response.data.token;
                         const role = response.data.role;
 
@@ -131,8 +134,8 @@ Vue.component("loginForm", {
                             "Bearer " + token;
 
                         this.$root.redirectToUserPage();
-                    })
-                    .catch(error => {
+                    },
+                    (error) => {
                         if (error.response.data == "Invalid username") {
                             this.showInvalidUserNameError(error.response.data);
                         } else if (error.response.data == "Invalid password") {
@@ -140,7 +143,8 @@ Vue.component("loginForm", {
                         } else {
                             this.$root.defaultCatchError(error);
                         }
-                    });
+                    }    
+                )
             }
         }
 
@@ -150,8 +154,6 @@ Vue.component("loginForm", {
     },
 
     mounted() {
-        this.userNameErrorMessage = "Username must not be empty";
-        this.passwordErrorMessage = "Password must not be empty";
     },
 
     destroyed() {}

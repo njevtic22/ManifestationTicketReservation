@@ -113,6 +113,8 @@ Vue.component("registerForm", {
             </div>
         </div>
     
+        
+        <authenticationService ref="authService"></authenticationService>
     </baseForm>
     `,
     data: function() {
@@ -263,11 +265,13 @@ Vue.component("registerForm", {
 
         registerCustomer: function() {
             if (this.validateForm()) {
+                this.removeValidation();
                 this.newCustomer.dateOfBirth += " 08:00:00";
 
-                axios
-                    .post("/api/authentication/registerCustomer", this.newCustomer)
-                    .then(response => {
+                
+                this.$refs.authService.registerCustomer(
+                    this.newCustomer,
+                    (response) => {
                         const token = response.data.token;
                         const role = response.data.role;
 
@@ -279,8 +283,8 @@ Vue.component("registerForm", {
                             "Bearer " + token;
 
                         this.$root.redirectToUserPage();
-                    })
-                    .catch(error => {
+                    },
+                    (error) => {
                         console.log(error.response.data);
                         if (error.response.data === "Username " + this.newCustomer.username + " is taken.") {
                             this.showInvalidUserNameError(error.response.data);
@@ -289,7 +293,8 @@ Vue.component("registerForm", {
                         } else {
                             this.$root.defaultCatchError(error);
                         }
-                    });
+                    }
+                )
             }
         }
     },
