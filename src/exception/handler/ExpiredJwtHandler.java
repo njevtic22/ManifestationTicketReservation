@@ -17,6 +17,6 @@ public class ExpiredJwtHandler extends ExceptionHandlerImpl {
         response.status(HttpStatus.TEMPORARY_REDIRECT_307);
         response.body("Expired session");
 
-        response.header("redirect", "/");
+        response.header("redirect", "/login");
     }
 }

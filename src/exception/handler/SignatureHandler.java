@@ -1,7 +1,6 @@
 package exception.handler;
 
 import org.eclipse.jetty.http.HttpStatus;
-import program.ProgramFactory;
 import spark.ExceptionHandlerImpl;
 import spark.Request;
 import spark.Response;
@@ -17,6 +16,6 @@ public class SignatureHandler extends ExceptionHandlerImpl {
         response.status(HttpStatus.TEMPORARY_REDIRECT_307);
         response.body("Invalid session");
 
-        response.header("redirect", "/");
+        response.header("redirect", "/login");
     }
 }

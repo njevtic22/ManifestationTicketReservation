@@ -5,7 +5,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.SignatureException;
+import io.jsonwebtoken.security.SignatureException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +42,7 @@ public class Program {
         factory.buildAdminController();
         factory.buildSalesmanController();
         factory.buildCustomerController();
+        factory.buildUserController();
         factory.buildHistoryController();
         factory.buildManifestationController();
         factory.buildReviewController();

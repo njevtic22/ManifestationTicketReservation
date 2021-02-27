@@ -1,7 +1,7 @@
 const ManifestationsTable = { template: "<manifestationsTable></manifestationsTable>" };
 const ManifestationsMap = { template: "<manifestationsMap></manifestationsMap>" };
 const Profile = { template: "<profile></profile>" };
-const AllUserstable = { template: "<allUsersTable></allUsersTable>" }
+const AllUsers = { template: "<allUsers></allUsers>" }
 
 const LoginPage = { template: "<logInPage></logInPage>" };
 const RegisterPage = { template: "<registerPage></registerPage>" };
@@ -191,8 +191,8 @@ const router = new VueRouter({
                 },
                 {
                     path: "users",
-                    name: "UsersTable",
-                    component: AllUserstable,
+                    name: "AllUsers",
+                    component: AllUsers,
                     meta: { title: "Users" }
                 }
             ],
@@ -372,7 +372,7 @@ var app = new Vue({
             const statusString = status.toString();
 
             if (statusString[0] == "3") {
-                toast("Error: " + status + ": " + msg, "failure");
+                this.$emit("toastFailure", "Error: " + status + ": " + msg);
                 this.clearStorageAndHeader();
                 this.$router.push(err.response.headers.redirect);
             } else if (
@@ -380,11 +380,11 @@ var app = new Vue({
                 statusString == "403" ||
                 statusString == "404"
             ) {
-                toast("Error: " + status + ": " + msg, "failure");
-                // there should header redirect in response from server
+                this.$emit("toastFailure", "Error: " + status + ": " + msg);
+                // there should be header redirect in response from server
                 this.$router.push(err.response.headers.redirect);
             } else {
-                toast("Error: " + status + ": " + msg);
+                this.$emit("toastFailure", "Error: " + status + ": " + msg);
             }
         }
     },

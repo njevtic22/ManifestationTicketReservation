@@ -17,6 +17,6 @@ public class TokenNotFoundHandler extends ExceptionHandlerImpl {
         response.status(HttpStatus.TEMPORARY_REDIRECT_307);
         response.body(e.getMessage());
 
-        response.header("redirect", "/");
+        response.header("redirect", "/login");
     }
 }

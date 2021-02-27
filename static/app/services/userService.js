@@ -1,4 +1,4 @@
-Vue.component("base", {
+Vue.component("userService", {
     template: `
     <div>
 
@@ -6,14 +6,16 @@ Vue.component("base", {
     `,
 
     data: function() {
-        return {};
+        return {
+            baseUrl: "/api/users"
+        };
     },
 
     methods: {
-        myFunction: function(successCallback, errorCallback) {
-            const url = "";
+        getAllUsers: function(page, size, successCallback, errorCallback) {
+            const url = `${this.baseUrl}?page=${page}&size=${size}`
             axios
-                .method(url)
+                .get(url)
                 .then(response => { successCallback(response) })
                 .catch(error => { errorCallback(error); });
         }

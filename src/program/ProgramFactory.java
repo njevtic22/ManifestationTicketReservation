@@ -9,6 +9,7 @@ import controller.ManifestationController;
 import controller.ReviewController;
 import controller.SalesmanController;
 import controller.TicketController;
+import controller.UserController;
 import controller.WithdrawalHistoryController;
 import exception.*;
 import exception.handler.*;
@@ -23,10 +24,11 @@ import service.ManifestationService;
 import service.ReviewService;
 import service.SalesmanService;
 import service.TicketService;
+import service.UserService;
 import service.WithdrawalHistoryService;
 import spark.ExceptionHandler;
 
-import java.security.SignatureException;
+import io.jsonwebtoken.security.SignatureException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -59,6 +61,7 @@ public class ProgramFactory {
     private AdminService adminService;
     private SalesmanService salesmanService;
     private CustomerService customerService;
+    private UserService userService;
     private WithdrawalHistoryService withdrawalHistoryService;
     private ManifestationService manifestationService;
     private ReviewController reviewController;
@@ -68,6 +71,7 @@ public class ProgramFactory {
     private AdminController adminController;
     private SalesmanController salesmanController;
     private CustomerController customerController;
+    private UserController userController;
     private WithdrawalHistoryController withdrawalHistoryController;
     private ManifestationController manifestationController;
     private ReviewService reviewService;
@@ -190,6 +194,23 @@ public class ProgramFactory {
                     customerService);
         }
         return customerController;
+    }
+
+    public UserController buildUserController() {
+        if (userController == null) {
+            userService = new UserService(
+                    formatter,
+                    jsonDbContext.getAdminRepository(),
+                    jsonDbContext.getSalesmanRepository(),
+                    jsonDbContext.getCustomerRepository()
+            );
+            userController = new UserController(
+                    gson,
+                    formatter,
+                    userService
+            );
+        }
+        return userController;
     }
 
     public WithdrawalHistoryController buildHistoryController() {
