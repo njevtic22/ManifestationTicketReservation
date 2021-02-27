@@ -23,8 +23,9 @@
 }
 
 .logout-sidebar-button {
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    width: 15rem;
 }
 
 .logo-table {
@@ -55,7 +56,7 @@ body {
 }
 
 .sidebar-sticky {
-    position: relative;
+    position: fixed;
     top: 0;
     height: calc(100vh - 48px);
     padding-top: 0.5rem;
@@ -79,6 +80,7 @@ body {
 [role="main"] {
     padding-top: 30px; /* Space for fixed navbar */
     padding-left: 30px; /* Space for fixed navbar */
+    padding-right: 30px; /* Space for fixed navbar */
 }
 
 /*
@@ -239,7 +241,8 @@ body {
 }
 
 #sidebar-wrapper .sidebar-heading {
-    padding: 0.875rem 1.25rem;
+    /* padding: 0.875rem 1.25rem; */
+    padding: 0.5rem 1.5rem;
     font-size: 1.2rem;
 }
 
@@ -268,10 +271,6 @@ body {
     #wrapper.toggled #sidebar-wrapper {
         margin-left: -15rem;
     }
-}
-
-.titleBottom {
-    margin-bottom: -3px;
 }
 
 a#mainAnchor:link {

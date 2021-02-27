@@ -1,12 +1,13 @@
 package controller;
 
 import com.google.gson.Gson;
-import filters.UserFilter;
+import filter.UserFilter;
 import model.CustomerType;
 import model.User;
 import org.eclipse.jetty.http.HttpStatus;
 import responseTransformer.GetAllUsersTransformer;
 import responseTransformer.dtoMappers.GetAllUsersMapper;
+import sorter.UserSorter;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -59,18 +60,35 @@ public class UserController {
     public Route getAll = (Request request, Response response) -> {
         ensureUserIsAdmin.ensure(request);
 
-        Collection<User> users = getAllUsersUseCase.getAllUsers();
+        List<User> users = new ArrayList<>(getAllUsersUseCase.getAllUsers());
         applyQueryFilter(request, users);
+        applyQuerySort(request, users);
         List<User> paginatedUsers = applyQueryPagination(request, users);
         response.status(HttpStatus.OK_200);
         return paginatedUsers;
     };
 
     private void applyQueryFilter(Request request, Collection<User> users) {
-        if (request.queryParams("role") != null)
-            UserFilter.filterByRole(request.queryParams("role"), users);
-        if (request.queryParams("type") != null)
-            UserFilter.filterByType(CustomerType.valueOf(request.queryParams("type")), users);
+        if (request.queryParams("filterRole") != null)
+            UserFilter.filterByRole(request.queryParams("filterRole"), users);
+        if (request.queryParams("filterType") != null)
+            UserFilter.filterByType(CustomerType.valueOf(request.queryParams("filterType")), users);
+    }
+
+    private void applyQuerySort(Request request, List<User> users) {
+        String sortBy = request.queryParams("sortBy");
+        if (sortBy == null)
+            return;
+
+        String sortOrderStr = request.queryParams("sortOrder");
+        if (sortOrderStr == null)
+            return;
+
+        int sortOrder = sortOrderStr.equals("asc") ? 1 : -1;
+
+        if (sortBy.equals("name"))
+            UserSorter.sortByName(users, sortOrder);
+
     }
 
     private List<User> applyQueryPagination(Request request, Collection<User> users) {

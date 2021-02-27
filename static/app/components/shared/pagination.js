@@ -2,7 +2,7 @@ Vue.component("pagination", {
     template: `
     <nav aria-label="Page navigation example">
         <ul class="pagination" v-bind:class="[justifyContent]">
-            <li class="page-item" v-bind:class="{disabled: !hasPrevious}">
+            <li class="page-item" v-if="hasPrevious">
                 <button 
                     class="page-link" 
                     aria-label="Previous"
@@ -20,14 +20,14 @@ Vue.component("pagination", {
                         class="page-link"
                         v-on:click="navigateTo(currentPage - (numberOfPrevious - n + 1))" 
                     >
-                        {{ currentPage - (numberOfPrevious - n + 1) }}
+                        {{ currentPage - (numberOfPrevious - n) }}
                     </button>
                 </li>
             </div>
 
 
             <li class="page-item active">
-                <button class="page-link">{{ currentPage }}</button>
+                <button class="page-link">{{ currentPage + 1 }}</button>
             </li>
 
 
@@ -36,11 +36,11 @@ Vue.component("pagination", {
                     class="page-link"
                     v-on:click="navigateTo(currentPage + n)" 
                 >
-                    {{ currentPage + n }}
+                    {{ currentPage + n + 1}}
                 </button>
             </li>
 
-            <li class="page-item" v-bind:class="{disabled: !hasNext}">
+            <li class="page-item" v-if="hasNext">
                 <button 
                     class="page-link" 
                     aria-label="Next"
@@ -58,9 +58,16 @@ Vue.component("pagination", {
         hasPrevious: Boolean,
         hasNext: Boolean,
 
-        numberOfPrevious: Number,
-        numberOfNext: Number,
+        numberOfPrevious: {
+            type: Number,
+            default: 2
+        },
 
+        numberOfNext: {
+            type: Number,
+            default: 2
+        },
+        
         justifyContent: {
             type: String,
             default: ""
@@ -69,7 +76,7 @@ Vue.component("pagination", {
 
     data: function() {
         return {
-            arrayOfPrevious: []
+            
         };
     },
 

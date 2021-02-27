@@ -1,4 +1,4 @@
-package filters;
+package filter;
 
 import model.Customer;
 import model.CustomerType;

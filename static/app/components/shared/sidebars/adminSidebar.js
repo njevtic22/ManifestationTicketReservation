@@ -1,9 +1,10 @@
 Vue.component("adminSidebar", {
     template: `
     <nav class="bg-light list-group list-group-flush sidebar"> 
-        <h5 class="sidebar-heading titleBottom"><a href="#/admin/manifestations/table" id="mainAnchor">Manifestation service</a></h5>
-    
+        
         <div class="sidebar-sticky">
+            <h5 class="sidebar-heading"><a href="#/admin/manifestations/table" id="mainAnchor">Manifestation service</a></h5>
+    
             <ul class="nav flex-column">
     
                 <li class="nav-item">

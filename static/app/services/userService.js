@@ -12,8 +12,8 @@ Vue.component("userService", {
     },
 
     methods: {
-        getAllUsers: function(page, size, successCallback, errorCallback) {
-            const url = `${this.baseUrl}?page=${page}&size=${size}`
+        getAllUsers: function(page, size, sortBy, sortOrder, successCallback, errorCallback) {
+            const url = `${this.baseUrl}?page=${page}&size=${size}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
             axios
                 .get(url)
                 .then(response => { successCallback(response) })

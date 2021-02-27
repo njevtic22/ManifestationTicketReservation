@@ -6,9 +6,6 @@ Vue.component("allUsers", {
             v-bind:hasPrevious="page > 0"
             v-bind:hasNext="users.length != 0"
 
-            v-bind:numberOfPrevious="2"
-            v-bind:numberOfNext="2"
-
             v-on:previous="previousPage"
             v-on:next="nextPage"
             v-on:to="toPage($event)"
@@ -17,6 +14,7 @@ Vue.component("allUsers", {
         ></pagination>
         <usersTable
             v-bind:users="users"
+            v-on:sort="performSort($event)"
             ref="usersTable"
         >
         </usersTable>
@@ -30,7 +28,21 @@ Vue.component("allUsers", {
             page: 0,
             size: 5,
 
-            users: []
+            users: [
+                {
+                    name: "",
+                    surname: "",
+                    username: "",
+                    dateOfBirth: "",
+                    gender: "",
+                    role: "",
+                    type: "",
+                    points: "",
+                }
+            ],
+
+            sortBy: "name",
+            sortOrder: "asc",
         };
     },
 
@@ -39,12 +51,20 @@ Vue.component("allUsers", {
             this.page--;
             this.getAllUsers();
         },
+        
         nextPage: function() {
             this.page++;
             this.getAllUsers();
         },
+
         toPage: function(to) {
             this.page = to;
+            this.getAllUsers();
+        },
+
+        performSort: function(sortDetails) {
+            this.sortBy = sortDetails.sortBy;
+            this.sortOrder = sortDetails.sortOrder;
             this.getAllUsers();
         },
 
@@ -56,7 +76,7 @@ Vue.component("allUsers", {
                 this.$root.defaultCatchError(error);
             };
     
-            this.$refs.userService.getAllUsers(this.page, this.size, successCallback, errorCallback);
+            this.$refs.userService.getAllUsers(this.page, this.size, this.sortBy, this.sortOrder, successCallback, errorCallback);
         }
     },
 
