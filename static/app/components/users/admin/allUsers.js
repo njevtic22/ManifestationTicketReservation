@@ -76,7 +76,14 @@ Vue.component("allUsers", {
                 this.$root.defaultCatchError(error);
             };
     
-            this.$refs.userService.getAllUsers(this.page, this.size, this.sortBy, this.sortOrder, successCallback, errorCallback);
+            this.$refs.userService.getAllUsers(
+                this.page, 
+                this.size, 
+                this.sortBy, 
+                this.sortOrder, 
+                successCallback, 
+                errorCallback
+            );
         }
     },
 

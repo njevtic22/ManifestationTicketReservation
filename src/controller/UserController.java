@@ -29,6 +29,8 @@ public class UserController {
     private Gson gson;
     private final SimpleDateFormat formatter;
     private GetAllUsersUseCase getAllUsersUseCase;
+    private final UserFilter userFilter;
+    private final UserSorter userSorter;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
     private RoleEnsure ensureUserIsSalesman = AuthenticationController::ensureUserIsSalesman;
@@ -37,10 +39,12 @@ public class UserController {
     private RoleEnsure ensureUserIsAdminOrCustomer = AuthenticationController::ensureUserIsAdminOrCustomer;
 
 
-    public UserController(Gson gson, SimpleDateFormat formatter, GetAllUsersUseCase getAllUsersUseCase) {
+    public UserController(Gson gson, SimpleDateFormat formatter, GetAllUsersUseCase getAllUsersUseCase, UserFilter userFilter, UserSorter userSorter) {
         this.gson = gson;
         this.formatter = formatter;
         this.getAllUsersUseCase = getAllUsersUseCase;
+        this.userFilter = userFilter;
+        this.userSorter = userSorter;
         this.setUpRoutes();
     }
 
@@ -62,6 +66,7 @@ public class UserController {
 
         List<User> users = new ArrayList<>(getAllUsersUseCase.getAllUsers());
         applyQueryFilter(request, users);
+        applyQuerySearch(request, users);
         applyQuerySort(request, users);
         List<User> paginatedUsers = applyQueryPagination(request, users);
         response.status(HttpStatus.OK_200);
@@ -70,9 +75,13 @@ public class UserController {
 
     private void applyQueryFilter(Request request, Collection<User> users) {
         if (request.queryParams("filterRole") != null)
-            UserFilter.filterByRole(request.queryParams("filterRole"), users);
+            userFilter.filterByRole(request.queryParams("filterRole"), users);
         if (request.queryParams("filterType") != null)
-            UserFilter.filterByType(CustomerType.valueOf(request.queryParams("filterType")), users);
+            userFilter.filterByType(CustomerType.valueOf(request.queryParams("filterType")), users);
+    }
+
+    private void applyQuerySearch(Request request, List<User> users) {
+
     }
 
     private void applyQuerySort(Request request, List<User> users) {
@@ -86,9 +95,32 @@ public class UserController {
 
         int sortOrder = sortOrderStr.equals("asc") ? 1 : -1;
 
-        if (sortBy.equals("name"))
-            UserSorter.sortByName(users, sortOrder);
-
+        switch (sortBy) {
+            case "name":
+                userSorter.sortByName(users, sortOrder);
+                break;
+            case "surname":
+                userSorter.sortBySurname(users, sortOrder);
+                break;
+            case "username":
+                userSorter.sortByUsername(users, sortOrder);
+                break;
+            case "date":
+                userSorter.sortByDateOfBirth(users, sortOrder);
+                break;
+            case "gender":
+                userSorter.sortByGender(users, sortOrder);
+                break;
+            case "role":
+                userSorter.sortByRole(users, sortOrder);
+                break;
+            case "type":
+                userSorter.sortByType(users, sortOrder);
+                break;
+            case "points":
+                userSorter.sortByPoints(users, sortOrder);
+                break;
+        }
     }
 
     private List<User> applyQueryPagination(Request request, Collection<User> users) {
@@ -107,6 +139,8 @@ public class UserController {
             *         {@code (fromIndex < 0 || toIndex > size)}
             * @throws IllegalArgumentException if the endpoint indices are out of order
             *         {@code (fromIndex > toIndex)}
+            *
+            * arrUsers.subList(fromIndex, toIndex);
             *
             * */
 

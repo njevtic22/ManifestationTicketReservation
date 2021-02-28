@@ -90,7 +90,6 @@ Vue.component("usersTable", {
         },
 
         sortName: function(sortOrder) {
-            console.log("nemanja");
             this.resetSort();
             this.sortNameAsc = sortOrder === "asc";
             this.$emit("sort", { sortBy: "name", sortOrder: sortOrder});
@@ -99,36 +98,43 @@ Vue.component("usersTable", {
         sortSurname: function(sortOrder) {
             this.resetSort();
             this.sortSurnameAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "surname", sortOrder: sortOrder});
         },
         
         sortUsername: function(sortOrder) {
             this.resetSort();
             this.sortUsernameAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "username", sortOrder: sortOrder});
         },
         
         sortDate: function(sortOrder) {
             this.resetSort();
             this.sortDateAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "date", sortOrder: sortOrder});
         },
         
         sortGender: function(sortOrder) {
             this.resetSort();
             this.sortGenderAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "gender", sortOrder: sortOrder});
         },
         
         sortRole: function(sortOrder) {
             this.resetSort();
             this.sortRoleAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "role", sortOrder: sortOrder});
         },
         
         sortType: function(sortOrder) {
             this.resetSort();
             this.sortTypeAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "type", sortOrder: sortOrder});
         },
         
         sortPoints: function(sortOrder) {
             this.resetSort();
             this.sortPointsAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "points", sortOrder: sortOrder});
         }
     },
 

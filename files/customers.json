@@ -9,7 +9,7 @@
     "surname": "Dušković",
     "username": "customer1",
     "password": "123",
-    "dateOfBirth": "01.08.2000. 08:00:00",
+    "dateOfBirth": "01.06.2001. 08:00:00",
     "gender": "MALE",
     "archived": false
   },
@@ -37,7 +37,7 @@
     "surname": "Zoranović",
     "username": "customer3",
     "password": "123",
-    "dateOfBirth": "01.10.2000. 08:00:00",
+    "dateOfBirth": "01.11.2000. 08:00:00",
     "gender": "FEMALE",
     "archived": false
   },
@@ -51,7 +51,7 @@
     "surname": "Vesnić",
     "username": "customer4",
     "password": "123",
-    "dateOfBirth": "01.10.2000. 08:00:00",
+    "dateOfBirth": "01.12.2000. 08:00:00",
     "gender": "FEMALE",
     "archived": false
   },
@@ -65,7 +65,7 @@
     "surname": "Zorić",
     "username": "customer5",
     "password": "123",
-    "dateOfBirth": "01.10.2000. 08:00:00",
+    "dateOfBirth": "01.01.2001. 08:00:00",
     "gender": "MALE",
     "archived": false
   },
@@ -79,7 +79,7 @@
     "surname": "Ljubišić",
     "username": "customer6",
     "password": "123",
-    "dateOfBirth": "01.10.2000. 08:00:00",
+    "dateOfBirth": "01.02.2001. 08:00:00",
     "gender": "MALE",
     "archived": false
   },
@@ -93,7 +93,7 @@
     "surname": "Anić",
     "username": "customer7",
     "password": "123",
-    "dateOfBirth": "01.10.2000. 08:00:00",
+    "dateOfBirth": "01.03.2001. 08:00:00",
     "gender": "FEMALE",
     "archived": false
   },
@@ -107,7 +107,7 @@
     "surname": "Milicić",
     "username": "customer8",
     "password": "123",
-    "dateOfBirth": "01.10.2000. 08:00:00",
+    "dateOfBirth": "01.04.2001. 08:00:00",
     "gender": "FEMALE",
     "archived": false
   },
@@ -121,7 +121,7 @@
     "surname": "Gordanović",
     "username": "customer9",
     "password": "123",
-    "dateOfBirth": "01.10.2000. 08:00:00",
+    "dateOfBirth": "01.05.2001. 08:00:00",
     "gender": "FEMALE",
     "archived": false
   }

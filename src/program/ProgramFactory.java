@@ -13,6 +13,7 @@ import controller.UserController;
 import controller.WithdrawalHistoryController;
 import exception.*;
 import exception.handler.*;
+import filter.UserFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import repository.JSONDbContext;
 import security.NoOpPasswordEncoder;
@@ -26,6 +27,7 @@ import service.SalesmanService;
 import service.TicketService;
 import service.UserService;
 import service.WithdrawalHistoryService;
+import sorter.UserSorter;
 import spark.ExceptionHandler;
 
 import io.jsonwebtoken.security.SignatureException;
@@ -207,7 +209,9 @@ public class ProgramFactory {
             userController = new UserController(
                     gson,
                     formatter,
-                    userService
+                    userService,
+                    new UserFilter(),
+                    new UserSorter()
             );
         }
         return userController;
