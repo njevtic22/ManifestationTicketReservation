@@ -1,5 +1,10 @@
 package security;
 
+/*
+ * Not used because org.springframework.security.crypto.password.NoOpPasswordEncoder
+                 or org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+ * is used instead
+ */
 public class NoOpPasswordEncoder implements PasswordEncoder {
     @Override
     public String encode(CharSequence rawPassword) {

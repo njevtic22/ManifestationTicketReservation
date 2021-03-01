@@ -7,7 +7,8 @@ import model.Gender;
 import model.Salesman;
 import model.User;
 import repository.AuthenticationRepository;
-import security.PasswordEncoder;
+//import security.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import security.TokenUtils;
 import useCase.authentication.CreateTokenAuthenticationCase;
 import useCase.authentication.GetUserFromTokenAuthenticationCase;
@@ -63,7 +64,7 @@ public class AuthenticationService implements
                 command.name,
                 command.surname,
                 command.username,
-                command.password,
+                passwordEncoder.encode(command.password),
                 formatter.parse(command.dateOfBirth),
                 Gender.valueOf(command.gender),
                 false
@@ -80,7 +81,7 @@ public class AuthenticationService implements
                 command.name,
                 command.surname,
                 command.username,
-                command.password,
+                passwordEncoder.encode(command.password),
                 formatter.parse(command.dateOfBirth),
                 Gender.valueOf(command.gender),
                 false,

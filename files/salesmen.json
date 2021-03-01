@@ -16,7 +16,7 @@
     "name": "Ljubica",
     "surname": "Ljubinčić",
     "username": "salesman1",
-    "password": "123",
+    "password": "$2y$10$3Hdi/LGDnymCd7xLLXsMpegmNtnopfTfHf1h7dGlg20740IqG/8TS",
     "dateOfBirth": "01.04.2000. 08:00:00",
     "gender": "FEMALE",
     "archived": false
@@ -38,7 +38,7 @@
     "name": "Marijana",
     "surname": "Marijanović",
     "username": "salesman2",
-    "password": "123",
+    "password": "$2y$10$3Hdi/LGDnymCd7xLLXsMpegmNtnopfTfHf1h7dGlg20740IqG/8TS",
     "dateOfBirth": "01.05.2000. 08:00:00",
     "gender": "FEMALE",
     "archived": false
@@ -55,7 +55,7 @@
     "name": "Marina",
     "surname": "Marinić",
     "username": "salesman3",
-    "password": "123",
+    "password": "$2y$10$3Hdi/LGDnymCd7xLLXsMpegmNtnopfTfHf1h7dGlg20740IqG/8TS",
     "dateOfBirth": "01.06.2000. 08:00:00",
     "gender": "FEMALE",
     "archived": false
@@ -72,7 +72,7 @@
     "name": "Dušan",
     "surname": "Dušanović",
     "username": "salesman4",
-    "password": "123",
+    "password": "$2y$10$3Hdi/LGDnymCd7xLLXsMpegmNtnopfTfHf1h7dGlg20740IqG/8TS",
     "dateOfBirth": "01.07.2000. 08:00:00",
     "gender": "MALE",
     "archived": false
@@ -89,7 +89,7 @@
     "name": "Marko",
     "surname": "Marković",
     "username": "salesman5",
-    "password": "123",
+    "password": "$2y$10$3Hdi/LGDnymCd7xLLXsMpegmNtnopfTfHf1h7dGlg20740IqG/8TS",
     "dateOfBirth": "01.08.2000. 08:00:00",
     "gender": "MALE",
     "archived": false
@@ -106,7 +106,7 @@
     "name": "Aljoša",
     "surname": "Aljošić",
     "username": "salesman6",
-    "password": "123",
+    "password": "$2y$10$3Hdi/LGDnymCd7xLLXsMpegmNtnopfTfHf1h7dGlg20740IqG/8TS",
     "dateOfBirth": "01.09.2000. 08:00:00",
     "gender": "MALE",
     "archived": false

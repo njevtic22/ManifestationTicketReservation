@@ -148,7 +148,7 @@ public class AuthenticationController {
         );
         Customer customer = registerCustomerAuthenticationCase.registerCustomer(command);
 
-        String jwt = createTokenAuthenticationCase.createToken(customer.getUsername(), customer.getPassword());
+        String jwt = createTokenAuthenticationCase.createToken(customer.getUsername(), command.password);
 
         response.status(HttpStatus.OK_200);
         return gson.toJson(new TokenResponse(jwt, customer.getClass().getSimpleName().toUpperCase()));

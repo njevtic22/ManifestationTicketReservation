@@ -15,8 +15,9 @@ import exception.*;
 import exception.handler.*;
 import filter.UserFilter;
 import io.jsonwebtoken.ExpiredJwtException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import repository.JSONDbContext;
-import security.NoOpPasswordEncoder;
+//import security.NoOpPasswordEncoder;
 import security.TokenUtils;
 import service.AdminService;
 import service.AuthenticationService;
@@ -121,7 +122,7 @@ public class ProgramFactory {
             authenticationService = new AuthenticationService(
                     formatter,
                     new TokenUtils(),
-                    new NoOpPasswordEncoder(),
+                    new BCryptPasswordEncoder(),
                     jsonDbContext.getAuthenticationRepository()
             );
             authenticationController = new AuthenticationController(

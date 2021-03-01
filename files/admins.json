@@ -4,7 +4,7 @@
     "name": "Petar",
     "surname": "Petrović",
     "username": "admin1",
-    "password": "123",
+    "password": "$2y$10$3Hdi/LGDnymCd7xLLXsMpegmNtnopfTfHf1h7dGlg20740IqG/8TS",
     "dateOfBirth": "01.01.2000. 08:00:00",
     "gender": "MALE",
     "archived": false
@@ -14,7 +14,7 @@
     "name": "Dejan",
     "surname": "Dejanović",
     "username": "admin2",
-    "password": "123",
+    "password": "$2y$10$3Hdi/LGDnymCd7xLLXsMpegmNtnopfTfHf1h7dGlg20740IqG/8TS",
     "dateOfBirth": "01.02.2000. 08:00:00",
     "gender": "MALE",
     "archived": false
@@ -24,7 +24,7 @@
     "name": "Jovan",
     "surname": "Jovanović",
     "username": "admin3",
-    "password": "123",
+    "password": "$2y$10$3Hdi/LGDnymCd7xLLXsMpegmNtnopfTfHf1h7dGlg20740IqG/8TS",
     "dateOfBirth": "01.03.2000. 08:00:00",
     "gender": "MALE",
     "archived": false
