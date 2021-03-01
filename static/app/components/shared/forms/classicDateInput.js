@@ -22,8 +22,10 @@ Vue.component("classicDateInput", {
                     <slot></slot>
                 </label>
                 <div class="input-group">
-                    <div class="input-group-prepend input-group-text">
-                        <calendar3-icon></calendar3-icon>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <calendar3-icon></calendar3-icon>
+                        </div>
                     </div>
                         <input
                             class="form-control"

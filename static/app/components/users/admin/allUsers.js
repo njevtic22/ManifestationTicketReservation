@@ -1,24 +1,42 @@
 Vue.component("allUsers", {
     template: `
     <div>
-        <pagination
-            v-bind:currentPage="page"
-            v-bind:hasPrevious="page > 0"
-            v-bind:hasNext="users.length != 0"
+    
+        <form class="form-inline spaced">
+            <pageSizeSelect 
+                name="sizeInput"
+                v-bind:value="sizeStr"
+                v-bind:options="sizes"
+                v-bind:page="page"
+                v-bind:size="size"
+                v-bind:currentDataSize="users.length"
+                ref="pageSizeSelect"
 
-            v-on:previous="previousPage"
-            v-on:next="nextPage"
-            v-on:to="toPage($event)"
+                v-on:select="changeSize($event)"
+            ></pageSizeSelect>
 
-            justifyContent="justify-content-center"
-        ></pagination>
+
+            <pagination
+                v-bind:currentPage="page"
+                v-bind:hasPrevious="page > 0"
+                v-bind:hasNext="users.length != 0"
+
+                v-on:previous="previousPage"
+                v-on:next="nextPage"
+                v-on:to="toPage($event)"
+
+                justifyContent="justify-content-right"
+                
+            ></pagination>
+        </form>
+
+
         <usersTable
             v-bind:users="users"
             v-on:sort="performSort($event)"
             ref="usersTable"
-        >
-        </usersTable>
-        
+        ></usersTable>
+
         <userService ref="userService"></userService>
     </div>
     `,
@@ -27,6 +45,13 @@ Vue.component("allUsers", {
         return {
             page: 0,
             size: 5,
+            sizeStr: "5",
+            sizes: [
+                "5",
+                "10",
+                "50",
+                "All"
+            ],
 
             users: [
                 {
@@ -65,6 +90,16 @@ Vue.component("allUsers", {
         performSort: function(sortDetails) {
             this.sortBy = sortDetails.sortBy;
             this.sortOrder = sortDetails.sortOrder;
+            this.getAllUsers();
+        },
+
+        changeSize: function(event) {
+            this.sizeStr = event;
+            if (event === "All") {
+                this.size = 10000;
+            } else {
+                this.size = Number(event);
+            }
             this.getAllUsers();
         },
 

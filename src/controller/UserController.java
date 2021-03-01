@@ -127,6 +127,9 @@ public class UserController {
         String pageStr = request.queryParams("page");
         String sizeStr = request.queryParams("size");
         if (pageStr != null && sizeStr != null) {
+            if (sizeStr.equals("All"))
+                return new ArrayList<>(users);
+
             int page = Integer.parseInt(pageStr);
             int size = Integer.parseInt((sizeStr));
 

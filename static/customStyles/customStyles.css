@@ -305,3 +305,8 @@ a#mainAnchor:active {
 .sidebar-icon {
     margin-right: 5px;
 }
+
+.spaced {
+    display: flex;
+    justify-content: space-between;
+}
