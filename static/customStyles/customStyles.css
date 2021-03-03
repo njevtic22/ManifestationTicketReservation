@@ -310,3 +310,17 @@ a#mainAnchor:active {
     display: flex;
     justify-content: space-between;
 }
+
+/* Filter side bar */
+
+/* .search-filter-group {
+    display: flex;
+}
+
+.search-filter-group > div {
+    width: 50%;
+}
+
+.search-filter-group > div:last-child {
+    margin-left: 5%;
+} */

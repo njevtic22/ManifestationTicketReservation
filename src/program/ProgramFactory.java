@@ -13,7 +13,7 @@ import controller.UserController;
 import controller.WithdrawalHistoryController;
 import exception.*;
 import exception.handler.*;
-import filter.UserFilter;
+import filterSearcher.UserFilterSearcher;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import repository.JSONDbContext;
@@ -211,7 +211,7 @@ public class ProgramFactory {
                     gson,
                     formatter,
                     userService,
-                    new UserFilter(),
+                    new UserFilterSearcher(),
                     new UserSorter()
             );
         }

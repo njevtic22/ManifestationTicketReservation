@@ -10,10 +10,10 @@ Vue.component("pageSizeSelect", {
         &nbsp;
 
         <selectInput
-            componentClass="mb-2 mr-sm-2"
             :name="name"
             :value="value"
             :options="options"
+            class="mb-2 mr-sm-2"
             required
             ref="selectInput"
 

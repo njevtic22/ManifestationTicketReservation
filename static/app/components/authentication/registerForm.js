@@ -14,26 +14,24 @@ Vue.component("registerForm", {
                     <div class="form-group col-md-6">
                         <textInput
                             name="name"
+                            labelText="Name"
                             v-model="newCustomer.name"
                             v-bind:errorMessage="nameErrorMessage"
                             v-bind:isInvalid="isNameInvalid"
-                            showLabel
                             required
                         >
-                            Name
                         </textInput>
                     </div>
 
                     <div class="form-group col-md-6">
                         <textInput
                             name="surname"
+                            labelText="Surname"
                             v-model="newCustomer.surname"
                             v-bind:errorMessage="surnameErrorMessage"
                             v-bind:isInvalid="isSurnameInvalid"
-                            showLabel
                             required
                         >
-                            Surname
                         </textInput>
                     </div>
                 </div>
@@ -42,60 +40,56 @@ Vue.component("registerForm", {
                     <div class="form-group col-md-6">
                         <textInput
                             name="username"
+                            labelText="Username"
                             v-model="newCustomer.username"
                             v-bind:errorMessage="usernameErrorMessage"
                             v-bind:isInvalid="isUsernameInvalid"
-                            showLabel
                             required
                         >
-                            Username
                         </textInput>
                     </div>
 
                     <div class="form-group col-md-6">
                         <classicDateInput
                             name="date"
+                            labelText="Date"
                             v-model="newCustomer.dateOfBirth"
                             v-bind:errorMessage="dateErrorMessage"
                             v-bind:isInvalid="isDateInvalid"
                             v-bind:maxDate="new Date()"
-                            showLabel
                             required
                         >
-                            Date
                         </classicDateInput>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <textInput
+                        <passwordInput
                             name="password"
+                            labelText="Password"
                             v-model="newCustomer.password"
                             v-bind:errorMessage="passwordErrorMessage"
                             v-bind:isInvalid="isPasswordInvalid"
-                            showLabel
                             required
                         >
-                            Password
-                        </textInput>
+                        </passwordInput>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <textInput
+                        <passwordInput
                             name="passwordRepeat"
+                            labelText="Repeat password"
                             v-model="newCustomer.passwordRepeat"
                             v-bind:errorMessage="pasRepErrorMessage"
                             v-bind:isInvalid="isPasRepInvalid"
-                            showLabel
                             required
                         >
-                            Repeat password
-                        </textInput>
+                        </passwordInput>
                     </div>
                 </div>
 
-                <div class="form-group text-center">
+                <div class="text-center">
                     <fieldset class="btn-group btn-group-toggle" data-toggle="buttons">
                         <legend>Gender</legend>
                         <label class="btn btn-secondary active">
@@ -268,33 +262,32 @@ Vue.component("registerForm", {
                 this.removeValidation();
                 this.newCustomer.dateOfBirth += " 08:00:00";
 
-                
-                this.$refs.authService.registerCustomer(
-                    this.newCustomer,
-                    (response) => {
-                        const token = response.data.token;
-                        const role = response.data.role;
+                const successCallback = (response) => {
+                    const token = response.data.token;
+                    const role = response.data.role;
 
-                        localStorage.setItem("token", token);
-                        localStorage.setItem("role", role);
+                    localStorage.setItem("token", token);
+                    localStorage.setItem("role", role);
 
-                        // make axios send token as default header
-                        axios.defaults.headers.common["Authorization"] =
-                            "Bearer " + token;
+                    // make axios send token as default header
+                    axios.defaults.headers.common["Authorization"] =
+                        "Bearer " + token;
 
-                        this.$root.redirectToUserPage();
-                    },
-                    (error) => {
-                        console.log(error.response.data);
-                        if (error.response.data === "Username " + this.newCustomer.username + " is taken.") {
-                            this.showInvalidUserNameError(error.response.data);
-                        } else if (error.response.data.startsWith("Unparseable date:")) {
-                            this.showInvalidDateError("Date must be in format " + this.$root.getDateFormat());
-                        } else {
-                            this.$root.defaultCatchError(error);
-                        }
+                    this.$root.redirectToUserPage();
+                };
+
+                const errorCallback = (error) => {
+                    console.log(error.response.data);
+                    if (error.response.data === "Username " + this.newCustomer.username + " is taken.") {
+                        this.showInvalidUserNameError(error.response.data);
+                    } else if (error.response.data.startsWith("Unparseable date:")) {
+                        this.showInvalidDateError("Date must be in format " + this.$root.getDateFormat());
+                    } else {
+                        this.$root.defaultCatchError(error);
                     }
-                )
+                };
+                
+                this.$refs.authService.registerCustomer(this.newCustomer, successCallback, errorCallback);
             }
         }
     },

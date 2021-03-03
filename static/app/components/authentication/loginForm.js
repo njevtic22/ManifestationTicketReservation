@@ -11,21 +11,21 @@ Vue.component("loginForm", {
 
         <textInput
             name="username"
+            placeholder="Username"
             v-model="username"
             v-bind:errorMessage="userNameErrorMessage"
             v-bind:isInvalid="isUsernameInvalid"
-            componentClass="form-group"
-            placeholder="Username"
+            class="form-group"
             required
         >
         </textInput>
         <passwordInput
             name="password"
+            placeholder="Password"
             v-model="password"
             v-bind:errorMessage="passwordErrorMessage"
             v-bind:isInvalid="isPasswordInvalid"
-            componentClass="form-group"
-            placeholder="Password"
+            class="form-group"
             required
         >
         </passwordInput>
@@ -120,31 +120,31 @@ Vue.component("loginForm", {
                     password: this.password
                 };
 
-                this.$refs.authService.login(
-                    userData,
-                    (response) => {
-                        const token = response.data.token;
-                        const role = response.data.role;
+                const successCallback = (response) => {
+                    const token = response.data.token;
+                    const role = response.data.role;
 
-                        localStorage.setItem("token", token);
-                        localStorage.setItem("role", role);
+                    localStorage.setItem("token", token);
+                    localStorage.setItem("role", role);
 
-                        // make axios send token as default header
-                        axios.defaults.headers.common["Authorization"] =
-                            "Bearer " + token;
+                    // make axios send token as default header
+                    axios.defaults.headers.common["Authorization"] =
+                        "Bearer " + token;
 
-                        this.$root.redirectToUserPage();
-                    },
-                    (error) => {
-                        if (error.response.data == "Invalid username") {
-                            this.showInvalidUserNameError(error.response.data);
-                        } else if (error.response.data == "Invalid password") {
-                            this.showInvalidPasswordError(error.response.data);
-                        } else {
-                            this.$root.defaultCatchError(error);
-                        }
-                    }    
-                )
+                    this.$root.redirectToUserPage();
+                };
+
+                const errorCallback = (error) => {
+                    if (error.response.data == "Invalid username") {
+                        this.showInvalidUserNameError(error.response.data);
+                    } else if (error.response.data == "Invalid password") {
+                        this.showInvalidPasswordError(error.response.data);
+                    } else {
+                        this.$root.defaultCatchError(error);
+                    }
+                };
+
+                this.$refs.authService.login(userData, successCallback, errorCallback);
             }
         }
 

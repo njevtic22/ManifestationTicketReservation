@@ -3,8 +3,8 @@ Vue.component('vue-multiselect', window.VueMultiselect.default);
 Vue.component('selectInput',{
     template: `
         <div v-bind:class="[componentClass]">   
-            <label v-if="showLabel" v-bind:for="name">
-               <slot></slot>
+            <label v-if="labelText" v-bind:for="name">
+                {{ labelText }}
             </label>  
             <div class="input-group">
                 <vue-multiselect
@@ -17,6 +17,7 @@ Vue.component('selectInput',{
                     :disabled="disabled"
                     :allow-empty="!required"
                     :preselect-first="required"
+                    :placeholder="placeholder"
                     
                     v-on:select="$emit('select', $event)"
                 >
@@ -38,9 +39,13 @@ Vue.component('selectInput',{
         name: String,
         value: String,
         errorMessage: String,
-        showLabel: {
-            type: Boolean,
-            default: false
+        placeholder: {
+            type: String,
+            default: ""
+        },
+        labelText: {
+            type: String,
+            default: ""
         },
         options: {
             type: Array

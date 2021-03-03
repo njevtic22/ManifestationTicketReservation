@@ -1,7 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
-import filter.UserFilter;
+import filterSearcher.UserFilterSearcher;
 import model.CustomerType;
 import model.User;
 import org.eclipse.jetty.http.HttpStatus;
@@ -29,7 +29,7 @@ public class UserController {
     private Gson gson;
     private final SimpleDateFormat formatter;
     private GetAllUsersUseCase getAllUsersUseCase;
-    private final UserFilter userFilter;
+    private final UserFilterSearcher userFilterSearcher;
     private final UserSorter userSorter;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
@@ -39,11 +39,11 @@ public class UserController {
     private RoleEnsure ensureUserIsAdminOrCustomer = AuthenticationController::ensureUserIsAdminOrCustomer;
 
 
-    public UserController(Gson gson, SimpleDateFormat formatter, GetAllUsersUseCase getAllUsersUseCase, UserFilter userFilter, UserSorter userSorter) {
+    public UserController(Gson gson, SimpleDateFormat formatter, GetAllUsersUseCase getAllUsersUseCase, UserFilterSearcher userFilterSearcher, UserSorter userSorter) {
         this.gson = gson;
         this.formatter = formatter;
         this.getAllUsersUseCase = getAllUsersUseCase;
-        this.userFilter = userFilter;
+        this.userFilterSearcher = userFilterSearcher;
         this.userSorter = userSorter;
         this.setUpRoutes();
     }
@@ -75,13 +75,18 @@ public class UserController {
 
     private void applyQueryFilter(Request request, Collection<User> users) {
         if (request.queryParams("filterRole") != null)
-            userFilter.filterByRole(request.queryParams("filterRole"), users);
+            userFilterSearcher.filterByRole(request.queryParams("filterRole"), users);
         if (request.queryParams("filterType") != null)
-            userFilter.filterByType(CustomerType.valueOf(request.queryParams("filterType")), users);
+            userFilterSearcher.filterByType(CustomerType.valueOf(request.queryParams("filterType")), users);
     }
 
     private void applyQuerySearch(Request request, List<User> users) {
-
+        if (request.queryParams("searchName") != null)
+            userFilterSearcher.searchByName(request.queryParams("searchName"), users);
+        if (request.queryParams("searchSurname") != null)
+            userFilterSearcher.searchBySurname(request.queryParams("searchSurname"), users);
+        if (request.queryParams("searchUsername") != null)
+            userFilterSearcher.searchByUsername(request.queryParams("searchUsername"), users);
     }
 
     private void applyQuerySort(Request request, List<User> users) {
@@ -123,6 +128,7 @@ public class UserController {
         }
     }
 
+    // TODO: implement as util function
     private List<User> applyQueryPagination(Request request, Collection<User> users) {
         String pageStr = request.queryParams("page");
         String sizeStr = request.queryParams("size");

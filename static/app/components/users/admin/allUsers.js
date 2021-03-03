@@ -1,41 +1,50 @@
 Vue.component("allUsers", {
     template: `
     <div>
-    
-        <form class="form-inline spaced">
-            <pageSizeSelect 
-                name="sizeInput"
-                v-bind:value="sizeStr"
-                v-bind:options="sizes"
-                v-bind:page="page"
-                v-bind:size="size"
-                v-bind:currentDataSize="users.length"
-                ref="pageSizeSelect"
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <div class="col spaced">
+                    <pageSizeSelect 
+                        name="sizeInput"
+                        v-bind:value="sizeStr"
+                        v-bind:options="sizes"
+                        v-bind:page="page"
+                        v-bind:size="size"
+                        v-bind:currentDataSize="users.length"
+                        ref="pageSizeSelect"
 
-                v-on:select="changeSize($event)"
-            ></pageSizeSelect>
-
-
-            <pagination
-                v-bind:currentPage="page"
-                v-bind:hasPrevious="page > 0"
-                v-bind:hasNext="users.length != 0"
-
-                v-on:previous="previousPage"
-                v-on:next="nextPage"
-                v-on:to="toPage($event)"
-
-                justifyContent="justify-content-right"
-                
-            ></pagination>
-        </form>
+                        v-on:select="changeSize($event)"
+                    ></pageSizeSelect>
 
 
-        <usersTable
-            v-bind:users="users"
-            v-on:sort="performSort($event)"
-            ref="usersTable"
-        ></usersTable>
+                    <pagination
+                        v-bind:currentPage="page"
+                        v-bind:hasPrevious="page > 0"
+                        v-bind:hasNext="users.length != 0"
+
+                        v-on:previous="previousPage"
+                        v-on:next="nextPage"
+                        v-on:to="toPage($event)"
+
+                        justifyContent="justify-content-right"
+                    ></pagination>
+                </div>
+
+                <usersTable
+                    v-bind:users="users"
+                    v-on:sort="performSort($event)"
+                    ref="usersTable"
+                ></usersTable>
+            </div>
+
+
+            <div class="form-group col-md-4">
+                <userSearchFilterForm
+                    v-on:submitSearchFilter="submitSearchFilter($event)"
+                    v-on:resetSearchFilter="resetSearchFilter"
+                ></userSearchFilterForm>
+            </div>
+        </div>
 
         <userService ref="userService"></userService>
     </div>
@@ -68,6 +77,17 @@ Vue.component("allUsers", {
 
             sortBy: "name",
             sortOrder: "asc",
+
+
+            searchData: {
+                searchName: "",
+                searchSurname: "",
+                searchUsername: ""
+            },
+            filterData: {
+                filterRole: "",
+                filterType: ""
+            }
         };
     },
 
@@ -103,6 +123,23 @@ Vue.component("allUsers", {
             this.getAllUsers();
         },
 
+        submitSearchFilter: function(searchFilterEvent) {
+            this.searchData = searchFilterEvent.searchData;
+            this.filterData = searchFilterEvent.filterData;
+            this.getAllUsers();
+        },
+
+        resetSearchFilter: function() {
+            this.searchData.searchName = "";
+            this.searchData.searchSurname = "";
+            this.searchData.searchUsername = "";
+
+            this.filterData.filterRole = "";
+            this.filterData.filterType = "";
+
+            this.getAllUsers();
+        },
+
         getAllUsers: function() {
             const successCallback = (response) => {
                 this.users = response.data;
@@ -110,12 +147,14 @@ Vue.component("allUsers", {
             const errorCallback = (error) => {
                 this.$root.defaultCatchError(error);
             };
-    
+
             this.$refs.userService.getAllUsers(
                 this.page, 
                 this.size, 
                 this.sortBy, 
-                this.sortOrder, 
+                this.sortOrder,
+                this.searchData,
+                this.filterData,
                 successCallback, 
                 errorCallback
             );

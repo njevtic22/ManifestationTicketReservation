@@ -12,8 +12,43 @@ Vue.component("userService", {
     },
 
     methods: {
-        getAllUsers: function(page, size, sortBy, sortOrder, successCallback, errorCallback) {
-            const url = `${this.baseUrl}?page=${page}&size=${size}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
+        formSearchUrl: function(searchData) {
+            let searchUrl = "";
+            for (const key of Object.keys(searchData)) {
+                if (searchData[key]) {
+                    searchUrl += key + "=" + searchData[key] + "&";
+                }
+            }
+
+            // Remove trailing &
+            if (searchUrl.length != 0) {
+                searchUrl = searchUrl.slice(0, -1);
+            }
+
+            return searchUrl;
+        },
+
+        formFilterUrl: function(filterData) {
+            let filterUrl = "";
+            for (const key of Object.keys(filterData)) {
+                if (filterData[key]) {
+                    filterUrl += key + "=" + filterData[key] + "&";
+                }
+            }
+
+            // remove trailing &
+            if (filterUrl.length != 0) {
+                filterurl = filterUrl.slice(0, -1);
+            }
+
+            return filterUrl;
+        },
+
+        getAllUsers: function(page, size, sortBy, sortOrder, searchData, filterData, successCallback, errorCallback) {
+            const searchUrl = this.formSearchUrl(searchData);
+            const filterUrl = this.formFilterUrl(filterData);
+
+            const url = `${this.baseUrl}?page=${page}&size=${size}&sortBy=${sortBy}&sortOrder=${sortOrder}&${searchUrl}&${filterUrl}`;
             axios
                 .get(url)
                 .then(response => { successCallback(response) })

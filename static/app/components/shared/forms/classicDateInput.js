@@ -18,8 +18,8 @@ Vue.component("classicDateInput", {
 
         
             <div v-bind:class="[componentClass]">
-                <label v-if="showLabel" v-bind:for="name">
-                    <slot></slot>
+                <label v-if="labelText" v-bind:for="name">
+                    {{ labelText }}
                 </label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -28,9 +28,9 @@ Vue.component("classicDateInput", {
                         </div>
                     </div>
                         <input
+                            type="text"
                             class="form-control"
                             v-bind:class="{'is-invalid': isInvalid}"
-                            type="text"
                             :name="name"
                             :value="inputValue"
                             :required="required"
@@ -92,9 +92,9 @@ Vue.component("classicDateInput", {
         name: String,
         value: String,
         errorMessage: String,
-        showLabel: {
-            type: Boolean,
-            default: false
+        labelText: {
+            type: String,
+            default: ""
         },
         isInvalid: {
             type: Boolean,

@@ -1,19 +1,19 @@
 Vue.component("passwordInput", {
     template: `
         <div class="form-group">
-            <label v-if="showLabel" v-bind:for="name">
-                <slot></slot>
+            <label v-if="labelText" v-bind:for="name">
+                {{ labelText }}
             </label>
             <div class="input-group">
                 <input
+                    type="password"
                     class="form-control"
                     v-bind:class="{'is-invalid': isInvalid}"
-                    type="password"
                     v-bind:name="name"
                     v-bind:value="value"
-                    :placeholder="placeholder"
-                    v-on:input="$emit('input', $event.target.value)"
                     v-bind:required="required"
+                    v-bind:placeholder="placeholder"
+                    v-on:input="$emit('input', $event.target.value)"
                 >
                 <div class="invalid-tooltip">
                     {{errorMessage}}
@@ -25,9 +25,9 @@ Vue.component("passwordInput", {
         name: String,
         value: String,
         errorMessage: String,
-        showLabel: {
-            type: Boolean,
-            default: false
+        labelText: {
+            type: String,
+            default: ""
         },
         isInvalid: {
             type: Boolean,

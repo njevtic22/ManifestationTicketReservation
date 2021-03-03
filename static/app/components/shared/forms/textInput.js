@@ -1,14 +1,14 @@
 Vue.component("textInput", {
     template: `
         <div v-bind:class="[componentClass]">
-            <label v-if="showLabel" v-bind:for="name">
-                <slot></slot>
+            <label v-if="labelText" v-bind:for="name">
+                {{ labelText }}
             </label>
             <div class="input-group">
                 <input
+                    type="text"
                     class="form-control"
                     v-bind:class="{'is-invalid': isInvalid}"
-                    type="text"
                     :name="name"
                     :value="value"
                     :required="required"
@@ -27,9 +27,9 @@ Vue.component("textInput", {
         name: String,
         value: String,
         errorMessage: String,
-        showLabel: {
-            type: Boolean,
-            default: false
+        labelText: {
+            type: String,
+            default: ""
         },
         isInvalid: {
             type: Boolean,
