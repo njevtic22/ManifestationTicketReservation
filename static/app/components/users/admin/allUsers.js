@@ -16,7 +16,6 @@ Vue.component("allUsers", {
                         v-on:select="changeSize($event)"
                     ></pageSizeSelect>
 
-
                     <pagination
                         v-bind:currentPage="page"
                         v-bind:hasPrevious="page > 0"
@@ -26,9 +25,19 @@ Vue.component("allUsers", {
                         v-on:next="nextPage"
                         v-on:to="toPage($event)"
 
-                        justifyContent="justify-content-right"
                     ></pagination>
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#addSalesmanModalId"
+                    >
+                        Add salesman
+                    </button>
                 </div>
+
+                <br/>
 
                 <usersTable
                     v-bind:users="users"
@@ -45,6 +54,8 @@ Vue.component("allUsers", {
                 ></userSearchFilterForm>
             </div>
         </div>
+
+        <addSalesmanModal id="addSalesmanModalId"></addSalesmanModal>
 
         <userService ref="userService"></userService>
     </div>
@@ -92,6 +103,10 @@ Vue.component("allUsers", {
     },
 
     methods: {
+        showAddSalesmanModal: function() {
+            alert("Nemanja");
+        },
+
         previousPage: function() {
             this.page--;
             this.getAllUsers();
