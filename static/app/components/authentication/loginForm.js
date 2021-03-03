@@ -60,18 +60,6 @@ Vue.component("loginForm", {
     },
 
     methods: {
-        // failureToast: function() {
-        //     this.$root.$emit("toastFailure", "This toast failed");
-        // },
-
-        // successToast: function() {
-        //     this.$root.$emit("toastSuccess", "This toast succeeded");
-        // },
-
-        // infoToast: function() {
-        //     this.$root.$emit("toastInfo", "This toast informed");
-        // },
-
         showInvalidUserNameError: function(message) {
             this.userNameErrorMessage = message;
             this.isUsernameInvalid = true;

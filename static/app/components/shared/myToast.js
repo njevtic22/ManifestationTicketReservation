@@ -52,7 +52,7 @@ Vue.component("myToast", {
     },
 
     mounted() {
-        this.$root.$on("toastSuccess", message => {
+        this.$on("toastSuccess", message => {
             this.toastMessage = message;
 
             this.removeBgColors();
@@ -60,7 +60,7 @@ Vue.component("myToast", {
             $("#appToast").toast("show");
         });
 
-        this.$root.$on("toastFailure", message => {
+        this.$on("toastFailure", message => {
             this.toastMessage = message;
 
             this.removeBgColors();
@@ -68,7 +68,7 @@ Vue.component("myToast", {
             $("#appToast").toast("show");
         });
 
-        this.$root.$on("toastInfo", message => {
+        this.$on("toastInfo", message => {
             this.toastMessage = message;
 
             this.removeBgColors();
@@ -78,8 +78,8 @@ Vue.component("myToast", {
     },
 
     destroyed() {
-        this.$root.$off("toastSuccess");
-        this.$root.$off("toastFailure");
-        this.$root.$off("toastInfo");
+        this.$off("toastSuccess");
+        this.$off("toastFailure");
+        this.$off("toastInfo");
     }
 });

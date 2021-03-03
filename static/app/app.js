@@ -333,6 +333,18 @@ var app = new Vue({
             return this.getDateFormat() + " " + this.getTimeFormat();
         },
 
+        successToast: function(message) {
+            this.$emit("toastSuccess", message);
+        },
+        
+        failureToast: function(message) {
+            this.$emit("toastFailure", message);
+        },
+
+        infoToast: function(message) {
+            this.$emit("toastInfo", message);
+        },
+
         redirectToUserPage: function() {
             if (!this.isUserLoggedIn()) {
                 this.$router.push({

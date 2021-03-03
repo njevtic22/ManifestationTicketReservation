@@ -169,7 +169,7 @@ public class AuthenticationController {
         );
         registerSalesmanAuthenticationCase.registerSalesman(command);
 
-        response.status(HttpStatus.OK_200);
-        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
+        response.status(HttpStatus.CREATED_201);
+        return HttpStatus.CREATED_201 + " " + HttpStatus.Code.CREATED.getMessage();
     };
 }

@@ -6,7 +6,7 @@ Vue.component("registerForm", {
         ref="registerForm"
     >
         <div class="card border-dark">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header bg-success text-white">
                 <h3>Register</h3>
             </div>
             <div class="card-body">
@@ -145,14 +145,6 @@ Vue.component("registerForm", {
             
         };
     },
-
-    // watch: {
-    //     // whenever question changes, this function will run
-    //     usernameErrorMessage: function (newMessage, oldMessage) {
-    //       console.log(newMessage);
-    //       console.log(oldMessage);
-    //     }
-    //   },
 
     methods: {
         showInvalidNameError: function(message) {

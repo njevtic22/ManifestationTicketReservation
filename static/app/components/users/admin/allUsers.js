@@ -55,7 +55,10 @@ Vue.component("allUsers", {
             </div>
         </div>
 
-        <addSalesmanModal id="addSalesmanModalId"></addSalesmanModal>
+        <addSalesmanModal 
+            id="addSalesmanModalId"
+            v-on:salesmanCreatedEvent="getAllUsers"
+        ></addSalesmanModal>
 
         <userService ref="userService"></userService>
     </div>
@@ -103,10 +106,6 @@ Vue.component("allUsers", {
     },
 
     methods: {
-        showAddSalesmanModal: function() {
-            alert("Nemanja");
-        },
-
         previousPage: function() {
             this.page--;
             this.getAllUsers();

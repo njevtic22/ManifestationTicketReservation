@@ -9,7 +9,7 @@ Vue.component("baseModal", {
         data-backdrop="static"
         aria-labelledby="modalTitle"
     >
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header" v-bind:class="[headerClass]">
                     <h5 class="modal-title text-white" id="modalTitle">{{ modalTitle }}</h5>
@@ -22,7 +22,7 @@ Vue.component("baseModal", {
                     <slot></slot>
                 </div>
 
-                <div class="modal-footer">
+                <div class="modal-footer card-footer">
                     <button type="button" class="btn btn-success" v-on:click="$emit('successEvent', $event)">{{ successBtnText }}</button>
                     <button type="button" class="btn btn-secondary" v-on:click="$emit('cancelEvent', $event)">{{ cancelBtnText }}</button>
                 </div>
