@@ -62,6 +62,12 @@ Vue.component("allUsers", {
             v-on:salesmanCreatedEvent="getAllUsers"
         ></addSalesmanModal>
 
+        <deleteUserModal
+            id="deleteUserModalId"
+            v-bind:userToDelete="userToDelete"
+            v-on:deletedUserEvent="getAllUsers"
+        ></deleteUserModal>
+
         <userService ref="userService"></userService>
     </div>
     `,
@@ -90,6 +96,17 @@ Vue.component("allUsers", {
                     points: "",
                 }
             ],
+
+            userToDelete: {
+                name: "",
+                surname: "",
+                username: "",
+                dateOfBirth: "",
+                gender: "",
+                role: "",
+                type: "",
+                points: "",
+            },
 
             sortBy: "name",
             sortOrder: "asc",
@@ -177,7 +194,8 @@ Vue.component("allUsers", {
         },
 
         confirmDeleteUser: function(user) {
-            console.log(user);
+            this.userToDelete = user;
+            $("#deleteUserModalId").modal("show");
         }
     },
 

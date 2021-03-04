@@ -7,7 +7,10 @@ Vue.component("userService", {
 
     data: function() {
         return {
-            baseUrl: "/api/users"
+            baseUsersUrl: "/api/users",
+            baseAdminsUrl: "/api/admins",
+            baseSalesmenUrl: "/api/salesmen",
+            baseCustomersUrl: "/api/customers"
         };
     },
 
@@ -48,11 +51,51 @@ Vue.component("userService", {
             const searchUrl = this.formSearchUrl(searchData);
             const filterUrl = this.formFilterUrl(filterData);
 
-            const url = `${this.baseUrl}?page=${page}&size=${size}&sortBy=${sortBy}&sortOrder=${sortOrder}&${searchUrl}&${filterUrl}`;
+            const url = `${this.baseUsersUrl}?page=${page}&size=${size}&sortBy=${sortBy}&sortOrder=${sortOrder}&${searchUrl}&${filterUrl}`;
             axios
                 .get(url)
                 .then(response => { successCallback(response) })
                 .catch(error => { errorCallback(error); });
+        },
+
+        deleteSalesman: function(salesmanId, successCallback, errorCallback) {
+            const url = `${this.baseSalesmenUrl}/${salesmanId}`;
+            axios
+                .delete(url)
+                .then(response => { successCallback(response) })
+                .catch(error => { errorCallback(error) });
+
+                // {
+                //     data: {
+                //         id: self.chosenUser.id,
+                //         name: self.chosenUser.name,
+                //         surname: self.chosenUser.surname,
+                //         email: self.chosenUser.email,
+                //         password: self.chosenUser.password,
+                //         organization: self.chosenUser.organization,
+                //         role: self.chosenUser.role
+                //     }
+                // }
+        },
+
+        deleteCustomer: function(customerId, successCallback, errorCallback) {
+            const url = `${this.baseCustomersUrl}/${customerId}`;
+            axios
+                .delete(url)
+                .then(response => { successCallback(response) })
+                .catch(error => { errorCallback(error) });
+
+                // {
+                //     data: {
+                //         id: self.chosenUser.id,
+                //         name: self.chosenUser.name,
+                //         surname: self.chosenUser.surname,
+                //         email: self.chosenUser.email,
+                //         password: self.chosenUser.password,
+                //         organization: self.chosenUser.organization,
+                //         role: self.chosenUser.role
+                //     }
+                // }
         }
     },
 

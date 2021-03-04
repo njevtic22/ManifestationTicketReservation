@@ -23,7 +23,7 @@ Vue.component("baseModal", {
                 </div>
 
                 <div class="modal-footer card-footer">
-                    <button type="button" class="btn btn-success" v-on:click="$emit('successEvent', $event)">{{ successBtnText }}</button>
+                    <button type="button" class="btn" v-bind:class="[btnSuccessClass]" v-on:click="$emit('successEvent', $event)">{{ successBtnText }}</button>
                     <button type="button" class="btn btn-secondary" v-on:click="$emit('cancelEvent', $event)">{{ cancelBtnText }}</button>
                 </div>
             </div>
@@ -36,6 +36,7 @@ Vue.component("baseModal", {
         modalTitle: String,
         successBtnText: String,
         cancelBtnText: String,
+        btnSuccessClass: String,
         headerClass: {
             type: String,
             default: ""

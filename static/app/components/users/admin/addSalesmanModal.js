@@ -3,6 +3,7 @@ Vue.component("addSalesmanModal", {
     <baseModal
         v-bind:id="id"
         headerClass="bg-success"
+        btnSuccessClass="btn-success"
         modalTitle="Add Salesman"
         successBtnText="Add salesman"
         cancelBtnText="Cancel"
@@ -267,7 +268,6 @@ Vue.component("addSalesmanModal", {
                 };
 
                 const errorCallback = (error) => {
-                    console.log(error.response.data);
                     if (error.response.data === "Username " + this.newSalesman.username + " is taken.") {
                         this.showInvalidUserNameError(error.response.data);
                     } else if (error.response.data.startsWith("Unparseable date:")) {
