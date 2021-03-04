@@ -42,6 +42,8 @@ Vue.component("allUsers", {
                 <usersTable
                     v-bind:users="users"
                     v-on:sort="performSort($event)"
+                    v-on:deleteUser="confirmDeleteUser($event)"
+
                     ref="usersTable"
                 ></usersTable>
             </div>
@@ -172,6 +174,10 @@ Vue.component("allUsers", {
                 successCallback, 
                 errorCallback
             );
+        },
+
+        confirmDeleteUser: function(user) {
+            console.log(user);
         }
     },
 

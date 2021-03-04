@@ -59,7 +59,12 @@ Vue.component("usersTable", {
                 <td>{{ user.type }}</td>
                 <td>{{ user.points }}</td>
                 <td style="text-align: center;">
-                    <button type="button" class="btn btn-link btn-sm">
+                    <button 
+                        type="button" 
+                        class="btn btn-link btn-sm"
+                    
+                        v-on:click="$emit('deleteUser', user)"
+                    >
                         <trash-fill-icon></trash-fill-icon>
                     </button>
                 </td>
