@@ -333,7 +333,7 @@ var app = new Vue({
             return this.getDateFormat() + " " + this.getTimeFormat();
         },
 
-        successToast: function(message, timeout) {
+        successToast: function(message, timeout=5000) {
             this.$refs.toast.showSuccess(message, timeout);
         },
         
@@ -384,7 +384,7 @@ var app = new Vue({
             const statusString = status.toString();
 
             if (statusString[0] == "3") {
-                this.$emit("toastFailure", "Error: " + status + ": " + msg);
+                this.failureToast("Error: " + status + ": " + msg);
                 this.clearStorageAndHeader();
                 this.$router.push(err.response.headers.redirect);
             } else if (
@@ -392,11 +392,11 @@ var app = new Vue({
                 statusString == "403" ||
                 statusString == "404"
             ) {
-                this.$emit("toastFailure", "Error: " + status + ": " + msg);
+                this.failureToast("Error: " + status + ": " + msg);
                 // there should be header redirect in response from server
                 this.$router.push(err.response.headers.redirect);
             } else {
-                this.$emit("toastFailure", "Error: " + status + ": " + msg);
+                this.failureToast("Error: " + status + ": " + msg);
             }
         }
     },

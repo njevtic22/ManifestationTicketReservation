@@ -324,3 +324,11 @@ a#mainAnchor:active {
 .search-filter-group > div:last-child {
     margin-left: 5%;
 } */
+
+.table > thead > tr > th {
+    vertical-align: middle;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}

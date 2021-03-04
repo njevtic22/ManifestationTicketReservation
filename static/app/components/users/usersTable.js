@@ -1,6 +1,6 @@
 Vue.component("usersTable", {
     template: `
-    <table border="5" class="table table-striped table-hover">
+    <table border="5" class="table table-light table-striped table-hover ">
         <thead class="thead-dark">
             <tr>
                 <th>
@@ -43,6 +43,9 @@ Vue.component("usersTable", {
                     <caret-down-square-fill-icon v-else v-on:click="sortPoints('asc')"></caret-down-square-fill-icon>
                     Points
                 </th>
+                <th>
+                    Actions
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -55,6 +58,11 @@ Vue.component("usersTable", {
                 <td>{{ user.role }}</td>
                 <td>{{ user.type }}</td>
                 <td>{{ user.points }}</td>
+                <td style="text-align: center;">
+                    <button type="button" class="btn btn-link btn-sm">
+                        <trash-fill-icon></trash-fill-icon>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>

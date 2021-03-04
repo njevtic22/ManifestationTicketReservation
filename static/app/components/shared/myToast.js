@@ -65,7 +65,7 @@ Vue.component("myToast", {
             this.delayTime = timeout;
 
             this.removeBgColors();
-            $(".toast-header").addClass("bg-success");
+            $(".toast-header").addClass("bg-danger");
             $("#appToast").toast("show");
         },
 
@@ -74,7 +74,7 @@ Vue.component("myToast", {
             this.delayTime = timeout;
 
             this.removeBgColors();
-            $(".toast-header").addClass("bg-success");
+            $(".toast-header").addClass("bg-primary");
             $("#appToast").toast("show");
         }
     },
