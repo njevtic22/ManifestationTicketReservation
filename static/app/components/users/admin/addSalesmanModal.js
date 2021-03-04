@@ -263,7 +263,7 @@ Vue.component("addSalesmanModal", {
                     $("#" + this.id).modal("hide");
                     this.$emit('salesmanCreatedEvent')
                     this.clearModal();
-                    this.$root.successToast("New salesman is created.")
+                    this.$root.successToast("New salesman is created.", 3600000);
                 };
 
                 const errorCallback = (error) => {

@@ -11,7 +11,7 @@ public class UserSorter {
         Comparator<User> userComparator = new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                return order * o1.getName().compareTo(o2.getName());
+                return order * o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
             }
         };
 
@@ -22,7 +22,7 @@ public class UserSorter {
         Comparator<User> userComparator = new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                return order * o1.getSurname().compareTo(o2.getSurname());
+                return order * o1.getSurname().toLowerCase().compareTo(o2.getSurname().toLowerCase());
             }
         };
 
@@ -33,7 +33,7 @@ public class UserSorter {
         Comparator<User> userComparator = new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                return order * o1.getUsername().compareTo(o2.getUsername());
+                return order * o1.getUsername().toLowerCase().compareTo(o2.getUsername().toLowerCase());
             }
         };
 

@@ -9,13 +9,15 @@ Vue.component("myToast", {
         <div
             id="appToast"
             class="toast fade"
+
             role="alert"
             aria-live="assertive"
+
+
             aria-atomic="true"
             data-animation="true"
             
             v-bind:data-delay="delayTime"
-            v-bind:data-autohide="toAutoHide"
         >
             <div class="toast-header bg-success">
                 <strong class="mr-auto text-dark">Message</strong>
@@ -39,7 +41,6 @@ Vue.component("myToast", {
         return {
             toastMessage: "",
             delayTime: 5000,
-            toAutoHide: true
         };
     },
 
@@ -48,38 +49,37 @@ Vue.component("myToast", {
             $(".toast-header").removeClass("bg-danger");
             $(".toast-header").removeClass("bg-success");
             $(".toast-header").removeClass("bg-primary");
-        }
-    },
+        },
 
-    mounted() {
-        this.$on("toastSuccess", message => {
+        showSuccess: function(message, timeout) {
             this.toastMessage = message;
+            this.delayTime = timeout;
 
             this.removeBgColors();
             $(".toast-header").addClass("bg-success");
             $("#appToast").toast("show");
-        });
+        },
 
-        this.$on("toastFailure", message => {
+        showFailure: function(message, timeout) {
             this.toastMessage = message;
+            this.delayTime = timeout;
 
             this.removeBgColors();
-            $(".toast-header").addClass("bg-danger");
+            $(".toast-header").addClass("bg-success");
             $("#appToast").toast("show");
-        });
+        },
 
-        this.$on("toastInfo", message => {
+        showInfo: function(message, timeout) {
             this.toastMessage = message;
+            this.delayTime = timeout;
 
             this.removeBgColors();
-            $(".toast-header").addClass("bg-primary");
+            $(".toast-header").addClass("bg-success");
             $("#appToast").toast("show");
-        });
+        }
     },
 
-    destroyed() {
-        this.$off("toastSuccess");
-        this.$off("toastFailure");
-        this.$off("toastInfo");
-    }
+    mounted() {},
+
+    destroyed() {}
 });

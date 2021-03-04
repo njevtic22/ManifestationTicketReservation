@@ -299,7 +299,7 @@ var app = new Vue({
     template: `
     <div>
         <router-view />
-        <myToast></myToast>
+        <myToast ref="toast"></myToast>
     </div>
     `,
     router,
@@ -333,16 +333,16 @@ var app = new Vue({
             return this.getDateFormat() + " " + this.getTimeFormat();
         },
 
-        successToast: function(message) {
-            this.$emit("toastSuccess", message);
+        successToast: function(message, timeout) {
+            this.$refs.toast.showSuccess(message, timeout);
         },
         
-        failureToast: function(message) {
-            this.$emit("toastFailure", message);
+        failureToast: function(message, timeout=5000) {
+            this.$refs.toast.showFailure(message, timeout);
         },
 
-        infoToast: function(message) {
-            this.$emit("toastInfo", message);
+        infoToast: function(message, timeout=5000) {
+            this.$refs.toast.showInfo(message, timeout);
         },
 
         redirectToUserPage: function() {

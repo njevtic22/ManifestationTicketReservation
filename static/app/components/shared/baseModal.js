@@ -9,7 +9,7 @@ Vue.component("baseModal", {
         data-backdrop="static"
         aria-labelledby="modalTitle"
     >
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" v-bind:class="modalClass" role="document">
             <div class="modal-content">
                 <div class="modal-header" v-bind:class="[headerClass]">
                     <h5 class="modal-title text-white" id="modalTitle">{{ modalTitle }}</h5>
@@ -37,6 +37,10 @@ Vue.component("baseModal", {
         successBtnText: String,
         cancelBtnText: String,
         headerClass: {
+            type: String,
+            default: ""
+        },
+        modalClass: {
             type: String,
             default: ""
         }
