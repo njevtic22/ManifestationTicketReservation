@@ -2,7 +2,10 @@ package controller;
 
 import com.google.gson.Gson;
 import filterSearcher.UserFilterSearcher;
+import model.Admin;
+import model.Customer;
 import model.CustomerType;
+import model.Salesman;
 import model.User;
 import org.eclipse.jetty.http.HttpStatus;
 import responseTransformer.GetAllUsersTransformer;
@@ -11,6 +14,9 @@ import sorter.UserSorter;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import useCase.admin.dto.GetByIdAdminDTO;
+import useCase.customer.dto.GetByIdCustomerDTO;
+import useCase.salesman.dto.GetByIdSalesmanDTO;
 import useCase.user.GetAllUsersUseCase;
 import utility.RoleEnsure;
 
@@ -27,7 +33,7 @@ import static spark.Spark.put;
 
 public class UserController {
     private Gson gson;
-    private final SimpleDateFormat formatter;
+    private SimpleDateFormat formatter;
     private GetAllUsersUseCase getAllUsersUseCase;
     private final UserFilterSearcher userFilterSearcher;
     private final UserSorter userSorter;
@@ -53,13 +59,23 @@ public class UserController {
             path("/users", () -> {
 //                post("", add);
                 get("", getAll, new GetAllUsersTransformer(gson, new GetAllUsersMapper(formatter)));
-//                get("/:id", getById, new GetByIdAdminTransformer(gson, new GetByIdAdminMapper(formatter)));
+                get("/authenticated", getAuthenticated);
 //                put("/:id", update);
 //                put("/:id/password", updatePassword);
 //                delete("/:id", delete);
             });
         });
     }
+
+    public Route getAuthenticated = (Request request, Response response) -> {
+        User user = request.attribute("user");
+        if (user instanceof Admin) {
+            return gson.toJson(new GetByIdAdminDTO((Admin) user, formatter.format(user.getDateOfBirth())));
+        } else if (user instanceof Salesman)
+            return gson.toJson(new GetByIdSalesmanDTO((Salesman) user, formatter.format(user.getDateOfBirth())));
+        else
+            return gson.toJson(new GetByIdCustomerDTO((Customer) user, formatter.format(user.getDateOfBirth())));
+    };
 
     public Route getAll = (Request request, Response response) -> {
         ensureUserIsAdmin.ensure(request);

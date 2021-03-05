@@ -9,6 +9,7 @@ public class GetByIdCustomerDTO {
     public String username;
     public String dateOfBirth;
     public String gender;
+    public String role;
 
     public double points;
     public String type;
@@ -22,6 +23,7 @@ public class GetByIdCustomerDTO {
         this.username = customer.getUsername();
         this.dateOfBirth = parsedDate;
         this.gender = customer.getGender().toString();
+        this.role = customer.getClass().getSimpleName().toUpperCase();
         this.points = customer.getPoints();
         this.type = customer.getType().toString();
     }

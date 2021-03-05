@@ -14,7 +14,7 @@ Vue.component("base", {
             const url = "";
             axios
                 .method(url)
-                .then(response => { successCallback(response) })
+                .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
         }
     },

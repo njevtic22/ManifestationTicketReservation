@@ -96,18 +96,15 @@ body {
 }
 */
 
-/*
 .emp-profile {
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
     background: #fff;
-    /* background-image: linear-gradient(270deg, #aeb2b6 0%, #f7f6f5 50%); */
-/*}
-*/
+    /* background-image: linear-gradient(90deg, #aeb2b6 0%, #f7f6f5 50%); */
+}
 
-/*
 .profile-img {
     text-align: center;
 }
@@ -160,7 +157,6 @@ body {
     font-size: 16px;
     color: #0062cc;
 }
-*/
 
 /*
 .category-label {

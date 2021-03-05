@@ -54,16 +54,48 @@ Vue.component("userService", {
             const url = `${this.baseUsersUrl}?page=${page}&size=${size}&sortBy=${sortBy}&sortOrder=${sortOrder}&${searchUrl}&${filterUrl}`;
             axios
                 .get(url)
-                .then(response => { successCallback(response) })
+                .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
         },
+
+        getAuthenticated: function(successCallback, errorCallback) {
+            const url = `${this.baseUsersUrl}/authenticated`;
+            axios
+                .get(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error) });
+        },
+
+        // getAdmin: function(adminId, successCallback, errorCallback) {
+        //     const url = `${this.baseAdminsUrl}/${adminId}`;
+        //     axios
+        //         .get(url)
+        //         .then(response => { successCallback(response); })
+        //         .catch(error => { errorCallback(error); });
+        // },
+
+        // getSalesman: function(salesmanId, successCallback, errorCallback) {
+        //     const url = `${this.baseSalesmenUrl}/${salesmanId}`;
+        //     axios
+        //         .get(url)
+        //         .then(response => { successCallback(response); })
+        //         .catch(error => { errorCallback(error); });
+        // },
+
+        // getCustomer: function(customerId, successCallback, errorCallback) {
+        //     const url = `${this.baseCustomersUrl}/${customerId}`;
+        //     axios
+        //         .get(url)
+        //         .then(response => { successCallback(response); })
+        //         .catch(error => { errorCallback(error); });
+        // },
 
         deleteSalesman: function(salesmanId, successCallback, errorCallback) {
             const url = `${this.baseSalesmenUrl}/${salesmanId}`;
             axios
                 .delete(url)
-                .then(response => { successCallback(response) })
-                .catch(error => { errorCallback(error) });
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
 
                 // {
                 //     data: {
@@ -82,8 +114,8 @@ Vue.component("userService", {
             const url = `${this.baseCustomersUrl}/${customerId}`;
             axios
                 .delete(url)
-                .then(response => { successCallback(response) })
-                .catch(error => { errorCallback(error) });
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
 
                 // {
                 //     data: {

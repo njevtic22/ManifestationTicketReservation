@@ -86,6 +86,7 @@ Vue.component("allUsers", {
 
             users: [
                 {
+                    id: 0,
                     name: "",
                     surname: "",
                     username: "",
@@ -93,11 +94,12 @@ Vue.component("allUsers", {
                     gender: "",
                     role: "",
                     type: "",
-                    points: "",
+                    points: 0,
                 }
             ],
 
             userToDelete: {
+                id: 0,
                 name: "",
                 surname: "",
                 username: "",
@@ -105,7 +107,7 @@ Vue.component("allUsers", {
                 gender: "",
                 role: "",
                 type: "",
-                points: "",
+                points: 0,
             },
 
             sortBy: "name",

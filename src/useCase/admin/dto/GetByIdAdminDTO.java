@@ -9,6 +9,7 @@ public class GetByIdAdminDTO {
     public String username;
     public String dateOfBirth;
     public String gender;
+    public String role;
 
     public GetByIdAdminDTO(Admin admin, String parsedDate) {
         this.id = admin.getId();
@@ -17,5 +18,6 @@ public class GetByIdAdminDTO {
         this.username = admin.getUsername();
         this.dateOfBirth = parsedDate;
         this.gender = admin.getGender().toString();
+        this.role = admin.getClass().getSimpleName().toUpperCase();
     }
 }
