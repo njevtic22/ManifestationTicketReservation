@@ -131,7 +131,7 @@ Vue.component("registerForm", {
 
             nameErrorMessage: "Name must not be empty",
             surnameErrorMessage: "Surname must not be empty",
-            usernameErrorMessage: "Username must not be empty",
+            usernameErrorMessage: "Username is invalid or taken",
             passwordErrorMessage: "Password must not be empty",
             pasRepErrorMessage: "Password must be repeated",
             dateErrorMessage: "Date must be in format " + this.$root.getDateFormat(),
@@ -174,7 +174,7 @@ Vue.component("registerForm", {
         },
 
         removeInvalidUserNameError: function() {
-            this.userNameErrorMessage = "Username must not be empty";
+            this.userNameErrorMessage = "Username is invalid or taken";
             this.isUsernameInvalid = false;
         },
 

@@ -21,8 +21,7 @@ Vue.component("profile", {
                 <button 
                     type="button" 
                     class="profile-edit-btn"
-                    data-toggle="modal" 
-                    data-target="#editProfileModalId"
+                    v-on:click="showChangeModal"
                 >
                     Edit Profile
                 </button>
@@ -95,13 +94,15 @@ Vue.component("profile", {
 
         <editProfileModal 
             id="editProfileModalId"
-            v-on:changedProfile="getUser"
+            v-bind:currentUser="user"
+            v-on:profileChanged="getUser"
+            ref="editProfileModal"
         ></editProfileModal>
         <changePasswordModal 
             id="changePasswordModalId"
         ></changePasswordModal>
 
-        <userService ref="userService"></userService>
+        <authenticationService ref="authenticationService"></authenticationService>
     </div>
     `,
 
@@ -123,6 +124,11 @@ Vue.component("profile", {
     },
 
     methods: {
+        showChangeModal: function() {
+            this.$refs.editProfileModal.getUser();
+            $("#editProfileModalId").modal("show");
+        },
+
         getUser: function() {
             const successCallback = (response) => {
                 this.user = response.data;
@@ -132,7 +138,7 @@ Vue.component("profile", {
                 this.$root.defaultCatchError(error);
             };
 
-            this.$refs.userService.getAuthenticated(successCallback, errorCallback);  
+            this.$refs.authenticationService.getAuthenticated(successCallback, errorCallback);  
         }
     },
 

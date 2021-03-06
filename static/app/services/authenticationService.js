@@ -46,7 +46,15 @@ Vue.component("authenticationService", {
                 .catch(error => {
                     errorCallback(error);
                 });
-        }
+        },
+
+        getAuthenticated: function(successCallback, errorCallback) {
+            const url = `${this.baseUrl}/authenticated`;
+            axios
+                .get(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error) });
+        },
     },
 
     mounted() {},

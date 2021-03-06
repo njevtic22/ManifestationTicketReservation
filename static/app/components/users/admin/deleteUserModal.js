@@ -28,7 +28,8 @@ Vue.component("deleteUserModal", {
         <br/>
         <strong>This action can not be undode.</strong>
 
-        <userService ref=userService></userService>
+        <salesmanService ref="salesmanService"></salesmanService>
+        <customerService ref="customerService"></customerService>
     </baseModal>
     `,
 
@@ -53,9 +54,8 @@ Vue.component("deleteUserModal", {
     methods: {
         deleteUser: function() {
             const successCallback = (response) => {
-                $("#" + this.id).modal("hide");
+                this.closeModal();
                 this.$emit('deletedUserEvent');
-                this.clearModal();
                 this.$root.successToast("User is deleted");
             };
 
@@ -64,15 +64,19 @@ Vue.component("deleteUserModal", {
             };
 
             if (this.userToDelete.role === "CUSTOMER") {
-                this.$refs.userService.deleteCustomer(this.userToDelete.id, successCallback, errorCallback);
+                this.$refs.customerService.deleteCustomer(this.userToDelete.id, successCallback, errorCallback);
             } else {
-                this.$refs.userService.deleteSalesman(this.userToDelete.id, successCallback, errorCallback);
+                this.$refs.salesmanService.deleteSalesman(this.userToDelete.id, successCallback, errorCallback);
             }
         },
 
         cancel: function() {
-            $("#" + this.id).modal("hide");
+            this.closeModal();
             // this.$emit('cancelEvent')
+        },
+
+        closeModal: function() {
+            $("#" + this.id).modal("hide");
             this.clearModal();
         },
 

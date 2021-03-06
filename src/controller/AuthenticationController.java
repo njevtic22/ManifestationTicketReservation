@@ -3,6 +3,7 @@ package controller;
 import com.google.gson.Gson;
 import exception.InvalidRoleException;
 import exception.TokenNotFoundException;
+import model.Admin;
 import model.Customer;
 import model.Salesman;
 import model.User;
@@ -13,29 +14,34 @@ import spark.Filter;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import useCase.admin.dto.GetByIdAdminDTO;
 import useCase.authentication.CreateTokenAuthenticationCase;
 import useCase.authentication.GetUserFromTokenAuthenticationCase;
 import useCase.authentication.RegisterCustomerAuthenticationCase;
 import useCase.authentication.RegisterSalesmanAuthenticationCase;
 import useCase.authentication.command.RegisterUserCommand;
 import useCase.authentication.dto.TokenResponse;
+import useCase.customer.dto.GetByIdCustomerDTO;
+import useCase.salesman.dto.GetByIdSalesmanDTO;
+
+import java.text.SimpleDateFormat;
 
 import static spark.Spark.before;
-import static spark.Spark.delete;
 import static spark.Spark.get;
 import static spark.Spark.path;
 import static spark.Spark.post;
-import static spark.Spark.put;
 
 public class AuthenticationController {
     private Gson gson;
+    private SimpleDateFormat formatter;
     private CreateTokenAuthenticationCase createTokenAuthenticationCase;
     private GetUserFromTokenAuthenticationCase getUserFromTokenAuthenticationCase;
     private RegisterCustomerAuthenticationCase registerCustomerAuthenticationCase;
     private RegisterSalesmanAuthenticationCase registerSalesmanAuthenticationCase;
 
-    public AuthenticationController(Gson gson, CreateTokenAuthenticationCase createTokenAuthenticationCase, GetUserFromTokenAuthenticationCase getUserFromTokenAuthenticationCase, RegisterCustomerAuthenticationCase registerCustomerAuthenticationCase, RegisterSalesmanAuthenticationCase registerSalesmanAuthenticationCase) {
+    public AuthenticationController(Gson gson, SimpleDateFormat formatter, CreateTokenAuthenticationCase createTokenAuthenticationCase, GetUserFromTokenAuthenticationCase getUserFromTokenAuthenticationCase, RegisterCustomerAuthenticationCase registerCustomerAuthenticationCase, RegisterSalesmanAuthenticationCase registerSalesmanAuthenticationCase) {
         this.gson = gson;
+        this.formatter = formatter;
         this.createTokenAuthenticationCase = createTokenAuthenticationCase;
         this.getUserFromTokenAuthenticationCase = getUserFromTokenAuthenticationCase;
         this.registerCustomerAuthenticationCase = registerCustomerAuthenticationCase;
@@ -47,6 +53,7 @@ public class AuthenticationController {
         path("api", () -> {
             before("/*", this.validateToken);
             path("/authentication", () -> {
+                get("/authenticated", getAuthenticated);
                 post("/login", logIn);
                 post("/registerCustomer", registerCustomer);
                 post("/registerSalesman", registerSalesman);
@@ -171,5 +178,15 @@ public class AuthenticationController {
 
         response.status(HttpStatus.CREATED_201);
         return HttpStatus.CREATED_201 + " " + HttpStatus.Code.CREATED.getMessage();
+    };
+
+    public Route getAuthenticated = (Request request, Response response) -> {
+        User user = request.attribute("user");
+        if (user instanceof Admin) {
+            return gson.toJson(new GetByIdAdminDTO((Admin) user, formatter.format(user.getDateOfBirth())));
+        } else if (user instanceof Salesman)
+            return gson.toJson(new GetByIdSalesmanDTO((Salesman) user, formatter.format(user.getDateOfBirth())));
+        else
+            return gson.toJson(new GetByIdCustomerDTO((Customer) user, formatter.format(user.getDateOfBirth())));
     };
 }

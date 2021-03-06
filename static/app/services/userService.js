@@ -7,10 +7,7 @@ Vue.component("userService", {
 
     data: function() {
         return {
-            baseUsersUrl: "/api/users",
-            baseAdminsUrl: "/api/admins",
-            baseSalesmenUrl: "/api/salesmen",
-            baseCustomersUrl: "/api/customers"
+            baseUsersUrl: "/api/users"
         };
     },
 
@@ -56,78 +53,6 @@ Vue.component("userService", {
                 .get(url)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
-        },
-
-        getAuthenticated: function(successCallback, errorCallback) {
-            const url = `${this.baseUsersUrl}/authenticated`;
-            axios
-                .get(url)
-                .then(response => { successCallback(response); })
-                .catch(error => { errorCallback(error) });
-        },
-
-        // getAdmin: function(adminId, successCallback, errorCallback) {
-        //     const url = `${this.baseAdminsUrl}/${adminId}`;
-        //     axios
-        //         .get(url)
-        //         .then(response => { successCallback(response); })
-        //         .catch(error => { errorCallback(error); });
-        // },
-
-        // getSalesman: function(salesmanId, successCallback, errorCallback) {
-        //     const url = `${this.baseSalesmenUrl}/${salesmanId}`;
-        //     axios
-        //         .get(url)
-        //         .then(response => { successCallback(response); })
-        //         .catch(error => { errorCallback(error); });
-        // },
-
-        // getCustomer: function(customerId, successCallback, errorCallback) {
-        //     const url = `${this.baseCustomersUrl}/${customerId}`;
-        //     axios
-        //         .get(url)
-        //         .then(response => { successCallback(response); })
-        //         .catch(error => { errorCallback(error); });
-        // },
-
-        deleteSalesman: function(salesmanId, successCallback, errorCallback) {
-            const url = `${this.baseSalesmenUrl}/${salesmanId}`;
-            axios
-                .delete(url)
-                .then(response => { successCallback(response); })
-                .catch(error => { errorCallback(error); });
-
-                // {
-                //     data: {
-                //         id: self.chosenUser.id,
-                //         name: self.chosenUser.name,
-                //         surname: self.chosenUser.surname,
-                //         email: self.chosenUser.email,
-                //         password: self.chosenUser.password,
-                //         organization: self.chosenUser.organization,
-                //         role: self.chosenUser.role
-                //     }
-                // }
-        },
-
-        deleteCustomer: function(customerId, successCallback, errorCallback) {
-            const url = `${this.baseCustomersUrl}/${customerId}`;
-            axios
-                .delete(url)
-                .then(response => { successCallback(response); })
-                .catch(error => { errorCallback(error); });
-
-                // {
-                //     data: {
-                //         id: self.chosenUser.id,
-                //         name: self.chosenUser.name,
-                //         surname: self.chosenUser.surname,
-                //         email: self.chosenUser.email,
-                //         password: self.chosenUser.password,
-                //         organization: self.chosenUser.organization,
-                //         role: self.chosenUser.role
-                //     }
-                // }
         }
     },
 

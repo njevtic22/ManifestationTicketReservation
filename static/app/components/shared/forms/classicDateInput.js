@@ -1,7 +1,7 @@
 Vue.component("classicDateInput", {
     template: `
     <v-date-picker
-        value=""
+        v-bind:value="value"
         v-bind:max-date="maxDate"
         v-bind:min-date="minDate"
         v-bind:model-config="dateToStringConfig"
@@ -12,6 +12,7 @@ Vue.component("classicDateInput", {
         v-bind:minute-increment="15" 
         mode="date"
 
+        ref="datePicker"
         v-on:input="$emit('input', $event)"
     >
         <template v-slot="{ inputValue, inputEvents }">
@@ -83,7 +84,7 @@ Vue.component("classicDateInput", {
             // for model-config in v-date-picker
             dateToStringConfig: {
                 type: 'string',
-                mask: this.$root.getDateFormat(), // Uses 'iso' if missing
+                mask: this.$root.getDateFormat()
             },
         };
     },
@@ -123,7 +124,9 @@ Vue.component("classicDateInput", {
     }, 
 
     methods: {
-
+        move: function(toDateString) {
+            // this.$refs.datePicker.move(toDateString);
+        }
     },
 
     mounted() {

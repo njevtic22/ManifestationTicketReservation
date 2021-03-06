@@ -137,7 +137,7 @@ Vue.component("addSalesmanModal", {
 
             nameErrorMessage: "Name must not be empty",
             surnameErrorMessage: "Surname must not be empty",
-            usernameErrorMessage: "Username must not be empty",
+            usernameErrorMessage: "Username is invalid or taken",
             passwordErrorMessage: "Password must not be empty",
             pasRepErrorMessage: "Password must be repeated",
             dateErrorMessage: "Date must be in format " + this.$root.getDateFormat(),
@@ -180,7 +180,7 @@ Vue.component("addSalesmanModal", {
         },
 
         removeInvalidUserNameError: function() {
-            this.userNameErrorMessage = "Username must not be empty";
+            this.userNameErrorMessage = "Username is invalid or taken";
             this.isUsernameInvalid = false;
         },
 
@@ -261,9 +261,8 @@ Vue.component("addSalesmanModal", {
                 this.newSalesman.dateOfBirth += " 08:00:00";
 
                 const successCallback = (response) => {
-                    $("#" + this.id).modal("hide");
-                    this.$emit('salesmanCreatedEvent')
-                    this.clearModal();
+                    this.closeModal();
+                    this.$emit('salesmanCreatedEvent');
                     this.$root.successToast("New salesman is created.", 3600000);
                 };
 
@@ -282,8 +281,12 @@ Vue.component("addSalesmanModal", {
         },
 
         cancel: function(event) {
-            $("#" + this.id).modal("hide");
+            this.closeModal();
             // this.$emit('cancelEvent', event)
+        },
+
+        closeModal: function() {
+            $("#" + this.id).modal("hide");
             this.clearModal();
         },
 
@@ -293,7 +296,7 @@ Vue.component("addSalesmanModal", {
             this.newSalesman.username = "";
             this.newSalesman.password = "";
             this.newSalesman.passwordRepeat = "";
-            // this.newSalesman.dateOfBirth = "";
+            this.newSalesman.dateOfBirth = "";
             this.newSalesman.gender = this.Genders.MALE;
 
             this.removeValidation();

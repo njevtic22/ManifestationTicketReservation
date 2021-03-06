@@ -2,10 +2,10 @@ Vue.component("pageSizeSelect", {
     template: `
     <div style="display: inline-flex">
         <span v-if="currentDataSize === 0" style="margin-top: 7px">
-            Showing 0 rows,
+            Showing 0 results,
         </span>
         <span v-else style="margin-top: 7px">
-            Showing {{ page * size + 1 }} to {{ page * size + currentDataSize }} rows,
+            Showing {{ page * size + 1 }} to {{ page * size + currentDataSize }} results,
         </span>
         &nbsp;
 
@@ -20,7 +20,7 @@ Vue.component("pageSizeSelect", {
             v-on:select="$emit('select', $event)"
         ></selectInput>
 
-        <span style="margin-top: 7px">rows per page</span>
+        <span style="margin-top: 7px">results per page</span>
     </div>
     `,
 

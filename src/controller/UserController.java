@@ -59,23 +59,12 @@ public class UserController {
             path("/users", () -> {
 //                post("", add);
                 get("", getAll, new GetAllUsersTransformer(gson, new GetAllUsersMapper(formatter)));
-                get("/authenticated", getAuthenticated);
 //                put("/:id", update);
 //                put("/:id/password", updatePassword);
 //                delete("/:id", delete);
             });
         });
     }
-
-    public Route getAuthenticated = (Request request, Response response) -> {
-        User user = request.attribute("user");
-        if (user instanceof Admin) {
-            return gson.toJson(new GetByIdAdminDTO((Admin) user, formatter.format(user.getDateOfBirth())));
-        } else if (user instanceof Salesman)
-            return gson.toJson(new GetByIdSalesmanDTO((Salesman) user, formatter.format(user.getDateOfBirth())));
-        else
-            return gson.toJson(new GetByIdCustomerDTO((Customer) user, formatter.format(user.getDateOfBirth())));
-    };
 
     public Route getAll = (Request request, Response response) -> {
         ensureUserIsAdmin.ensure(request);

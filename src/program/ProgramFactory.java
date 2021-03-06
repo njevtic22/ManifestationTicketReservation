@@ -127,6 +127,7 @@ public class ProgramFactory {
             );
             authenticationController = new AuthenticationController(
                     gson,
+                    formatter,
                     authenticationService,
                     authenticationService,
                     authenticationService,
