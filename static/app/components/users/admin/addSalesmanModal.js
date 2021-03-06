@@ -20,6 +20,7 @@ Vue.component("addSalesmanModal", {
                     <textInput
                         name="name"
                         labelText="Name"
+                        class="form-group"
                         v-model="newSalesman.name"
                         v-bind:errorMessage="nameErrorMessage"
                         v-bind:isInvalid="isNameInvalid"
@@ -32,6 +33,7 @@ Vue.component("addSalesmanModal", {
                     <textInput
                         name="surname"
                         labelText="Surname"
+                        class="form-group"
                         v-model="newSalesman.surname"
                         v-bind:errorMessage="surnameErrorMessage"
                         v-bind:isInvalid="isSurnameInvalid"
@@ -46,6 +48,7 @@ Vue.component("addSalesmanModal", {
                     <textInput
                         name="username"
                         labelText="Username"
+                        class="form-group"
                         v-model="newSalesman.username"
                         v-bind:errorMessage="usernameErrorMessage"
                         v-bind:isInvalid="isUsernameInvalid"
@@ -58,6 +61,7 @@ Vue.component("addSalesmanModal", {
                     <classicDateInput
                         name="date"
                         labelText="Date"
+                        class="form-group"
                         v-model="newSalesman.dateOfBirth"
                         v-bind:errorMessage="dateErrorMessage"
                         v-bind:isInvalid="isDateInvalid"
@@ -74,6 +78,7 @@ Vue.component("addSalesmanModal", {
                     <passwordInput
                         name="password"
                         labelText="Password"
+                        class="form-group"
                         v-model="newSalesman.password"
                         v-bind:errorMessage="passwordErrorMessage"
                         v-bind:isInvalid="isPasswordInvalid"
@@ -86,6 +91,7 @@ Vue.component("addSalesmanModal", {
                     <passwordInput
                         name="passwordRepeat"
                         labelText="Repeat password"
+                        class="form-group"
                         v-model="newSalesman.passwordRepeat"
                         v-bind:errorMessage="pasRepErrorMessage"
                         v-bind:isInvalid="isPasRepInvalid"

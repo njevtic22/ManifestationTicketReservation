@@ -100,6 +100,7 @@ Vue.component("profile", {
         ></editProfileModal>
         <changePasswordModal 
             id="changePasswordModalId"
+            v-bind:userId="user.id"
         ></changePasswordModal>
 
         <authenticationService ref="authenticationService"></authenticationService>

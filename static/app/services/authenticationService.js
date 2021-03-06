@@ -55,6 +55,14 @@ Vue.component("authenticationService", {
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error) });
         },
+
+        changePassword: function(userId, passwordData, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${userId}/password`;
+            axios
+                .post(url, passwordData)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
+        }
     },
 
     mounted() {},

@@ -1,30 +1,35 @@
 package service;
 
 import exception.UserNameTakenException;
+import exception.UserNotFoundException;
 import model.Customer;
 import model.CustomerType;
 import model.Gender;
 import model.Salesman;
 import model.User;
-import repository.AuthenticationRepository;
-//import security.PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import repository.AuthenticationRepository;
 import security.TokenUtils;
+import useCase.authentication.ChangePasswordAuthenticationCase;
 import useCase.authentication.CreateTokenAuthenticationCase;
 import useCase.authentication.GetUserFromTokenAuthenticationCase;
 import useCase.authentication.RegisterCustomerAuthenticationCase;
 import useCase.authentication.RegisterSalesmanAuthenticationCase;
+import useCase.authentication.command.ChangePasswordCommand;
 import useCase.authentication.command.RegisterUserCommand;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 
+//import security.PasswordEncoder;
+
 public class AuthenticationService implements
         CreateTokenAuthenticationCase,
         GetUserFromTokenAuthenticationCase,
         RegisterSalesmanAuthenticationCase,
-        RegisterCustomerAuthenticationCase {
+        RegisterCustomerAuthenticationCase,
+        ChangePasswordAuthenticationCase {
     private final SimpleDateFormat formatter;
     private final TokenUtils tokenUtils;
     private final PasswordEncoder passwordEncoder;
@@ -90,6 +95,22 @@ public class AuthenticationService implements
         );
         authRepository.registerCustomer(customer);
         return customer;
+    }
+
+    @Override
+    public void changePassword(ChangePasswordCommand command) {
+        User user = authRepository.findByIdAndArchivedFalse(command.id)
+                .orElseThrow(() -> new UserNotFoundException(command.id));
+
+        if (!passwordEncoder.matches(command.oldPassword, user.getPassword()))
+            throw new IllegalArgumentException("Wrong password");
+
+        if (!command.newPassword.equals(command.repPassword))
+            throw new IllegalArgumentException("Passwords do not match");
+
+        user.setPassword(passwordEncoder.encode(command.newPassword));
+
+        authRepository.save(user);
     }
 
     private boolean isUsernameTaken(String usernameToValidate) {

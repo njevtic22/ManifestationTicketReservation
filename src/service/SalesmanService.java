@@ -6,17 +6,14 @@ import model.Admin;
 import model.Customer;
 import model.Gender;
 import model.Salesman;
-import model.User;
 import repository.UserRepository;
 import useCase.salesman.AddSalesmanUseCase;
 import useCase.salesman.DeleteSalesmanUseCase;
 import useCase.salesman.GetAllSalesmenUseCase;
 import useCase.salesman.GetByIdSalesmanUseCase;
-import useCase.salesman.UpdateSalesmanPasswordUseCase;
 import useCase.salesman.UpdateSalesmanUseCase;
 import useCase.salesman.command.AddSalesmanCommand;
 import useCase.salesman.command.UpdateSalesmanCommand;
-import useCase.salesman.command.UpdateSalesmanPasswordCommand;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,7 +25,6 @@ public class SalesmanService implements
         GetAllSalesmenUseCase,
         GetByIdSalesmanUseCase,
         UpdateSalesmanUseCase,
-        UpdateSalesmanPasswordUseCase,
         DeleteSalesmanUseCase {
     private final SimpleDateFormat formatter;
     private final UserRepository<Salesman> salesmanRepository;
@@ -94,16 +90,6 @@ public class SalesmanService implements
         salesman.setUsername(command.username);
         salesman.setDateOfBirth(formatter.parse(command.dateOfBirth));
         salesman.setGender(Gender.valueOf(command.gender));
-
-        salesmanRepository.save(salesman);
-    }
-
-    @Override
-    public void updatePassword(UpdateSalesmanPasswordCommand command) {
-        Salesman salesman = salesmanRepository.findByIdAndArchivedFalse(command.id)
-                .orElseThrow(() -> new SalesmanNotFoundException(command.id));
-
-        salesman.setPassword(command.password);
 
         salesmanRepository.save(salesman);
     }

@@ -24,19 +24,19 @@ Vue.component("classicDateInput", {
                 </label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <div class="input-group-text">
+                        <span class="input-group-text">
                             <calendar3-icon></calendar3-icon>
-                        </div>
+                        </span>
                     </div>
-                        <input
-                            type="text"
-                            class="form-control"
-                            v-bind:class="{'is-invalid': isInvalid}"
-                            :name="name"
-                            :value="inputValue"
-                            :required="required"
-                            v-on="inputEvents"
-                        >
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-bind:class="{'is-invalid': isInvalid}"
+                        :name="name"
+                        :value="inputValue"
+                        :required="required"
+                        v-on="inputEvents"
+                    >
                     <div class="invalid-tooltip">
                         {{errorMessage}}
                     </div>

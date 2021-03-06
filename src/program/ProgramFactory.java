@@ -80,6 +80,7 @@ public class ProgramFactory {
     private ReviewService reviewService;
     private TicketService ticketService;
 
+    private ExceptionHandler userNotFoundHandler;
     private ExceptionHandler adminNotFoundHandler;
     private ExceptionHandler salesmanNotFoundHandler;
     private ExceptionHandler customerNotFoundHandler;
@@ -131,6 +132,7 @@ public class ProgramFactory {
                     authenticationService,
                     authenticationService,
                     authenticationService,
+                    authenticationService,
                     authenticationService
             );
         }
@@ -151,7 +153,6 @@ public class ProgramFactory {
                     adminService,
                     adminService,
                     adminService,
-                    adminService,
                     adminService
             );
         }
@@ -168,7 +169,6 @@ public class ProgramFactory {
             salesmanController = new SalesmanController(
                     gson,
                     formatter,
-                    salesmanService,
                     salesmanService,
                     salesmanService,
                     salesmanService,
@@ -194,8 +194,8 @@ public class ProgramFactory {
                     customerService,
                     customerService,
                     customerService,
-                    customerService,
-                    customerService);
+                    customerService
+            );
         }
         return customerController;
     }
@@ -293,6 +293,12 @@ public class ProgramFactory {
             );
         }
         return ticketController;
+    }
+
+    public ExceptionHandler buildUserNotFoundHandler() {
+        if (userNotFoundHandler == null)
+            userNotFoundHandler = new UserNotFoundHandler(UserNotFoundException.class);
+        return userNotFoundHandler;
     }
 
     public ExceptionHandler buildAdminNotFoundHandler() {

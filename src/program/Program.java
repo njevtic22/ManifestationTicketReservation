@@ -48,6 +48,7 @@ public class Program {
         factory.buildReviewController();
         factory.buildTicketController();
 
+        exception(UserNotFoundException.class, factory.buildUserNotFoundHandler());
         exception(AdminNotFoundException.class, factory.buildAdminNotFoundHandler());
         exception(SalesmanNotFoundException.class, factory.buildSalesmanNotFoundHandler());
         exception(CustomerNotFoundException.class, factory.buildCustomerNotFoundHandler());

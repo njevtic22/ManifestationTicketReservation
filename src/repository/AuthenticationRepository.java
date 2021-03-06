@@ -12,6 +12,7 @@ public interface AuthenticationRepository {
     Optional<User> findByUserName(String userName);
     Optional<User> findByUserNameAndArchivedFalse(String userName);
 
+    void save(User user);
     void registerSalesman(Salesman salesman);
     void registerCustomer(Customer customer);
 }

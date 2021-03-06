@@ -1,5 +1,6 @@
 package repository;
 
+import exception.InvalidRoleException;
 import model.Admin;
 import model.Customer;
 import model.Salesman;
@@ -72,6 +73,18 @@ public class AuthenticationJSONRepository implements AuthenticationRepository {
                 return Optional.empty();
         }
         return userOptional;
+    }
+
+    @Override
+    public void save(User user) {
+        if (user instanceof Admin)
+            adminRepository.save((Admin) user);
+        else if (user instanceof Salesman)
+            salesmanRepository.save((Salesman) user);
+        else if (user instanceof Customer)
+            customerRepository.save((Customer) user);
+        else
+            throw new InvalidRoleException("Unknown user role");
     }
 
     @Override

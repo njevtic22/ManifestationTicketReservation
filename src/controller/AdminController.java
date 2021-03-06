@@ -6,7 +6,6 @@ import model.Admin;
 import org.eclipse.jetty.http.HttpStatus;
 import request.AddAdminRequest;
 import request.UpdateAdminRequest;
-import request.UpdatePasswordRequest;
 import responseTransformer.GetAllAdminsTransformer;
 import responseTransformer.GetByIdAdminTransformer;
 import responseTransformer.dtoMappers.GetAllAdminsMapper;
@@ -19,10 +18,8 @@ import useCase.admin.DeleteAdminUseCase;
 import useCase.admin.GetAllAdminsUseCase;
 import useCase.admin.GetByIdAdminUseCase;
 import useCase.admin.UpdateAdminUseCase;
-import useCase.admin.UpdateAdminPasswordUseCase;
 import useCase.admin.command.AddAdminCommand;
 import useCase.admin.command.UpdateAdminCommand;
-import useCase.admin.command.UpdateAdminPasswordCommand;
 import utility.RoleEnsure;
 import validation.SelfValidating;
 
@@ -42,19 +39,25 @@ public class AdminController {
     private GetAllAdminsUseCase getAllAdminsUseCase;
     private GetByIdAdminUseCase getByIdAdminUseCase;
     private UpdateAdminUseCase updateAdminUseCase;
-    private UpdateAdminPasswordUseCase updateAdminPasswordUseCase;
     private DeleteAdminUseCase deleteAdminUseCase;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
 
-    public AdminController(Gson gson, SimpleDateFormat formatter, AddAdminUseCase addAdminUseCase, GetAllAdminsUseCase getAllAdminsUseCase, GetByIdAdminUseCase getByIdAdminUseCase, UpdateAdminUseCase updateAdminUseCase, UpdateAdminPasswordUseCase updateAdminPasswordUseCase, DeleteAdminUseCase deleteAdminUseCase) {
+    public AdminController(
+            Gson gson,
+            SimpleDateFormat formatter,
+            AddAdminUseCase addAdminUseCase,
+            GetAllAdminsUseCase getAllAdminsUseCase,
+            GetByIdAdminUseCase getByIdAdminUseCase,
+            UpdateAdminUseCase updateAdminUseCase,
+            DeleteAdminUseCase deleteAdminUseCase
+    ) {
         this.gson = gson;
         this.formatter = formatter;
         this.addAdminUseCase = addAdminUseCase;
         this.getAllAdminsUseCase = getAllAdminsUseCase;
         this.getByIdAdminUseCase = getByIdAdminUseCase;
         this.updateAdminUseCase = updateAdminUseCase;
-        this.updateAdminPasswordUseCase = updateAdminPasswordUseCase;
         this.deleteAdminUseCase = deleteAdminUseCase;
         this.setUpRoutes();
     }
@@ -66,7 +69,6 @@ public class AdminController {
                 get("", getAll, new GetAllAdminsTransformer(gson, new GetAllAdminsMapper(formatter)));
                 get("/:id", getById, new GetByIdAdminTransformer(gson, new GetByIdAdminMapper(formatter)));
                 put("/:id", update);
-                put("/:id/password", updatePassword);
                 delete("/:id", delete);
             });
         });
@@ -124,21 +126,6 @@ public class AdminController {
                 requestBody.gender
         );
         updateAdminUseCase.updateAdmin(command);
-        response.status(HttpStatus.OK_200);
-        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
-    };
-
-    public Route updatePassword = (Request request, Response response) -> {
-        ensureUserIsAdmin.ensure(request);
-
-        Type requestType = new TypeToken<UpdatePasswordRequest>() {}.getType();
-        UpdatePasswordRequest requestBody = gson.fromJson(request.body(), requestType);
-
-        UpdateAdminPasswordCommand command = new UpdateAdminPasswordCommand(
-                SelfValidating.validId(request.params(":id")),
-                requestBody.password
-        );
-        updateAdminPasswordUseCase.updatePassword(command);
         response.status(HttpStatus.OK_200);
         return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };

@@ -15,6 +15,7 @@ Vue.component("registerForm", {
                         <textInput
                             name="name"
                             labelText="Name"
+                            class="form-group"
                             v-model="newCustomer.name"
                             v-bind:errorMessage="nameErrorMessage"
                             v-bind:isInvalid="isNameInvalid"
@@ -27,6 +28,7 @@ Vue.component("registerForm", {
                         <textInput
                             name="surname"
                             labelText="Surname"
+                            class="form-group"
                             v-model="newCustomer.surname"
                             v-bind:errorMessage="surnameErrorMessage"
                             v-bind:isInvalid="isSurnameInvalid"
@@ -41,6 +43,7 @@ Vue.component("registerForm", {
                         <textInput
                             name="username"
                             labelText="Username"
+                            class="form-group"
                             v-model="newCustomer.username"
                             v-bind:errorMessage="usernameErrorMessage"
                             v-bind:isInvalid="isUsernameInvalid"
@@ -53,6 +56,7 @@ Vue.component("registerForm", {
                         <classicDateInput
                             name="date"
                             labelText="Date"
+                            class="form-group"
                             v-model="newCustomer.dateOfBirth"
                             v-bind:errorMessage="dateErrorMessage"
                             v-bind:isInvalid="isDateInvalid"
@@ -68,6 +72,7 @@ Vue.component("registerForm", {
                         <passwordInput
                             name="password"
                             labelText="Password"
+                            class="form-group"
                             v-model="newCustomer.password"
                             v-bind:errorMessage="passwordErrorMessage"
                             v-bind:isInvalid="isPasswordInvalid"
@@ -80,6 +85,7 @@ Vue.component("registerForm", {
                         <passwordInput
                             name="passwordRepeat"
                             labelText="Repeat password"
+                            class="form-group"
                             v-model="newCustomer.passwordRepeat"
                             v-bind:errorMessage="pasRepErrorMessage"
                             v-bind:isInvalid="isPasRepInvalid"
@@ -204,7 +210,7 @@ Vue.component("registerForm", {
         },
 
         removeInvalidRepPasError: function() {
-            this.pasRepErrorMessage = "Password must not be repeated";
+            this.pasRepErrorMessage = "Password must be repeated";
             this.isPasRepInvalid = false;
         },
 

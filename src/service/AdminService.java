@@ -12,10 +12,8 @@ import useCase.admin.DeleteAdminUseCase;
 import useCase.admin.GetAllAdminsUseCase;
 import useCase.admin.GetByIdAdminUseCase;
 import useCase.admin.UpdateAdminUseCase;
-import useCase.admin.UpdateAdminPasswordUseCase;
 import useCase.admin.command.AddAdminCommand;
 import useCase.admin.command.UpdateAdminCommand;
-import useCase.admin.command.UpdateAdminPasswordCommand;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +25,6 @@ public class AdminService implements
         GetAllAdminsUseCase,
         GetByIdAdminUseCase,
         UpdateAdminUseCase,
-        UpdateAdminPasswordUseCase,
         DeleteAdminUseCase {
     private final SimpleDateFormat formatter;
     private final UserRepository<Admin> adminRepository;
@@ -94,16 +91,6 @@ public class AdminService implements
         admin.setUsername(command.username);
         admin.setDateOfBirth(formatter.parse(command.dateOfBirth));
         admin.setGender(Gender.valueOf(command.gender));
-
-        adminRepository.save(admin);
-    }
-
-    @Override
-    public void updatePassword(UpdateAdminPasswordCommand command) {
-        Admin admin = adminRepository.findByIdAndArchivedFalse(command.id)
-                .orElseThrow(() -> new AdminNotFoundException(command.id));
-
-        admin.setPassword(command.password);
 
         adminRepository.save(admin);
     }

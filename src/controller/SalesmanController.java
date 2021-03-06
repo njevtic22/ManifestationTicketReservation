@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import model.Salesman;
 import org.eclipse.jetty.http.HttpStatus;
 import request.AddSalesmanRequest;
-import request.UpdatePasswordRequest;
 import request.UpdateSalesmanRequest;
 import responseTransformer.GetAllSalesmenTransformer;
 import responseTransformer.GetByIdSalesmanTransformer;
@@ -18,11 +17,9 @@ import useCase.salesman.AddSalesmanUseCase;
 import useCase.salesman.DeleteSalesmanUseCase;
 import useCase.salesman.GetAllSalesmenUseCase;
 import useCase.salesman.GetByIdSalesmanUseCase;
-import useCase.salesman.UpdateSalesmanPasswordUseCase;
 import useCase.salesman.UpdateSalesmanUseCase;
 import useCase.salesman.command.AddSalesmanCommand;
 import useCase.salesman.command.UpdateSalesmanCommand;
-import useCase.salesman.command.UpdateSalesmanPasswordCommand;
 import utility.RoleEnsure;
 import validation.SelfValidating;
 
@@ -42,21 +39,27 @@ public class SalesmanController {
     private GetAllSalesmenUseCase getAllSalesmenUseCase;
     private GetByIdSalesmanUseCase getByIdSalesmanUseCase;
     private UpdateSalesmanUseCase updateSalesmanUseCase;
-    private UpdateSalesmanPasswordUseCase updateSalesmanPasswordUseCase;
     private DeleteSalesmanUseCase deleteSalesmanUseCase;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
     private RoleEnsure ensureUserIsSalesman = AuthenticationController::ensureUserIsSalesman;
     private RoleEnsure ensureUserIsAdminOrSalesman = AuthenticationController::ensureUserIsAdminOrSalesman;
 
-    public SalesmanController(Gson gson, SimpleDateFormat formatter, AddSalesmanUseCase addSalesmanUseCase, GetAllSalesmenUseCase getAllSalesmenUseCase, GetByIdSalesmanUseCase getByIdSalesmanUseCase, UpdateSalesmanUseCase updateSalesmanUseCase, UpdateSalesmanPasswordUseCase updateSalesmanPasswordUseCase, DeleteSalesmanUseCase deleteSalesmanUseCase) {
+    public SalesmanController(
+            Gson gson,
+            SimpleDateFormat formatter,
+            AddSalesmanUseCase addSalesmanUseCase,
+            GetAllSalesmenUseCase getAllSalesmenUseCase,
+            GetByIdSalesmanUseCase getByIdSalesmanUseCase,
+            UpdateSalesmanUseCase updateSalesmanUseCase,
+            DeleteSalesmanUseCase deleteSalesmanUseCase
+    ) {
         this.gson = gson;
         this.formatter = formatter;
         this.addSalesmanUseCase = addSalesmanUseCase;
         this.getAllSalesmenUseCase = getAllSalesmenUseCase;
         this.getByIdSalesmanUseCase = getByIdSalesmanUseCase;
         this.updateSalesmanUseCase = updateSalesmanUseCase;
-        this.updateSalesmanPasswordUseCase = updateSalesmanPasswordUseCase;
         this.deleteSalesmanUseCase = deleteSalesmanUseCase;
         this.setUpRoutes();
     }
@@ -68,7 +71,6 @@ public class SalesmanController {
                 get("", getAll, new GetAllSalesmenTransformer(gson, new GetAllSalesmenMapper(formatter)));
                 get("/:id", getById, new GetByIdSalesmanTransformer(gson, new GetByIdSalesmanMapper(formatter)));
                 put("/:id", update);
-                put("/:id/password", updatePassword);
                 delete("/:id", delete);
             });
         });
@@ -126,21 +128,6 @@ public class SalesmanController {
                 requestBody.gender
         );
         updateSalesmanUseCase.updateSalesman(command);
-        response.status(HttpStatus.OK_200);
-        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
-    };
-
-    public Route updatePassword = (Request request, Response response) -> {
-        ensureUserIsSalesman.ensure(request);
-
-        Type requestType = new TypeToken<UpdatePasswordRequest>() {}.getType();
-        UpdatePasswordRequest requestBody = gson.fromJson(request.body(), requestType);
-
-        UpdateSalesmanPasswordCommand command = new UpdateSalesmanPasswordCommand(
-                SelfValidating.validId(request.params(":id")),
-                requestBody.password
-        );
-        updateSalesmanPasswordUseCase.updatePassword(command);
         response.status(HttpStatus.OK_200);
         return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };

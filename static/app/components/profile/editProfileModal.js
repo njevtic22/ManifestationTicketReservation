@@ -20,6 +20,7 @@ Vue.component("editProfileModal", {
                     <textInput
                         name="name"
                         labelText="Name"
+                        class="form-group"
                         v-model="user.name"
                         v-bind:errorMessage="nameErrorMessage"
                         v-bind:isInvalid="isNameInvalid"
@@ -32,6 +33,7 @@ Vue.component("editProfileModal", {
                     <textInput
                         name="surname"
                         labelText="Surname"
+                        class="form-group"
                         v-model="user.surname"
                         v-bind:errorMessage="surnameErrorMessage"
                         v-bind:isInvalid="isSurnameInvalid"
@@ -213,34 +215,23 @@ Vue.component("editProfileModal", {
                     }
                 };
 
+                const userData = {
+                    name: this.user.name,
+                    surname: this.user.surname,
+                    username: this.user.username,
+                    dateOfBirth: this.user.dateOfBirth,
+                    gender: this.user.gender
+                };
+
                 if (this.$root.isAdmin()) {
-                    const adminData = {
-                        name: this.user.name,
-                        surname: this.user.surname,
-                        username: this.user.username,
-                        dateOfBirth: this.user.dateOfBirth,
-                        gender: this.user.gender
-                    };
-                    this.$refs.adminService.updateAdmin(this.user.id, adminData, successCallback, errorCallback);
+                    this.$refs.adminService.updateAdmin(this.user.id, userData, successCallback, errorCallback);
 
                 } else if (this.$root.isSalesman()) {
-                    const salesmanData = {
-                        name: this.user.name,
-                        surname: this.user.surname,
-                        username: this.user.username,
-                        dateOfBirth: this.user.dateOfBirth,
-                        gender: this.user.gender
-                    };
-                    this.$refs.salesmanService.updateSalesman(this.user.id, salesmanData, successCallback, errorCallback);
+                    this.$refs.salesmanService.updateSalesman(this.user.id, userData, successCallback, errorCallback);
+
                 } else if (this.$root.isCustomer()) {
-                    const customerData = {
-                        name: this.user.name,
-                        surname: this.user.surname,
-                        username: this.user.username,
-                        dateOfBirth: this.user.dateOfBirth,
-                        gender: this.user.gender
-                    };
-                    this.$refs.customerService.updateCustomer(this.user.id, customerData, successCallback, errorCallback);
+                    this.$refs.customerService.updateCustomer(this.user.id, userData, successCallback, errorCallback);
+
                 } else {
                     this.$root.failureToast("unexpected error occured.", 360000);
                 }

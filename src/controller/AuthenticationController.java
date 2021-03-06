@@ -10,19 +10,23 @@ import model.User;
 import org.eclipse.jetty.http.HttpStatus;
 import request.LogInRequest;
 import request.RegisterUserRequest;
+import request.UpdatePasswordRequest;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import useCase.admin.dto.GetByIdAdminDTO;
+import useCase.authentication.ChangePasswordAuthenticationCase;
 import useCase.authentication.CreateTokenAuthenticationCase;
 import useCase.authentication.GetUserFromTokenAuthenticationCase;
 import useCase.authentication.RegisterCustomerAuthenticationCase;
 import useCase.authentication.RegisterSalesmanAuthenticationCase;
+import useCase.authentication.command.ChangePasswordCommand;
 import useCase.authentication.command.RegisterUserCommand;
 import useCase.authentication.dto.TokenResponse;
 import useCase.customer.dto.GetByIdCustomerDTO;
 import useCase.salesman.dto.GetByIdSalesmanDTO;
+import validation.SelfValidating;
 
 import java.text.SimpleDateFormat;
 
@@ -35,14 +39,24 @@ public class AuthenticationController {
     private Gson gson;
     private SimpleDateFormat formatter;
     private CreateTokenAuthenticationCase createTokenAuthenticationCase;
+    private ChangePasswordAuthenticationCase changePasswordAuthenticationCase;
     private GetUserFromTokenAuthenticationCase getUserFromTokenAuthenticationCase;
     private RegisterCustomerAuthenticationCase registerCustomerAuthenticationCase;
     private RegisterSalesmanAuthenticationCase registerSalesmanAuthenticationCase;
 
-    public AuthenticationController(Gson gson, SimpleDateFormat formatter, CreateTokenAuthenticationCase createTokenAuthenticationCase, GetUserFromTokenAuthenticationCase getUserFromTokenAuthenticationCase, RegisterCustomerAuthenticationCase registerCustomerAuthenticationCase, RegisterSalesmanAuthenticationCase registerSalesmanAuthenticationCase) {
+    public AuthenticationController(
+            Gson gson,
+            SimpleDateFormat formatter,
+            CreateTokenAuthenticationCase createTokenAuthenticationCase,
+            ChangePasswordAuthenticationCase changePasswordAuthenticationCase,
+            GetUserFromTokenAuthenticationCase getUserFromTokenAuthenticationCase,
+            RegisterCustomerAuthenticationCase registerCustomerAuthenticationCase,
+            RegisterSalesmanAuthenticationCase registerSalesmanAuthenticationCase
+    ) {
         this.gson = gson;
         this.formatter = formatter;
         this.createTokenAuthenticationCase = createTokenAuthenticationCase;
+        this.changePasswordAuthenticationCase = changePasswordAuthenticationCase;
         this.getUserFromTokenAuthenticationCase = getUserFromTokenAuthenticationCase;
         this.registerCustomerAuthenticationCase = registerCustomerAuthenticationCase;
         this.registerSalesmanAuthenticationCase = registerSalesmanAuthenticationCase;
@@ -54,6 +68,7 @@ public class AuthenticationController {
             before("/*", this.validateToken);
             path("/authentication", () -> {
                 get("/authenticated", getAuthenticated);
+                post("/:id/password", changePassword);
                 post("/login", logIn);
                 post("/registerCustomer", registerCustomer);
                 post("/registerSalesman", registerSalesman);
@@ -188,5 +203,19 @@ public class AuthenticationController {
             return gson.toJson(new GetByIdSalesmanDTO((Salesman) user, formatter.format(user.getDateOfBirth())));
         else
             return gson.toJson(new GetByIdCustomerDTO((Customer) user, formatter.format(user.getDateOfBirth())));
+    };
+
+    public Route changePassword = (Request request, Response response) -> {
+        UpdatePasswordRequest requestBody = gson.fromJson(request.body(), UpdatePasswordRequest.class);
+
+        ChangePasswordCommand command = new ChangePasswordCommand(
+                SelfValidating.validId(request.params(":id")),
+                requestBody.oldPassword,
+                requestBody.newPassword,
+                requestBody.repPassword
+        );
+        changePasswordAuthenticationCase.changePassword(command);
+        response.status(HttpStatus.OK_200);
+        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };
 }

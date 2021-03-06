@@ -12,11 +12,9 @@ import useCase.customer.AddCustomerUseCase;
 import useCase.customer.DeleteCustomerUseCase;
 import useCase.customer.GetAllCustomersUseCase;
 import useCase.customer.GetByIdCustomerUseCase;
-import useCase.customer.UpdateCustomerPasswordUseCase;
 import useCase.customer.UpdateCustomerUseCase;
 import useCase.customer.command.AddCustomerCommand;
 import useCase.customer.command.UpdateCustomerCommand;
-import useCase.customer.command.UpdateCustomerPasswordCommand;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,7 +26,6 @@ public class CustomerService implements
         GetAllCustomersUseCase,
         GetByIdCustomerUseCase,
         UpdateCustomerUseCase,
-        UpdateCustomerPasswordUseCase,
         DeleteCustomerUseCase
 {
     private final SimpleDateFormat formatter;
@@ -97,16 +94,6 @@ public class CustomerService implements
         customer.setUsername(command.username);
         customer.setDateOfBirth(formatter.parse(command.dateOfBirth));
         customer.setGender(Gender.valueOf(command.gender));
-
-        customerRepository.save(customer);
-    }
-
-    @Override
-    public void updatePassword(UpdateCustomerPasswordCommand command) {
-        Customer customer = customerRepository.findByIdAndArchivedFalse(command.id)
-                .orElseThrow(() -> new CustomerNotFoundException(command.id));
-
-        customer.setPassword(command.password);
 
         customerRepository.save(customer);
     }
