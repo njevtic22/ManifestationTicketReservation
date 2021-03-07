@@ -18,6 +18,7 @@ import useCase.admin.dto.GetByIdAdminDTO;
 import useCase.customer.dto.GetByIdCustomerDTO;
 import useCase.salesman.dto.GetByIdSalesmanDTO;
 import useCase.user.GetAllUsersUseCase;
+import utility.Pagination;
 import utility.RoleEnsure;
 
 import java.text.SimpleDateFormat;
@@ -133,40 +134,18 @@ public class UserController {
         }
     }
 
-    // TODO: implement as util function
-    private List<User> applyQueryPagination(Request request, Collection<User> users) {
+    private List<User> applyQueryPagination(Request request, List<User> users) {
         String pageStr = request.queryParams("page");
         String sizeStr = request.queryParams("size");
-        if (pageStr != null && sizeStr != null) {
-            if (sizeStr.equals("All"))
-                return new ArrayList<>(users);
+        if (pageStr == null || sizeStr == null)
+            return List.of();
 
-            int page = Integer.parseInt(pageStr);
-            int size = Integer.parseInt((sizeStr));
+        if (sizeStr.equals("All"))
+            return users;
 
-            if (page < 0 || size < 1)
-                return new ArrayList<>();
+        int page = Integer.parseInt(pageStr);
+        int size = Integer.parseInt((sizeStr));
 
-            /*
-            *
-            * @throws IndexOutOfBoundsException if an endpoint index value is out of range
-            *         {@code (fromIndex < 0 || toIndex > size)}
-            * @throws IllegalArgumentException if the endpoint indices are out of order
-            *         {@code (fromIndex > toIndex)}
-            *
-            * arrUsers.subList(fromIndex, toIndex);
-            *
-            * */
-
-            int from = Math.max(page * size, 0);
-            int to = Math.min((page + 1) * size, users.size());
-
-            if (from > to)
-                return new ArrayList<>();
-
-            ArrayList<User> arrUsers = new ArrayList<>(users);
-            return arrUsers.subList(from, to);
-        }
-        return new ArrayList<>();
+        return Pagination.paginate(users, page, size);
     }
 }
