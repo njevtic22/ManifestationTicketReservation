@@ -106,6 +106,7 @@ public class ManifestationController {
     };
 
     public Route getAll = (Request request, Response response) -> {
+        // TODO: Implement pagination, sortering, filtering, searching
         User user = request.attribute("user");
         response.status(HttpStatus.OK_200);
         return getAllManifestationsUseCase.getAllManifestations(user);

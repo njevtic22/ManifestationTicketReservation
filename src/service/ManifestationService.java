@@ -84,6 +84,7 @@ public class ManifestationService implements
     public Collection<Manifestation> getAllManifestations(User user) {
         Collection<Manifestation> allManifestations;
 
+        // TODO: change this. Salesman can see all manifestations and his manifestations separately
         if (user instanceof Salesman)
             allManifestations = ((Salesman) user).getManifestations()
                     .stream()
@@ -92,6 +93,7 @@ public class ManifestationService implements
         else
             allManifestations = manifestationRepository.findAllByArchivedFalse();
 
+        // TODO: remove this, since sorting data will be sent from frontend
         Collections.sort((List<Manifestation>) allManifestations);
 
         return allManifestations;
