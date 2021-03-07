@@ -16,6 +16,8 @@ import spark.Response;
 import spark.Route;
 import useCase.manifestation.AddManifestationUseCase;
 import useCase.manifestation.DeleteManifestationUseCase;
+import useCase.manifestation.GetAllCreatedManifestationsUseCase;
+import useCase.manifestation.GetAllManifestationsForSalesmanUseCase;
 import useCase.manifestation.GetAllManifestationsUseCase;
 import useCase.manifestation.GetByIdManifestationUseCase;
 import useCase.manifestation.UpdateLocationUseCase;
@@ -39,6 +41,8 @@ public class ManifestationController {
     private final SimpleDateFormat formatter;
     private AddManifestationUseCase addManifestationUseCase;
     private GetAllManifestationsUseCase getAllManifestationsUseCase;
+    private GetAllManifestationsForSalesmanUseCase getAllManifestationsForSalesmanUseCase;
+    private GetAllCreatedManifestationsUseCase getAllCreatedManifestationsUseCase;
     private GetByIdManifestationUseCase getByIdManifestationUseCase;
     private UpdateManifestationUseCase updateManifestationUseCase;
     private UpdateLocationUseCase updateLocationUseCase;
@@ -50,11 +54,24 @@ public class ManifestationController {
     private RoleEnsure ensureUserIsAdminOrSalesman = AuthenticationController::ensureUserIsAdminOrSalesman;
     private RoleEnsure ensureUserIsAdminOrCustomer = AuthenticationController::ensureUserIsAdminOrCustomer;
 
-    public ManifestationController(Gson gson, SimpleDateFormat formatter, AddManifestationUseCase addManifestationUseCase, GetAllManifestationsUseCase getAllManifestationsUseCase, GetByIdManifestationUseCase getByIdManifestationUseCase, UpdateManifestationUseCase updateManifestationUseCase, UpdateLocationUseCase updateLocationUseCase, DeleteManifestationUseCase deleteManifestationUseCase) {
+    public ManifestationController(
+            Gson gson,
+            SimpleDateFormat formatter,
+            AddManifestationUseCase addManifestationUseCase,
+            GetAllManifestationsUseCase getAllManifestationsUseCase,
+            GetAllManifestationsForSalesmanUseCase getAllManifestationsForSalesmanUseCase,
+            GetAllCreatedManifestationsUseCase getAllCreatedManifestationsUseCase,
+            GetByIdManifestationUseCase getByIdManifestationUseCase,
+            UpdateManifestationUseCase updateManifestationUseCase,
+            UpdateLocationUseCase updateLocationUseCase,
+            DeleteManifestationUseCase deleteManifestationUseCase
+    ) {
         this.gson = gson;
         this.formatter = formatter;
         this.addManifestationUseCase = addManifestationUseCase;
         this.getAllManifestationsUseCase = getAllManifestationsUseCase;
+        this.getAllManifestationsForSalesmanUseCase = getAllManifestationsForSalesmanUseCase;
+        this.getAllCreatedManifestationsUseCase = getAllCreatedManifestationsUseCase;
         this.getByIdManifestationUseCase = getByIdManifestationUseCase;
         this.updateManifestationUseCase = updateManifestationUseCase;
         this.updateLocationUseCase = updateLocationUseCase;
@@ -67,6 +84,8 @@ public class ManifestationController {
             path("/manifestations", () -> {
                 post("", add);
                 get("", getAll, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
+                get("/forSalesman", getAllForSalesman, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
+                get("/created", getCreated, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
                 get("/:id", getById, new GetByIdManifestationTransformer(gson, new GetByIdManifestationMapper(formatter)));
                 put("/:id", updateManifestation);
                 put("/:id/location", updateLocation);
@@ -104,10 +123,25 @@ public class ManifestationController {
     };
 
     public Route getAll = (Request request, Response response) -> {
-        // TODO: Implement pagination, sortering, filtering, searching
+        // TODO: Implement pagination, sorting, filtering, searching
         User user = request.attribute("user");
         response.status(HttpStatus.OK_200);
         return getAllManifestationsUseCase.getAllManifestations(user);
+    };
+
+    public Route getAllForSalesman = (Request request, Response response) -> {
+        ensureUserIsSalesman.ensure(request);
+        // TODO: Implement pagination, sorting, filtering, searching
+        Salesman salesman = request.attribute("user");
+        response.status(HttpStatus.OK_200);
+        return getAllManifestationsForSalesmanUseCase.getAllManifestationsForSalesman(salesman);
+    };
+
+    public Route getCreated = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+        // TODO: Implement pagination, sorting, filtering, searching
+        response.status(HttpStatus.OK_200);
+        return getAllCreatedManifestationsUseCase.getCreatedManifestations();
     };
 
     public Route getById = (Request request, Response response) -> {

@@ -21,7 +21,7 @@ public class AddManifestationCommand implements SelfValidating {
     public String city;
     public String postalCode;
 
-    // TODO: CHANGE THIS
+    // TODO: CHANGE THIS -> maybe
     public String imageLocation;
 
     public AddManifestationCommand(Long salesmanId, String name, double regularTicketPrice, String holdingDate, String description, String status, String type, double longitude, double latitude, String street, long number, String city, String postalCode, String imageLocation) {

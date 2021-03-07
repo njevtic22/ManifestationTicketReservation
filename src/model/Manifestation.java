@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Manifestation implements Comparable<Manifestation> {
+public class Manifestation {
     private Long id;
     private String name;
     private long numberOfTicketsLeft;
@@ -272,10 +272,5 @@ public class Manifestation implements Comparable<Manifestation> {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
-    }
-
-    @Override
-    public int compareTo(Manifestation otherManifestation) {
-        return this.holdingDate.compareTo(otherManifestation.getHoldingDate());
     }
 }

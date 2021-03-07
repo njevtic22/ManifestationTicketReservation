@@ -8,6 +8,8 @@ import repository.Repository;
 import repository.UserRepository;
 import useCase.manifestation.AddManifestationUseCase;
 import useCase.manifestation.DeleteManifestationUseCase;
+import useCase.manifestation.GetAllCreatedManifestationsUseCase;
+import useCase.manifestation.GetAllManifestationsForSalesmanUseCase;
 import useCase.manifestation.GetAllManifestationsUseCase;
 import useCase.manifestation.GetByIdManifestationUseCase;
 import useCase.manifestation.UpdateLocationUseCase;
@@ -29,6 +31,8 @@ import java.util.stream.Collectors;
 public class ManifestationService implements
         AddManifestationUseCase,
         GetAllManifestationsUseCase,
+        GetAllManifestationsForSalesmanUseCase,
+        GetAllCreatedManifestationsUseCase,
         GetByIdManifestationUseCase,
         UpdateManifestationUseCase,
         UpdateLocationUseCase,
@@ -83,21 +87,53 @@ public class ManifestationService implements
 
     @Override
     public Collection<Manifestation> getAllManifestations(User user) {
-        Collection<Manifestation> allManifestations;
+        Collection<Manifestation> manifestations;
 
-        // TODO: change this. Salesman can see all manifestations and his manifestations separately
-        if (user instanceof Salesman)
-            allManifestations = ((Salesman) user).getManifestations()
+        if (user == null) {
+            manifestations = manifestationRepository.findAllByArchivedFalse()
                     .stream()
-                    .filter(manifestation -> !manifestation.isArchived())
+                    .filter(manifestation -> {
+                        ManifestationStatus status = manifestation.getStatus();
+                        if (status == ManifestationStatus.CREATED || status == ManifestationStatus.REJECTED)
+                            return false;
+                        else
+                            return true;
+                    })
                     .collect(Collectors.toList());
-        else
-            allManifestations = manifestationRepository.findAllByArchivedFalse();
 
-        // TODO: remove this, since sorting data will be sent from frontend
-        Collections.sort((List<Manifestation>) allManifestations);
+        } else if (user instanceof Admin) {
+            manifestations = manifestationRepository.findAllByArchivedFalse();
 
-        return allManifestations;
+        } else {
+            manifestations = manifestationRepository.findAllByArchivedFalse()
+                    .stream()
+                    .filter(manifestation -> {
+                        ManifestationStatus status = manifestation.getStatus();
+                        if (status == ManifestationStatus.CREATED || status == ManifestationStatus.REJECTED)
+                            return false;
+                        else
+                            return true;
+                    })
+                    .collect(Collectors.toList());
+        }
+
+        return manifestations;
+    }
+
+    @Override
+    public Collection<Manifestation> getAllManifestationsForSalesman(Salesman salesman) {
+        return salesman.getManifestations()
+                .stream()
+                .filter(manifestation -> !manifestation.isArchived())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<Manifestation> getCreatedManifestations() {
+        return manifestationRepository.findAllByArchivedFalse()
+                .stream()
+                .filter(manifestation -> manifestation.getStatus() == ManifestationStatus.CREATED)
+                .collect(Collectors.toList());
     }
 
     @Override
