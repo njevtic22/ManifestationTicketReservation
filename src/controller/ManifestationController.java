@@ -1,7 +1,6 @@
 package controller;
 
 import com.google.gson.Gson;
-import model.Manifestation;
 import model.Salesman;
 import model.User;
 import org.eclipse.jetty.http.HttpStatus;
@@ -27,9 +26,7 @@ import useCase.manifestation.command.UpdateManifestationCommand;
 import utility.RoleEnsure;
 import validation.SelfValidating;
 
-import javax.swing.*;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 
 import static spark.Spark.get;
 import static spark.Spark.path;
@@ -89,6 +86,7 @@ public class ManifestationController {
                 requestBody.name,
                 requestBody.regularTicketPrice,
                 requestBody.holdingDate,
+                requestBody.description,
                 requestBody.status,
                 requestBody.type,
                 requestBody.longitude,
@@ -127,6 +125,7 @@ public class ManifestationController {
                 requestBody.name,
                 requestBody.regularTicketPrice,
                 requestBody.holdingDate,
+                requestBody.description,
                 requestBody.status,
                 requestBody.type,
                 requestBody.imageLocation

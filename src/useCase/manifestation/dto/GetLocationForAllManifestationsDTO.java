@@ -8,16 +8,12 @@ public class GetLocationForAllManifestationsDTO {
     public double longitude;
     public double latitude;
 
-    public String formattedAddress;
+    public GetAddressForManifestationDTO address;
 
     public GetLocationForAllManifestationsDTO(Location location) {
         this.id = location.getId();
         this.longitude = location.getLongitude();
         this.latitude = location.getLatitude();
-        this.formattedAddress = formatAddress(location.getAddress());
-    }
-
-    private String formatAddress(Address address) {
-        return address.getStreet() + " " + address.getNumber() + ", " + address.getCity() + ", " + address.getPostalCode();
+        this.address = new GetAddressForManifestationDTO(location.getAddress());
     }
 }

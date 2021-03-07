@@ -13,6 +13,7 @@ public class Manifestation implements Comparable<Manifestation> {
     private long numberOfTicketsLeft;
     private double regularTicketPrice;
     private Date holdingDate;
+    private String description;
     private ManifestationStatus status;
     private ManifestationType type;
     private boolean archived;
@@ -24,13 +25,25 @@ public class Manifestation implements Comparable<Manifestation> {
 
     private static LongGenerator idGenerator;
 
-    public Manifestation(String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image) {
+    public Manifestation(
+            String name,
+            long numberOfTicketsLeft,
+            double regularTicketPrice,
+            Date holdingDate,
+            String description,
+            ManifestationStatus status,
+            ManifestationType type,
+            boolean archived,
+            Location location,
+            Image image
+    ) {
         this(
                 idGenerator.next(),
                 name,
                 numberOfTicketsLeft,
                 regularTicketPrice,
                 holdingDate,
+                description,
                 status,
                 type,
                 archived,
@@ -39,12 +52,25 @@ public class Manifestation implements Comparable<Manifestation> {
         );
     }
 
-    public Manifestation(Long id, String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image) {
+    public Manifestation(
+            Long id,
+            String name,
+            long numberOfTicketsLeft,
+            double regularTicketPrice,
+            Date holdingDate,
+            String description,
+            ManifestationStatus status,
+            ManifestationType type,
+            boolean archived,
+            Location location,
+            Image image
+    ) {
         this.id = id;
         this.name = name;
         this.numberOfTicketsLeft = numberOfTicketsLeft;
         this.regularTicketPrice = regularTicketPrice;
         this.holdingDate = holdingDate;
+        this.description = description;
         this.status = status;
         this.type = type;
         this.archived = archived;
@@ -54,13 +80,27 @@ public class Manifestation implements Comparable<Manifestation> {
         this.reviews = new ArrayList<>();
     }
 
-    public Manifestation(String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image, List<Ticket> tickets, List<Review> reviews) {
+    public Manifestation(
+            String name,
+            long numberOfTicketsLeft,
+            double regularTicketPrice,
+            Date holdingDate,
+            String description,
+            ManifestationStatus status,
+            ManifestationType type,
+            boolean archived,
+            Location location,
+            Image image,
+            List<Ticket> tickets,
+            List<Review> reviews
+    ) {
         this(
                 idGenerator.next(),
                 name,
                 numberOfTicketsLeft,
                 regularTicketPrice,
                 holdingDate,
+                description,
                 status,
                 type,
                 archived,
@@ -71,12 +111,27 @@ public class Manifestation implements Comparable<Manifestation> {
         );
     }
 
-    public Manifestation(Long id, String name, long numberOfTicketsLeft, double regularTicketPrice, Date holdingDate, ManifestationStatus status, ManifestationType type, boolean archived, Location location, Image image, List<Ticket> tickets, List<Review> reviews) {
+    public Manifestation(
+            Long id,
+            String name,
+            long numberOfTicketsLeft,
+            double regularTicketPrice,
+            Date holdingDate,
+            String description,
+            ManifestationStatus status,
+            ManifestationType type,
+            boolean archived,
+            Location location,
+            Image image,
+            List<Ticket> tickets,
+            List<Review> reviews
+    ) {
         this.id = id;
         this.name = name;
         this.numberOfTicketsLeft = numberOfTicketsLeft;
         this.regularTicketPrice = regularTicketPrice;
         this.holdingDate = holdingDate;
+        this.description = description;
         this.status = status;
         this.type = type;
         this.archived = archived;
@@ -145,6 +200,14 @@ public class Manifestation implements Comparable<Manifestation> {
 
     public void setRegularTicketPrice(double regularTicketPrice) {
         this.regularTicketPrice = regularTicketPrice;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getHoldingDate() {

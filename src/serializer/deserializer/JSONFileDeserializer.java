@@ -290,6 +290,7 @@ public class JSONFileDeserializer implements FileDeserializer {
                 jsonManifestation.numberOfTicketsLeft,
                 jsonManifestation.regularTicketPrice,
                 jsonManifestation.holdingDate,
+                jsonManifestation.description,
                 ManifestationStatus.valueOf(jsonManifestation.status),
                 ManifestationType.valueOf(jsonManifestation.type),
                 jsonManifestation.archived,

@@ -9,6 +9,7 @@ public class AddManifestationCommand implements SelfValidating {
 //    public long numberOfTicketsLeft; = 0
     public double regularTicketPrice;
     public String holdingDate;
+    public String description;
     public String status;
     public String type;
 
@@ -23,11 +24,12 @@ public class AddManifestationCommand implements SelfValidating {
     // TODO: CHANGE THIS
     public String imageLocation;
 
-    public AddManifestationCommand(Long salesmanId, String name, double regularTicketPrice, String holdingDate, String status, String type, double longitude, double latitude, String street, long number, String city, String postalCode, String imageLocation) {
+    public AddManifestationCommand(Long salesmanId, String name, double regularTicketPrice, String holdingDate, String description, String status, String type, double longitude, double latitude, String street, long number, String city, String postalCode, String imageLocation) {
         this.salesmanId = salesmanId;
         this.name = name;
         this.regularTicketPrice = regularTicketPrice;
         this.holdingDate = holdingDate;
+        this.description = description;
         this.status = status;
         this.type = type;
         this.longitude = longitude;
@@ -53,6 +55,9 @@ public class AddManifestationCommand implements SelfValidating {
 
         if (holdingDate == null || holdingDate.trim().isEmpty())
             throw new ConstraintViolationException("Holding date must not be empty.");
+
+        if (description == null || description.trim().isEmpty())
+            throw new ConstraintViolationException("Description must not be empty.");
 
         if (status == null || status.trim().isEmpty())
             throw new ConstraintViolationException("Manifestation status must not be empty.");

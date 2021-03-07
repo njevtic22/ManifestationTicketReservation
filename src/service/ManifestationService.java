@@ -52,6 +52,7 @@ public class ManifestationService implements
                 0,
                 command.regularTicketPrice,
                 formatter.parse(command.holdingDate),
+                command.description,
                 ManifestationStatus.valueOf(command.status),
                 ManifestationType.valueOf(command.type),
                 false,
@@ -118,6 +119,7 @@ public class ManifestationService implements
         });
 
         manifestation.setHoldingDate(formatter.parse(command.holdingDate));
+        manifestation.setDescription(command.description);
         manifestation.setStatus(ManifestationStatus.valueOf(command.status));
         manifestation.setType(ManifestationType.valueOf(command.type));
 

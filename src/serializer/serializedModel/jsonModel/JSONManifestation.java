@@ -9,6 +9,7 @@ public class JSONManifestation {
     public long numberOfTicketsLeft;
     public double regularTicketPrice;
     public Date holdingDate;
+    public String description;
     public String status;
     public String type;
     public boolean archived;
