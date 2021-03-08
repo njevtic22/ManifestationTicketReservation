@@ -14,6 +14,7 @@ public class GetByIdManifestationDTO {
     public String holdingDate;
     public String status;
     public String type;
+    public double avgRating;
 
     public GetLocationForManifestationDTO location;
 
@@ -42,5 +43,9 @@ public class GetByIdManifestationDTO {
                 .filter(review -> /*review.getStatus() == ReviewStatus.APPROVED ||*/ !review.isArchived())
                 .map(GetAllReviewsForManifestationDTO::new)
                 .collect(Collectors.toList());
+
+
+        this.avgRating = 0;
+        manifestation.getReviews().forEach(review -> avgRating += review.getRating());
     }
 }

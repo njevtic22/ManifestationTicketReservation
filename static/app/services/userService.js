@@ -48,7 +48,12 @@ Vue.component("userService", {
             const searchUrl = this.formSearchUrl(searchData);
             const filterUrl = this.formFilterUrl(filterData);
 
-            const url = `${this.baseUsersUrl}?page=${page}&size=${size}&sortBy=${sortBy}&sortOrder=${sortOrder}&${searchUrl}&${filterUrl}`;
+            let url = `${this.baseUsersUrl}?page=${page}&size=${size}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
+            if (searchUrl.length != 0)
+                url += `&${searchUrl}`;
+            if (filterUrl.length != 0)
+                url += `&${filterUrl}`;
+
             axios
                 .get(url)
                 .then(response => { successCallback(response); })

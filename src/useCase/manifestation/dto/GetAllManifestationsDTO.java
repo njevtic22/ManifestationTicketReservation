@@ -1,6 +1,8 @@
 package useCase.manifestation.dto;
 
+import jdk.jfr.Frequency;
 import model.Manifestation;
+import model.Review;
 
 public class GetAllManifestationsDTO {
     public long id;
@@ -12,6 +14,7 @@ public class GetAllManifestationsDTO {
     public String description;
     public String status;
     public String type;
+    public double avgRating;
 
     //    public String street;
 //    public long number;
@@ -33,5 +36,8 @@ public class GetAllManifestationsDTO {
         this.type = manifestation.getType().toString();
         this.location = new GetLocationForAllManifestationsDTO(manifestation.getLocation());
         this.imageLocation = manifestation.getImage().getLocation();
+
+        this.avgRating = 0;
+        manifestation.getReviews().forEach(review -> avgRating += review.getRating());
     }
 }

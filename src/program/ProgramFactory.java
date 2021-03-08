@@ -13,6 +13,7 @@ import controller.UserController;
 import controller.WithdrawalHistoryController;
 import exception.*;
 import exception.handler.*;
+import filterSearcher.ManifestationFilterSearcher;
 import filterSearcher.UserFilterSearcher;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +29,7 @@ import service.SalesmanService;
 import service.TicketService;
 import service.UserService;
 import service.WithdrawalHistoryService;
+import sorter.ManifestationSorter;
 import sorter.UserSorter;
 import spark.ExceptionHandler;
 
@@ -251,7 +253,9 @@ public class ProgramFactory {
                     manifestationService,
                     manifestationService,
                     manifestationService,
-                    manifestationService
+                    manifestationService,
+                    new ManifestationFilterSearcher(),
+                    new ManifestationSorter()
             );
         }
         return manifestationController;

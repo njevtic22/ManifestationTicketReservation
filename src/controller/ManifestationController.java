@@ -1,6 +1,9 @@
 package controller;
 
 import com.google.gson.Gson;
+import filterSearcher.ManifestationFilterSearcher;
+import model.Manifestation;
+import model.ManifestationType;
 import model.Salesman;
 import model.User;
 import org.eclipse.jetty.http.HttpStatus;
@@ -11,6 +14,7 @@ import responseTransformer.GetAllManifestationsTransformer;
 import responseTransformer.GetByIdManifestationTransformer;
 import responseTransformer.dtoMappers.GetAllManifestationsMapper;
 import responseTransformer.dtoMappers.GetByIdManifestationMapper;
+import sorter.ManifestationSorter;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -25,10 +29,15 @@ import useCase.manifestation.UpdateManifestationUseCase;
 import useCase.manifestation.command.AddManifestationCommand;
 import useCase.manifestation.command.UpdateLocationCommand;
 import useCase.manifestation.command.UpdateManifestationCommand;
+import utility.Pagination;
 import utility.RoleEnsure;
 import validation.SelfValidating;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static spark.Spark.get;
 import static spark.Spark.path;
@@ -47,6 +56,8 @@ public class ManifestationController {
     private UpdateManifestationUseCase updateManifestationUseCase;
     private UpdateLocationUseCase updateLocationUseCase;
     private DeleteManifestationUseCase deleteManifestationUseCase;
+    private final ManifestationFilterSearcher manifestationFilterSearcher;
+    private final ManifestationSorter manifestationSorter;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
     private RoleEnsure ensureUserIsSalesman = AuthenticationController::ensureUserIsSalesman;
@@ -64,7 +75,9 @@ public class ManifestationController {
             GetByIdManifestationUseCase getByIdManifestationUseCase,
             UpdateManifestationUseCase updateManifestationUseCase,
             UpdateLocationUseCase updateLocationUseCase,
-            DeleteManifestationUseCase deleteManifestationUseCase
+            DeleteManifestationUseCase deleteManifestationUseCase,
+            ManifestationFilterSearcher manifestationFilterSearcher,
+            ManifestationSorter manifestationSorter
     ) {
         this.gson = gson;
         this.formatter = formatter;
@@ -76,6 +89,8 @@ public class ManifestationController {
         this.updateManifestationUseCase = updateManifestationUseCase;
         this.updateLocationUseCase = updateLocationUseCase;
         this.deleteManifestationUseCase = deleteManifestationUseCase;
+        this.manifestationFilterSearcher = manifestationFilterSearcher;
+        this.manifestationSorter = manifestationSorter;
         this.setUpRoutes();
     }
 
@@ -125,8 +140,15 @@ public class ManifestationController {
     public Route getAll = (Request request, Response response) -> {
         // TODO: Implement pagination, sorting, filtering, searching
         User user = request.attribute("user");
+
+        List<Manifestation> manifestations = new ArrayList<>(getAllManifestationsUseCase.getAllManifestations(user));
+        applyFilter(request, manifestations);
+        applySearch(request, manifestations);
+        applySort(request, manifestations);
+        List<Manifestation> paginatedManifestations = applyPagination(request, manifestations);
+
         response.status(HttpStatus.OK_200);
-        return getAllManifestationsUseCase.getAllManifestations(user);
+        return paginatedManifestations;
     };
 
     public Route getAllForSalesman = (Request request, Response response) -> {
@@ -195,4 +217,58 @@ public class ManifestationController {
         response.status(HttpStatus.OK_200);
         return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };
+
+    private void applyFilter(Request request, Collection<Manifestation> manifestations) {
+        if (request.queryParams("filterType") != null)
+            manifestationFilterSearcher.filterByType(ManifestationType.valueOf(request.queryParams("filterType")), manifestations);
+        if (request.queryParams("filterAvailable") != null && request.queryParams("filterAvailable").equals("true"))
+            manifestationFilterSearcher.filterByAvailable(manifestations);
+    }
+
+    private void applySearch(Request request, Collection<Manifestation> manifestations) throws ParseException {
+        if (request.queryParams("searchName") != null)
+            manifestationFilterSearcher.searchByName(request.queryParams("searchName"), manifestations);
+        if (request.queryParams("searchDateFrom") != null)
+            manifestationFilterSearcher.searchByDateFrom(formatter.parse(request.queryParams("searchDateFrom")), manifestations);
+        if (request.queryParams("searchDateTo") != null)
+            manifestationFilterSearcher.searchByDateTo(formatter.parse(request.queryParams("searchDateTo")), manifestations);
+        if (request.queryParams("searchCity") != null)
+            manifestationFilterSearcher.searchByCity(request.queryParams("searchCity"), manifestations);
+        if (request.queryParams("searchStreet") != null)
+            manifestationFilterSearcher.searchByStreet(request.queryParams("searchStreet"), manifestations);
+        if (request.queryParams("searchPriceFrom") != null)
+            manifestationFilterSearcher.searchByPriceFrom(Long.parseLong(request.queryParams("searchPriceFrom")), manifestations);
+        if (request.queryParams("searchPriceTo") != null)
+            manifestationFilterSearcher.searchByPriceTo(Long.parseLong(request.queryParams("searchPriceTo")), manifestations);
+    }
+
+    private void applySort(Request request, List<Manifestation> manifestations) {
+        String sortBy = request.queryParams("sortBy");
+        if (sortBy == null)
+            return;
+
+        String sortOrderStr = request.queryParams("sortOrder");
+        if (sortOrderStr == null)
+            return;
+
+        int sortOrder = sortOrderStr.equals("asc") ? 1 : -1;
+
+        if (sortBy.equals("date"))
+            manifestationSorter.sortByDate(manifestations, sortOrder);
+    }
+
+    private List<Manifestation> applyPagination(Request request, List<Manifestation> manifestations) {
+        String pageStr = request.queryParams("page");
+        String sizeStr = request.queryParams("size");
+        if (pageStr == null || sizeStr == null)
+            return List.of();
+
+        if (sizeStr.equals("All"))
+            return manifestations;
+
+        int page = Integer.parseInt(pageStr);
+        int size = Integer.parseInt((sizeStr));
+
+        return Pagination.paginate(manifestations, page, size);
+    }
 }

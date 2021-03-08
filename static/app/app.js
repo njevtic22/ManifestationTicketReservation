@@ -1,5 +1,5 @@
-const ManifestationsTable = { template: "<manifestationsTable></manifestationsTable>" };
-const ManifestationsMap = { template: "<manifestationsMap></manifestationsMap>" };
+const ActiveAndInactiveManifestationsReg = { template: "<activeAndInactiveManifestationsReg></activeAndInactiveManifestationsReg>" };
+const ActiveAndInactiveManifestationsMap = { template: "<activeAndInactiveManifestationsMap></activeAndInactiveManifestationsMap>" };
 const Profile = { template: "<profile></profile>" };
 const AllUsers = { template: "<allUsers></allUsers>" }
 
@@ -154,13 +154,13 @@ const router = new VueRouter({
                 {
                     path: "manifestations/table",
                     name: "AnonymousManifestationsTable",
-                    component: ManifestationsTable,
+                    component: ActiveAndInactiveManifestationsReg,
                     meta: { title: "Manifestations table" }
                 },
                 {
                     path: "manifestations/map",
                     name: "AnonymousManifestationsMap",
-                    component: ManifestationsMap,
+                    component: ActiveAndInactiveManifestationsMap,
                     meta: { title: "Manifestations map" }
                 }
             ],
@@ -180,13 +180,13 @@ const router = new VueRouter({
                 {
                     path: "manifestations/table",
                     name: "AdminManifestationsTable",
-                    component: ManifestationsTable,
+                    component: ActiveAndInactiveManifestationsReg,
                     meta: { title: "Manifestations table" }
                 },
                 {
                     path: "manifestations/map",
                     name: "AdminManifestationsMap",
-                    component: ManifestationsMap,
+                    component: ActiveAndInactiveManifestationsMap,
                     meta: { title: "Manifestations map" }
                 },
                 {
@@ -212,13 +212,13 @@ const router = new VueRouter({
                 {
                     path: "manifestations/table",
                     name: "SalesmanManifestationsTable",
-                    component: ManifestationsTable,
+                    component: ActiveAndInactiveManifestationsReg,
                     meta: { title: "Manifestations table" }
                 },
                 {
                     path: "manifestations/map",
                     name: "SalesmanManifestationsMap",
-                    component: ManifestationsMap,
+                    component: ActiveAndInactiveManifestationsMap,
                     meta: { title: "Manifestations map" }
                 }
             ]
@@ -238,13 +238,13 @@ const router = new VueRouter({
                 {
                     path: "manifestations/table",
                     name: "CustomerManifestationsTable",
-                    component: ManifestationsTable,
+                    component: ActiveAndInactiveManifestationsReg,
                     meta: { title: "Manifestations table" }
                 },
                 {
                     path: "manifestations/map",
                     name: "CustomerManifestationsMap",
-                    component: ManifestationsMap,
+                    component: ActiveAndInactiveManifestationsMap,
                     meta: { title: "Manifestations map" }
                 }
             ]

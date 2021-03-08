@@ -64,7 +64,7 @@ public class TicketService implements
         );
 
         manifestation.addTicket(ticket);
-        manifestation.setNumberOfTicketsLeft(manifestation.getNumberOfTicketsLeft() + 1);
+        manifestation.setNumberOfTicketsLeft(manifestation.getNumberOfTicketsLeft() - 1);
 
         ticketRepository.save(ticket);
         manifestationRepository.save(manifestation);

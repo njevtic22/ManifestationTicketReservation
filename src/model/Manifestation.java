@@ -174,6 +174,10 @@ public class Manifestation {
         this.reviews.add(review);
     }
 
+    public boolean isSoldOut() {
+        return numberOfTicketsLeft == 0;
+    }
+
     public Long getId() {
         return id;
     }

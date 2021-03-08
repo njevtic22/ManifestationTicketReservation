@@ -2,10 +2,7 @@ package controller;
 
 import com.google.gson.Gson;
 import filterSearcher.UserFilterSearcher;
-import model.Admin;
-import model.Customer;
 import model.CustomerType;
-import model.Salesman;
 import model.User;
 import org.eclipse.jetty.http.HttpStatus;
 import responseTransformer.GetAllUsersTransformer;
@@ -14,9 +11,6 @@ import sorter.UserSorter;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import useCase.admin.dto.GetByIdAdminDTO;
-import useCase.customer.dto.GetByIdCustomerDTO;
-import useCase.salesman.dto.GetByIdSalesmanDTO;
 import useCase.user.GetAllUsersUseCase;
 import utility.Pagination;
 import utility.RoleEnsure;
@@ -71,22 +65,23 @@ public class UserController {
         ensureUserIsAdmin.ensure(request);
 
         List<User> users = new ArrayList<>(getAllUsersUseCase.getAllUsers());
-        applyQueryFilter(request, users);
-        applyQuerySearch(request, users);
-        applyQuerySort(request, users);
-        List<User> paginatedUsers = applyQueryPagination(request, users);
+        applyFilter(request, users);
+        applySearch(request, users);
+        applySort(request, users);
+        List<User> paginatedUsers = applyPagination(request, users);
+
         response.status(HttpStatus.OK_200);
         return paginatedUsers;
     };
 
-    private void applyQueryFilter(Request request, Collection<User> users) {
+    private void applyFilter(Request request, Collection<User> users) {
         if (request.queryParams("filterRole") != null)
             userFilterSearcher.filterByRole(request.queryParams("filterRole"), users);
         if (request.queryParams("filterType") != null)
             userFilterSearcher.filterByType(CustomerType.valueOf(request.queryParams("filterType")), users);
     }
 
-    private void applyQuerySearch(Request request, List<User> users) {
+    private void applySearch(Request request, List<User> users) {
         if (request.queryParams("searchName") != null)
             userFilterSearcher.searchByName(request.queryParams("searchName"), users);
         if (request.queryParams("searchSurname") != null)
@@ -95,7 +90,7 @@ public class UserController {
             userFilterSearcher.searchByUsername(request.queryParams("searchUsername"), users);
     }
 
-    private void applyQuerySort(Request request, List<User> users) {
+    private void applySort(Request request, List<User> users) {
         String sortBy = request.queryParams("sortBy");
         if (sortBy == null)
             return;
@@ -134,7 +129,7 @@ public class UserController {
         }
     }
 
-    private List<User> applyQueryPagination(Request request, List<User> users) {
+    private List<User> applyPagination(Request request, List<User> users) {
         String pageStr = request.queryParams("page");
         String sizeStr = request.queryParams("size");
         if (pageStr == null || sizeStr == null)
