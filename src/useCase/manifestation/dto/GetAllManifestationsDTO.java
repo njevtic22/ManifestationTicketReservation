@@ -4,6 +4,11 @@ import jdk.jfr.Frequency;
 import model.Manifestation;
 import model.Review;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Base64;
+
 public class GetAllManifestationsDTO {
     public long id;
     public String name;
@@ -22,7 +27,8 @@ public class GetAllManifestationsDTO {
 //    public String postalCode;
     public GetLocationForAllManifestationsDTO location;
 
-    public String imageLocation;
+    public String imageBase64;
+    public String imageType;
 
     public GetAllManifestationsDTO(Manifestation manifestation, String parsedDate) {
         this.id = manifestation.getId();
@@ -35,9 +41,24 @@ public class GetAllManifestationsDTO {
         this.status = manifestation.getStatus().toString();
         this.type = manifestation.getType().toString();
         this.location = new GetLocationForAllManifestationsDTO(manifestation.getLocation());
-        this.imageLocation = manifestation.getImage().getLocation();
+
+        String imageLocation = manifestation.getImage().getLocation();
+        this.imageBase64 = imageLocationToBase64(imageLocation);
+        int dotIndex = imageLocation.lastIndexOf(".");
+        this.imageType = imageLocation.substring(dotIndex + 1);
 
         this.avgRating = 0;
         manifestation.getReviews().forEach(review -> avgRating += review.getRating());
+    }
+
+    public String imageLocationToBase64(String imageLocation) {
+        try {
+            File file = new File("static" + File.separator + imageLocation);
+            byte[] imageBytes = Files.readAllBytes(file.toPath());
+            return Base64.getEncoder().encodeToString(imageBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

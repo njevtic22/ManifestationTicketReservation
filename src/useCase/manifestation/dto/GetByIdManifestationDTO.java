@@ -3,6 +3,10 @@ package useCase.manifestation.dto;
 import model.Manifestation;
 import model.ReviewStatus;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +24,8 @@ public class GetByIdManifestationDTO {
 
 //    public String formattedAddress;
 
-    public String imageLocation;
+    public String imageBase64;
+    public String imageType;
 
     public List<GetAllReviewsForManifestationDTO> reviews;
 
@@ -36,7 +41,11 @@ public class GetByIdManifestationDTO {
         this.location = new GetLocationForManifestationDTO(manifestation.getLocation());
 
 
-        this.imageLocation = manifestation.getImage().getLocation();
+        String imageLocation = manifestation.getImage().getLocation();
+        this.imageBase64 = imageLocationToBase64(imageLocation);
+        int dotIndex = imageLocation.lastIndexOf(".");
+        this.imageType = imageLocation.substring(dotIndex + 1);
+
         this.reviews = manifestation.getReviews()
                 .stream()
                 // filtering out not approved reviews and deleted reviews
@@ -47,5 +56,16 @@ public class GetByIdManifestationDTO {
 
         this.avgRating = 0;
         manifestation.getReviews().forEach(review -> avgRating += review.getRating());
+    }
+
+    public String imageLocationToBase64(String imageLocation) {
+        try {
+            File file = new File("static" + File.separator + imageLocation);
+            byte[] imageBytes = Files.readAllBytes(file.toPath());
+            return Base64.getEncoder().encodeToString(imageBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

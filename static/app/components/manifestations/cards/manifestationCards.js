@@ -1,8 +1,9 @@
 Vue.component("manifestationCards", {
     template: `
-    <div>
-        <div v-for="man in manifestations">
-            <manifestationCard 
+    <div class="row row-cols-1 row-cols-3">
+        <div class="col mb-4" v-for="man in manifestations">
+            <manifestationCard
+                class="h-100"
                 v-bind:manifestation="man"
             >
             </manifestationCard>

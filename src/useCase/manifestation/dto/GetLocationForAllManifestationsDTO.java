@@ -1,6 +1,5 @@
 package useCase.manifestation.dto;
 
-import model.Address;
 import model.Location;
 
 public class GetLocationForAllManifestationsDTO {
@@ -16,8 +15,4 @@ public class GetLocationForAllManifestationsDTO {
         this.latitude = location.getLatitude();
         this.address = new GetAddressForManifestationDTO(location.getAddress());
     }
-
-//    private String formatAddress(Address address) {
-//        return address.getStreet() + " " + address.getNumber() + ", " + address.getCity() + ", " + address.getPostalCode();
-//    }
 }

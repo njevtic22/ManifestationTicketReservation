@@ -8,9 +8,29 @@ Vue.component("manifestationCard", {
             v-on:error="showAlternateImage"
         >
         <div class="card-body">
-            <h5 class="card-title">{{ manifestation.name }}</h5>
-            <h5 class="card-title">{{ manifestation.holdingDate }}</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <div class="spaced">
+                <h5 class="card-title">{{ manifestation.name }}</h5>
+                <p class="card-title btn text-white" v-bind:style="{'background-color': statusColor}">{{ manifestation.status }}</p>
+            </div>
+            <div class="spaced">
+                <h5 class="card-title" v-if="manifestation.status == 'INACTIVE'">Rating: {{ manifestation.avgRating }}</h5>
+                <h5 class="card-title" v-else></h5>
+
+                <h5 class="card-title">{{ manifestation.type }}</h5>
+            </div>
+            
+            <h6>Regular ticket price: {{ manifestation.regularTicketPrice }} RSD</h6>
+            <!-- <h6>Number of tickets left: {{ manifestation.numberOfTicketsLeft }}</h6>
+            <h6>Total number of tickets: {{ manifestation.maxNumberOfTickets }}</h6>  -->
+            
+            <hr/>
+            <p class="card-text description-scroll">{{ manifestation.description }}</p>
+            <hr/>
+
+            <div class="spaced">
+                <em>{{ formattedAddress }}</em>
+                <em>{{ manifestation.holdingDate }}</em>
+            </div>
         </div>
         <div class="card-footer text-right">
             <button type="button" class="btn btn-success">Button</button>
@@ -24,7 +44,15 @@ Vue.component("manifestationCard", {
 
     data: function() {
         return {
-            imageLocationToShow: ""
+            imageLocationToShow: "",
+            statusColor: "",
+
+            StatusColors: Object.freeze({
+                CREATED: "#00008B",     // DarkBlue
+                REJECTED: "#FF8C00",    // DarkOrange
+                ACTIVE: "#006400",      // DarkGreen
+                INACTIVE: "#8B0000"     // DarkRed
+            })
         };
     },
 
@@ -34,8 +62,17 @@ Vue.component("manifestationCard", {
         }
     },
 
+    computed: {
+        formattedAddress() {
+            const address = this.manifestation.location.address;
+            return address.street + " " + address.number + ", " + address.city + ", " + address.postalCode;
+        }
+    },
+
     mounted() {
-        this.imageLocationToShow = this.manifestation.imageLocation;
+        this.imageLocationToShow = `data:image/${this.manifestation.imageType};base64, ${this.manifestation.imageBase64}`;
+
+        this.statusColor = this.StatusColors[this.manifestation.status];
     },
 
     destroyed() {}

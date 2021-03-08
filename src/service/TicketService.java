@@ -64,7 +64,7 @@ public class TicketService implements
         );
 
         manifestation.addTicket(ticket);
-        manifestation.setNumberOfTicketsLeft(manifestation.getNumberOfTicketsLeft() - 1);
+        manifestation.setNumberOfTicketsLeft(manifestation.getNumberOfTicketsLeft() + 1);
 
         ticketRepository.save(ticket);
         manifestationRepository.save(manifestation);
@@ -104,6 +104,9 @@ public class TicketService implements
         Customer customer = customerRepository.findByIdAndArchivedFalse(command.customerId)
                 .orElseThrow(() -> new CustomerNotFoundException(command.customerId));
 
+        Manifestation manifestation = ticket.getManifestation();
+        manifestation.setNumberOfTicketsLeft(manifestation.getNumberOfTicketsLeft() - 1);
+
         if (ticket.getStatus() == TicketStatus.RESERVED)
             throw new TicketReservedException(ticket.getId());
 
@@ -117,6 +120,7 @@ public class TicketService implements
 
         ticketRepository.save(ticket);
         customerRepository.save(customer);
+        manifestationRepository.save(manifestation);
     }
 
     @Override
@@ -135,6 +139,9 @@ public class TicketService implements
         historyRepository.save(history);
         customer.addHistory(history);
 
+        Manifestation manifestation = ticket.getManifestation();
+        manifestation.setNumberOfTicketsLeft(manifestation.getNumberOfTicketsLeft() + 1);
+
         double priceToCalculateInFine = ticket.getPrice();
 
         ticket.setCustomer(null);
@@ -147,6 +154,7 @@ public class TicketService implements
 
         ticketRepository.save(ticket);
         customerRepository.save(customer);
+        manifestationRepository.save(manifestation);
     }
 
     @Override

@@ -15,12 +15,12 @@ Vue.component("activeAndInactiveManifestationsReg", {
             manifestations: [],
 
             page: 0,
-            size: 5,
-            sizeStr: "5",
+            size: 6,
+            sizeStr: "6",
             sizes: [
-                "5",
-                "10",
-                "50",
+                "6",
+                "12",
+                "72",
                 "All"
             ],
             
