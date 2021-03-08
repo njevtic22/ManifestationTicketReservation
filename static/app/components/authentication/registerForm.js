@@ -5,7 +5,7 @@ Vue.component("registerForm", {
         class="register-center"
         ref="registerForm"
     >
-        <div class="card border-dark">
+        <div class="card shadow-lg">
             <div class="card-header bg-success text-white">
                 <h3>Register</h3>
             </div>

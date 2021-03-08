@@ -1,6 +1,6 @@
 Vue.component("manifestationCard", {
     template: `
-    <div class="card border-dark">
+    <div class="card">
         <img 
             v-bind:src="imageLocationToShow" 
             class="card-img-top" 
