@@ -7,7 +7,7 @@ Vue.component("manifestationCard", {
             alt="Image not found"
             v-on:error="showAlternateImage"
         >
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
             <div class="spaced">
                 <h5 class="card-title">{{ manifestation.name }}</h5>
                 <p class="card-title btn text-white" v-bind:style="{'background-color': statusColor}">{{ manifestation.status }}</p>
@@ -27,7 +27,7 @@ Vue.component("manifestationCard", {
             <p class="card-text description-scroll">{{ manifestation.description }}</p>
             <hr/>
 
-            <div class="spaced">
+            <div class="spaced mt-auto">
                 <em>{{ formattedAddress }}</em>
                 <em>{{ manifestation.holdingDate }}</em>
             </div>

@@ -12,7 +12,7 @@ Vue.component("forbiddenPage", {
         <!-- Page Content -->
         <div id="page-content-wrapper">
 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
                 <button class="btn btn-outline-light" id="menu-toggle" v-on:click="toggleSidebar">
                     <list-ul-icon></list-ul-icon>
                 </button>
