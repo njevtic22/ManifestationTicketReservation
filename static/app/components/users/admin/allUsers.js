@@ -2,7 +2,7 @@ Vue.component("allUsers", {
     template: `
     <div>
         <div class="form-row">
-            <div class="form-group col-md-9">
+            <div class="form-group col-md-10">
                 <div class="col spaced">
                     <pageSizeSelect 
                         name="sizeInput"
@@ -49,7 +49,7 @@ Vue.component("allUsers", {
             </div>
 
 
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-2">
                 <userSearchFilterForm
                     v-on:submitSearchFilter="submitSearchFilter($event)"
                     v-on:resetSearchFilter="resetSearchFilter"
