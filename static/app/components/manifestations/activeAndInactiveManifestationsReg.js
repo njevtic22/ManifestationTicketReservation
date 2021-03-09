@@ -2,7 +2,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
     template: `
     <div>
         <div class="form-row">
-            <div class="form-group col-md-10">
+            <div class="form-group col-md-9">
                 <div class="col spaced">  
                     <pageSizeSelect
                         name="sizeInput"
@@ -43,7 +43,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
             </div>
 
             
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
                 <userSearchFilterForm
                 ></userSearchFilterForm>
             </div>
