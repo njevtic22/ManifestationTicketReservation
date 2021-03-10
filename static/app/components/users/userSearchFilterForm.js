@@ -4,7 +4,7 @@ Vue.component("userSearchFilterForm", {
         id="userSearchFilterForm"
         ref="userSearchFilterForm"
     >    
-        <h4>Search by</h4>
+        <h4>Search and filter</h4>
         <textInput
             name="name"
             labelText="Name"
@@ -28,7 +28,7 @@ Vue.component("userSearchFilterForm", {
         </textInput>
 
 
-        <h4>Filter by</h4>
+        <!-- <h4>Filter by</h4> -->
         <div class="row">
             <selectInput
                 placeholder=""
@@ -127,7 +127,7 @@ Vue.component("userSearchFilterForm", {
             this.$emit('submitSearchFilter', {
                 searchData: this.searchData,
                 filterData: this.filterData
-            })
+            });
         }
     },
 

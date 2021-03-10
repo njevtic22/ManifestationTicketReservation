@@ -118,6 +118,7 @@ public class ManifestationController {
         AddManifestationCommand command = new AddManifestationCommand(
                 salesman.getId(),
                 requestBody.name,
+                requestBody.maxNumberOfTickets,
                 requestBody.regularTicketPrice,
                 requestBody.holdingDate,
                 requestBody.description,
@@ -138,7 +139,6 @@ public class ManifestationController {
     };
 
     public Route getAll = (Request request, Response response) -> {
-        // TODO: Implement pagination, sorting, filtering, searching
         User user = request.attribute("user");
 
         List<Manifestation> manifestations = new ArrayList<>(getAllManifestationsUseCase.getAllManifestations(user));
@@ -179,6 +179,7 @@ public class ManifestationController {
         UpdateManifestationCommand command = new UpdateManifestationCommand(
                 SelfValidating.validId(request.params(":id")),
                 requestBody.name,
+                requestBody.maxNumberOfTickets,
                 requestBody.regularTicketPrice,
                 requestBody.holdingDate,
                 requestBody.description,
@@ -221,7 +222,7 @@ public class ManifestationController {
     private void applyFilter(Request request, Collection<Manifestation> manifestations) {
         if (request.queryParams("filterType") != null)
             manifestationFilterSearcher.filterByType(ManifestationType.valueOf(request.queryParams("filterType")), manifestations);
-        if (request.queryParams("filterAvailable") != null && request.queryParams("filterAvailable").equals("true"))
+        if (request.queryParams("filterAvailable") != null && request.queryParams("filterAvailable").toLowerCase().equals("available"))
             manifestationFilterSearcher.filterByAvailable(manifestations);
     }
 
@@ -246,6 +247,7 @@ public class ManifestationController {
         String sortBy = request.queryParams("sortBy");
         if (sortBy == null)
             return;
+        sortBy = sortBy.toLowerCase();
 
         String sortOrderStr = request.queryParams("sortOrder");
         if (sortOrderStr == null)
@@ -253,8 +255,20 @@ public class ManifestationController {
 
         int sortOrder = sortOrderStr.equals("asc") ? 1 : -1;
 
-        if (sortBy.equals("date"))
-            manifestationSorter.sortByDate(manifestations, sortOrder);
+        switch (sortBy) {
+            case "name":
+                manifestationSorter.sortByName(manifestations, sortOrder);
+                break;
+            case "date":
+                manifestationSorter.sortByDate(manifestations, sortOrder);
+                break;
+            case "price":
+                manifestationSorter.sortByPrice(manifestations, sortOrder);
+                break;
+            case "location":
+                manifestationSorter.sortByLocation(manifestations, sortOrder);
+                break;
+        }
     }
 
     private List<Manifestation> applyPagination(Request request, List<Manifestation> manifestations) {

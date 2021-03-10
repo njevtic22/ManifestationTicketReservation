@@ -53,7 +53,7 @@ public class ManifestationService implements
     public void addManifestation(AddManifestationCommand command) throws ParseException {
         Manifestation manifestation = new Manifestation(
                 command.name,
-                0,
+                command.maxNumberOfTickets,
                 command.regularTicketPrice,
                 formatter.parse(command.holdingDate),
                 command.description,

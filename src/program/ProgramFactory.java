@@ -94,6 +94,7 @@ public class ProgramFactory {
     private ExceptionHandler constraintViolationHandler;
     private ExceptionHandler invalidRoleHandler;
     private ExceptionHandler placeAndDateTakenHandler;
+    private ExceptionHandler soldOutHandler;
 
     private ExceptionHandler expiredJwtHandler;
     private ExceptionHandler signatureHandler;
@@ -371,6 +372,12 @@ public class ProgramFactory {
         if (placeAndDateTakenHandler == null)
             placeAndDateTakenHandler = new PlaceAndDateTakenHandler(PlaceAndDateTakenException.class);
         return placeAndDateTakenHandler;
+    }
+
+    public ExceptionHandler buildSoldOutHandler() {
+        if (soldOutHandler == null)
+            soldOutHandler = new SoldOutHandler(SoldOutException.class);
+        return soldOutHandler;
     }
 
     public ExceptionHandler buildExpiredJwtHandler() {

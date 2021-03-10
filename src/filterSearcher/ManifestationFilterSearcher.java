@@ -1,6 +1,7 @@
 package filterSearcher;
 
 import model.Manifestation;
+import model.ManifestationStatus;
 import model.ManifestationType;
 
 import java.util.Collection;
@@ -12,7 +13,11 @@ public class ManifestationFilterSearcher {
     }
 
     public void filterByAvailable(Collection<Manifestation> manifestations) {
-        manifestations.removeIf(Manifestation::isSoldOut);
+        manifestations.removeIf(manifestation -> {
+            if (manifestation.getStatus() != ManifestationStatus.ACTIVE)
+                return true;
+            return manifestation.isSoldOut();
+        });
     }
 
     public void searchByName(String name, Collection<Manifestation> manifestations) {

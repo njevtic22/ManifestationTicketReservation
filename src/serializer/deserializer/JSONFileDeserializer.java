@@ -287,7 +287,7 @@ public class JSONFileDeserializer implements FileDeserializer {
         return new Manifestation(
                 jsonManifestation.id,
                 jsonManifestation.name,
-                jsonManifestation.numberOfTicketsLeft,
+                jsonManifestation.maxNumberOfTickets,
                 jsonManifestation.regularTicketPrice,
                 jsonManifestation.holdingDate,
                 jsonManifestation.description,

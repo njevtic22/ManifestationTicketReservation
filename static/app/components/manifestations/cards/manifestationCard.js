@@ -28,7 +28,7 @@ Vue.component("manifestationCard", {
             <hr/>
 
             <div class="spaced mt-auto">
-                <em>{{ formattedAddress }}</em>
+                <em style="margin-right: 10px;">{{ formattedAddress }}</em>
                 <em>{{ manifestation.holdingDate }}</em>
             </div>
         </div>

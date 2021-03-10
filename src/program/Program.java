@@ -60,6 +60,7 @@ public class Program {
         exception(ConstraintViolationException.class, factory.buildConstraintViolationHandler());
         exception(InvalidRoleException.class, factory.buildInvalidRoleHandler());
         exception(PlaceAndDateTakenException.class, factory.buildPlaceAndDateTakenHandler());
+        exception(SoldOutException.class, factory.buildSoldOutHandler());
 
         exception(ExpiredJwtException.class, factory.buildExpiredJwtHandler());
         exception(SignatureException.class, factory.buildSignatureHandler());

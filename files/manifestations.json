@@ -2,7 +2,7 @@
   "1": {
     "id": 1,
     "name": "Concert 1: Joey Tribbiani",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 20,
     "regularTicketPrice": 1000.0,
     "holdingDate": "01.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -23,7 +23,7 @@
     },
     "image": {
       "id": 1,
-      "location": "images/manifestation/aurora.jpg"
+      "location": "images/manifestation/manifestation 1.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -31,7 +31,7 @@
   "2": {
     "id": 2,
     "name": "Festival 2: Chandler Bing",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 20,
     "regularTicketPrice": 1000.0,
     "holdingDate": "02.05.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -39,11 +39,11 @@
     "type": "FESTIVAL",
     "archived": false,
     "location": {
-      "id": 3,
+      "id": 2,
       "longitude": 44.8241056,
       "latitude": 20.4587845,
       "address": {
-        "id": 3,
+        "id": 2,
         "street": "Cara Dušana",
         "number": 19,
         "city": "Beograd",
@@ -51,8 +51,8 @@
       }
     },
     "image": {
-      "id": 3,
-      "location": "images/manifestation/balcony.jpg"
+      "id": 2,
+      "location": "images/manifestation/manifestation 2.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -60,7 +60,7 @@
   "3": {
     "id": 3,
     "name": "Theater 3: Ross Geller",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 20,
     "regularTicketPrice": 1500.0,
     "holdingDate": "03.05.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -68,11 +68,11 @@
     "type": "THEATER",
     "archived": false,
     "location": {
-      "id": 4,
+      "id": 3,
       "longitude": 44.8060619,
       "latitude": 20.4547841,
       "address": {
-        "id": 4,
+        "id": 3,
         "street": "Savska",
         "number": 13,
         "city": "Beograd",
@@ -80,8 +80,8 @@
       }
     },
     "image": {
-      "id": 4,
-      "location": "images/manifestation/boat 2.jpg"
+      "id": 3,
+      "location": "images/manifestation/manifestation 3.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -89,7 +89,7 @@
   "4": {
     "id": 4,
     "name": "Concert 4: Monica Geller",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 20,
     "regularTicketPrice": 1500.0,
     "holdingDate": "04.05.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -97,11 +97,11 @@
     "type": "CONCERT",
     "archived": false,
     "location": {
-      "id": 5,
+      "id": 4,
       "longitude": 44.8022327,
       "latitude": 20.4659012,
       "address": {
-        "id": 5,
+        "id": 4,
         "street": "Nemanjina",
         "number": 74,
         "city": "Beograd",
@@ -109,8 +109,8 @@
       }
     },
     "image": {
-      "id": 5,
-      "location": "images/manifestation/bridge.jpg"
+      "id": 4,
+      "location": "images/manifestation/manifestation 4.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -118,7 +118,7 @@
   "5": {
     "id": 5,
     "name": "Festival 5: Rachel Green",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 20,
     "regularTicketPrice": 1500.0,
     "holdingDate": "05.05.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -126,11 +126,11 @@
     "type": "FESTIVAL",
     "archived": false,
     "location": {
-      "id": 7,
+      "id": 5,
       "longitude": 44.792635,
       "latitude": 20.4724955,
       "address": {
-        "id": 7,
+        "id": 5,
         "street": "Južni bulevar",
         "number": 21,
         "city": "Beograd",
@@ -138,8 +138,8 @@
       }
     },
     "image": {
-      "id": 7,
-      "location": "images/manifestation/castle.jpg"
+      "id": 5,
+      "location": "images/manifestation/manifestation 5.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -147,7 +147,7 @@
   "6": {
     "id": 6,
     "name": "Theater 6: Phoebe Buffay",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 20,
     "regularTicketPrice": 2000.0,
     "holdingDate": "06.05.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -168,7 +168,7 @@
     },
     "image": {
       "id": 6,
-      "location": "images/manifestation/dart.jpg"
+      "location": "images/manifestation/manifestation 6.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -176,7 +176,7 @@
   "7": {
     "id": 7,
     "name": "Concert 7: Estelle Leonard",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 20,
     "regularTicketPrice": 2000.0,
     "holdingDate": "07.04.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -197,7 +197,7 @@
     },
     "image": {
       "id": 7,
-      "location": "images/manifestation/eagle.jpg"
+      "location": "images/manifestation/manifestation 7.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -205,7 +205,7 @@
   "8": {
     "id": 8,
     "name": "Festival 8: Paul Stevens",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 20,
     "regularTicketPrice": 2500.0,
     "holdingDate": "08.04.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -226,7 +226,7 @@
     },
     "image": {
       "id": 8,
-      "location": "images/manifestation/flowers 4.jpg"
+      "location": "images/manifestation/manifestation 8.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -234,7 +234,7 @@
   "9": {
     "id": 9,
     "name": "Theater 9: Tag Jones",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 20,
     "regularTicketPrice": 2500.0,
     "holdingDate": "09.04.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -255,7 +255,7 @@
     },
     "image": {
       "id": 9,
-      "location": "images/manifestation/flowers.jpg"
+      "location": "images/manifestation/manifestation 9.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -263,7 +263,7 @@
   "10": {
     "id": 10,
     "name": "Concert 10: Emma Geller",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 20,
     "regularTicketPrice": 2500.0,
     "holdingDate": "10.04.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -284,7 +284,7 @@
     },
     "image": {
       "id": 10,
-      "location": "images/manifestation/forest 3.jpg"
+      "location": "images/manifestation/manifestation 10.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -292,7 +292,7 @@
   "11": {
     "id": 11,
     "name": "Festival 11: Emma Geller",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 25,
     "regularTicketPrice": 3000.0,
     "holdingDate": "11.04.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -313,7 +313,7 @@
     },
     "image": {
       "id": 11,
-      "location": "images/manifestation/house 2.jpg"
+      "location": "images/manifestation/manifestation 11.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -321,7 +321,7 @@
   "12": {
     "id": 12,
     "name": "Theater 12: Erica Bing",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 25,
     "regularTicketPrice": 3000.0,
     "holdingDate": "12.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -342,7 +342,7 @@
     },
     "image": {
       "id": 12,
-      "location": "images/manifestation/leafs.jpg"
+      "location": "images/manifestation/manifestation 12.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -350,7 +350,7 @@
   "13": {
     "id": 13,
     "name": "Concert 13: Marcel",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 25,
     "regularTicketPrice": 3500.0,
     "holdingDate": "13.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -371,7 +371,7 @@
     },
     "image": {
       "id": 13,
-      "location": "images/manifestation/mountain 3.jpg"
+      "location": "images/manifestation/manifestation 13.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -379,7 +379,7 @@
   "14": {
     "id": 14,
     "name": "Festival 14: Kathy",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 25,
     "regularTicketPrice": 3500.0,
     "holdingDate": "14.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -400,7 +400,7 @@
     },
     "image": {
       "id": 14,
-      "location": "images/manifestation/mountain 5.jpg"
+      "location": "images/manifestation/manifestation 14.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -408,7 +408,7 @@
   "15": {
     "id": 15,
     "name": "Theater 15: Jack Geller",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 25,
     "regularTicketPrice": 3500.0,
     "holdingDate": "15.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -429,7 +429,7 @@
     },
     "image": {
       "id": 15,
-      "location": "images/manifestation/mountain 7.jpg"
+      "location": "images/manifestation/manifestation 15.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -437,7 +437,7 @@
   "16": {
     "id": 16,
     "name": "Concert 16: Julie",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 25,
     "regularTicketPrice": 4000.0,
     "holdingDate": "27.04.2021. 11:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -445,11 +445,11 @@
     "type": "CONCERT",
     "archived": false,
     "location": {
-      "id": 17,
+      "id": 16,
       "longitude": 44.7717184,
       "latitude": 20.45446,
       "address": {
-        "id": 17,
+        "id": 16,
         "street": "Bulevar kneza Aleksandra Karađorđevića",
         "number": 67,
         "city": "Beograd",
@@ -457,8 +457,8 @@
       }
     },
     "image": {
-      "id": 17,
-      "location": "images/manifestation/mountain 9.jpg"
+      "id": 16,
+      "location": "images/manifestation/manifestation 16.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -466,7 +466,7 @@
   "17": {
     "id": 17,
     "name": "Festival 17: Erica",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 25,
     "regularTicketPrice": 4000.0,
     "holdingDate": "28.04.2021. 11:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -474,11 +474,11 @@
     "type": "FESTIVAL",
     "archived": false,
     "location": {
-      "id": 18,
+      "id": 17,
       "longitude": 44.7876073,
       "latitude": 20.4580272,
       "address": {
-        "id": 18,
+        "id": 17,
         "street": "Dr Milutina Ivkovića",
         "number": 62,
         "city": "Beograd",
@@ -486,8 +486,8 @@
       }
     },
     "image": {
-      "id": 18,
-      "location": "images/manifestation/pumpkins.jpg"
+      "id": 17,
+      "location": "images/manifestation/manifestation 17.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -495,7 +495,7 @@
   "18": {
     "id": 18,
     "name": "Theater 18: Mike Hannigan",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 25,
     "regularTicketPrice": 4500.0,
     "holdingDate": "29.04.2021. 11:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -503,11 +503,11 @@
     "type": "THEATER",
     "archived": false,
     "location": {
-      "id": 19,
+      "id": 18,
       "longitude": 44.7806632,
       "latitude": 20.4720994,
       "address": {
-        "id": 19,
+        "id": 18,
         "street": "Vojvode Stepe",
         "number": 86,
         "city": "Beograd",
@@ -515,8 +515,8 @@
       }
     },
     "image": {
-      "id": 19,
-      "location": "images/manifestation/river.jpg"
+      "id": 18,
+      "location": "images/manifestation/manifestation 18.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -524,7 +524,7 @@
   "19": {
     "id": 19,
     "name": "Concert 19: Emma Geller",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 25,
     "regularTicketPrice": 4500.0,
     "holdingDate": "30.04.2021. 11:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -532,11 +532,11 @@
     "type": "CONCERT",
     "archived": false,
     "location": {
-      "id": 20,
+      "id": 19,
       "longitude": 44.8033584,
       "latitude": 20.3863543,
       "address": {
-        "id": 20,
+        "id": 19,
         "street": "Jurija Gagarina",
         "number": 32,
         "city": "Beograd",
@@ -544,8 +544,8 @@
       }
     },
     "image": {
-      "id": 20,
-      "location": "images/manifestation/sea 2.jpg"
+      "id": 19,
+      "location": "images/manifestation/manifestation 19.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -553,7 +553,7 @@
   "20": {
     "id": 20,
     "name": "Festival 20: Nora Tyler Bing",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 25,
     "regularTicketPrice": 4500.0,
     "holdingDate": "31.04.2021. 11:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -561,11 +561,11 @@
     "type": "FESTIVAL",
     "archived": false,
     "location": {
-      "id": 21,
+      "id": 20,
       "longitude": 44.8064208,
       "latitude": 20.3865865,
       "address": {
-        "id": 21,
+        "id": 20,
         "street": "Gandijeva",
         "number": 63,
         "city": "Beograd",
@@ -573,8 +573,8 @@
       }
     },
     "image": {
-      "id": 21,
-      "location": "images/manifestation/sea 4.jpg"
+      "id": 20,
+      "location": "images/manifestation/manifestation 20.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -582,7 +582,7 @@
   "21": {
     "id": 21,
     "name": "Theater 21: Ben",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 30,
     "regularTicketPrice": 5000.0,
     "holdingDate": "21.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -603,7 +603,7 @@
     },
     "image": {
       "id": 21,
-      "location": "images/manifestation/sea 6.jpg"
+      "location": "images/manifestation/manifestation 21.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -611,7 +611,7 @@
   "22": {
     "id": 22,
     "name": "Concert 22: Leonard Green",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 30,
     "regularTicketPrice": 5000.0,
     "holdingDate": "22.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -632,7 +632,7 @@
     },
     "image": {
       "id": 22,
-      "location": "images/manifestation/sea.jpg"
+      "location": "images/manifestation/manifestation 22.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -640,7 +640,7 @@
   "23": {
     "id": 23,
     "name": "Festival 23: David",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 30,
     "regularTicketPrice": 5500.0,
     "holdingDate": "23.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -661,7 +661,7 @@
     },
     "image": {
       "id": 23,
-      "location": "images/manifestation/smoke.jpg"
+      "location": "images/manifestation/manifestation 23.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -669,7 +669,7 @@
   "24": {
     "id": 24,
     "name": "Theater 24: Gary",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 30,
     "regularTicketPrice": 5500.0,
     "holdingDate": "24.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -690,7 +690,7 @@
     },
     "image": {
       "id": 24,
-      "location": "images/manifestation/strawberries.jpg"
+      "location": "images/manifestation/manifestation 24.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -698,7 +698,7 @@
   "25": {
     "id": 25,
     "name": "Concert 25: Gavin Mitchell",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 30,
     "regularTicketPrice": 5500.0,
     "holdingDate": "25.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -719,7 +719,7 @@
     },
     "image": {
       "id": 25,
-      "location": "images/manifestation/watch.jpg"
+      "location": "images/manifestation/manifestation 25.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -727,7 +727,7 @@
   "26": {
     "id": 26,
     "name": "Festival 26: Richard Burke",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 30,
     "regularTicketPrice": 6000.0,
     "holdingDate": "26.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -748,7 +748,7 @@
     },
     "image": {
       "id": 26,
-      "location": "images/manifestation/birds.jpg"
+      "location": "images/manifestation/manifestation 26.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -756,7 +756,7 @@
   "27": {
     "id": 27,
     "name": "Theater 27: Charlie Wheeler",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 30,
     "regularTicketPrice": 6000.0,
     "holdingDate": "27.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -777,7 +777,7 @@
     },
     "image": {
       "id": 27,
-      "location": "images/manifestation/butterfly.jpg"
+      "location": "images/manifestation/manifestation 27.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -785,7 +785,7 @@
   "28": {
     "id": 28,
     "name": "Concert 28: Mr. Heckles",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 30,
     "regularTicketPrice": 6500.0,
     "holdingDate": "28.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -806,7 +806,7 @@
     },
     "image": {
       "id": 28,
-      "location": "images/manifestation/ducks.jpg"
+      "location": "images/manifestation/manifestation 28.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -814,7 +814,7 @@
   "29": {
     "id": 29,
     "name": "Festival 29: Ugly Naked Guy",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 30,
     "regularTicketPrice": 6500.0,
     "holdingDate": "29.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -835,7 +835,7 @@
     },
     "image": {
       "id": 29,
-      "location": "images/manifestation/flowers 5.jpg"
+      "location": "images/manifestation/manifestation 29.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -843,7 +843,7 @@
   "30": {
     "id": 30,
     "name": "Theater 30: Janice Goralnik",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 30,
     "regularTicketPrice": 6500.0,
     "holdingDate": "30.06.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -864,7 +864,7 @@
     },
     "image": {
       "id": 30,
-      "location": "images/manifestation/forest.jpg"
+      "location": "images/manifestation/manifestation 30.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -872,7 +872,7 @@
   "31": {
     "id": 31,
     "name": "Concert 31: Bonnie",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 35,
     "regularTicketPrice": 7000.0,
     "holdingDate": "01.07.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -893,7 +893,7 @@
     },
     "image": {
       "id": 31,
-      "location": "images/manifestation/mountain 2.jpg"
+      "location": "images/manifestation/manifestation 31.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -901,7 +901,7 @@
   "32": {
     "id": 32,
     "name": "Festival 32: Missy Goldberg",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 35,
     "regularTicketPrice": 7000.0,
     "holdingDate": "02.07.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -922,7 +922,7 @@
     },
     "image": {
       "id": 32,
-      "location": "images/manifestation/mountain 6.jpg"
+      "location": "images/manifestation/manifestation 32.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -930,7 +930,7 @@
   "33": {
     "id": 33,
     "name": "Theater 33: Miss Chanandler Bong",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 35,
     "regularTicketPrice": 7500.0,
     "holdingDate": "03.07.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -951,7 +951,7 @@
     },
     "image": {
       "id": 33,
-      "location": "images/manifestation/mountain.jpg"
+      "location": "images/manifestation/manifestation 33.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -959,7 +959,7 @@
   "34": {
     "id": 34,
     "name": "Concert 34: Terry",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 35,
     "regularTicketPrice": 7500.0,
     "holdingDate": "04.07.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -980,7 +980,7 @@
     },
     "image": {
       "id": 34,
-      "location": "images/manifestation/road.jpg"
+      "location": "images/manifestation/manifestation 34.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -988,7 +988,7 @@
   "35": {
     "id": 35,
     "name": "Festival 35: Frances Buffay",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 35,
     "regularTicketPrice": 7500.0,
     "holdingDate": "05.07.2021. 08:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -1009,7 +1009,7 @@
     },
     "image": {
       "id": 35,
-      "location": "images/manifestation/sea 5.jpg"
+      "location": "images/manifestation/manifestation 35.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -1017,7 +1017,7 @@
   "36": {
     "id": 36,
     "name": "Theater 36: Chandler Bing",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 35,
     "regularTicketPrice": 8000.0,
     "holdingDate": "27.04.2021. 14:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -1038,7 +1038,7 @@
     },
     "image": {
       "id": 36,
-      "location": "images/manifestation/sky.jpg"
+      "location": "images/manifestation/manifestation 36.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -1046,7 +1046,7 @@
   "37": {
     "id": 37,
     "name": "Concert 37: Joey Tribbiani",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 35,
     "regularTicketPrice": 8000.0,
     "holdingDate": "28.04.2021. 14:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -1067,7 +1067,7 @@
     },
     "image": {
       "id": 37,
-      "location": "images/manifestation/sunflower.jpg"
+      "location": "images/manifestation/manifestation 37.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -1075,7 +1075,7 @@
   "38": {
     "id": 38,
     "name": "Festival 38: Ross Geller",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 35,
     "regularTicketPrice": 8500.0,
     "holdingDate": "29.04.2021. 14:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -1096,7 +1096,7 @@
     },
     "image": {
       "id": 38,
-      "location": "images/manifestation/boat.jpg"
+      "location": "images/manifestation/manifestation 38.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -1104,7 +1104,7 @@
   "39": {
     "id": 39,
     "name": "Theater 39: Monica Geller",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 35,
     "regularTicketPrice": 8500.0,
     "holdingDate": "30.04.2021. 14:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -1125,7 +1125,7 @@
     },
     "image": {
       "id": 39,
-      "location": "images/manifestation/flowers 2.jpg"
+      "location": "images/manifestation/manifestation 39.jpg"
     },
     "tickets": [],
     "reviews": []
@@ -1133,7 +1133,7 @@
   "40": {
     "id": 40,
     "name": "Concert 40: Rachel Green",
-    "numberOfTicketsLeft": 0,
+    "maxNumberOfTickets": 35,
     "regularTicketPrice": 8500.0,
     "holdingDate": "31.04.2021. 14:00:00",
     "description": "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor",
@@ -1154,7 +1154,7 @@
     },
     "image": {
       "id": 40,
-      "location": "images/manifestation/house.jpg"
+      "location": "images/manifestation/manifestation 40.jpg"
     },
     "tickets": [],
     "reviews": []

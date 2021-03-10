@@ -1,7 +1,6 @@
 package useCase.manifestation.dto;
 
 import model.Manifestation;
-import model.ReviewStatus;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +13,10 @@ public class GetByIdManifestationDTO {
     public long id;
     public String name;
     public long numberOfTicketsLeft;
+    public long maxNumberOfTickets;
     public double regularTicketPrice;
     public String holdingDate;
+    public String description;
     public String status;
     public String type;
     public double avgRating;
@@ -32,9 +33,11 @@ public class GetByIdManifestationDTO {
     public GetByIdManifestationDTO(Manifestation manifestation, String parsedDate) {
         this.id = manifestation.getId();
         this.name = manifestation.getName();
-        this.numberOfTicketsLeft = manifestation.getNumberOfTicketsLeft();
+        this.numberOfTicketsLeft = manifestation.getMaxNumberOfTickets() - manifestation.getTickets().size();
+        this.maxNumberOfTickets = manifestation.getMaxNumberOfTickets();
         this.regularTicketPrice = manifestation.getRegularTicketPrice();
         this.holdingDate = parsedDate;
+        this.description = manifestation.getDescription();
         this.status = manifestation.getStatus().toString();
         this.type = manifestation.getType().toString();
 

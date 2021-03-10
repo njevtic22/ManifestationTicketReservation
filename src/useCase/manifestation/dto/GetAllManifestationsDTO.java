@@ -1,13 +1,13 @@
 package useCase.manifestation.dto;
 
-import jdk.jfr.Frequency;
 import model.Manifestation;
-import model.Review;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GetAllManifestationsDTO {
     public long id;
@@ -33,8 +33,8 @@ public class GetAllManifestationsDTO {
     public GetAllManifestationsDTO(Manifestation manifestation, String parsedDate) {
         this.id = manifestation.getId();
         this.name = manifestation.getName();
-        this.numberOfTicketsLeft = manifestation.getNumberOfTicketsLeft();
-        this.maxNumberOfTickets = manifestation.getTickets().size();
+        this.numberOfTicketsLeft = manifestation.getMaxNumberOfTickets() - manifestation.getTickets().size();
+        this.maxNumberOfTickets = manifestation.getMaxNumberOfTickets();
         this.regularTicketPrice = manifestation.getRegularTicketPrice();
         this.holdingDate = parsedDate;
         this.description = manifestation.getDescription();

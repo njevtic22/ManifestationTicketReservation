@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Manifestation {
     private Long id;
     private String name;
-    private long numberOfTicketsLeft;
+    private long maxNumberOfTickets;
     private double regularTicketPrice;
     private Date holdingDate;
     private String description;
@@ -27,7 +27,7 @@ public class Manifestation {
 
     public Manifestation(
             String name,
-            long numberOfTicketsLeft,
+            long maxNumberOfTickets,
             double regularTicketPrice,
             Date holdingDate,
             String description,
@@ -40,7 +40,7 @@ public class Manifestation {
         this(
                 idGenerator.next(),
                 name,
-                numberOfTicketsLeft,
+                maxNumberOfTickets,
                 regularTicketPrice,
                 holdingDate,
                 description,
@@ -55,7 +55,7 @@ public class Manifestation {
     public Manifestation(
             Long id,
             String name,
-            long numberOfTicketsLeft,
+            long maxNumberOfTickets,
             double regularTicketPrice,
             Date holdingDate,
             String description,
@@ -67,7 +67,7 @@ public class Manifestation {
     ) {
         this.id = id;
         this.name = name;
-        this.numberOfTicketsLeft = numberOfTicketsLeft;
+        this.maxNumberOfTickets = maxNumberOfTickets;
         this.regularTicketPrice = regularTicketPrice;
         this.holdingDate = holdingDate;
         this.description = description;
@@ -82,7 +82,7 @@ public class Manifestation {
 
     public Manifestation(
             String name,
-            long numberOfTicketsLeft,
+            long maxNumberOfTickets,
             double regularTicketPrice,
             Date holdingDate,
             String description,
@@ -97,7 +97,7 @@ public class Manifestation {
         this(
                 idGenerator.next(),
                 name,
-                numberOfTicketsLeft,
+                maxNumberOfTickets,
                 regularTicketPrice,
                 holdingDate,
                 description,
@@ -114,7 +114,7 @@ public class Manifestation {
     public Manifestation(
             Long id,
             String name,
-            long numberOfTicketsLeft,
+            long maxNumberOfTickets,
             double regularTicketPrice,
             Date holdingDate,
             String description,
@@ -128,7 +128,7 @@ public class Manifestation {
     ) {
         this.id = id;
         this.name = name;
-        this.numberOfTicketsLeft = numberOfTicketsLeft;
+        this.maxNumberOfTickets = maxNumberOfTickets;
         this.regularTicketPrice = regularTicketPrice;
         this.holdingDate = holdingDate;
         this.description = description;
@@ -175,7 +175,7 @@ public class Manifestation {
     }
 
     public boolean isSoldOut() {
-        return numberOfTicketsLeft == 0;
+        return maxNumberOfTickets == tickets.size();
     }
 
     public Long getId() {
@@ -190,12 +190,12 @@ public class Manifestation {
         this.name = name;
     }
 
-    public long getNumberOfTicketsLeft() {
-        return numberOfTicketsLeft;
+    public long getMaxNumberOfTickets() {
+        return maxNumberOfTickets;
     }
 
-    public void setNumberOfTicketsLeft(long numberOfTicketsLeft) {
-        this.numberOfTicketsLeft = numberOfTicketsLeft;
+    public void setMaxNumberOfTickets(long maxNumberOfTickets) {
+        this.maxNumberOfTickets = maxNumberOfTickets;
     }
 
     public double getRegularTicketPrice() {

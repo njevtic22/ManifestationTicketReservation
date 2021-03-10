@@ -2,7 +2,7 @@ package request;
 
 public class UpdateManifestationRequest {
     public String name;
-    //    public long numberOfTicketsLeft; = 0
+    public long maxNumberOfTickets;
     public double regularTicketPrice;
     public String holdingDate;
     public String description;

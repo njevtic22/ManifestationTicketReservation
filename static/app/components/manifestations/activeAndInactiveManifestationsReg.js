@@ -44,8 +44,10 @@ Vue.component("activeAndInactiveManifestationsReg", {
 
             
             <div class="form-group col-md-3">
-                <userSearchFilterForm
-                ></userSearchFilterForm>
+                <manifestationFilterSearchSortForm
+                    v-on:submitSearchFilterSort="submitSearchFilterSort($event)"
+                    v-on:resetSearchFilterSort="resetSearchFilterSort"
+                ></manifestationFilterSearchSortForm>
             </div>
         </div>
 
@@ -73,32 +75,35 @@ Vue.component("activeAndInactiveManifestationsReg", {
             
             searchData: {
                 searchName: "",
-                searchSurname: "",
-                searchUsername: ""
+                searchCity: "",
+                searchStreet: "",
+
+                searchDateFrom: "",
+                searchDateTo: "",
+                
+                searchPriceFrom: 0,
+                searchPriceTo: 0
             },
             filterData: {
-                filterRole: "",
-                filterType: ""
-            }
+                filterType: "",
+                filterAvailable: ""
+            },
         };
     },
 
     methods: {
         previousPage: function() {
             this.page--;
-            this.manifestations = [];
             this.getActAndInactManifestations();
         },
         
         nextPage: function() {
             this.page++;
-            this.manifestations = [];
             this.getActAndInactManifestations();
         },
 
         toPage: function(to) {
             this.page = to;
-            this.manifestations = [];
             this.getActAndInactManifestations();
         },
 
@@ -112,7 +117,51 @@ Vue.component("activeAndInactiveManifestationsReg", {
             this.getActAndInactManifestations();
         },
 
+        submitSearchFilterSort: function(searchFilterSortEvent) {
+            
+            const myData = JSON.parse(JSON.stringify(searchFilterSortEvent));
+
+            this.searchData = myData.searchData;
+            this.filterData = myData.filterData;
+            this.sortBy = myData.sortBy;
+            this.sortOrder = myData.sortOrder;
+
+        
+            if (this.searchData.searchDateFrom)
+                this.searchData.searchDateFrom += " 00:00:00";
+            if (this.searchData.searchDateTo)
+                this.searchData.searchDateTo += " 23:59:59";
+
+            
+            this.getActAndInactManifestations();
+        },
+
+        resetSearchFilterSort: function() {
+            this.sortBy = "date";
+            this.sortOrder = "asc";
+
+            this.searchData = {
+                searchName: "",
+                searchCity: "",
+                searchStreet: "",
+
+                searchDateFrom: "",
+                searchDateTo: "",
+                
+                searchPriceFrom: 0,
+                searchPriceTo: 0
+            },
+            this.filterData = {
+                filterType: "",
+                filterAvailable: ""
+            },
+
+
+            this.getActAndInactManifestations();
+        },
+
         getActAndInactManifestations: function() {
+            this.manifestations = [];
             const successCallback = (response) => {
                 this.manifestations = response.data;
             };

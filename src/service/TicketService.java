@@ -2,6 +2,7 @@ package service;
 
 import exception.CustomerNotFoundException;
 import exception.ManifestationNotFoundException;
+import exception.SoldOutException;
 import exception.TicketNotFoundException;
 import exception.TicketReservedException;
 import model.Admin;
@@ -64,7 +65,7 @@ public class TicketService implements
         );
 
         manifestation.addTicket(ticket);
-        manifestation.setNumberOfTicketsLeft(manifestation.getNumberOfTicketsLeft() + 1);
+        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + 1);
 
         ticketRepository.save(ticket);
         manifestationRepository.save(manifestation);
@@ -105,7 +106,11 @@ public class TicketService implements
                 .orElseThrow(() -> new CustomerNotFoundException(command.customerId));
 
         Manifestation manifestation = ticket.getManifestation();
-        manifestation.setNumberOfTicketsLeft(manifestation.getNumberOfTicketsLeft() - 1);
+        if (manifestation.isSoldOut())
+            throw new SoldOutException(manifestation.getName());
+
+
+        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() - 1);
 
         if (ticket.getStatus() == TicketStatus.RESERVED)
             throw new TicketReservedException(ticket.getId());
@@ -140,7 +145,7 @@ public class TicketService implements
         customer.addHistory(history);
 
         Manifestation manifestation = ticket.getManifestation();
-        manifestation.setNumberOfTicketsLeft(manifestation.getNumberOfTicketsLeft() + 1);
+        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + 1);
 
         double priceToCalculateInFine = ticket.getPrice();
 

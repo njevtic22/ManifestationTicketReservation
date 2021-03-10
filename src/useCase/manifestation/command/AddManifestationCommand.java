@@ -6,7 +6,7 @@ import validation.SelfValidating;
 public class AddManifestationCommand implements SelfValidating {
     public Long salesmanId;
     public String name;
-//    public long numberOfTicketsLeft; = 0
+    public long maxNumberOfTickets;
     public double regularTicketPrice;
     public String holdingDate;
     public String description;
@@ -24,9 +24,10 @@ public class AddManifestationCommand implements SelfValidating {
     // TODO: CHANGE THIS -> maybe
     public String imageLocation;
 
-    public AddManifestationCommand(Long salesmanId, String name, double regularTicketPrice, String holdingDate, String description, String status, String type, double longitude, double latitude, String street, long number, String city, String postalCode, String imageLocation) {
+    public AddManifestationCommand(Long salesmanId, String name, long maxNumberOfTickets, double regularTicketPrice, String holdingDate, String description, String status, String type, double longitude, double latitude, String street, long number, String city, String postalCode, String imageLocation) {
         this.salesmanId = salesmanId;
         this.name = name;
+        this.maxNumberOfTickets = maxNumberOfTickets;
         this.regularTicketPrice = regularTicketPrice;
         this.holdingDate = holdingDate;
         this.description = description;
@@ -49,6 +50,9 @@ public class AddManifestationCommand implements SelfValidating {
 
         if (name == null || name.trim().isEmpty())
             throw new ConstraintViolationException("Name must not be empty.");
+
+        if (maxNumberOfTickets <= 0)
+            throw new ConstraintViolationException("Max number of tickets must not be empty.");
 
         if (regularTicketPrice <= 0)
             throw new ConstraintViolationException("Regular ticket price must not be empty.");

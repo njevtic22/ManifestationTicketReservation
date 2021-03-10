@@ -6,7 +6,7 @@ import java.util.List;
 public class JSONManifestation {
     public long id;
     public String name;
-    public long numberOfTicketsLeft;
+    public long maxNumberOfTickets;
     public double regularTicketPrice;
     public Date holdingDate;
     public String description;
