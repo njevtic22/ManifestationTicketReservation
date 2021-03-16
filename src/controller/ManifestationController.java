@@ -29,6 +29,7 @@ import useCase.manifestation.UpdateManifestationUseCase;
 import useCase.manifestation.command.AddManifestationCommand;
 import useCase.manifestation.command.UpdateLocationCommand;
 import useCase.manifestation.command.UpdateManifestationCommand;
+import utility.PaginatedResponse;
 import utility.Pagination;
 import utility.RoleEnsure;
 import validation.SelfValidating;
@@ -58,6 +59,7 @@ public class ManifestationController {
     private DeleteManifestationUseCase deleteManifestationUseCase;
     private final ManifestationFilterSearcher manifestationFilterSearcher;
     private final ManifestationSorter manifestationSorter;
+    private Pagination pagination;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
     private RoleEnsure ensureUserIsSalesman = AuthenticationController::ensureUserIsSalesman;
@@ -77,7 +79,8 @@ public class ManifestationController {
             UpdateLocationUseCase updateLocationUseCase,
             DeleteManifestationUseCase deleteManifestationUseCase,
             ManifestationFilterSearcher manifestationFilterSearcher,
-            ManifestationSorter manifestationSorter
+            ManifestationSorter manifestationSorter,
+            Pagination pagination
     ) {
         this.gson = gson;
         this.formatter = formatter;
@@ -91,6 +94,7 @@ public class ManifestationController {
         this.deleteManifestationUseCase = deleteManifestationUseCase;
         this.manifestationFilterSearcher = manifestationFilterSearcher;
         this.manifestationSorter = manifestationSorter;
+        this.pagination = pagination;
         this.setUpRoutes();
     }
 
@@ -145,7 +149,12 @@ public class ManifestationController {
         applyFilter(request, manifestations);
         applySearch(request, manifestations);
         applySort(request, manifestations);
-        List<Manifestation> paginatedManifestations = applyPagination(request, manifestations);
+
+        PaginatedResponse<Manifestation> paginatedManifestations = pagination.paginate(
+                manifestations,
+                request.queryParams("page"),
+                request.queryParams("size")
+        );
 
         response.status(HttpStatus.OK_200);
         return paginatedManifestations;
@@ -269,20 +278,5 @@ public class ManifestationController {
                 manifestationSorter.sortByLocation(manifestations, sortOrder);
                 break;
         }
-    }
-
-    private List<Manifestation> applyPagination(Request request, List<Manifestation> manifestations) {
-        String pageStr = request.queryParams("page");
-        String sizeStr = request.queryParams("size");
-        if (pageStr == null || sizeStr == null)
-            return List.of();
-
-        if (sizeStr.equals("All"))
-            return manifestations;
-
-        int page = Integer.parseInt(pageStr);
-        int size = Integer.parseInt((sizeStr));
-
-        return Pagination.paginate(manifestations, page, size);
     }
 }

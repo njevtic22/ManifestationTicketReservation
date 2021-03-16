@@ -10,7 +10,8 @@ Vue.component("activeAndInactiveManifestationsReg", {
                         v-bind:options="sizes"
                         v-bind:page="page"
                         v-bind:size="size"
-                        v-bind:currentDataSize="manifestations.length"
+                        v-bind:currentDataSize="manifestations.data.length"
+                        v-bind:totalNumberOfResults="manifestations.totalNumberOfResults"
                         ref="pageSizeSelect"
 
                         v-on:select="changeSize($event)"
@@ -19,8 +20,8 @@ Vue.component("activeAndInactiveManifestationsReg", {
 
                     <pagination
                         v-bind:currentPage="page"
-                        v-bind:hasPrevious="page > 0"
-                        v-bind:hasNext="manifestations.length != 0"
+                        v-bind:hasPrevious="manifestations.hasPreviousPage"
+                        v-bind:hasNext="manifestations.hasNextPage"
 
                         v-on:previous="previousPage"
                         v-on:next="nextPage"
@@ -30,14 +31,18 @@ Vue.component("activeAndInactiveManifestationsReg", {
                 </div>
 
 
-                <div class="d-flex justify-content-center" v-if="manifestations.length === 0">
+                <div class="d-flex justify-content-center" v-if="loading">
                     <div class="spinner-grow text-secondary" role="status" style="width: 3rem; height: 3rem;">
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>
 
+                <div v-else-if="manifestations.totalNumberOfResults === 0">
+                    <h4 class="text-center">No Results</h4>
+                </div>
+
                 <manifestationCards v-else
-                    v-bind:manifestations="manifestations"
+                    v-bind:manifestations="manifestations.data"
                 >
                 </manifestationCards>
             </div>
@@ -58,7 +63,13 @@ Vue.component("activeAndInactiveManifestationsReg", {
 
     data: function() {
         return {
-            manifestations: [],
+            loading: true,
+            manifestations: {
+                data: [],
+                totalNumberOfResults: 0,
+                hasNextPage: null,
+                hasPreviousPage: null
+            },
 
             page: 0,
             size: 6,
@@ -108,6 +119,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
         },
 
         changeSize: function(event) {
+            this.page = 0;
             this.sizeStr = event;
             if (event === "All") {
                 this.size = 10000;
@@ -161,9 +173,11 @@ Vue.component("activeAndInactiveManifestationsReg", {
         },
 
         getActAndInactManifestations: function() {
-            this.manifestations = [];
+            this.loading = true;
+            this.manifestations.data = [];
             const successCallback = (response) => {
                 this.manifestations = response.data;
+                this.loading = false;
             };
             const errorCallback = (error) => {
                 this.$root.defaultCatchError(error);

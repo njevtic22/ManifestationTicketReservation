@@ -48,7 +48,7 @@ Vue.component("usersTable", {
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody v-if="users.length !== 0">
             <tr v-for="user in users">
                 <td>{{ user.name }}</td>
                 <td>{{ user.surname }}</td>
@@ -58,7 +58,7 @@ Vue.component("usersTable", {
                 <td>{{ user.role }}</td>
                 <td>{{ user.type }}</td>
                 <td>{{ user.points }}</td>
-                <td style="text-align: center;" v-if="$root.isAdmin()">
+                <td class="text-center" v-if="$root.isAdmin()">
                     <button 
                         type="button" 
                         class="btn btn-link btn-sm"
@@ -69,6 +69,12 @@ Vue.component("usersTable", {
                         <trash-fill-icon></trash-fill-icon>
                     </button>
                 </td>
+            </tr>
+        </tbody>
+
+        <tbody v-else>
+            <tr>
+                <td colspan="9"><h4 class="text-center">No Results</h4></td>
             </tr>
         </tbody>
     </table>

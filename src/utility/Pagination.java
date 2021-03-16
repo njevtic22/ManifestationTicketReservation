@@ -3,9 +3,41 @@ package utility;
 import java.util.List;
 
 public class Pagination {
-    public static <T> List<T> paginate(List<T> elements, int page, int size) {
+    public <T> PaginatedResponse<T> paginate(List<T> elements, String pageStr, String sizeStr) {
+        int page;
+        try {
+            page = Integer.parseInt(pageStr);
+            if (page < 0)
+                throw new NumberFormatException("Page can not be negative number.");
+
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid page argument.", e);
+        }
+
+        if (sizeStr.toLowerCase().equals("all"))
+            return new PaginatedResponse<>(
+                    elements,
+                    elements.size(),
+                    page > 0,
+                    false
+            );
+
+
+        int size;
+        try {
+            size = Integer.parseInt((sizeStr));
+            if (size < 1)
+                throw new NumberFormatException("Size can not be negative number.");
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid size argument.", e);
+        }
+
+        return paginate(elements, page, size);
+    }
+
+    public <T> PaginatedResponse<T> paginate(List<T> elements, int page, int size) {
         if (page < 0 || size < 1)
-            return List.of();
+            throw new IllegalArgumentException("Invalid page and size arguments.");
 
         /*
          *
@@ -14,7 +46,7 @@ public class Pagination {
          * @throws IllegalArgumentException if the endpoint indices are out of order
          *         {@code (fromIndex > toIndex)}
          *
-         * arrUsers.subList(fromIndex, toIndex);
+         * list.subList(fromIndex, toIndex);
          *
          * */
 
@@ -22,8 +54,18 @@ public class Pagination {
         int to = Math.min((page + 1) * size, elements.size());
 
         if (from > to)
-            return List.of();
+            return new PaginatedResponse<>(
+                    List.of(),
+                    elements.size(),
+                    page > 0,
+                    false
+            );
 
-        return elements.subList(from, to);
+        return new PaginatedResponse<>(
+                elements.subList(from, to),
+                elements.size(),
+                page > 0,
+                to < elements.size()
+        );
     }
 }

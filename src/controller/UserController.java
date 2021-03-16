@@ -12,6 +12,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import useCase.user.GetAllUsersUseCase;
+import utility.PaginatedResponse;
 import utility.Pagination;
 import utility.RoleEnsure;
 
@@ -32,6 +33,7 @@ public class UserController {
     private GetAllUsersUseCase getAllUsersUseCase;
     private final UserFilterSearcher userFilterSearcher;
     private final UserSorter userSorter;
+    private Pagination pagination;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
     private RoleEnsure ensureUserIsSalesman = AuthenticationController::ensureUserIsSalesman;
@@ -40,12 +42,20 @@ public class UserController {
     private RoleEnsure ensureUserIsAdminOrCustomer = AuthenticationController::ensureUserIsAdminOrCustomer;
 
 
-    public UserController(Gson gson, SimpleDateFormat formatter, GetAllUsersUseCase getAllUsersUseCase, UserFilterSearcher userFilterSearcher, UserSorter userSorter) {
+    public UserController(
+            Gson gson,
+            SimpleDateFormat formatter,
+            GetAllUsersUseCase getAllUsersUseCase,
+            UserFilterSearcher userFilterSearcher,
+            UserSorter userSorter,
+            Pagination pagination
+    ) {
         this.gson = gson;
         this.formatter = formatter;
         this.getAllUsersUseCase = getAllUsersUseCase;
         this.userFilterSearcher = userFilterSearcher;
         this.userSorter = userSorter;
+        this.pagination = pagination;
         this.setUpRoutes();
     }
 
@@ -68,7 +78,7 @@ public class UserController {
         applyFilter(request, users);
         applySearch(request, users);
         applySort(request, users);
-        List<User> paginatedUsers = applyPagination(request, users);
+        PaginatedResponse<User> paginatedUsers = pagination.paginate(users, request.queryParams("page"), request.queryParams("size"));
 
         response.status(HttpStatus.OK_200);
         return paginatedUsers;
@@ -127,20 +137,5 @@ public class UserController {
                 userSorter.sortByPoints(users, sortOrder);
                 break;
         }
-    }
-
-    private List<User> applyPagination(Request request, List<User> users) {
-        String pageStr = request.queryParams("page");
-        String sizeStr = request.queryParams("size");
-        if (pageStr == null || sizeStr == null)
-            return List.of();
-
-        if (sizeStr.equals("All"))
-            return users;
-
-        int page = Integer.parseInt(pageStr);
-        int size = Integer.parseInt((sizeStr));
-
-        return Pagination.paginate(users, page, size);
     }
 }

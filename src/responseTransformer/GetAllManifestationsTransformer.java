@@ -5,8 +5,9 @@ import model.Manifestation;
 import responseTransformer.dtoMappers.DTOMapper;
 import spark.ResponseTransformer;
 import useCase.manifestation.dto.GetAllManifestationsDTO;
+import utility.PaginatedResponse;
 
-import java.util.Collection;
+import java.util.List;
 
 public class GetAllManifestationsTransformer implements ResponseTransformer {
     private final Gson gson;
@@ -19,7 +20,16 @@ public class GetAllManifestationsTransformer implements ResponseTransformer {
 
     @Override
     public String render(Object o) throws Exception {
-        Collection<Manifestation> manifestations = (Collection<Manifestation>) o;
-        return gson.toJson(mapper.toDTOList(manifestations));
+        PaginatedResponse<Manifestation> paginatedResponse = (PaginatedResponse<Manifestation>) o;
+        List<GetAllManifestationsDTO> manifestationsDTO = mapper.toDTOList(paginatedResponse.data);
+
+        return gson.toJson(
+                new PaginatedResponse<>(
+                        manifestationsDTO,
+                        paginatedResponse.totalNumberOfResults,
+                        paginatedResponse.hasPreviousPage,
+                        paginatedResponse.hasNextPage
+                )
+        );
     }
 }

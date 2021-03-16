@@ -34,6 +34,8 @@ import sorter.UserSorter;
 import spark.ExceptionHandler;
 
 import io.jsonwebtoken.security.SignatureException;
+import utility.Pagination;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -216,7 +218,8 @@ public class ProgramFactory {
                     formatter,
                     userService,
                     new UserFilterSearcher(),
-                    new UserSorter()
+                    new UserSorter(),
+                    new Pagination()
             );
         }
         return userController;
@@ -256,7 +259,8 @@ public class ProgramFactory {
                     manifestationService,
                     manifestationService,
                     new ManifestationFilterSearcher(),
-                    new ManifestationSorter()
+                    new ManifestationSorter(),
+                    new Pagination()
             );
         }
         return manifestationController;

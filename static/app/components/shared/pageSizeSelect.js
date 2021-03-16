@@ -5,7 +5,7 @@ Vue.component("pageSizeSelect", {
             Showing 0 results,
         </span>
         <span v-else style="margin-top: 7px">
-            Showing {{ page * size + 1 }} to {{ page * size + currentDataSize }} results,
+            Showing {{ page * size + 1 }} to {{ page * size + currentDataSize }} of {{ totalNumberOfResults }} results,
         </span>
         &nbsp;
 
@@ -30,7 +30,8 @@ Vue.component("pageSizeSelect", {
         options: Array,
         page: Number,
         size: Number,
-        currentDataSize: Number
+        currentDataSize: Number,
+        totalNumberOfResults: Number
     },
 
     data: function() {

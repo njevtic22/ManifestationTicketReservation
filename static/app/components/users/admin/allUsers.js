@@ -10,7 +10,8 @@ Vue.component("allUsers", {
                         v-bind:options="sizes"
                         v-bind:page="page"
                         v-bind:size="size"
-                        v-bind:currentDataSize="users.length"
+                        v-bind:currentDataSize="users.data.length"
+                        v-bind:totalNumberOfResults="users.totalNumberOfResults"
                         ref="pageSizeSelect"
 
                         v-on:select="changeSize($event)"
@@ -18,8 +19,8 @@ Vue.component("allUsers", {
 
                     <pagination
                         v-bind:currentPage="page"
-                        v-bind:hasPrevious="page > 0"
-                        v-bind:hasNext="users.length != 0"
+                        v-bind:hasPrevious="users.hasPreviousPage"
+                        v-bind:hasNext="users.hasNextPage"
 
                         v-on:previous="previousPage"
                         v-on:next="nextPage"
@@ -40,7 +41,7 @@ Vue.component("allUsers", {
                 <br/>
 
                 <usersTable
-                    v-bind:users="users"
+                    v-bind:users="users.data"
                     v-on:sort="performSort($event)"
                     v-on:deleteUser="confirmDeleteUser($event)"
 
@@ -84,19 +85,25 @@ Vue.component("allUsers", {
                 "All"
             ],
 
-            users: [
-                {
-                    id: 0,
-                    name: "",
-                    surname: "",
-                    username: "",
-                    dateOfBirth: "",
-                    gender: "",
-                    role: "",
-                    type: "",
-                    points: 0,
-                }
-            ],
+
+            // user: {
+            //     id: 0,
+            //     name: "",
+            //     surname: "",
+            //     username: "",
+            //     dateOfBirth: "",
+            //     gender: "",
+            //     role: "",
+            //     type: "",
+            //     points: 0,
+            // }
+
+            users: {
+                data: [],
+                totalNumberOfResults: 0,
+                hasNextPage: null,
+                hasPrevious: null
+            },
 
             userToDelete: {
                 id: 0,
@@ -149,6 +156,7 @@ Vue.component("allUsers", {
         },
 
         changeSize: function(event) {
+            this.page = 0;
             this.sizeStr = event;
             if (event === "All") {
                 this.size = 10000;

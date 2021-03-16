@@ -31,7 +31,7 @@ Vue.component("pagination", {
             </li>
 
 
-            <li class="page-item" v-if="hasNext" v-for="n in numberOfPrevious">
+            <li class="page-item" v-if="hasNext" v-for="n in numberOfNext">
                 <button 
                     class="page-link"
                     v-on:click="navigateTo(currentPage + n)" 
@@ -60,12 +60,12 @@ Vue.component("pagination", {
 
         numberOfPrevious: {
             type: Number,
-            default: 2
+            default: 1
         },
 
         numberOfNext: {
             type: Number,
-            default: 2
+            default: 1
         },
         
         justifyContent: {
