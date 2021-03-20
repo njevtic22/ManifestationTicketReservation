@@ -63,7 +63,7 @@ public class GetByIdManifestationDTO {
 
     public String imageLocationToBase64(String imageLocation) {
         try {
-            File file = new File("static" + File.separator + imageLocation);
+            File file = new File(imageLocation);
             byte[] imageBytes = Files.readAllBytes(file.toPath());
             return Base64.getEncoder().encodeToString(imageBytes);
         } catch (IOException e) {

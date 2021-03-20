@@ -33,7 +33,7 @@ Vue.component("manifestationCard", {
             </div>
         </div>
         <div class="card-footer text-right">
-            <button type="button" class="btn btn-success">Button</button>
+            <button type="button" class="btn btn-success" v-on:click="redirectToManifestation">View page</button>
         </div>
     </div>
     `,
@@ -48,7 +48,7 @@ Vue.component("manifestationCard", {
             statusColor: "",
 
             StatusColors: Object.freeze({
-                CREATED: "#00008B",     // DarkBlue
+                CREATED: "darkblue",     // DarkBlue
                 REJECTED: "#FF8C00",    // DarkOrange
                 ACTIVE: "#006400",      // DarkGreen
                 INACTIVE: "#8B0000"     // DarkRed
@@ -59,6 +59,27 @@ Vue.component("manifestationCard", {
     methods: {
         showAlternateImage: function() {
             this.imageLocationToShow = "/images/no image 2.png"
+        },
+
+        redirectToManifestation: function() {
+            // // NOTE: relies on current route
+            // const lastIndex = this.$route.path.lastIndexOf("/");
+            // const pathTo = this.$route.path.substring(0, lastIndex + 1) + this.manifestation.id;
+            // this.$router.push({ path: pathTo });
+
+
+            // NOTE: relies on roles
+            let rolePath = "";
+            if (this.$root.isAdmin())
+                rolePath = "/admin";
+            else if (this.$root.isSalesman())
+                rolePath = "/salesman";
+            else if (this.$root.isCustomer())
+                rolePath = "/customer";
+
+            
+            const pathTo = `${rolePath}/manifestations/${this.manifestation.id}`;
+            this.$router.push({ path: pathTo });
         }
     },
 

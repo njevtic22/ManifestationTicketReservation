@@ -1,5 +1,6 @@
 const ActiveAndInactiveManifestationsReg = { template: "<activeAndInactiveManifestationsReg></activeAndInactiveManifestationsReg>" };
 const ActiveAndInactiveManifestationsMap = { template: "<activeAndInactiveManifestationsMap></activeAndInactiveManifestationsMap>" };
+const Manifestation = { template: "<manifestation></manifestation>" };
 const Profile = { template: "<profile></profile>" };
 const AllUsers = { template: "<allUsers></allUsers>" }
 
@@ -162,7 +163,17 @@ const router = new VueRouter({
                     name: "AnonymousManifestationsMap",
                     component: ActiveAndInactiveManifestationsMap,
                     meta: { title: "Manifestations map" }
-                }
+                },
+                // NOTE: Order is important
+                //       If manifestations/:id is first,
+                //       then other other two would not be rendered
+                // paths are matched from up to down
+                {
+                    path: "manifestations/:id",
+                    name: "AnonymousManifestation",
+                    component: Manifestation,
+                    meta: { title: "Manifestation" }
+                },
             ],
         },
         {
@@ -190,11 +201,17 @@ const router = new VueRouter({
                     meta: { title: "Manifestations map" }
                 },
                 {
+                    path: "manifestations/:id",
+                    name: "AdminManifestation",
+                    component: Manifestation,
+                    meta: { title: "Manifestation" }
+                },
+                {
                     path: "users",
                     name: "AllUsers",
                     component: AllUsers,
                     meta: { title: "Users" }
-                }
+                },
             ],
         },
         {
@@ -220,6 +237,12 @@ const router = new VueRouter({
                     name: "SalesmanManifestationsMap",
                     component: ActiveAndInactiveManifestationsMap,
                     meta: { title: "Manifestations map" }
+                },
+                {
+                    path: "manifestations/:id",
+                    name: "SalesmanManifestation",
+                    component: Manifestation,
+                    meta: { title: "Manifestation" }
                 }
             ]
         },
@@ -246,6 +269,12 @@ const router = new VueRouter({
                     name: "CustomerManifestationsMap",
                     component: ActiveAndInactiveManifestationsMap,
                     meta: { title: "Manifestations map" }
+                },
+                {
+                    path: "manifestations/:id",
+                    name: "CustomerManifestation",
+                    component: Manifestation,
+                    meta: { title: "Manifestation" }
                 }
             ]
         },
