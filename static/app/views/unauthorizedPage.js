@@ -12,26 +12,22 @@ Vue.component("unauthorizedPage", {
         <!-- Page Content -->
         <div id="page-content-wrapper">
 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg">
-                <button class="btn btn-outline-light" id="menu-toggle" v-on:click="toggleSidebar">
+            <nav class="navbar navbar-expand-lg spaced">
+                <button class="btn btn-outline-dark" id="menu-toggle" v-on:click="toggleSidebar">
                     <list-ul-icon></list-ul-icon>
                 </button>
 
-                <h5 class="px-3 text-light pageTitle">{{$route.meta.title}}</h5>
+                <h3 class="px-3 text-dark pageTitle">{{$route.meta.title}}</h3>
             </nav>
 
-            <div class="container-fluid">
-                <main role="main">
-
-                    <div class="error-center">
-                        <img 
-                        src="/images/401 error.png" 
-                        alt="Even image is unauthorized" 
-                        width="280" height="210"/>
-                        <h1 class="text-danger">Unauthorized acces</h1>            
-                    </div>
-                    
-                </main>
+            <div class="container-fluid main-content">
+                <div class="error-center">
+                    <img 
+                    src="/images/401 error.png" 
+                    alt="Even image is unauthorized" 
+                    width="280" height="210"/>
+                    <h1 class="text-danger">Unauthorized acces</h1>            
+                </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->

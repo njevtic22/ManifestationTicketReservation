@@ -22,7 +22,7 @@ Vue.component("adminSidebar", {
                 </li>
                 
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/admin/users">
+                    <router-link class="nav-link nav-link" to="/admin/users">
                         <people-fill-icon class="sidebar-icon"></people-fill-icon>
                         Users
                     </router-link>

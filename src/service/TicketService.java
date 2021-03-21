@@ -52,9 +52,11 @@ public class TicketService implements
 
     @Override
     public void addTicket(AddTicketCommand command) {
+        // TODO: Think of adding more ticket at same time of same ticket type
         Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.manifestationId)
                 .orElseThrow(() -> new ManifestationNotFoundException(command.manifestationId));
 
+        //
         Ticket ticket = new Ticket(
                 manifestation.getRegularTicketPrice(),
                 TicketStatus.FREE,
@@ -68,6 +70,7 @@ public class TicketService implements
         manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + 1);
 
         ticketRepository.save(ticket);
+        //
         manifestationRepository.save(manifestation);
     }
 
@@ -109,8 +112,8 @@ public class TicketService implements
         if (manifestation.isSoldOut())
             throw new SoldOutException(manifestation.getName());
 
-
-        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() - 1);
+//        Ticket already has manifestation
+//        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() - 1);
 
         if (ticket.getStatus() == TicketStatus.RESERVED)
             throw new TicketReservedException(ticket.getId());
@@ -125,7 +128,7 @@ public class TicketService implements
 
         ticketRepository.save(ticket);
         customerRepository.save(customer);
-        manifestationRepository.save(manifestation);
+//        manifestationRepository.save(manifestation);
     }
 
     @Override
@@ -144,8 +147,8 @@ public class TicketService implements
         historyRepository.save(history);
         customer.addHistory(history);
 
-        Manifestation manifestation = ticket.getManifestation();
-        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + 1);
+//        Manifestation manifestation = ticket.getManifestation();
+//        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + 1);
 
         double priceToCalculateInFine = ticket.getPrice();
 
@@ -159,7 +162,7 @@ public class TicketService implements
 
         ticketRepository.save(ticket);
         customerRepository.save(customer);
-        manifestationRepository.save(manifestation);
+//        manifestationRepository.save(manifestation);
     }
 
     @Override

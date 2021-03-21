@@ -156,7 +156,7 @@ const router = new VueRouter({
                     path: "manifestations/table",
                     name: "AnonymousManifestationsTable",
                     component: ActiveAndInactiveManifestationsReg,
-                    meta: { title: "Manifestations table" }
+                    meta: { title: "Manifestations cards" }
                 },
                 {
                     path: "manifestations/map",
@@ -192,7 +192,7 @@ const router = new VueRouter({
                     path: "manifestations/table",
                     name: "AdminManifestationsTable",
                     component: ActiveAndInactiveManifestationsReg,
-                    meta: { title: "Manifestations table" }
+                    meta: { title: "Manifestations cards" }
                 },
                 {
                     path: "manifestations/map",
@@ -230,7 +230,7 @@ const router = new VueRouter({
                     path: "manifestations/table",
                     name: "SalesmanManifestationsTable",
                     component: ActiveAndInactiveManifestationsReg,
-                    meta: { title: "Manifestations table" }
+                    meta: { title: "Manifestations cards" }
                 },
                 {
                     path: "manifestations/map",
@@ -262,7 +262,7 @@ const router = new VueRouter({
                     path: "manifestations/table",
                     name: "CustomerManifestationsTable",
                     component: ActiveAndInactiveManifestationsReg,
-                    meta: { title: "Manifestations table" }
+                    meta: { title: "Manifestations cards" }
                 },
                 {
                     path: "manifestations/map",
