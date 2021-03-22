@@ -1,6 +1,6 @@
 Vue.component("numberInput", {
     template: `
-        <div v-bind:class="[componentClass]">
+        <div>
             <label v-if="labelText" v-bind:for="name">
                 {{ labelText }}
             </label>
@@ -8,17 +8,17 @@ Vue.component("numberInput", {
                 <input
                     type="number"
                     class="form-control"
-                    :min="min"
+                    v-bind:min="min"
                     v-bind:class="{'is-invalid': isInvalid}"
-                    :name="name"
-                    :value="value"
-                    :required="required"
-                    :disabled="disabled"
+                    v-bind:name="name"
+                    v-bind:value="value"
+                    v-bind:required="required"
+                    v-bind:disabled="disabled"
 
                     v-on:input="$emit('input', Number($event.target.value))"
                 >
                 <div class="invalid-tooltip">
-                    {{errorMessage}}
+                    {{ errorMessage }}
                 </div>
             </div>
         </div>
@@ -47,10 +47,6 @@ Vue.component("numberInput", {
         disabled: {
             type: Boolean,
             default: false
-        },
-        componentClass: {
-            type: String,
-            default: ""
         }
     },
     

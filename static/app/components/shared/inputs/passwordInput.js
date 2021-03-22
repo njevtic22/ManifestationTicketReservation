@@ -1,6 +1,6 @@
 Vue.component("passwordInput", {
     template: `
-        <div v-bind:class="[componentClass]">
+        <div>
             <label v-if="labelText" v-bind:for="name">
                 {{ labelText }}
             </label>
@@ -13,6 +13,7 @@ Vue.component("passwordInput", {
                     v-bind:value="value"
                     v-bind:required="required"
                     v-bind:placeholder="placeholder"
+
                     v-on:input="$emit('input', $event.target.value)"
                 >
                 <div class="input-group-append" v-on:click="toggleView">
@@ -22,7 +23,7 @@ Vue.component("passwordInput", {
                     </span>
                 </div>
                 <div class="invalid-tooltip">
-                    {{errorMessage}}
+                    {{ errorMessage }}
                 </div>
             </div>
         </div>
@@ -46,10 +47,6 @@ Vue.component("passwordInput", {
         required: {
             type: Boolean,
             default: false
-        },
-        componentClass: {
-            type: String,
-            default: ""
         }
     },
     
@@ -59,9 +56,7 @@ Vue.component("passwordInput", {
             InputTypes: Object.freeze({
                 TEXT: "text",
                 PASSWORD: "password"
-            }),
-
-
+            })
         };
     },
 

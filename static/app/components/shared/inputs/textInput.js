@@ -1,6 +1,6 @@
 Vue.component("textInput", {
     template: `
-        <div v-bind:class="[componentClass]">
+        <div>
             <label v-if="labelText" v-bind:for="name">
                 {{ labelText }}
             </label>
@@ -9,15 +9,16 @@ Vue.component("textInput", {
                     type="text"
                     class="form-control"
                     v-bind:class="{'is-invalid': isInvalid}"
-                    :name="name"
-                    :value="value"
-                    :required="required"
-                    :disabled="disabled"
-                    :placeholder="placeholder"
+                    v-bind:name="name"
+                    v-bind:value="value"
+                    v-bind:required="required"
+                    v-bind:disabled="disabled"
+                    v-bind:placeholder="placeholder"
+                    
                     v-on:input="$emit('input', $event.target.value)"
                 >
                 <div class="invalid-tooltip">
-                    {{errorMessage}}
+                    {{ errorMessage }}
                 </div>
             </div>
         </div>
@@ -46,10 +47,6 @@ Vue.component("textInput", {
         disabled: {
             type: Boolean,
             default: false
-        },
-        componentClass: {
-            type: String,
-            default: ""
         }
     },
 

@@ -3,7 +3,7 @@ package utility;
 import java.util.List;
 
 public class Pagination {
-    public <T> PaginatedResponse<T> paginate(List<T> elements, String pageStr, String sizeStr) {
+    private int parsePage(String pageStr) {
         int page;
         try {
             page = Integer.parseInt(pageStr);
@@ -14,15 +14,10 @@ public class Pagination {
             throw new IllegalArgumentException("Invalid page argument.", e);
         }
 
-        if (sizeStr.toLowerCase().equals("all"))
-            return new PaginatedResponse<>(
-                    elements,
-                    elements.size(),
-                    page > 0,
-                    false
-            );
+        return page;
+    }
 
-
+    private int parseSize(String sizeStr) {
         int size;
         try {
             size = Integer.parseInt((sizeStr));
@@ -31,6 +26,22 @@ public class Pagination {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid size argument.", e);
         }
+
+        return size;
+    }
+
+    public <T> PaginatedResponse<T> paginate(List<T> elements, String pageStr, String sizeStr) {
+        int page = parsePage(pageStr);
+
+        if (sizeStr.toLowerCase().equals("all"))
+            return new PaginatedResponse<>(
+                    elements,
+                    elements.size(),
+                    page > 0,
+                    false
+            );
+
+        int size = parseSize(sizeStr);
 
         return paginate(elements, page, size);
     }

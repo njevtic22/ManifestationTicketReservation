@@ -13,6 +13,7 @@ Vue.component("classicDateInput", {
         mode="date"
 
         ref="datePicker"
+        
         v-on:input="$emit('input', $event)"
     >
         <template v-slot="{ inputValue, inputEvents }">
@@ -32,9 +33,10 @@ Vue.component("classicDateInput", {
                         type="text"
                         class="form-control"
                         v-bind:class="{'is-invalid': isInvalid}"
-                        :name="name"
-                        :value="inputValue"
-                        :required="required"
+                        v-bind:name="name"
+                        v-bind:value="inputValue"
+                        v-bind:required="required"
+
                         v-on="inputEvents"
                     >
                     <div class="invalid-tooltip">

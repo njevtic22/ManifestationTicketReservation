@@ -2,43 +2,49 @@ Vue.component('vue-multiselect', window.VueMultiselect.default);
 
 Vue.component('selectInput',{
     template: `
-        <div v-bind:class="[componentClass]">   
+        <div>   
             <label v-if="labelText" v-bind:for="name">
                 {{ labelText }}
             </label>  
             <div class="input-group">
                 <vue-multiselect
-                    :name="name"
-                    :value="value"
-                    :options="options"
-                    :searchable="false"
-                    :show-labels="false"
-                    :close-on-select="true"
-                    :disabled="disabled"
-                    :allow-empty="!required"
-                    :preselect-first="required"
-                    :placeholder="placeholder"
+                    v-bind:name="name"
+                    v-bind:value="value"
+                    v-bind:options="options"
+                    v-bind:searchable="searchable"
+                    v-bind:show-labels="showLabels"
+                    v-bind:close-on-select="closeOnSelect"
+                    v-bind:disabled="disabled"
+                    v-bind:allow-empty="!required"
+                    v-bind:preselect-first="required"
+                    v-bind:placeholder="placeholder"
                     
                     v-on:select="$emit('select', $event)"
                 >
                 </vue-multiselect>
-                <div class="invalid-tooltip" v-bind:style="{display: display}">
-                    {{errorMessage}}
+                <div class="invalid-tooltip">
+                    {{ errorMessage }}
                 </div>
             </div>
         </div>
     `,
 
-    data: function() {
-        return {
-            display: 'none'
-        }
-    },
-
     props: {
         name: String,
         value: String,
         errorMessage: String,
+        searchable: {
+            type: Boolean,
+            default: false
+        },
+        showLabels: {
+            type: Boolean,
+            default: false
+        },
+        closeOnSelect: {
+            type: Boolean,
+            default: true
+        },
         placeholder: {
             type: String,
             default: ""
@@ -57,16 +63,6 @@ Vue.component('selectInput',{
         disabled: {
             type: Boolean,
             default: false
-        },
-        componentClass: {
-            type: String,
-            default: ""
-        }
-    },
-    
-    methods: {
-        validate() {
-            this.display = 'block';
         }
     }
 });

@@ -4,6 +4,9 @@ Vue.component("pageSizeSelect", {
         <span v-if="currentDataSize === 0" style="margin-top: 7px">
             Showing 0 results,
         </span>
+        <span v-else-if="value.toLowerCase() === 'all'" style="margin-top: 7px">
+            Showing {{ totalNumberOfResults }} results,
+        </span>
         <span v-else style="margin-top: 7px">
             Showing {{ page * size + 1 }} to {{ page * size + currentDataSize }} of {{ totalNumberOfResults }} results,
         </span>

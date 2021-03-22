@@ -159,7 +159,7 @@ Vue.component("allUsers", {
             this.page = 0;
             this.sizeStr = event;
             if (event === "All") {
-                this.size = 10000;
+                this.size = Infinity;
             } else {
                 this.size = Number(event);
             }
@@ -193,7 +193,7 @@ Vue.component("allUsers", {
 
             this.$refs.userService.getAllUsers(
                 this.page, 
-                this.size, 
+                this.sizeStr, 
                 this.sortBy, 
                 this.sortOrder,
                 this.searchData,

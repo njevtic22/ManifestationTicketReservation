@@ -33,7 +33,7 @@ Vue.component("manifestationCard", {
             </div>
         </div>
         <div class="card-footer text-right">
-            <button type="button" class="btn btn-success" v-on:click="redirectToManifestation">View page</button>
+            <button type="button" class="btn btn-success" v-on:click="redirectToManifestation">View details</button>
         </div>
     </div>
     `,

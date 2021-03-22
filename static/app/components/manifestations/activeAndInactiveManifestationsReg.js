@@ -122,7 +122,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
             this.page = 0;
             this.sizeStr = event;
             if (event === "All") {
-                this.size = 10000;
+                this.size = Infinity;
             } else {
                 this.size = Number(event);
             }
@@ -174,7 +174,13 @@ Vue.component("activeAndInactiveManifestationsReg", {
 
         getActAndInactManifestations: function() {
             this.loading = true;
-            this.manifestations.data = [];
+            this.manifestations = {
+                data: [],
+                totalNumberOfResults: 0,
+                hasNextPage: null,
+                hasPreviousPage: null
+            };
+            
             const successCallback = (response) => {
                 this.manifestations = response.data;
                 this.loading = false;
@@ -185,7 +191,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
 
             this.$refs.manifestationService.getActAndInactManifestations(
                 this.page,
-                this.size,
+                this.sizeStr,
                 this.sortBy,
                 this.sortOrder,
                 this.searchData,
