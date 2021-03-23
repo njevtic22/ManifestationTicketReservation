@@ -25,7 +25,7 @@ Vue.component("deleteUserModal", {
                 <div class="row">{{ userToDelete.username }}</div>
             </div>
         </div>
-        <br/>
+        <hr/>
         <strong>This action can not be undode.</strong>
 
         <salesmanService ref="salesmanService"></salesmanService>

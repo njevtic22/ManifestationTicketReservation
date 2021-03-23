@@ -12,14 +12,6 @@ Vue.component("manifestationService", {
     },
 
     methods: {
-        myFunction: function(successCallback, errorCallback) {
-            const url = "";
-            axios
-                .method(url)
-                .then(response => { successCallback(response); })
-                .catch(error => { errorCallback(error); });
-        },
-
         formFilterUrl: function(filterData) {
             let filterUrl = "";
             for (const key of Object.keys(filterData)) {
@@ -62,6 +54,14 @@ Vue.component("manifestationService", {
             if (filterUrl.length != 0)
                 url += `&${filterUrl}`;
                 
+            axios
+                .get(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
+        },
+
+        getManifestation: function(manifestationId, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${manifestationId}`;
             axios
                 .get(url)
                 .then(response => { successCallback(response); })

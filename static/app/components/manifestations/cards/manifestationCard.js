@@ -48,7 +48,7 @@ Vue.component("manifestationCard", {
             statusColor: "",
 
             StatusColors: Object.freeze({
-                CREATED: "darkblue",     // DarkBlue
+                CREATED: "#0000A0",     // DarkBlue
                 REJECTED: "#FF8C00",    // DarkOrange
                 ACTIVE: "#006400",      // DarkGreen
                 INACTIVE: "#8B0000"     // DarkRed

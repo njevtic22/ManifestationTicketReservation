@@ -16,10 +16,10 @@ Vue.component("changePasswordModal", {
             ref="changePasswordForm"
         >
             <div class="form-group row">
-                <label for="inputOldPas" class="col-sm-2 col-form-label">Old Password</label>
+                <label for="inputOldPas" class="col-sm-4 col-form-label">Old Password</label>
                 <passwordInput
                     id="inputOldPas"
-                    class="col-sm-10"
+                    class="col-sm-8"
                     name="oldPassword"
                     placeholder="Old password"
                     v-model="passwordData.oldPassword"
@@ -31,10 +31,10 @@ Vue.component("changePasswordModal", {
             </div>
 
             <div class="form-group row">
-                <label for="inputNewPas" class="col-sm-2 col-form-label">New password</label>
+                <label for="inputNewPas" class="col-sm-4 col-form-label">New password</label>
                 <passwordInput
                     id="inputNewPas"
-                    class="col-sm-10"
+                    class="col-sm-8"
                     name="newPassword"
                     placeholder="New password"
                     v-model="passwordData.newPassword"
@@ -46,10 +46,10 @@ Vue.component("changePasswordModal", {
             </div>
 
             <div class="form-group row">
-                <label for="inputRepPas" class="col-sm-2 col-form-label">Repeat password</label>
+                <label for="inputRepPas" class="col-sm-4 col-form-label">Repeat password</label>
                 <passwordInput
                     id="inputRepPas"
-                    class="col-sm-10"
+                    class="col-sm-8"
                     name="repPas"
                     placeholder="Repeat password"
                     v-model="passwordData.repPassword"
