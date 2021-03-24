@@ -4,7 +4,7 @@ Vue.component("manifestationCards", {
         <!-- <button type="button" v-on:click="showScreenSize">{{ JSON.stringify(window) }}</button> -->
         <div class="col mb-4" v-for="man in manifestations">
             <manifestationCard
-                class="h-100 shadow-lg"
+                class="h-100"
                 v-bind:manifestation="man"
             >
             </manifestationCard>

@@ -1,6 +1,6 @@
 Vue.component("profile", {
     template: `
-    <div class="container emp-profile">
+    <div class="container emp-profile shadow-lg">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">

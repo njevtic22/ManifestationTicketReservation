@@ -98,6 +98,10 @@ body {
     background: #fff;
 }
 
+.manifestation-image img {
+    width: 100%;
+}
+
 /* 
 
 Profile template source: 
@@ -336,8 +340,4 @@ a#mainAnchor {
 .description-scroll {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
-}
-
-.manifestation-image img {
-    width: 100%;
 }

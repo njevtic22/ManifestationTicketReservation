@@ -1,6 +1,6 @@
 Vue.component("manifestation", {
     template: `
-    <div class="manifestation-details">
+    <div class="manifestation-details shadow-lg">
         <div class="row">
             <div class="col d-flex flex-column">
                 <h3>{{ manifestation.name }}</h3>

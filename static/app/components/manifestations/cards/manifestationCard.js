@@ -1,6 +1,12 @@
 Vue.component("manifestationCard", {
     template: `
-    <div class="card">
+    <div 
+        class="card border-0"
+        v-bind:id="manifestation.id"
+        v-on:mouseenter="addShadow"
+        v-on:mouseleave="removeShadow"
+        v-on:click="redirectToManifestation"
+    >
         <img 
             v-bind:src="imageLocationToShow" 
             class="card-img-top" 
@@ -32,9 +38,10 @@ Vue.component("manifestationCard", {
                 <em>{{ manifestation.holdingDate }}</em>
             </div>
         </div>
+        <!--
         <div class="card-footer text-right">
             <button type="button" class="btn btn-success" v-on:click="redirectToManifestation">View details</button>
-        </div>
+        </div> -->
     </div>
     `,
 
@@ -57,6 +64,14 @@ Vue.component("manifestationCard", {
     },
 
     methods: {
+        addShadow: function() {
+            $(`#${this.manifestation.id}`).addClass('shadow-lg').css('cursor', 'pointer'); 
+        },
+
+        removeShadow: function() {
+            $(`#${this.manifestation.id}`).removeClass('shadow-lg');
+        },
+
         showAlternateImage: function() {
             this.imageLocationToShow = "/images/no image 2.png"
         },
