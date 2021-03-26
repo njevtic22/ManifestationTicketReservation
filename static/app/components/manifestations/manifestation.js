@@ -1,54 +1,128 @@
 Vue.component("manifestation", {
     template: `
-    <div class="manifestation-details shadow-lg">
-        <div class="row">
-            <div class="col d-flex flex-column">
-                <h3>{{ manifestation.name }}</h3>
+    <div>
+        <div class="form-row card border-0 manifestation-details shadow-lg">
+            <div class="row">
+                <div class="col d-flex flex-column">
+                    <h3>{{ manifestation.name }}</h3>
 
-                <div class="spaced">
-                    <h5>{{ manifestation.type }}</h5>
-                    <p class="card-title btn text-white" v-bind:style="{'background-color': statusColor}">{{ manifestation.status }}</p>
-                </div>
-
-                <em>{{ manifestation.holdingDate }}</em>
-                <br/>
-                <em>{{ formattedAddress }}</em>
-                
-                <br/>
-                <br/>
-                <div class='row' style="margin-left: 1px">
-                    <div class="col-md-6"> 
-                        <div class="row">Total number of tickets:</div>
-                        <div class="row">Tickets left:</div>
-                        <div class="row">Regular ticket price:</div>
+                    <div class="spaced">
+                        <h5>{{ manifestation.type }}</h5>
+                        <p class="card-title btn text-white" v-bind:style="{'background-color': statusColor}">{{ manifestation.status }}</p>
                     </div>
-                    <div class="col-md-4"> 
-                        <div class="row">{{ manifestation.maxNumberOfTickets }}</div>
-                        <div class="row">{{ manifestation.numberOfTicketsLeft }}</div>
-                        <div class="row">{{ manifestation.regularTicketPrice }} RSD</div>
+                    
+                    <div class='row' style="margin-left: 1px">
+                        <div class="col-md-6"> 
+                            <div class="row">Total number of tickets:</div>
+                            <div class="row">Tickets left:</div>
+                            <div class="row">Regular ticket price:</div>
+                        </div>
+                        <div class="col-md-4"> 
+                            <div class="row">{{ manifestation.maxNumberOfTickets }}</div>
+                            <div class="row">{{ manifestation.numberOfTicketsLeft }}</div>
+                            <div class="row">{{ manifestation.regularTicketPrice }} RSD</div>
+                        </div>
+                    </div>
+
+                    <hr/>
+                    <p class="description-scroll">{{ manifestation.description }}</p>
+                    <hr/>
+
+                    
+                    <div class="spaced mt-auto">
+                        <em>{{ formattedAddress }}</em>
+                        <em>{{ manifestation.holdingDate }}</em>
                     </div>
                 </div>
-
-                <hr/>
-                <p class="description-scroll">{{ manifestation.description }}</p>
-                <hr/>
-
-                
-                <div class="spaced mt-auto">
-                    <em>{{ formattedAddress }}</em>
-                    <em>{{ manifestation.holdingDate }}</em>
+                <div class="col manifestation-image">
+                    <img 
+                        v-bind:src="imageLocationToShow"
+                        alt="Image not found"
+                        v-on:error="showAlternateImage"
+                    >
                 </div>
             </div>
-            <div class="col manifestation-image">
-                <img 
-                    v-bind:src="imageLocationToShow"
-                    alt="Image not found"
-                    v-on:error="showAlternateImage"
-                >
-            </div>
+
+            <manifestationService ref="manifestationService"></manifestationService>
         </div>
 
-        <manifestationService ref="manifestationService"></manifestationService>
+        <div class="form-row" style="margin-top: 20px;">
+            <div class="col-sm card border-0 manifestation-details shadow-lg" style="margin-left: 10px; padding: 3%;">
+                <div class="spaced">
+                    <h1>Average rating: {{ manifestation.avgRating }}</h1>
+                    <button class="btn btn-primary" v-if="$root.isCustomer()">Add review</button>
+                </div>
+                <br/>
+                <div class="spaced">
+                    <pageSizeSelect
+                        class="d-flex justify-content-center"
+
+                        name="sizeInput"
+                        v-bind:value="reviewSizeStr"
+                        v-bind:options="reivewSizeOptions"
+                        v-bind:page="reviewPage"
+                        v-bind:size="reviewSize"
+                        v-bind:currentDataSize="reviews.data.length"
+                        v-bind:totalNumberOfResults="reviews.totalNumberOfResults"
+                        ref="pageSizeSelect"
+
+                        v-on:select="changeSize($event)"
+                    >
+                    </pageSizeSelect>
+
+                    <pagination
+                        class="d-flex justify-content-center"
+
+                        v-bind:currentPage="reviewPage"
+                        v-bind:hasPrevious="reviews.hasPreviousPage"
+                        v-bind:hasNext="reviews.hasNextPage"
+
+                        v-on:previous="previousPage"
+                        v-on:next="nextPage"
+                        v-on:to="toPage($event)"
+                    >
+                    </pagination>
+                </div>
+                
+                <div>
+                    <div v-for="x in reviews.data">
+                        {{ x }} TODO: show Review
+                    </div>
+                </div>
+
+                <br/>
+                <div class="spaced">
+                    <pageSizeSelect
+                        class="d-flex justify-content-center"
+
+                        name="sizeInput"
+                        v-bind:value="reviewSizeStr"
+                        v-bind:options="reivewSizeOptions"
+                        v-bind:page="reviewPage"
+                        v-bind:size="reviewSize"
+                        v-bind:currentDataSize="reviews.data.length"
+                        v-bind:totalNumberOfResults="reviews.totalNumberOfResults"
+                        ref="pageSizeSelect"
+
+                        v-on:select="changeSize($event)"
+                    >
+                    </pageSizeSelect>
+
+                    <pagination
+                        class="d-flex justify-content-center"
+
+                        v-bind:currentPage="reviewPage"
+                        v-bind:hasPrevious="reviews.hasPreviousPage"
+                        v-bind:hasNext="reviews.hasNextPage"
+
+                        v-on:previous="previousPage"
+                        v-on:next="nextPage"
+                        v-on:to="toPage($event)"
+                    >
+                    </pagination>
+                </div>
+            </div>
+        </div>
     </div>
     `,
 
@@ -108,13 +182,66 @@ Vue.component("manifestation", {
                 REJECTED: "#FF8C00",    // DarkOrange
                 ACTIVE: "#006400",      // DarkGreen
                 INACTIVE: "#8B0000"     // DarkRed
-            })
+            }),
+
+            reviewPage: 0,
+            reviewSize: 5,
+            reviewSizeStr: "5",
+            reivewSizeOptions: [
+                "5",
+                "10",
+                "50",
+                "All"
+            ],
+
+            reviews: {
+                data: [
+                    0, 
+                    1, 
+                    2, 
+                    3, 
+                    4
+                ],
+                totalNumberOfResults: 10,
+                hasPreviousPage: true,
+                hasNextPage: true
+            }
         };
     },
 
     methods: {
         showAlternateImage: function() {
-            this.imageLocationToShow = "/images/no image 2.png"
+            this.imageLocationToShow = "/images/no image 2.png";
+        },
+
+        changeSize: function(event) {
+            this.reviewPage = 0;
+            this.reviewSizeStr = event;
+            if (event === "All") {
+                this.reviewSize = Infinity;
+            } else {
+                this.reviewSize = Number(event);
+            }
+            this.getReviews();
+        },
+
+        previousPage: function() {
+            this.reviewPage--;
+            this.getReviews();
+        },
+
+        nextPage: function() {
+            this.reviewPage++;
+            this.getReviews();
+        },
+
+        toPage: function(to) {
+            this.page = to;
+            this.getReviews();
+        },
+
+        getReviews: function() {
+            console.log("Implement this");
         },
 
         getManifestation: function(manifestationId) {
@@ -144,6 +271,7 @@ Vue.component("manifestation", {
     mounted() {
         const id = this.$route.params.id;
         this.getManifestation(id);
+        this.getReviews();
     },
 
     destroyed() {}
