@@ -52,6 +52,7 @@ public class ReviewController {
                 post("", add);
                 get("", getAll, new GetAllReviewsTransformer(gson, new GetAllReviewsMapper()));
                 // TODO: forManifestation
+                // TODO: createdForSalesman
                 put("/:id", update);
                 delete("/:id", delete);
             });
