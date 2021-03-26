@@ -51,6 +51,7 @@ public class ReviewController {
             path("/reviews", () -> {
                 post("", add);
                 get("", getAll, new GetAllReviewsTransformer(gson, new GetAllReviewsMapper()));
+                // TODO: forManifestation
                 put("/:id", update);
                 delete("/:id", delete);
             });

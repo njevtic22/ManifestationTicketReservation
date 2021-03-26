@@ -28,7 +28,7 @@ public class GetByIdManifestationDTO {
     public String imageBase64;
     public String imageType;
 
-    public List<GetAllReviewsForManifestationDTO> reviews;
+//    public List<GetAllReviewsForManifestationDTO> reviews;
 
     public GetByIdManifestationDTO(Manifestation manifestation, String parsedDate) {
         this.id = manifestation.getId();
@@ -49,12 +49,12 @@ public class GetByIdManifestationDTO {
         int dotIndex = imageLocation.lastIndexOf(".");
         this.imageType = imageLocation.substring(dotIndex + 1);
 
-        this.reviews = manifestation.getReviews()
-                .stream()
-                // filtering out not approved reviews and deleted reviews
-                .filter(review -> /*review.getStatus() == ReviewStatus.APPROVED ||*/ !review.isArchived())
-                .map(GetAllReviewsForManifestationDTO::new)
-                .collect(Collectors.toList());
+//        this.reviews = manifestation.getReviews()
+//                .stream()
+//                // filtering out not approved reviews and deleted reviews
+//                .filter(review -> /*review.getStatus() == ReviewStatus.APPROVED ||*/ !review.isArchived())
+//                .map(GetAllReviewsForManifestationDTO::new)
+//                .collect(Collectors.toList());
 
 
         this.avgRating = 0;
