@@ -6,9 +6,15 @@ Vue.component("manifestation", {
                 <div class="col d-flex flex-column">
                     <h3>{{ manifestation.name }}</h3>
 
-                    <div class="spaced">
+                    <div class="d-flex justify-content-between">
                         <h5>{{ manifestation.type }}</h5>
-                        <p class="card-title btn text-white" v-bind:style="{'background-color': statusColor}">{{ manifestation.status }}</p>
+                        <p 
+                            class="card-title btn text-white"
+                            style="cursor: default;"
+                            v-bind:style="{'background-color': statusColor}"
+                        >
+                            {{ manifestation.status }}
+                        </p>
                     </div>
                     
                     <div class='row' style="margin-left: 1px">
@@ -29,7 +35,7 @@ Vue.component("manifestation", {
                     <hr/>
 
                     
-                    <div class="spaced mt-auto">
+                    <div class="d-flex justify-content-between mt-auto">
                         <em>{{ formattedAddress }}</em>
                         <em>{{ manifestation.holdingDate }}</em>
                     </div>
@@ -48,12 +54,12 @@ Vue.component("manifestation", {
 
         <div class="form-row" style="margin-top: 20px;">
             <div class="col-sm card border-0 manifestation-details shadow-lg" style="margin-left: 10px; padding: 3%;">
-                <div class="spaced">
+                <div class="d-flex justify-content-between">
                     <h1>Average rating: {{ manifestation.avgRating }}</h1>
                     <button class="btn btn-primary" v-if="$root.isCustomer()">Add review</button>
                 </div>
                 <br/>
-                <div class="spaced">
+                <div class="d-flex justify-content-between">
                     <pageSizeSelect
                         class="d-flex justify-content-center"
 
@@ -91,7 +97,7 @@ Vue.component("manifestation", {
                 </div>
 
                 <br/>
-                <div class="spaced">
+                <div class="d-flex justify-content-between">
                     <pageSizeSelect
                         class="d-flex justify-content-center"
 

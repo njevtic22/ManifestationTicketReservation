@@ -5,7 +5,7 @@ Vue.component("addSalesmanModal", {
         headerClass="bg-success"
         btnSuccessClass="btn-success"
         modalTitle="Add Salesman"
-        successBtnText="Add salesman"
+        successBtnText="Add Salesman"
         cancelBtnText="Cancel"
 
         v-on:successEvent="createSalesman"

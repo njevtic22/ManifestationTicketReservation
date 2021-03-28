@@ -162,10 +162,21 @@ public class ManifestationController {
 
     public Route getAllForSalesman = (Request request, Response response) -> {
         ensureUserIsSalesman.ensure(request);
-        // TODO: Implement pagination, sorting, filtering, searching
+
         Salesman salesman = request.attribute("user");
+        List<Manifestation> manifestations = new ArrayList<>(getAllManifestationsForSalesmanUseCase.getAllManifestationsForSalesman(salesman));
+        applyFilter(request, manifestations);
+        applySearch(request, manifestations);
+        applySort(request, manifestations);
+
+        PaginatedResponse<Manifestation> paginatedManifestations = pagination.paginate(
+                manifestations,
+                request.queryParams("page"),
+                request.queryParams("size")
+        );
+
         response.status(HttpStatus.OK_200);
-        return getAllManifestationsForSalesmanUseCase.getAllManifestationsForSalesman(salesman);
+        return paginatedManifestations;
     };
 
     public Route getCreated = (Request request, Response response) -> {

@@ -60,6 +60,22 @@ Vue.component("manifestationService", {
                 .catch(error => { errorCallback(error); });
         },
 
+        getSalesmanManifestations: function(page, size, sortBy, sortOrder, searchData, filterData, successCallback, errorCallback) {
+            const searchUrl = this.formSearchUrl(searchData);
+            const filterUrl = this.formFilterUrl(filterData);
+
+            let url = `${this.baseUrl}/forSalesman?page=${page}&size=${size}&sortBy=${sortBy}&sortOrder=${sortOrder}`;
+            if (searchUrl.length != 0)
+                url += `&${searchUrl}`;
+            if (filterUrl.length != 0)
+                url += `&${filterUrl}`;
+            
+            axios
+                .get(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
+        },
+
         getManifestation: function(manifestationId, successCallback, errorCallback) {
             const url = `${this.baseUrl}/${manifestationId}`;
             axios

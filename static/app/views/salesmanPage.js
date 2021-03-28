@@ -11,7 +11,7 @@ Vue.component("salesmanPage", {
         <!-- Page Content -->
         <div id="page-content-wrapper">
 
-            <nav class="navbar navbar-expand-lg spaced">
+            <nav class="navbar navbar-expand-lg d-flex justify-content-between">
                 <button class="btn btn-outline-dark" id="menu-toggle" v-on:click="toggleSidebar">
                     <list-ul-icon></list-ul-icon>
                 </button>

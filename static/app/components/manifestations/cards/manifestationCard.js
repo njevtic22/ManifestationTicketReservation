@@ -14,11 +14,11 @@ Vue.component("manifestationCard", {
             v-on:error="showAlternateImage"
         >
         <div class="card-body d-flex flex-column">
-            <div class="spaced">
+            <div class="d-flex justify-content-between">
                 <h5 class="card-title">{{ manifestation.name }}</h5>
                 <p class="card-title btn text-white" v-bind:style="{'background-color': statusColor}">{{ manifestation.status }}</p>
             </div>
-            <div class="spaced">
+            <div class="d-flex justify-content-between">
                 <h5 class="card-title" v-if="manifestation.status == 'INACTIVE'">Rating: {{ manifestation.avgRating }}</h5>
                 <h5 class="card-title" v-else></h5>
 
@@ -33,7 +33,7 @@ Vue.component("manifestationCard", {
             <p class="card-text description-scroll">{{ manifestation.description }}</p>
             <hr/>
 
-            <div class="spaced mt-auto">
+            <div class="d-flex justify-content-between mt-auto">
                 <em style="margin-right: 10px;">{{ formattedAddress }}</em>
                 <em>{{ manifestation.holdingDate }}</em>
             </div>

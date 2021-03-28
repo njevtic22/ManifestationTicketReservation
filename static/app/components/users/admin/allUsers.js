@@ -3,7 +3,7 @@ Vue.component("allUsers", {
     <div>
         <div class="form-row">
             <div class="form-group col-md-9">
-                <div class="col spaced">
+                <div class="col d-flex justify-content-between">
                     <pageSizeSelect 
                         name="sizeInput"
                         v-bind:value="sizeStr"

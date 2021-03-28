@@ -1,4 +1,4 @@
-Vue.component("ActiveAndInactiveManifestationsMap", {
+Vue.component("activeAndInactiveManifestationsMap", {
     template: `
     <div>
         <h1>Manifestations map</h1>

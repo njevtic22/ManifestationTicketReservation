@@ -1,9 +1,9 @@
-Vue.component("activeAndInactiveManifestationsReg", {
+Vue.component("salesmanManifestationsReg", {
     template: `
     <div>
         <div class="form-row">
             <div class="form-group col-md-9">
-                <div class="col spaced">  
+                <div class="col d-flex justify-content-between">
                     <pageSizeSelect
                         name="sizeInput"
                         v-bind:value="sizeStr"
@@ -28,7 +28,18 @@ Vue.component("activeAndInactiveManifestationsReg", {
                         v-on:to="toPage($event)"
                     >
                     </pagination>
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#createManifestationModalId"
+                    >
+                        Create Manifestation
+                    </button>
                 </div>
+
+                <br/>
 
 
                 <div class="d-flex justify-content-center" v-if="loading">
@@ -46,8 +57,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
                 >
                 </manifestationCards>
             </div>
-
-            
+        
             <div class="form-group col-md-3">
                 <manifestationFilterSearchSortForm
                     v-on:submitSearchFilterSort="submitSearchFilterSort($event)"
@@ -56,6 +66,11 @@ Vue.component("activeAndInactiveManifestationsReg", {
             </div>
         </div>
 
+        
+        <createManifestationModal 
+            id="createManifestationModalId"
+            
+        ></createManifestationModal>
 
         <manifestationService ref="manifestationService"></manifestationService>
     </div>
@@ -105,17 +120,17 @@ Vue.component("activeAndInactiveManifestationsReg", {
     methods: {
         previousPage: function() {
             this.page--;
-            this.getActAndInactManifestations();
+            this.getSalesmanManifestations();
         },
         
         nextPage: function() {
             this.page++;
-            this.getActAndInactManifestations();
+            this.getSalesmanManifestations();
         },
 
         toPage: function(to) {
             this.page = to;
-            this.getActAndInactManifestations();
+            this.getSalesmanManifestations();
         },
 
         changeSize: function(event) {
@@ -126,7 +141,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
             } else {
                 this.size = Number(event);
             }
-            this.getActAndInactManifestations();
+            this.getSalesmanManifestations();
         },
 
         submitSearchFilterSort: function(searchFilterSortEvent) {
@@ -145,7 +160,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
                 this.searchData.searchDateTo += " 23:59:59";
 
             
-            this.getActAndInactManifestations();
+            this.getSalesmanManifestations();
         },
 
         resetSearchFilterSort: function() {
@@ -169,10 +184,11 @@ Vue.component("activeAndInactiveManifestationsReg", {
             },
 
 
-            this.getActAndInactManifestations();
+            this.getSalesmanManifestations();
         },
+        
 
-        getActAndInactManifestations: function() {
+        getSalesmanManifestations: function() {
             this.loading = true;
             this.manifestations = {
                 data: [],
@@ -189,7 +205,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
                 this.$root.defaultCatchError(error);
             };
 
-            this.$refs.manifestationService.getActAndInactManifestations(
+            this.$refs.manifestationService.getSalesmanManifestations(
                 this.page,
                 this.sizeStr,
                 this.sortBy,
@@ -203,7 +219,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
     },
 
     mounted() {
-        this.getActAndInactManifestations();
+        this.getSalesmanManifestations();
     },
 
     destroyed() {}

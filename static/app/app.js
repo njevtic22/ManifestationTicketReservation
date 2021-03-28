@@ -1,5 +1,9 @@
 const ActiveAndInactiveManifestationsReg = { template: "<activeAndInactiveManifestationsReg></activeAndInactiveManifestationsReg>" };
 const ActiveAndInactiveManifestationsMap = { template: "<activeAndInactiveManifestationsMap></activeAndInactiveManifestationsMap>" };
+
+const SalesmanManifestationsReg = { template: "<salesmanManifestationsReg></salesmanManifestationsReg>" };
+const SalesmanManifestationsMap = { template: "<salesmanManifestationsMap></salesmanManifestationsMap>" };
+
 const Manifestation = { template: "<manifestation></manifestation>" };
 const Profile = { template: "<profile></profile>" };
 const AllUsers = { template: "<allUsers></allUsers>" }
@@ -219,6 +223,7 @@ const router = new VueRouter({
             name: "SalesmanPage",
             component: SalesmanPage,
             beforeEnter: isSalesmanRoute,
+
             children: [
                 {
                     path: "profile",
@@ -237,6 +242,18 @@ const router = new VueRouter({
                     name: "SalesmanManifestationsMap",
                     component: ActiveAndInactiveManifestationsMap,
                     meta: { title: "Manifestations map" }
+                },
+                {
+                    path: "manifestations/mine/table",
+                    name: "SSalesmanManifestationsTable",
+                    component: SalesmanManifestationsReg,
+                    meta: { title: "Mine manifestations cards" }
+                },
+                {
+                    path: "manifestations/mine/map",
+                    name: "SSalesmanManifestationsMap",
+                    component: SalesmanManifestationsMap,
+                    meta: { title: "Mine manifestations map" }
                 },
                 {
                     path: "manifestations/:id",
