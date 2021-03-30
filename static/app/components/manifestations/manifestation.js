@@ -56,7 +56,12 @@ Vue.component("manifestation", {
             <div class="col-sm card border-0 manifestation-details shadow-lg" style="margin-left: 10px; padding: 3%;">
                 <div class="d-flex justify-content-between">
                     <h1>Average rating: {{ manifestation.avgRating }}</h1>
-                    <button class="btn btn-primary" v-if="$root.isCustomer()">Add review</button>
+                    <button 
+                        class="btn btn-primary" 
+                        v-if="$root.isCustomer() && manifestation.status === 'INACTIVE'"
+                    >
+                        Add review
+                    </button>
                 </div>
                 <br/>
                 <div class="d-flex justify-content-between">

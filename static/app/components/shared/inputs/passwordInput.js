@@ -16,7 +16,13 @@ Vue.component("passwordInput", {
 
                     v-on:input="$emit('input', $event.target.value)"
                 >
-                <div class="input-group-append" v-on:click="toggleView">
+                <div
+                    class="input-group-append"
+                    
+                    v-on:mouseenter="showPointer"
+                    v-on:mouseleave="showArrow" 
+                    v-on:click="toggleView"
+                >
                     <span class="input-group-text">
                         <eye-fill-icon v-if="inputType === InputTypes.TEXT"></eye-fill-icon>
                         <eye-slash-fill-icon v-else></eye-slash-fill-icon>
@@ -61,6 +67,14 @@ Vue.component("passwordInput", {
     },
 
     methods: {
+        showPointer: function() {
+            $('.input-group-append').css('cursor', 'pointer'); 
+        },
+
+        showArrow: function() {
+            $('.input-group-append').css('cursor', 'default'); 
+        },
+
         toggleView: function() {
             if (this.inputType === this.InputTypes.PASSWORD)
                 this.inputType = this.InputTypes.TEXT;

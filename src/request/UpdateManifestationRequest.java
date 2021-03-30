@@ -9,5 +9,6 @@ public class UpdateManifestationRequest {
     public String status;
     public String type;
 
-    public String imageLocation;
+    public String imageBase64;
+    public String imageType;
 }

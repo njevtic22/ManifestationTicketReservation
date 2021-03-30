@@ -13,9 +13,21 @@ public class UpdateManifestationCommand implements SelfValidating {
     public String status;
     public String type;
 
-    public String imageLocation;
+    public String imageBase64;
+    public String imageType;
 
-    public UpdateManifestationCommand(Long id, String name, long maxNumberOfTickets, double regularTicketPrice, String holdingDate, String description, String status, String type, String imageLocation) {
+    public UpdateManifestationCommand(
+            Long id,
+            String name,
+            long maxNumberOfTickets,
+            double regularTicketPrice,
+            String holdingDate,
+            String description,
+            String status,
+            String type,
+            String imageBase64,
+            String imageType
+    ) {
         this.id = id;
         this.name = name;
         this.maxNumberOfTickets = maxNumberOfTickets;
@@ -25,7 +37,8 @@ public class UpdateManifestationCommand implements SelfValidating {
         this.status = status;
         this.type = type;
 
-        this.imageLocation = imageLocation;
+        this.imageBase64 = imageBase64;
+        this.imageType = imageType;
         this.validateSelf();
     }
 
@@ -55,7 +68,10 @@ public class UpdateManifestationCommand implements SelfValidating {
         if (type == null || type.trim().isEmpty())
             throw new ConstraintViolationException("Manifestation type must not be empty.");
 
-        if (imageLocation == null || imageLocation.trim().isEmpty())
+        if (imageBase64 == null /*|| imageBase64.trim().isEmpty()*/)
             throw new ConstraintViolationException("Image location must not be empty.");
+
+        if (imageType == null /*|| imageType.trim().isEmpty()*/)
+            throw new ConstraintViolationException("Image type must not be empty.");
     }
 }

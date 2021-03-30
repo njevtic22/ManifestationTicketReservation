@@ -17,7 +17,6 @@ public class AddManifestationRequest {
     public String city;
     public String postalCode;
 
-    // TODO: CHANGE THIS -> maybe
-    public String imageLocation;
-
+    public String imageBase64;
+    public String imageType;
 }

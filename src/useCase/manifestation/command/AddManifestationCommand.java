@@ -21,10 +21,26 @@ public class AddManifestationCommand implements SelfValidating {
     public String city;
     public String postalCode;
 
-    // TODO: CHANGE THIS -> maybe
-    public String imageLocation;
+    public String imageBase64;
+    public String imageType;
 
-    public AddManifestationCommand(Long salesmanId, String name, long maxNumberOfTickets, double regularTicketPrice, String holdingDate, String description, String status, String type, double longitude, double latitude, String street, long number, String city, String postalCode, String imageLocation) {
+    public AddManifestationCommand(
+            Long salesmanId,
+            String name,
+            long maxNumberOfTickets,
+            double regularTicketPrice,
+            String holdingDate,
+            String description,
+            String status,
+            String type,
+            double longitude,
+            double latitude,
+            String street,
+            long number,
+            String city,
+            String postalCode,
+            String imageBase64,
+            String imageType) {
         this.salesmanId = salesmanId;
         this.name = name;
         this.maxNumberOfTickets = maxNumberOfTickets;
@@ -39,7 +55,8 @@ public class AddManifestationCommand implements SelfValidating {
         this.number = number;
         this.city = city;
         this.postalCode = postalCode;
-        this.imageLocation = imageLocation;
+        this.imageBase64 = imageBase64;
+        this.imageType = imageType;
         this.validateSelf();
     }
 
@@ -87,7 +104,10 @@ public class AddManifestationCommand implements SelfValidating {
         if (postalCode == null || postalCode.trim().isEmpty())
             throw new ConstraintViolationException("Postal code must not be empty.");
 
-        if (imageLocation == null || imageLocation.trim().isEmpty())
+        if (imageBase64 == null /*|| imageBase64.trim().isEmpty()*/)
             throw new ConstraintViolationException("Image location must not be empty.");
+
+        if (imageType == null /*|| imageType.trim().isEmpty()*/)
+            throw new ConstraintViolationException("Image type must not be empty.");
     }
 }

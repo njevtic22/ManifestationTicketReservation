@@ -18,14 +18,18 @@ import useCase.manifestation.command.AddManifestationCommand;
 import useCase.manifestation.command.UpdateLocationCommand;
 import useCase.manifestation.command.UpdateManifestationCommand;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ManifestationService implements
@@ -49,6 +53,24 @@ public class ManifestationService implements
         this.salesmanRepository = salesmanRepository;
     }
 
+    public String base64ToImageLocation(String imageBase64, String imageType, long manifestationId) {
+        if (imageBase64.trim().isEmpty() || imageType.trim().isEmpty())
+            return "";
+
+        try {
+            byte[] decodedImage = Base64.getDecoder().decode(imageBase64);
+            String imageLocation = "images/manifestation/manifestation " + manifestationId + "." + imageType;
+
+            OutputStream stream = new FileOutputStream(imageLocation);
+            stream.write(decodedImage);
+            stream.close();
+
+            return imageLocation;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
     @Override
     public void addManifestation(AddManifestationCommand command) throws ParseException {
         Manifestation manifestation = new Manifestation(
@@ -71,7 +93,7 @@ public class ManifestationService implements
                         )
                 ),
                 new Image(
-                        command.imageLocation
+                        base64ToImageLocation(command.imageBase64, command.imageType, manifestationRepository.count() + 1)
                 )
         );
 
@@ -159,7 +181,7 @@ public class ManifestationService implements
         manifestation.setStatus(ManifestationStatus.valueOf(command.status));
         manifestation.setType(ManifestationType.valueOf(command.type));
 
-        manifestation.getImage().setLocation(command.imageLocation);
+        manifestation.getImage().setLocation(base64ToImageLocation(command.imageBase64, command.imageType, manifestation.getId()));
 
         manifestationRepository.save(manifestation);
     }

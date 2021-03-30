@@ -134,7 +134,8 @@ public class ManifestationController {
                 requestBody.number,
                 requestBody.city,
                 requestBody.postalCode,
-                requestBody.imageLocation
+                requestBody.imageBase64,
+                requestBody.imageType
         );
         addManifestationUseCase.addManifestation(command);
         response.status(HttpStatus.CREATED_201);
@@ -205,7 +206,8 @@ public class ManifestationController {
                 requestBody.description,
                 requestBody.status,
                 requestBody.type,
-                requestBody.imageLocation
+                requestBody.imageBase64,
+                requestBody.imageType
         );
         updateManifestationUseCase.updateManifestation(command);
         response.status(HttpStatus.OK_200);
