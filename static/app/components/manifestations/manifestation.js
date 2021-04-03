@@ -8,6 +8,13 @@ Vue.component("manifestation", {
 
                     <div class="d-flex justify-content-between">
                         <h5>{{ manifestation.type }}</h5>
+                        <div>
+                        <button 
+                            class="card-title btn btn-primary"
+                            v-if="$root.isSalesman() && (manifestation.status === 'ACTIVE' || manifestation.status === 'CREATED')"
+                        >
+                            Add tickets
+                        </button>
                         <p 
                             class="card-title btn text-white"
                             style="cursor: default;"
@@ -15,6 +22,7 @@ Vue.component("manifestation", {
                         >
                             {{ manifestation.status }}
                         </p>
+                        </div>
                     </div>
                     
                     <div class='row' style="margin-left: 1px">

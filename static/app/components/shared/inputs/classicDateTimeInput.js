@@ -1,4 +1,4 @@
-Vue.component("classicDateInput", {
+Vue.component("classicDateTimeInput", {
     template: `
     <v-date-picker
         v-bind:value="value"
@@ -9,7 +9,10 @@ Vue.component("classicDateInput", {
         v-bind:masks="masks"
         is24hr 
 
-        ref="datePicker"
+        v-bind:minute-increment="15" 
+        mode="dateTime"
+
+        ref="dateTimePicker"
         
         v-on:input="$emit('input', $event)"
     >
@@ -75,7 +78,7 @@ Vue.component("classicDateInput", {
             dateTimeFormat: Object,
 
             masks: {
-                input: this.$root.getDateFormat()
+                input: this.$root.getDateTimeFormat()
             },
             ///////////////////////////////////////////////////////////////////
 
@@ -83,7 +86,7 @@ Vue.component("classicDateInput", {
             // for model-config in v-date-picker
             dateToStringConfig: {
                 type: 'string',
-                mask: this.$root.getDateFormat()
+                mask: this.$root.getDateTimeFormat()
             },
         };
     },
