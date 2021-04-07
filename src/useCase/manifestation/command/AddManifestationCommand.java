@@ -40,7 +40,8 @@ public class AddManifestationCommand implements SelfValidating {
             String city,
             String postalCode,
             String imageBase64,
-            String imageType) {
+            String imageType
+    ) {
         this.salesmanId = salesmanId;
         this.name = name;
         this.maxNumberOfTickets = maxNumberOfTickets;
@@ -68,8 +69,8 @@ public class AddManifestationCommand implements SelfValidating {
         if (name == null || name.trim().isEmpty())
             throw new ConstraintViolationException("Name must not be empty.");
 
-        if (maxNumberOfTickets <= 0)
-            throw new ConstraintViolationException("Max number of tickets must not be empty.");
+        if (maxNumberOfTickets < 0)
+            throw new ConstraintViolationException("Max number of tickets must not be negative number.");
 
         if (regularTicketPrice <= 0)
             throw new ConstraintViolationException("Regular ticket price must not be empty.");

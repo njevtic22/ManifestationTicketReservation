@@ -1,7 +1,7 @@
 Vue.component("manifestation", {
     template: `
     <div>
-        <div class="form-row card border-0 manifestation-details shadow-lg">
+        <div class="form-row border-0 manifestation-details shadow-lg">
             <div class="row">
                 <div class="col d-flex flex-column">
                     <h3>{{ manifestation.name }}</h3>
@@ -9,12 +9,6 @@ Vue.component("manifestation", {
                     <div class="d-flex justify-content-between">
                         <h5>{{ manifestation.type }}</h5>
                         <div>
-                        <button 
-                            class="card-title btn btn-primary"
-                            v-if="$root.isSalesman() && (manifestation.status === 'ACTIVE' || manifestation.status === 'CREATED')"
-                        >
-                            Add tickets
-                        </button>
                         <p 
                             class="card-title btn text-white"
                             style="cursor: default;"
@@ -39,7 +33,7 @@ Vue.component("manifestation", {
                     </div>
 
                     <hr/>
-                    <p class="description-scroll">{{ manifestation.description }}</p>
+                    <p class="manifestation-description-scroll">{{ manifestation.description  }}</p>
                     <hr/>
 
                     

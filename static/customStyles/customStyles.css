@@ -102,6 +102,23 @@ body {
     width: 100%;
 }
 
+/* Scroll */
+.manifestation-description-scroll {
+    height: 400px;
+    overflow: auto;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.manifestation-description-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.manifestation-description-scroll {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
 /* 
 
 Profile template source: 
@@ -327,7 +344,7 @@ a#mainAnchor {
 
 /* Scroll */
 .description-scroll {
-    height: 200px;
+    height: 300px;
     overflow: auto;
 }
 

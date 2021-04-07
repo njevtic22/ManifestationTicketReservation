@@ -82,6 +82,13 @@ Vue.component("manifestationService", {
                 .get(url)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
+        },
+
+        addManifestation: function(manifestationToAdd, successCallback, errorCallback) {
+            axios
+                .post(this.baseUrl, manifestationToAdd)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
         }
     },
 

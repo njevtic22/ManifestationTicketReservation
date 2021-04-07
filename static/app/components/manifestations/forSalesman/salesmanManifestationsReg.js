@@ -69,7 +69,7 @@ Vue.component("salesmanManifestationsReg", {
         
         <createManifestationModal 
             id="createManifestationModalId"
-            
+            v-on:manifestationCreated="getSalesmanManifestations"
         ></createManifestationModal>
 
         <manifestationService ref="manifestationService"></manifestationService>

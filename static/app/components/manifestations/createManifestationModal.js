@@ -71,13 +71,33 @@ Vue.component("createManifestationModal", {
                     </classicDateTimeInput>
                 </div>
             </div>
+
             <div class="form-row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
+                    <img 
+                        class="w-100"
+                        alt="Image not found"
+                        v-bind:src="imageToShow"
+                        v-on:error="showAlternateImage"
+                    >
+                    &nbsp;
+                    <div class="custom-file">
+                        <input 
+                            type="file" 
+                            class="custom-file-input" 
+                            id="fileInput" 
+                            v-on:change="changeFile($event)" 
+                            v-bind:accept="imagesToAccept"
+                        >
+                        <label class="custom-file-label" for="customFile">Choose image</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
                     <textAreaInput
                         name="description"
-                        labelText="Description"
-                        class="form-group w-100"
-                        height="200px"
+                        placeholder="Description"
+                        class="form-group w-100 h-100"
+                        height="440px"
                         v-model="manifestationToCreate.description"
                         v-bind:errorMessage="descriptionErrorMessage"
                         v-bind:isInvalid="isDescriptionInvalid"
@@ -86,6 +106,8 @@ Vue.component("createManifestationModal", {
                     </textAreaInput>
                 </div>
             </div>
+
+            <manifestationService ref="manifestationService"></manifestationService>
             {{ JSON.stringify(manifestationToCreate, null, 4) }}
 
             <br/>
@@ -163,8 +185,8 @@ Vue.component("createManifestationModal", {
                 city: "",
                 postalCode: "",
 
-                imageBase64: "",
-                imageType: ""
+                imageBase64: "",//
+                imageType: ""//
             },
 
             typeOptions: Object.freeze([
@@ -173,12 +195,17 @@ Vue.component("createManifestationModal", {
                 "THEATER"
             ]),
 
-            imageFile: {},
-            ImageTypes: Object.freeze({
-                PNG:  ".png",
-                JPG:  ".jpg",
-                JPEG: ".jpeg"
-            }),
+            imageTypes: Object.freeze([
+                "png",
+                "jpg",
+                "jpeg",
+
+                "tif",
+                "tiff",
+                "bmp"
+            ]),
+            imagesToAccept: "",
+            imageToShow: "/images/no image 2.png",
 
 
 
@@ -195,6 +222,15 @@ Vue.component("createManifestationModal", {
             isDescriptionInvalid: false
         };
     },
+
+    // computed: {
+    //     imageToShow: {
+    //         if (this.manifestationToCreate.imageBase64 === "") {
+    //             return "/images/no image 2.png";
+    //         }
+    //         return this.manifestationToCreate.imageBase64;
+    //     }
+    // },
 
     methods: {
         showInvalidNameError: function(message) {
@@ -249,6 +285,7 @@ Vue.component("createManifestationModal", {
             this.removeInvalidNameError();
             this.removeInvalidPriceError();
             this.removeInvalidDateError();
+            this.removeInvalidDescriptionError();
 
             // this.removeInvalidSurnameError();
             // this.removeInvalidUserNameError();
@@ -279,6 +316,71 @@ Vue.component("createManifestationModal", {
             return isValid;
         },
         
+        changeFile: function(event) {
+            // fname.slice((fname.lastIndexOf(".") - 1 >>> 0) + 2);
+            // fname.slice((Math.max(0, fname.lastIndexOf(".")) || Infinity) + 1);
+
+            // var fileName = event.target.value.slice(event.target.value.lastIndexOf("\\") + 1);
+            // var fileExtension = fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2);
+
+            // console.log(fileName);
+            // console.log(fileExtension);
+
+            
+            this.manifestationToCreate.imageType = "";
+            this.manifestationToCreate.imageBase64 = "";
+            this.imageToShow = "/images/no image 2.png";
+
+            
+            var fileData = $('#fileInput').prop('files')[0];
+            if (fileData == null) {
+                return;
+            }
+
+
+            var fileExtension = fileData.name.slice((fileData.name.lastIndexOf(".") - 1 >>> 0) + 2);
+            console.log(fileData.name);
+            console.log(fileExtension);
+
+            if (fileExtension === "") {
+                return;
+            }
+
+            var isTypeValid = false;
+            for (let i = 0; i < this.imageTypes.length; i++) {
+                const type = this.imageTypes[i];
+                if (fileExtension === type) {
+                    isTypeValid = true;
+                    break;
+                }
+            }
+
+            if (!isTypeValid) {
+                return;
+            }
+
+            // this gets jpg, while FileReader gets jpeg
+            // this.manifestationToCreate.imageType = fileExtension;
+
+            var self = this;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                self.manifestationToCreate.imageBase64 = e.target.result;
+                self.imageToShow = e.target.result;
+
+                // data:image/jpeg;base64,
+                var base64Header = self.imageToShow.slice(0, self.imageToShow.indexOf(",") + 1);
+                
+                self.manifestationToCreate.imageType = base64Header.slice(base64Header.indexOf("/") + 1, base64Header.indexOf(";"));
+            };
+            reader.readAsDataURL(fileData);
+        },
+
+        showAlternateImage: function() {
+            console.log("showAlternateImage");
+            this.imageToShow = "/images/no image 2.png";
+        },
+
         changeType: function(newType) {
             this.manifestationToCreate.type = newType;
         },
@@ -286,7 +388,19 @@ Vue.component("createManifestationModal", {
         createManifestation: function() {
             this.removeValidation();
             if (this.validateForm()) {
-                this.closeModal();
+                const successCallback = (response) => {
+                    this.closeModal();
+                    this.$emit("manifestationCreated");
+                };
+                const errorCallback = (error) => {
+                    this.$root.defaultCatchError(error);
+                };
+
+                this.$refs.manifestationService.addManifestation(
+                    this.manifestationToCreate,
+                    successCallback,
+                    errorCallback
+                );
             }
         },
 
@@ -322,13 +436,18 @@ Vue.component("createManifestationModal", {
                 imageBase64: "",
                 imageType: ""
             },
-            this.imageFile = {}
+            this.imageToShow = "/images/no image 2.png",
 
             this.removeValidation();
         },
     },
 
-    mounted() {},
+    mounted() {
+        this.imageTypes.forEach(imageType => {
+            this.imagesToAccept += `image/${imageType},`;
+        });
+        this.imagesToAccept = this.imagesToAccept.slice(0, -1);
+    },
 
     destroyed() {}
 });

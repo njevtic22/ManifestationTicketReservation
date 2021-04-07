@@ -368,7 +368,7 @@ var app = new Vue({
         },
 
         getTimeFormat: function() {
-            return "HH:mm";
+            return "HH:mm:ss";
         },
 
         getDateFormat: function() {
