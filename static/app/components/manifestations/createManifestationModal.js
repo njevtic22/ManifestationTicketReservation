@@ -157,7 +157,7 @@ Vue.component("createManifestationModal", {
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="button" class="btn btn-primary">Sign in</button>
         </baseForm>
     </baseModal>
     `,

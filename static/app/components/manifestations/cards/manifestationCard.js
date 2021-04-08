@@ -30,7 +30,7 @@ Vue.component("manifestationCard", {
             <h6>Total number of tickets: {{ manifestation.maxNumberOfTickets }}</h6>  -->
             
             <hr/>
-            <p class="card-text description-scroll">{{ manifestation.description }}</p>
+            <p class="card-text scroll scroll-invisible description-scroll">{{ manifestation.description }}</p>
             <hr/>
 
             <div class="d-flex justify-content-between mt-auto">

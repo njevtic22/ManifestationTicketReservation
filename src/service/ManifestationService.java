@@ -58,11 +58,8 @@ public class ManifestationService implements
             return "";
 
         try {
-            System.out.println(imageBase64);
             String base64Header = "data:image/" + imageType + ";base64,";
-            System.out.println(base64Header);
             String trueBase64Image = imageBase64.substring(base64Header.length());
-            System.out.println(trueBase64Image);
             byte[] decodedImage = Base64.getDecoder().decode(trueBase64Image);
             String imageLocation = "images/manifestation/manifestation " + manifestationId + "." + imageType;
 

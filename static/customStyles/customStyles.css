@@ -49,6 +49,10 @@ body {
     /* box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1); */
 }
 
+.sticky {
+    position: absolute;
+}
+
 .sidebar-sticky {
     position: fixed;
     /* top: 0; */
@@ -100,23 +104,6 @@ body {
 
 .manifestation-image img {
     width: 100%;
-}
-
-/* Scroll */
-.manifestation-description-scroll {
-    height: 400px;
-    overflow: auto;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.manifestation-description-scroll::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.manifestation-description-scroll {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
 }
 
 /* 
@@ -343,18 +330,34 @@ a#mainAnchor {
 }
 
 /* Scroll */
-.description-scroll {
-    height: 300px;
+.scroll {
     overflow: auto;
 }
 
+.scroll-invisible {
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
-.description-scroll::-webkit-scrollbar {
+.scroll-invisible::-webkit-scrollbar {
     display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-.description-scroll {
+.scroll-invisible-scroll {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+}
+
+/* Scroll */
+.description-scroll {
+    height: 300px;
+}
+
+/* Scroll */
+.manifestation-description-scroll {
+    height: 400px;
+}
+
+.filter-scroll {
+    height: 550px;
 }

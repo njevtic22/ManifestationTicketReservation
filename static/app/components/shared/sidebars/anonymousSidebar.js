@@ -27,14 +27,12 @@ Vue.component("anonymousSidebar", {
                     </router-link>
                 </li>
 
-                <!--
                 <li class="nav-item">
                     <router-link class="nav-link" to="/manifestations/map">
                         <geo-alt-fill-icon class="sidebar-icon"></geo-alt-fill-icon>
                         Manifestations map
                     </router-link>
                 </li>
-                -->
             </ul> 
         </div>
     </nav>
