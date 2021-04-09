@@ -29,7 +29,7 @@ Vue.component("customerPage", {
     `,
     data: function() {
         return {
-          isToggled: false
+            isToggled: false
         };
     },
 

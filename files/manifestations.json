@@ -11,8 +11,8 @@
     "archived": false,
     "location": {
       "id": 1,
-      "longitude": 44.8166636,
-      "latitude": 20.3995262,
+      "longitude": 20.3995262,
+      "latitude": 44.8166636,
       "address": {
         "id": 1,
         "street": "Bulevar Milutina Milankovića",
@@ -40,8 +40,8 @@
     "archived": false,
     "location": {
       "id": 2,
-      "longitude": 44.8241056,
-      "latitude": 20.4587845,
+      "longitude": 20.4587845,
+      "latitude": 44.8241056,
       "address": {
         "id": 2,
         "street": "Cara Dušana",
@@ -69,8 +69,8 @@
     "archived": false,
     "location": {
       "id": 3,
-      "longitude": 44.8060619,
-      "latitude": 20.4547841,
+      "longitude": 20.4547841,
+      "latitude": 44.8060619,
       "address": {
         "id": 3,
         "street": "Savska",
@@ -98,8 +98,8 @@
     "archived": false,
     "location": {
       "id": 4,
-      "longitude": 44.8022327,
-      "latitude": 20.4659012,
+      "longitude": 20.4659012,
+      "latitude": 44.8022327,
       "address": {
         "id": 4,
         "street": "Nemanjina",
@@ -127,8 +127,8 @@
     "archived": false,
     "location": {
       "id": 5,
-      "longitude": 44.792635,
-      "latitude": 20.4724955,
+      "longitude": 20.4724955,
+      "latitude": 44.792635,
       "address": {
         "id": 5,
         "street": "Južni bulevar",
@@ -156,8 +156,8 @@
     "archived": false,
     "location": {
       "id": 6,
-      "longitude": 45.2418004,
-      "latitude": 19.8319182,
+      "longitude": 19.8319182,
+      "latitude": 45.2418004,
       "address": {
         "id": 6,
         "street": "Bulevar cara Lazara",
@@ -185,8 +185,8 @@
     "archived": false,
     "location": {
       "id": 7,
-      "longitude": 45.2358711,
-      "latitude": 19.8348293,
+      "longitude": 19.8348293,
+      "latitude": 45.2358711,
       "address": {
         "id": 7,
         "street": "Bulevar despota Stefana",
@@ -214,8 +214,8 @@
     "archived": false,
     "location": {
       "id": 8,
-      "longitude": 45.2448271,
-      "latitude": 19.8195107,
+      "longitude": 19.8195107,
+      "latitude": 45.2448271,
       "address": {
         "id": 8,
         "street": "Bulevar Evrope",
@@ -243,8 +243,8 @@
     "archived": false,
     "location": {
       "id": 9,
-      "longitude": 45.2645469,
-      "latitude": 19.8309387,
+      "longitude": 19.8309387,
+      "latitude": 45.2645469,
       "address": {
         "id": 9,
         "street": "Bulevar Jaše Tomića",
@@ -272,8 +272,8 @@
     "archived": false,
     "location": {
       "id": 10,
-      "longitude": 45.2482582,
-      "latitude": 19.7898652,
+      "longitude": 19.7898652,
+      "latitude": 45.2482582,
       "address": {
         "id": 10,
         "street": "Bulevar Jovana Dučića",
@@ -301,8 +301,8 @@
     "archived": false,
     "location": {
       "id": 11,
-      "longitude": 43.3090706,
-      "latitude": 21.9367705,
+      "longitude": 21.9367705,
+      "latitude": 43.3090706,
       "address": {
         "id": 11,
         "street": "Bulevar Šabana Bajramovića",
@@ -330,8 +330,8 @@
     "archived": false,
     "location": {
       "id": 12,
-      "longitude": 43.3105076,
-      "latitude": 21.9011146,
+      "longitude": 21.9011146,
+      "latitude": 43.3105076,
       "address": {
         "id": 12,
         "street": "Trg Nikole Dražića",
@@ -359,8 +359,8 @@
     "archived": false,
     "location": {
       "id": 13,
-      "longitude": 43.3184092,
-      "latitude": 21.9101393,
+      "longitude": 21.9101393,
+      "latitude": 43.3184092,
       "address": {
         "id": 13,
         "street": "Bulevar dr Zorana Đinđića",
@@ -388,8 +388,8 @@
     "archived": false,
     "location": {
       "id": 14,
-      "longitude": 43.3106002,
-      "latitude": 21.9352019,
+      "longitude": 21.9352019,
+      "latitude": 43.3106002,
       "address": {
         "id": 14,
         "street": "Bulevar Medijana",
@@ -417,8 +417,8 @@
     "archived": false,
     "location": {
       "id": 15,
-      "longitude": 43.3186633,
-      "latitude": 21.9218438,
+      "longitude": 21.9218438,
+      "latitude": 43.3186633,
       "address": {
         "id": 15,
         "street": "Bulevar Nemanjića",
@@ -446,8 +446,8 @@
     "archived": false,
     "location": {
       "id": 16,
-      "longitude": 44.7717184,
-      "latitude": 20.45446,
+      "longitude": 20.45446,
+      "latitude": 44.7717184,
       "address": {
         "id": 16,
         "street": "Bulevar kneza Aleksandra Karađorđevića",
@@ -475,8 +475,8 @@
     "archived": false,
     "location": {
       "id": 17,
-      "longitude": 44.7876073,
-      "latitude": 20.4580272,
+      "longitude": 20.4580272,
+      "latitude": 44.7876073,
       "address": {
         "id": 17,
         "street": "Dr Milutina Ivkovića",
@@ -504,8 +504,8 @@
     "archived": false,
     "location": {
       "id": 18,
-      "longitude": 44.7806632,
-      "latitude": 20.4720994,
+      "longitude": 20.4720994,
+      "latitude": 44.7806632,
       "address": {
         "id": 18,
         "street": "Vojvode Stepe",
@@ -533,8 +533,8 @@
     "archived": false,
     "location": {
       "id": 19,
-      "longitude": 44.8033584,
-      "latitude": 20.3863543,
+      "longitude": 20.3863543,
+      "latitude": 44.8033584,
       "address": {
         "id": 19,
         "street": "Jurija Gagarina",
@@ -562,8 +562,8 @@
     "archived": false,
     "location": {
       "id": 20,
-      "longitude": 44.8064208,
-      "latitude": 20.3865865,
+      "longitude": 20.3865865,
+      "latitude": 44.8064208,
       "address": {
         "id": 20,
         "street": "Gandijeva",
@@ -591,8 +591,8 @@
     "archived": false,
     "location": {
       "id": 21,
-      "longitude": 45.2525939,
-      "latitude": 19.7897746,
+      "longitude": 19.7897746,
+      "latitude": 45.2525939,
       "address": {
         "id": 21,
         "street": "Bulevar kneza Miloša",
@@ -620,8 +620,8 @@
     "archived": false,
     "location": {
       "id": 22,
-      "longitude": 45.2592398,
-      "latitude": 19.8253732,
+      "longitude": 19.8253732,
+      "latitude": 45.2592398,
       "address": {
         "id": 22,
         "street": "Bulevar kralja Petra I",
@@ -649,8 +649,8 @@
     "archived": false,
     "location": {
       "id": 23,
-      "longitude": 45.2542382,
-      "latitude": 19.8534565,
+      "longitude": 19.8534565,
+      "latitude": 45.2542382,
       "address": {
         "id": 23,
         "street": "Bulevar Mihajla Pupina",
@@ -678,8 +678,8 @@
     "archived": false,
     "location": {
       "id": 24,
-      "longitude": 45.2571034,
-      "latitude": 19.8342137,
+      "longitude": 19.8342137,
+      "latitude": 45.2571034,
       "address": {
         "id": 24,
         "street": "Bulevar oslobođenja",
@@ -707,8 +707,8 @@
     "archived": false,
     "location": {
       "id": 25,
-      "longitude": 45.2407254,
-      "latitude": 19.8086407,
+      "longitude": 19.8086407,
+      "latitude": 45.2407254,
       "address": {
         "id": 25,
         "street": "Bulevar Patrijarha Pavla",
@@ -736,8 +736,8 @@
     "archived": false,
     "location": {
       "id": 26,
-      "longitude": 43.3082873,
-      "latitude": 21.9478829,
+      "longitude": 21.9478829,
+      "latitude": 43.3082873,
       "address": {
         "id": 26,
         "street": "Bulevar svetog cara Konstantina",
@@ -765,8 +765,8 @@
     "archived": false,
     "location": {
       "id": 27,
-      "longitude": 43.3147083,
-      "latitude": 21.8953347,
+      "longitude": 21.8953347,
+      "latitude": 43.3147083,
       "address": {
         "id": 27,
         "street": "Trg 14. oktobra",
@@ -794,8 +794,8 @@
     "archived": false,
     "location": {
       "id": 28,
-      "longitude": 43.3177111,
-      "latitude": 21.8907904,
+      "longitude": 21.8907904,
+      "latitude": 43.3177111,
       "address": {
         "id": 28,
         "street": "Trg kralja Aleksandra Ujedinitelja",
@@ -823,8 +823,8 @@
     "archived": false,
     "location": {
       "id": 29,
-      "longitude": 43.322031,
-      "latitude": 21.8954013,
+      "longitude": 21.8954013,
+      "latitude": 43.322031,
       "address": {
         "id": 29,
         "street": "Trg kralja Milana",
@@ -852,8 +852,8 @@
     "archived": false,
     "location": {
       "id": 30,
-      "longitude": 43.3168781,
-      "latitude": 21.8940141,
+      "longitude": 21.8940141,
+      "latitude": 43.3168781,
       "address": {
         "id": 30,
         "street": "Trg Pavla Stojkovića",
@@ -881,8 +881,8 @@
     "archived": false,
     "location": {
       "id": 31,
-      "longitude": 44.8298341,
-      "latitude": 20.3999094,
+      "longitude": 20.3999094,
+      "latitude": 44.8298341,
       "address": {
         "id": 31,
         "street": "Pariske komune",
@@ -910,8 +910,8 @@
     "archived": false,
     "location": {
       "id": 32,
-      "longitude": 44.822305,
-      "latitude": 20.4268969,
+      "longitude": 20.4268969,
+      "latitude": 44.822305,
       "address": {
         "id": 32,
         "street": "Bulevar Nikole Tesle",
@@ -939,8 +939,8 @@
     "archived": false,
     "location": {
       "id": 33,
-      "longitude": 44.8165625,
-      "latitude": 20.4200803,
+      "longitude": 20.4200803,
+      "latitude": 44.8165625,
       "address": {
         "id": 33,
         "street": "Bulevar Zorana Đinđića",
@@ -968,8 +968,8 @@
     "archived": false,
     "location": {
       "id": 34,
-      "longitude": 44.8094977,
-      "latitude": 20.429995,
+      "longitude": 20.429995,
+      "latitude": 44.8094977,
       "address": {
         "id": 34,
         "street": "Milentija Popovića",
@@ -997,8 +997,8 @@
     "archived": false,
     "location": {
       "id": 35,
-      "longitude": 44.8167549,
-      "latitude": 20.4656701,
+      "longitude": 20.4656701,
+      "latitude": 44.8167549,
       "address": {
         "id": 35,
         "street": "Bulevar Despota Stefana",
@@ -1026,8 +1026,8 @@
     "archived": false,
     "location": {
       "id": 36,
-      "longitude": 45.2570001,
-      "latitude": 19.8016793,
+      "longitude": 19.8016793,
+      "latitude": 45.2570001,
       "address": {
         "id": 36,
         "street": "Bulevar Slobodana Jovanovića",
@@ -1055,8 +1055,8 @@
     "archived": false,
     "location": {
       "id": 37,
-      "longitude": 45.2592666,
-      "latitude": 19.8043879,
+      "longitude": 19.8043879,
+      "latitude": 45.2592666,
       "address": {
         "id": 37,
         "street": "Bulevar vojvode Stepe",
@@ -1084,8 +1084,8 @@
     "archived": false,
     "location": {
       "id": 38,
-      "longitude": 45.2556639,
-      "latitude": 19.8272431,
+      "longitude": 19.8272431,
+      "latitude": 45.2556639,
       "address": {
         "id": 38,
         "street": "Trg 1. maja",
@@ -1113,8 +1113,8 @@
     "archived": false,
     "location": {
       "id": 39,
-      "longitude": 45.2750377,
-      "latitude": 19.8371086,
+      "longitude": 19.8371086,
+      "latitude": 45.2750377,
       "address": {
         "id": 39,
         "street": "Trg 23. oktobra",
@@ -1142,8 +1142,8 @@
     "archived": false,
     "location": {
       "id": 40,
-      "longitude": 45.2439778,
-      "latitude": 19.8254728,
+      "longitude": 19.8254728,
+      "latitude": 45.2439778,
       "address": {
         "id": 40,
         "street": "Trg 27. marta",

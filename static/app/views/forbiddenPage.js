@@ -37,7 +37,7 @@ Vue.component("forbiddenPage", {
 
     data: function() {
         return {
-          isToggled: false
+            isToggled: false
         };
     },
 

@@ -44,7 +44,12 @@ Vue.component("activeAndInactiveManifestationsMap", {
                 </div>
 
                 <div v-else>
-                    Your content goes here
+                    <all-map
+                        style="height: 800px; 100%"
+                        v-bind:manifestations="manifestations.data"
+                        v-bind:zoom="7"
+                    >
+                    </all-map>
                 </div>
             </div>
 
@@ -185,6 +190,11 @@ Vue.component("activeAndInactiveManifestationsMap", {
             const successCallback = (response) => {
                 this.manifestations = response.data;
                 this.loading = false;
+
+                if (this.manifestations.data.length !== 0) {
+                    const manifestation = response.data.data[0];
+                    this.initCoords = [manifestation.location.latitude, manifestation.location.longitude];
+                }
             };
             const errorCallback = (error) => {
                 this.$root.defaultCatchError(error);

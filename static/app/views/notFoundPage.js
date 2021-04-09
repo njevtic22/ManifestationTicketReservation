@@ -37,7 +37,7 @@ Vue.component("notFoundPage", {
 
     data: function() {
         return {
-          isToggled: false
+            isToggled: false
         };
     },
 

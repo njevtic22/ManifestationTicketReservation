@@ -29,7 +29,7 @@ Vue.component("adminPage", {
     `,
     data: function() {
         return {
-          isToggled: false
+            isToggled: false
         };
     },
 
