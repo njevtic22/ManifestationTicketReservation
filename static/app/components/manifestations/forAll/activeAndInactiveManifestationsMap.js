@@ -45,7 +45,7 @@ Vue.component("activeAndInactiveManifestationsMap", {
 
                 <div v-else>
                     <all-map
-                        style="height: 800px; 100%"
+                        style="height: 800px; width: 100%;"
                         v-bind:manifestations="manifestations.data"
                         v-bind:zoom="7"
                     >

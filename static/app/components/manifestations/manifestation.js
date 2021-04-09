@@ -48,6 +48,16 @@ Vue.component("manifestation", {
                         alt="Image not found"
                         v-on:error="showAlternateImage"
                     >
+                    <br/>
+                    <br/>
+                    <br/>
+                    <m-map
+                        style="height: 500px; width: 100%;"
+                        v-bind:manifestation="manifestation"
+                        v-bind:zoom="15"
+                        v-bind:location="[location.latitude, location.longitude]"
+                    >
+                    </m-map>
                 </div>
             </div>
 

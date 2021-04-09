@@ -348,16 +348,13 @@ a#mainAnchor {
     scrollbar-width: none; /* Firefox */
 }
 
-/* Scroll */
 .description-scroll {
     height: 300px;
 }
 
-/* Scroll */
 .manifestation-description-scroll {
-    height: 400px;
-}
-
-.filter-scroll {
-    height: 550px;
+    height: 800px;
+    background: #fafafa;
+    border-radius: 5%;
+    padding: 3%;
 }

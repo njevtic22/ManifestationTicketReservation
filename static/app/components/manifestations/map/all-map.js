@@ -21,6 +21,7 @@ Vue.component("all-map", {
             required: true
         },
         zoom: {
+            type: Number,
             required: true
         }
     },
@@ -44,8 +45,8 @@ Vue.component("all-map", {
 
     methods: {
         onClick: function(e) {
-            console.log(e);
-            console.log(e.get('coords'));
+            // console.log(e);
+            // console.log(e.get('coords'));
         },
     },
 

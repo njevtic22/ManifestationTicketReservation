@@ -12,7 +12,10 @@ Vue.component("all-marker", {
     `,
 
     props: {
-        manifestation: Object
+        manifestation: {
+            type: Object,
+            required: true
+        }
     },
 
     data: function() {
