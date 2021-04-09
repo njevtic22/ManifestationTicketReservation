@@ -53,7 +53,12 @@ Vue.component("salesmanManifestationsMap", {
                 </div>
 
                 <div v-else>
-                    Your content goes here
+                    <all-map
+                        style="height: 800px; 100%"
+                        v-bind:manifestations="manifestations.data"
+                        v-bind:zoom="7"
+                    >
+                    </all-map>
                 </div>
             </div>
         

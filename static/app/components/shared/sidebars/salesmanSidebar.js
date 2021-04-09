@@ -2,7 +2,7 @@ Vue.component("salesmanSidebar", {
     template: `
     <nav class="bg-light list-group list-group-flush sidebar"> 
         <div class="sidebar-sticky">
-            <h5 class="sidebar-heading"><a href="#/" id="mainAnchor">Manifestation service</a></h5>
+            <h5 class="sidebar-heading"><a href="#/salesman/manifestations/map" id="mainAnchor">Manifestation service</a></h5>
             <ul class="nav flex-column">
     
                 <li class="nav-item">

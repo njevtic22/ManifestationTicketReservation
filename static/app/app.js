@@ -17,14 +17,14 @@ const UnauthorizedPage = { template: "<unauthorizedPage></unauthorizedPage>" };
 
 const beforeRouteEnterAndUpdateForUserPages = (to, from, next, pathToCheck) => {
     if (to.path === `${pathToCheck}` || to.path === `${pathToCheck}/`) {
-        next(`${pathToCheck}/manifestations/table`);
+        next(`${pathToCheck}/manifestations/map`);
         return;
     }
     if (to.path.startsWith(`${pathToCheck}`)) {
         next();
         return;
     }
-    next(`${pathToCheck}/manifestations/table`);
+    next(`${pathToCheck}/manifestations/map`);
 }; 
 
 const ManifestationsPage = { 
@@ -394,19 +394,19 @@ var app = new Vue({
         redirectToUserPage: function() {
             if (!this.isUserLoggedIn()) {
                 this.$router.push({
-                    name: "ManifestationsPage"
+                    name: "AnonymousManifestationsMap"
                 })
             } else if (this.isAdmin()) {
                 this.$router.push({
-                    name: "AdminManifestationsTable"
+                    name: "AdminManifestationsMap"
                 })
             } else if (this.isSalesman()) {
                 this.$router.push({
-                    name: "SalesmanManifestationsTable"
+                    name: "SalesmanManifestationsMap"
                 })
             } else if (this.isCustomer()) {
                 this.$router.push({
-                    name: "CustomerManifestationsTable"
+                    name: "CustomerManifestationsMap"
                 })
             } else {
                 alert("Serious error. This should not happen");
