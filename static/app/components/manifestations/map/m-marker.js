@@ -1,15 +1,19 @@
 Vue.component("m-marker", {
     template: `
     <ymap-marker
-        v-bind:markerId="manifestation.id"
-        v-bind:coords="[manifestation.location.latitude, manifestation.location.longitude]""
+        v-bind:markerId="markerId"
+        v-bind:coords="location"
     />
     `,
 
     props: {
-        manifestation: {
-            type: Object,
+        location: {
+            type: Array,
             required: true
+        },
+        markerId: {
+            type: Number,
+            required: true,
         }
     },
 

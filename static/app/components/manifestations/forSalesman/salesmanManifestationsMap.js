@@ -40,26 +40,12 @@ Vue.component("salesmanManifestationsMap", {
                 </div>
 
                 <br/>
-
-
-                <div class="d-flex justify-content-center" v-if="loading">
-                    <div class="spinner-grow text-secondary" role="status" style="width: 3rem; height: 3rem;">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </div>
-
-                <div v-else-if="manifestations.totalNumberOfResults === 0">
-                    <h4 class="text-center">No Results</h4>
-                </div>
-
-                <div v-else>
-                    <all-map
-                        style="height: 800px; width: 100%;"
-                        v-bind:manifestations="manifestations.data"
-                        v-bind:zoom="7"
-                    >
-                    </all-map>
-                </div>
+                <all-map
+                    style="height: 800px; width: 100%;"
+                    v-bind:manifestations="manifestations.data"
+                    v-bind:zoom="5"
+                >
+                </all-map>
             </div>
         
             <div class="form-group col-md-3">

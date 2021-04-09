@@ -51,13 +51,21 @@ Vue.component("manifestation", {
                     <br/>
                     <br/>
                     <br/>
-                    <m-map
-                        style="height: 500px; width: 100%;"
-                        v-bind:manifestation="manifestation"
-                        v-bind:zoom="15"
-                        v-bind:location="[location.latitude, location.longitude]"
-                    >
-                    </m-map>
+                    
+                    <div class="d-flex justify-content-center" v-if="location.latitude == null || location.longitude == null">
+                        <div class="spinner-grow text-secondary" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div v-else>
+                        <m-map
+                            style="height: 500px; width: 100%;"
+                            v-bind:zoom="15"
+                            v-bind:location="[location.latitude, location.longitude]"
+                        >
+                        </m-map>
+                    </div>
                 </div>
             </div>
 

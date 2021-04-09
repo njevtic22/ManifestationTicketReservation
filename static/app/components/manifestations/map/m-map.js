@@ -6,20 +6,17 @@ Vue.component("m-map", {
         v-bind:zoom="zoom"
     >
         <m-marker
-            v-bind:manifestation="manifestation"
+            v-bind:markerId="123"
+            v-bind:location="location"
         >
         </m-marker>
     </yandex-map>
     `,
 
     props: {
-        manifestation: {
-            type: Object,
-            required: true
-        },
         location: {
             type: Array,
-            required: true
+            required: true,
         },
         zoom: {
             type: Number,
