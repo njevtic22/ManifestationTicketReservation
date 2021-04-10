@@ -80,7 +80,8 @@ Vue.component("createManifestationModal", {
                         v-bind:src="imageToShow"
                         v-on:error="showAlternateImage"
                     >
-                    &nbsp;
+                    <br/>
+                    <br/>
                     <div class="custom-file">
                         <input 
                             type="file" 
@@ -107,57 +108,101 @@ Vue.component("createManifestationModal", {
                 </div>
             </div>
 
+            <br/>
+            <hr/>
+            <h4>Location</h4>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <numberInput
+                        name="latitude"
+                        labelText="Latitude"
+                        v-model="manifestationToCreate.latitude"
+                        required
+                        disabled
+                    >
+                    </numberInput>
+                </div>
+                <div class="form-group col-md-6">
+                    <numberInput
+                        name="longitude"
+                        labelText="Longitude"
+                        v-model="manifestationToCreate.longitude"
+                        required
+                        disabled
+                    >
+                    </numberInput>
+                </div>
+            </div>
+            
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <textInput
+                        name="street"
+                        labelText="Street"
+                        class="form-group"
+                        v-model="manifestationToCreate.street"
+                        v-bind:errorMessage="streetErrorMessage"
+                        v-bind:isInvalid="isStreetInvalid"
+                        required
+                    >
+                    </textInput>
+                </div>
+                <div class="form-group col-md-3">
+                    <numberInput
+                        class="form-group"
+                        name="number"
+                        labelText="Number"
+                        v-model="manifestationToCreate.number"
+                        v-bind:errorMessage="numberErrorMessage"
+                        v-bind:isInvalid="isNumberInvalid"
+                        required
+                    >
+                    </numberInput>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <textInput
+                        name="city"
+                        labelText="City"
+                        class="form-group"
+                        v-model="manifestationToCreate.city"
+                        v-bind:errorMessage="cityErrorMessage"
+                        v-bind:isInvalid="isCityInvalid"
+                        required
+                    >
+                    </textInput>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <textInput
+                        name="zipCode"
+                        labelText="Zip code"
+                        class="form-group"
+                        v-model="manifestationToCreate.postalCode"
+                        v-bind:errorMessage="postalCodeErrorMessage"
+                        v-bind:isInvalid="isPostalCodeInvalid"
+                        required
+                    >
+                    </textInput>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-block" v-on:click="geocodeCoordinates">View on map</button>
+
+            <add-map
+                style="height: 500px; width: 100%;"
+                v-bind:newManifestation="manifestationToCreate"
+                v-on:coordsChosen="changeLocation($event)"  
+            >
+            </add-map>
+
+
+
+            <geocodeService ref="geocodeService"></geocodeService>
             <manifestationService ref="manifestationService"></manifestationService>
-            {{ JSON.stringify(manifestationToCreate, null, 4) }}
-
-            <br/>
-            <br/>
-            EXAMPLES
-
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
-                    <input required type="email" class="form-control" id="inputEmail4">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
-            </div>
-            <button type="button" class="btn btn-primary">Sign in</button>
         </baseForm>
     </baseModal>
     `,
@@ -177,8 +222,8 @@ Vue.component("createManifestationModal", {
                 status: "CREATED",//
                 type: "CONCERT",//
 
-                latitude: 0,
-                longitude: 0,
+                latitude: 45.25603382101638,
+                longitude: 19.845723284250592,
 
                 street: "",
                 number: 0,
@@ -209,17 +254,28 @@ Vue.component("createManifestationModal", {
 
 
 
+            // return address.street + " " + address.number + ", " + address.city + ", " + address.postalCode;
 
             nameErrorMessage: "Name must not be empty",
             priceErrorMessage: "Price must be positive number",
             dateErrorMessage: "Holding date must not be empty",
             descriptionErrorMessage: "Description must not be empty",
 
+            streetErrorMessage: "Street must not be empty",
+            numberErrorMessage: "Number must not be empty",
+            cityErrorMessage: "City must not be empty",
+            postalCodeErrorMessage: "Zip code must not be empty",
+
             
             isNameInvalid: false,
             isPriceInvalid: false,
             isDateInvalid: false,
-            isDescriptionInvalid: false
+            isDescriptionInvalid: false,
+
+            isStreetInvalid: false,
+            isNumberInvalid: false,
+            isCityInvalid: false,
+            isPostalCodeInvalid: false
         };
     },
 
@@ -274,6 +330,46 @@ Vue.component("createManifestationModal", {
             this.isDescriptionInvalid = false;
         },
 
+        showInvalidStreetError: function(message) {
+            this.streetErrorMessage = message;
+            this.isStreetInvalid = true;
+        },
+
+        removeInvalidStreetError: function() {
+            this.streetErrorMessage = "Street must not be empty";
+            this.isStreetInvalid = false;
+        },
+
+        showInvalidNumberError: function(message) {
+            this.numberErrorMessage = message;
+            this.isNumberInvalid = true;
+        },
+
+        removeInvalidNumberError: function() {
+            this.numberErrorMessage = "Number must not be empty";
+            this.isNumberInvalid = false;
+        },
+
+        showInvalidCityError: function(message) {
+            this.cityErrorMessage = message;
+            this.isCityInvalid = true;
+        },
+
+        removeInvalidCityError: function() {
+            this.cityErrorMessage = "City must not be empty";
+            this.isCityInvalid = false;
+        },
+
+        showInvalidPostalCodeError: function(message) {
+            this.postalCodeErrorMessage = message;
+            this.isPostalCodeInvalid = true;
+        },
+
+        removeInvalidPostalCodeError: function() {
+            this.postalCodeErrorMessage = "Zip code must not be empty";
+            this.isPostalCodeInvalid = false;
+        },
+
 
 
         removeValidation: function() {
@@ -286,17 +382,11 @@ Vue.component("createManifestationModal", {
             this.removeInvalidPriceError();
             this.removeInvalidDateError();
             this.removeInvalidDescriptionError();
-
-            // this.removeInvalidSurnameError();
-            // this.removeInvalidUserNameError();
-            // this.removeInvalidDateError();
-            // this.removeInvalidPasswordError();
-            // this.removeInvalidRepPasError();
+            this.removeInvalidStreetError();
+            this.removeInvalidNumberError();
+            this.removeInvalidCityError();
+            this.removeInvalidPostalCodeError();
         },
-
-
-
-
 
         validateForm: function() {
             // var form = $("#createManifestationForm");
@@ -309,7 +399,12 @@ Vue.component("createManifestationModal", {
             var isValid = this.$refs.createManifestationForm.validateForm();
 
             if (this.manifestationToCreate.regularTicketPrice === "" || this.manifestationToCreate.regularTicketPrice === 0) {
-                this.showInvalidPriceError("Password must not be empty");
+                this.showInvalidPriceError("Price must be positive number");
+                isValid = false;
+            }
+
+            if (this.manifestationToCreate.number === "" || this.manifestationToCreate.number === 0) {
+                this.showInvalidNumberError("Number must not be empty");
                 isValid = false;
             }
 
@@ -339,8 +434,8 @@ Vue.component("createManifestationModal", {
 
 
             var fileExtension = fileData.name.slice((fileData.name.lastIndexOf(".") - 1 >>> 0) + 2);
-            console.log(fileData.name);
-            console.log(fileExtension);
+            // console.log(fileData.name);
+            // console.log(fileExtension);
 
             if (fileExtension === "") {
                 return;
@@ -377,19 +472,65 @@ Vue.component("createManifestationModal", {
         },
 
         showAlternateImage: function() {
-            console.log("showAlternateImage");
+            // console.log("showAlternateImage");
             this.imageToShow = "/images/no image 2.png";
         },
 
         changeType: function(newType) {
             this.manifestationToCreate.type = newType;
         },
-        
+
+        geocodeCoordinates: function() {
+
+            const successCallback = (coordinates) => {
+                console.log(coordinates);
+                this.manifestationToCreate.latitude = coordinates.latitude;
+                this.manifestationToCreate.longitude = coordinates.longitude;
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.geocodeService.geocode(
+                this.manifestationToCreate.street,
+                this.manifestationToCreate.number,
+                this.manifestationToCreate.city,
+                successCallback,
+                errorCallback
+            );
+        },
+
+        geocodeAddress: function(coordinates) {
+            const successCallback = (address) => {
+                this.manifestationToCreate.street = address.street;
+                this.manifestationToCreate.number = address.number;
+                this.manifestationToCreate.city   = address.city;
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.geocodeService.inverseGeocode(
+                coordinates.latitude,
+                coordinates.longitude,
+                successCallback,
+                errorCallback
+            );
+        },
+
+        changeLocation: function(coordinates) {
+            this.manifestationToCreate.latitude  = coordinates.latitude;
+            this.manifestationToCreate.longitude = coordinates.longitude;
+
+            this.geocodeAddress(coordinates);
+        },
+
         createManifestation: function() {
             this.removeValidation();
             if (this.validateForm()) {
                 const successCallback = (response) => {
                     this.closeModal();
+                    this.$root.successToast("Manifestation is created");
                     this.$emit("manifestationCreated");
                 };
                 const errorCallback = (error) => {
@@ -405,7 +546,6 @@ Vue.component("createManifestationModal", {
         },
 
         cancel: function() {
-            console.log("Nemanja");
             this.closeModal();
             // this.$emit('cancelEvent', event)
         },
@@ -425,8 +565,8 @@ Vue.component("createManifestationModal", {
                 status: "CREATED",
                 type: "CONCERT",
 
-                latitude: 0,
-                longitude: 0,
+                latitude: 45.25603382101638,
+                longitude: 19.845723284250592,
 
                 street: "",
                 number: 0,

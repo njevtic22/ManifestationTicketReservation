@@ -38,12 +38,14 @@ public class Address {
         if (this == o) return true;
         if (!(o instanceof Address)) return false;
         Address address = (Address) o;
-        return id.equals(address.id);
+        return number == address.number &&
+                street.equals(address.street) &&
+                city.equals(address.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(street, number, city);
     }
 
     @Override

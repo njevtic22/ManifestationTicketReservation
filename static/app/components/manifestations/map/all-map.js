@@ -36,7 +36,7 @@ Vue.component("all-map", {
         return {
             settings: {
                 apiKey: 'daf8ca4b-3c4e-4396-9bff-8c6b22f7e69a',
-                lang: 'en-US',
+                lang: 'en_US',
                 coordorder: 'latlong',
                 version: '2.1'
             }
@@ -45,8 +45,8 @@ Vue.component("all-map", {
 
     methods: {
         onClick: function(e) {
-            // console.log(e);
-            // console.log(e.get('coords'));
+            console.log(e);
+            console.log(e.get('coords'));
         },
     },
 

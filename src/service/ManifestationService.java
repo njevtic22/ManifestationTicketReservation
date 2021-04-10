@@ -237,18 +237,24 @@ public class ManifestationService implements
 
     public boolean isSamePlaceAndDate(final Manifestation manifestation1, final Manifestation manifestation2) {
         final Date holdingDate1 = manifestation1.getHoldingDate();
+        final Address address1 = manifestation1.getLocation().getAddress();
         final double longitude1 = manifestation1.getLocation().getLongitude();
         final double latitude1 = manifestation1.getLocation().getLatitude();
 
         final Date holdingDate2 = manifestation2.getHoldingDate();
+        final Address address2 = manifestation2.getLocation().getAddress();
         final double longitude2 = manifestation2.getLocation().getLongitude();
         final double latitude2 = manifestation2.getLocation().getLatitude();
 
-        if (longitude1 == longitude2) {
-            if (latitude1 == latitude2) {
-                return isOverlap(holdingDate1, holdingDate2, 2);
-            }
-        }
+        // Addresses can be same if coordinates are different on some small decimal place
+//        if (longitude1 == longitude2) {
+//            if (latitude1 == latitude2) {
+//                return isOverlap(holdingDate1, holdingDate2, 2);
+//            }
+//        }
+
+        if (address1.equals(address2))
+            return isOverlap(holdingDate1, holdingDate2, 2);
         return false;
     }
 
