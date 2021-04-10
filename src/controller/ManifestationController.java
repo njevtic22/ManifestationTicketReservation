@@ -19,6 +19,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import useCase.manifestation.AddManifestationUseCase;
+import useCase.manifestation.BelongsToSalesmanUseCase;
 import useCase.manifestation.DeleteManifestationUseCase;
 import useCase.manifestation.GetAllCreatedManifestationsUseCase;
 import useCase.manifestation.GetAllManifestationsForSalesmanUseCase;
@@ -53,6 +54,7 @@ public class ManifestationController {
     private GetAllManifestationsUseCase getAllManifestationsUseCase;
     private GetAllManifestationsForSalesmanUseCase getAllManifestationsForSalesmanUseCase;
     private GetAllCreatedManifestationsUseCase getAllCreatedManifestationsUseCase;
+    private BelongsToSalesmanUseCase belongsToSalesmanUseCase;
     private GetByIdManifestationUseCase getByIdManifestationUseCase;
     private UpdateManifestationUseCase updateManifestationUseCase;
     private UpdateLocationUseCase updateLocationUseCase;
@@ -74,7 +76,7 @@ public class ManifestationController {
             GetAllManifestationsUseCase getAllManifestationsUseCase,
             GetAllManifestationsForSalesmanUseCase getAllManifestationsForSalesmanUseCase,
             GetAllCreatedManifestationsUseCase getAllCreatedManifestationsUseCase,
-            GetByIdManifestationUseCase getByIdManifestationUseCase,
+            BelongsToSalesmanUseCase belongsToSalesmanUseCase, GetByIdManifestationUseCase getByIdManifestationUseCase,
             UpdateManifestationUseCase updateManifestationUseCase,
             UpdateLocationUseCase updateLocationUseCase,
             DeleteManifestationUseCase deleteManifestationUseCase,
@@ -88,6 +90,7 @@ public class ManifestationController {
         this.getAllManifestationsUseCase = getAllManifestationsUseCase;
         this.getAllManifestationsForSalesmanUseCase = getAllManifestationsForSalesmanUseCase;
         this.getAllCreatedManifestationsUseCase = getAllCreatedManifestationsUseCase;
+        this.belongsToSalesmanUseCase = belongsToSalesmanUseCase;
         this.getByIdManifestationUseCase = getByIdManifestationUseCase;
         this.updateManifestationUseCase = updateManifestationUseCase;
         this.updateLocationUseCase = updateLocationUseCase;
@@ -105,6 +108,7 @@ public class ManifestationController {
                 get("", getAll, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
                 get("/forSalesman", getAllForSalesman, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
                 get("/created", getCreated, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
+                get("/:id/belongsToSalesman", getBelongs);
                 get("/:id", getById, new GetByIdManifestationTransformer(gson, new GetByIdManifestationMapper(formatter)));
                 put("/:id", updateManifestation);
                 put("/:id/location", updateLocation);
@@ -185,6 +189,16 @@ public class ManifestationController {
         // TODO: Implement pagination, sorting, filtering, searching
         response.status(HttpStatus.OK_200);
         return getAllCreatedManifestationsUseCase.getCreatedManifestations();
+    };
+
+    public Route getBelongs = (Request request, Response response) -> {
+        ensureUserIsSalesman.ensure(request);
+
+        Salesman salesman = request.attribute("user");
+        Long id = SelfValidating.validId(request.params(":id"));
+
+        response.status(HttpStatus.OK_200);
+        return belongsToSalesmanUseCase.belongsToSalesman(id, salesman);
     };
 
     public Route getById = (Request request, Response response) -> {

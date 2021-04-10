@@ -2,6 +2,14 @@ Vue.component("manifestation", {
     template: `
     <div>
         <div class="form-row border-0 manifestation-details shadow-lg">
+            <div class="row" v-if="belognsToSalesman">
+                <div class="col text-right">
+                    <button class="btn btn-primary" v-on:click="changeDetails">Change details</button>
+                    <button class="btn btn-primary" v-on:click="changeLocation">Change location</button>
+                </div>
+                <br/>
+                <br/>
+            </div>
             <div class="row">
                 <div class="col d-flex flex-column">
                     <h3>{{ manifestation.name }}</h3>
@@ -65,14 +73,13 @@ Vue.component("manifestation", {
                             v-bind:location="[location.latitude, location.longitude]"
                         >
                         </m-map>
+                        <!-- v-bind:location="[location.latitude, location.longitude]" maybe not reactive in map -->
                     </div>
                 </div>
             </div>
-
-            <manifestationService ref="manifestationService"></manifestationService>
         </div>
 
-        <div class="form-row" style="margin-top: 20px;">
+        <div class="form-row" style="margin-top: 20px;" v-if="reviews.data.length !== 0">
             <div class="col-sm card border-0 manifestation-details shadow-lg" style="margin-left: 10px; padding: 3%;">
                 <div class="d-flex justify-content-between">
                     <h1>Average rating: {{ manifestation.avgRating }}</h1>
@@ -154,55 +161,74 @@ Vue.component("manifestation", {
                 </div>
             </div>
         </div>
+
+        <changeManifestationModal 
+            id="changeManifestationModal" 
+            v-bind:manifestation="manifestation"
+        ></changeManifestationModal>
+        <changeLocationModal 
+            id="changeLocationModal"
+            v-bind:location="location"
+            v-bind:address="address"
+        ></changeLocationModal>
+        
+        <manifestationService ref="manifestationService"></manifestationService>
     </div>
     `,
 
     data: function() {
         return {
+            belognsToSalesman: false,
+
             imageLocationToShow: "",
-            manifestation: {
+            manifestation: { 
+                id: 0, 
+                name: "",
+                numberOfTicketsLeft: 0,
+                maxNumberOfTickets: 0,
+                regularTicketPrice: 0,
+                holdingDate: "",
+                description: "",
+                status: "CREATED",
+                type: "CONCERT",
 
-            },
-            
-            /*
-            
-            { 
-                "id": 7, 
-                "name": "Concert 7: Estelle Leonard", ---
-                "numberOfTicketsLeft": 20, ---
-                "maxNumberOfTickets": 20, ---
-                "regularTicketPrice": 2000, ---
-                "holdingDate": "07.04.2021. 08:00:00",--- 
-                "description": "", ---
-                "status": "CREATED", ---
-                "type": "CONCERT", ---
+                avgRating: 0,
 
-                "avgRating": 0, <------ THIS
-
-                "location": {  <------ THIS MAP
-                    "id": 7, 
-                    "longitude": 45.2358711, 
-                    "latitude": 19.8348293, 
-                    "address": {
-                        "street": "Bulevar despota Stefana", 
-                        "number": 42, 
-                        "city": "Novi Sad", 
-                        "postalCode": "21000"
+                location: {
+                    id: 0, 
+                    longitude: null, 
+                    latitude: null, 
+                    address: {
+                        street: "", 
+                        number: 0, 
+                        city: "", 
+                        postalCode: ""
                     } 
                 }, 
 
-                "imageBase64": "", ---
-                "imageType": "jpg", 
+                imageBase64: "",
+                imageType: "", 
 
-                "reviews": [] <------ THIS
-            }       
-            */
+                reviews: []
+            },
+            
 
             location: {
-
+                id: 0,
+                latitude: 0,
+                longitude: 0,
+                address: {
+                    street: "", 
+                    number: 0, 
+                    city: "", 
+                    postalCode: ""
+                } 
             },
             address: {
-
+                street: "", 
+                number: 0, 
+                city: "", 
+                postalCode: ""
             },
 
             
@@ -289,6 +315,32 @@ Vue.component("manifestation", {
             };
 
             this.$refs.manifestationService.getManifestation(manifestationId, successCallback, errorCallback);
+        },
+
+        getBelongsToSalesman: function() {
+            if (this.$root.isSalesman()) {
+                const successCallback = (response) => {
+                    this.belognsToSalesman = response.data;
+                };
+                const errorCallback = (error) => {
+                    this.$root.defaultCatchError(error);
+                };
+                this.$refs.manifestationService.belognsToSalesman(
+                    this.$route.params.id,
+                    successCallback,
+                    errorCallback
+                );
+            } else {
+                this.belognsToSalesman = false;
+            }
+        },
+
+        changeDetails: function() {
+            $("#changeManifestationModal").modal("show");
+        },
+        
+        changeLocation: function() {
+            $("#changeLocationModal").modal("show");
         }
     },
 
@@ -303,6 +355,8 @@ Vue.component("manifestation", {
         const id = this.$route.params.id;
         this.getManifestation(id);
         this.getReviews();
+
+        this.getBelongsToSalesman();
     },
 
     destroyed() {}

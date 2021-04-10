@@ -89,6 +89,14 @@ Vue.component("manifestationService", {
                 .post(this.baseUrl, manifestationToAdd)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
+        },
+
+        belognsToSalesman: function(manifestationId, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${manifestationId}/belongsToSalesman`;
+            axios
+                .get(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
         }
     },
 

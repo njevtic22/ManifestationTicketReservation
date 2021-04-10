@@ -7,6 +7,7 @@ import model.*;
 import repository.Repository;
 import repository.UserRepository;
 import useCase.manifestation.AddManifestationUseCase;
+import useCase.manifestation.BelongsToSalesmanUseCase;
 import useCase.manifestation.DeleteManifestationUseCase;
 import useCase.manifestation.GetAllCreatedManifestationsUseCase;
 import useCase.manifestation.GetAllManifestationsForSalesmanUseCase;
@@ -37,6 +38,7 @@ public class ManifestationService implements
         GetAllManifestationsUseCase,
         GetAllManifestationsForSalesmanUseCase,
         GetAllCreatedManifestationsUseCase,
+        BelongsToSalesmanUseCase,
         GetByIdManifestationUseCase,
         UpdateManifestationUseCase,
         UpdateLocationUseCase,
@@ -161,6 +163,21 @@ public class ManifestationService implements
     }
 
     @Override
+    public boolean belongsToSalesman(Long manifestationId, Salesman salesman) {
+        Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(manifestationId)
+                .orElseThrow(() -> new ManifestationNotFoundException(manifestationId));
+
+        boolean found = false;
+        for (Manifestation salesmanManifestation : salesman.getManifestations()) {
+            if (manifestation.equals(salesmanManifestation)) {
+                found = true;
+                break;
+            }
+        }
+
+        return found;
+    }
+    @Override
     public Manifestation getByIdManifestation(Long id) {
         return manifestationRepository.findByIdAndArchivedFalse(id).orElseThrow(() -> new ManifestationNotFoundException(id));
     }
@@ -246,16 +263,48 @@ public class ManifestationService implements
         final double longitude2 = manifestation2.getLocation().getLongitude();
         final double latitude2 = manifestation2.getLocation().getLatitude();
 
-        // Addresses can be same if coordinates are different on some small decimal place
-//        if (longitude1 == longitude2) {
-//            if (latitude1 == latitude2) {
-//                return isOverlap(holdingDate1, holdingDate2, 2);
-//            }
-//        }
-
-        if (address1.equals(address2))
+        // https://jsfiddle.net/kux63f5e/21/
+        // Either address or coordinates are overlapping
+        if (address1.equals(address2) || isOverlap(latitude1, longitude1, latitude2, longitude2, 0.0003))
+            // Check if dates are overlapping
             return isOverlap(holdingDate1, holdingDate2, 2);
         return false;
+    }
+
+    private boolean isOverlap(double latitude1, double longitude1, double latitude2, double longitude2, double plusMinusOffset) {
+        double latitude1Upper  = latitude1  + plusMinusOffset;
+        double latitude1Lower  = latitude1  - plusMinusOffset;
+        double longitude1Right = longitude1 + plusMinusOffset;
+        double longitude1Left  = longitude1 - plusMinusOffset;
+
+        double latitude2Upper  = latitude2  + plusMinusOffset;
+        double latitude2Lower  = latitude2  - plusMinusOffset;
+        double longitude2Right = longitude2 + plusMinusOffset;
+        double longitude2Left  = longitude2 - plusMinusOffset;
+
+        if (isOverlap(latitude1Lower, latitude1Upper, latitude2Lower, latitude2Upper))
+            return isOverlap(longitude1Right, longitude1Left, longitude2Right, longitude2Left);
+        return false;
+    }
+
+    private boolean isOverlap(double lowerBound1, double upperBound1, double lowerBound2, double upperBound2) {
+        double chosenLowerBound = 0;
+        double chosenUpperBound = 0;
+
+//        if (lowerBound1 < lowerBound2)
+//            chosenLowerBound = lowerBound2;
+//        else
+//            chosenLowerBound = lowerBound1;
+//
+//        if (upperBound1 < upperBound2)
+//            chosenUpperBound = upperBound1;
+//        else
+//            chosenUpperBound = upperBound2;
+
+        chosenLowerBound = Math.max(lowerBound1, lowerBound2);
+        chosenUpperBound = Math.min(upperBound1, upperBound2);
+
+        return !(chosenLowerBound > chosenUpperBound);
     }
 
     private boolean isOverlap(final Date startDate1, final Date startDate2, int eventHoursDuration) {

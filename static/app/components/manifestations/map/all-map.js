@@ -52,6 +52,31 @@ Vue.component("all-map", {
 
     mounted() {
         // https://vue-yandex-maps.github.io/en/examples/#move-the-marker-by-click
+        /*
+        
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=initMap&libraries=&v=weekly"
+            async
+        ></script>
+
+        function initMap() {
+            const upperLeft = {
+                lat: 45.255439,
+                lng: 19.845174
+            };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 4,
+                center: upperLeft,
+            });
+            new google.maps.Marker({
+                position: upperLeft,
+                map,
+                title: "Hello World!",
+            });
+        }
+
+        
+        */
     },
 
     destroyed() {}

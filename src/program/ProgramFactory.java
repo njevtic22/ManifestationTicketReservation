@@ -258,6 +258,7 @@ public class ProgramFactory {
                     manifestationService,
                     manifestationService,
                     manifestationService,
+                    manifestationService,
                     new ManifestationFilterSearcher(),
                     new ManifestationSorter(),
                     new Pagination()
