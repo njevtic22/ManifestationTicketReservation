@@ -4,8 +4,18 @@ Vue.component("manifestation", {
         <div class="form-row border-0 manifestation-details shadow-lg">
             <div class="row" v-if="belognsToSalesman">
                 <div class="col text-right">
-                    <button class="btn btn-primary" v-on:click="changeDetails">Change details</button>
-                    <button class="btn btn-primary" v-on:click="changeLocation">Change location</button>
+                    <button 
+                        class="btn btn-primary"
+                        v-on:click="changeDetails"
+                    >
+                        Change details
+                    </button>
+                    <button 
+                        class="btn btn-primary" 
+                        v-on:click="changeLocation"
+                    >
+                        Change location
+                    </button>
                 </div>
                 <br/>
                 <br/>
@@ -163,13 +173,16 @@ Vue.component("manifestation", {
         </div>
 
         <changeManifestationModal 
-            id="changeManifestationModal" 
-            v-bind:manifestation="manifestation"
+            id="changeManifestationModal"
+            ref="changeManifestationModal"
+
+            v-on:manifestationUpdated="getManifestation($route.params.id)"
         ></changeManifestationModal>
         <changeLocationModal 
             id="changeLocationModal"
-            v-bind:location="location"
-            v-bind:address="address"
+            ref="changeLocationModal"
+            
+            v-on:locationUpdated="getManifestation($route.params.id)"
         ></changeLocationModal>
         
         <manifestationService ref="manifestationService"></manifestationService>
@@ -208,8 +221,6 @@ Vue.component("manifestation", {
 
                 imageBase64: "",
                 imageType: "", 
-
-                reviews: []
             },
             
 
@@ -336,10 +347,12 @@ Vue.component("manifestation", {
         },
 
         changeDetails: function() {
+            this.$refs.changeManifestationModal.getManifestation(this.manifestation.id);
             $("#changeManifestationModal").modal("show");
         },
         
         changeLocation: function() {
+            this.$refs.changeLocationModal.getManifestation(this.manifestation.id);
             $("#changeLocationModal").modal("show");
         }
     },

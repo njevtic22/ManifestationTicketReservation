@@ -214,13 +214,13 @@ Vue.component("createManifestationModal", {
     data: function() {
         return {
             manifestationToCreate: {
-                name: "",//
-                maxNumberOfTickets: 0,//
-                regularTicketPrice: 0,//
-                holdingDate: "",//
-                description: "",//
-                status: "CREATED",//
-                type: "CONCERT",//
+                name: "",
+                maxNumberOfTickets: 0,
+                regularTicketPrice: 0,
+                holdingDate: "",
+                description: "",
+                status: "CREATED",
+                type: "CONCERT",
 
                 latitude: 45.25603382101638,
                 longitude: 19.845723284250592,
@@ -230,8 +230,8 @@ Vue.component("createManifestationModal", {
                 city: "",
                 postalCode: "",
 
-                imageBase64: "",//
-                imageType: ""//
+                imageBase64: "",
+                imageType: ""
             },
 
             typeOptions: Object.freeze([
@@ -254,12 +254,10 @@ Vue.component("createManifestationModal", {
 
 
 
-            // return address.street + " " + address.number + ", " + address.city + ", " + address.postalCode;
-
             nameErrorMessage: "Name must not be empty",
             priceErrorMessage: "Price must be positive number",
             dateErrorMessage: "Holding date must not be empty",
-            descriptionErrorMessage: "Description must not be empty",
+            descriptionErrorMessage: "Description must have at least 100 characters",
 
             streetErrorMessage: "Street must not be empty",
             numberErrorMessage: "Number must not be empty",
@@ -326,7 +324,7 @@ Vue.component("createManifestationModal", {
         },
 
         removeInvalidDescriptionError: function() {
-            this.descriptionErrorMessage = "Description must not be empty";
+            this.descriptionErrorMessage = "Description must have at least 100 characters";
             this.isDescriptionInvalid = false;
         },
 

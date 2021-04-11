@@ -15,13 +15,19 @@ Vue.component("textAreaInput", {
                     v-bind:disabled="disabled"
                     v-bind:placeholder="placeholder"
                     v-bind:style="{height: height}"
-                    
+                    v-bind:minlength="minLength"
+
                     v-on:input="$emit('input', $event.target.value)"
                 ></textarea>
                 <div class="invalid-tooltip">
                     {{ errorMessage }}
                 </div>
             </div>
+
+            <!--
+                class="scroll scroll-invisible " to hide scrollbar and also prevent resizing
+                style="resize:none" to prevent resizing
+            -->
         </div>
     `,
 
@@ -49,6 +55,10 @@ Vue.component("textAreaInput", {
         disabled: {
             type: Boolean,
             default: false
+        },
+        minLength: {
+            type: Number,
+            default: 100
         }
     },
 

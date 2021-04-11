@@ -94,7 +94,6 @@ Vue.component("profile", {
 
         <editProfileModal 
             id="editProfileModalId"
-            v-bind:currentUser="user"
             v-on:profileChanged="getUser"
             ref="editProfileModal"
         ></editProfileModal>

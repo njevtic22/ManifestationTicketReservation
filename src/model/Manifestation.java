@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Manifestation {
+public class Manifestation implements Cloneable {
     private Long id;
     private String name;
     private long maxNumberOfTickets;
@@ -147,6 +147,11 @@ public class Manifestation {
 
     public static void initGenerator(Long start) {
         Manifestation.idGenerator = new LongGenerator(start);
+    }
+
+    @Override
+    public Manifestation clone() {
+        return null;
     }
 
     @Override

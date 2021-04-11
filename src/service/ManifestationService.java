@@ -6,15 +6,7 @@ import exception.SalesmanNotFoundException;
 import model.*;
 import repository.Repository;
 import repository.UserRepository;
-import useCase.manifestation.AddManifestationUseCase;
-import useCase.manifestation.BelongsToSalesmanUseCase;
-import useCase.manifestation.DeleteManifestationUseCase;
-import useCase.manifestation.GetAllCreatedManifestationsUseCase;
-import useCase.manifestation.GetAllManifestationsForSalesmanUseCase;
-import useCase.manifestation.GetAllManifestationsUseCase;
-import useCase.manifestation.GetByIdManifestationUseCase;
-import useCase.manifestation.UpdateLocationUseCase;
-import useCase.manifestation.UpdateManifestationUseCase;
+import useCase.manifestation.*;
 import useCase.manifestation.command.AddManifestationCommand;
 import useCase.manifestation.command.UpdateLocationCommand;
 import useCase.manifestation.command.UpdateManifestationCommand;
@@ -42,7 +34,8 @@ public class ManifestationService implements
         GetByIdManifestationUseCase,
         UpdateManifestationUseCase,
         UpdateLocationUseCase,
-        DeleteManifestationUseCase {
+        DeleteManifestationUseCase,
+        SetManifestationsToInactiveUseCase {
     private final SimpleDateFormat formatter;
     private final Repository<Manifestation, Long> manifestationRepository;
     private final Repository<Ticket, Long> ticketRepository;
@@ -187,6 +180,9 @@ public class ManifestationService implements
         final Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.id)
                 .orElseThrow(() -> new ManifestationNotFoundException(command.id));
 
+        Manifestation manifestationToCheck = new Manifestation()
+        ensurePlaceAndDateIsValid(manifestationToCheck);
+
         manifestation.setName(command.name);
 
         manifestation.setRegularTicketPrice(command.regularTicketPrice);
@@ -197,7 +193,6 @@ public class ManifestationService implements
 
         manifestation.setHoldingDate(formatter.parse(command.holdingDate));
         manifestation.setDescription(command.description);
-        manifestation.setStatus(ManifestationStatus.valueOf(command.status));
         manifestation.setType(ManifestationType.valueOf(command.type));
 
         manifestation.getImage().setLocation(base64ToImageLocation(command.imageBase64, command.imageType, manifestation.getId()));
@@ -233,6 +228,17 @@ public class ManifestationService implements
         manifestation.archive();
 
         manifestationRepository.save(manifestation);
+    }
+
+    @Override
+    public void setToInactive() {
+        Collection<Manifestation> manifestations = manifestationRepository.findAllByArchivedFalse();
+        manifestations.forEach(manifestation -> {
+            if (manifestation.getStatus() == ManifestationStatus.ACTIVE) {
+                manifestation.setStatus(ManifestationStatus.INACTIVE);
+                manifestationRepository.save(manifestation);
+            }
+        });
     }
 
     public void ensurePlaceAndDateIsValid(Manifestation manifestation) {

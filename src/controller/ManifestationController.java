@@ -18,15 +18,7 @@ import sorter.ManifestationSorter;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import useCase.manifestation.AddManifestationUseCase;
-import useCase.manifestation.BelongsToSalesmanUseCase;
-import useCase.manifestation.DeleteManifestationUseCase;
-import useCase.manifestation.GetAllCreatedManifestationsUseCase;
-import useCase.manifestation.GetAllManifestationsForSalesmanUseCase;
-import useCase.manifestation.GetAllManifestationsUseCase;
-import useCase.manifestation.GetByIdManifestationUseCase;
-import useCase.manifestation.UpdateLocationUseCase;
-import useCase.manifestation.UpdateManifestationUseCase;
+import useCase.manifestation.*;
 import useCase.manifestation.command.AddManifestationCommand;
 import useCase.manifestation.command.UpdateLocationCommand;
 import useCase.manifestation.command.UpdateManifestationCommand;
@@ -59,6 +51,7 @@ public class ManifestationController {
     private UpdateManifestationUseCase updateManifestationUseCase;
     private UpdateLocationUseCase updateLocationUseCase;
     private DeleteManifestationUseCase deleteManifestationUseCase;
+    private SetManifestationsToInactiveUseCase setManifestationsToInactiveUseCase;
     private final ManifestationFilterSearcher manifestationFilterSearcher;
     private final ManifestationSorter manifestationSorter;
     private Pagination pagination;
@@ -80,7 +73,7 @@ public class ManifestationController {
             UpdateManifestationUseCase updateManifestationUseCase,
             UpdateLocationUseCase updateLocationUseCase,
             DeleteManifestationUseCase deleteManifestationUseCase,
-            ManifestationFilterSearcher manifestationFilterSearcher,
+            SetManifestationsToInactiveUseCase setManifestationsToInactiveUseCase, ManifestationFilterSearcher manifestationFilterSearcher,
             ManifestationSorter manifestationSorter,
             Pagination pagination
     ) {
@@ -95,6 +88,7 @@ public class ManifestationController {
         this.updateManifestationUseCase = updateManifestationUseCase;
         this.updateLocationUseCase = updateLocationUseCase;
         this.deleteManifestationUseCase = deleteManifestationUseCase;
+        this.setManifestationsToInactiveUseCase = setManifestationsToInactiveUseCase;
         this.manifestationFilterSearcher = manifestationFilterSearcher;
         this.manifestationSorter = manifestationSorter;
         this.pagination = pagination;
@@ -105,6 +99,7 @@ public class ManifestationController {
         path("api", () -> {
             path("/manifestations", () -> {
                 post("", add);
+                post("/setToInactive", setToInactive);
                 get("", getAll, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
                 get("/forSalesman", getAllForSalesman, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
                 get("/created", getCreated, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
@@ -116,6 +111,13 @@ public class ManifestationController {
             });
         });
     }
+
+    public Route setToInactive = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+        setManifestationsToInactiveUseCase.setToInactive();
+        response.status(HttpStatus.OK_200);
+        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
+    };
 
     public Route add = (Request request, Response response) -> {
         ensureUserIsSalesman.ensure(request);
@@ -214,11 +216,9 @@ public class ManifestationController {
         UpdateManifestationCommand command = new UpdateManifestationCommand(
                 SelfValidating.validId(request.params(":id")),
                 requestBody.name,
-                requestBody.maxNumberOfTickets,
                 requestBody.regularTicketPrice,
                 requestBody.holdingDate,
                 requestBody.description,
-                requestBody.status,
                 requestBody.type,
                 requestBody.imageBase64,
                 requestBody.imageType

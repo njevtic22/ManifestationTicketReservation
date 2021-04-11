@@ -97,6 +97,14 @@ Vue.component("manifestationService", {
                 .get(url)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
+        },
+
+        updateManifestation: function(manifestationData, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${manifestationData.id}`;
+            axios
+                .put(url, manifestationData)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
         }
     },
 
