@@ -14,8 +14,6 @@ public class GetByIdCustomerDTO {
     public double points;
     public String type;
 
-    // TODO: Add DTO fro ticket and history -> maybe
-
     public GetByIdCustomerDTO(Customer customer, String parsedDate) {
         this.id = customer.getId();
         this.name = customer.getName();

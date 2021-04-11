@@ -115,11 +115,10 @@ public class AuthenticationController {
         String authorization = request.headers("Authorization");
 
         if (authorization == null || authorization.equals("Bearer null")) {
-            // TODO: Add other routes to ignore -> maybe
             if (request.uri().equals("/api/authentication/login")) {
-
+                // Ignoring
             } else if (request.uri().equals("/api/authentication/registerCustomer")) {
-
+                // Ignoring
             } else if (request.uri().equals("/api/manifestations")) {
                 if (!request.requestMethod().equals("GET")) {
                     throw new TokenNotFoundException("No token id found");

@@ -51,7 +51,7 @@ public class ReviewController {
             path("/reviews", () -> {
                 post("", add);
                 get("", getAll, new GetAllReviewsTransformer(gson, new GetAllReviewsMapper()));
-                // TODO: forManifestation
+                // TODO: forManifestation getForManifestationUseCase.get(User user)
                 // TODO: createdForSalesman
                 put("/:id", update);
                 delete("/:id", delete);
