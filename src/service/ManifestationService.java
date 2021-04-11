@@ -290,8 +290,9 @@ public class ManifestationService implements
         double longitude2Right = longitude2 + plusMinusOffset;
         double longitude2Left  = longitude2 - plusMinusOffset;
 
-        if (isOverlap(latitude1Lower, latitude1Upper, latitude2Lower, latitude2Upper))
-            return isOverlap(longitude1Right, longitude1Left, longitude2Right, longitude2Left);
+        if (isOverlap(latitude1Lower, latitude1Upper, latitude2Lower, latitude2Upper)) {
+            return isOverlap(longitude1Left, longitude1Right, longitude2Left, longitude2Right);
+        }
         return false;
     }
 

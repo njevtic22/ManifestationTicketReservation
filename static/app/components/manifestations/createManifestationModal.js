@@ -416,9 +416,6 @@ Vue.component("createManifestationModal", {
             // var fileName = event.target.value.slice(event.target.value.lastIndexOf("\\") + 1);
             // var fileExtension = fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2);
 
-            // console.log(fileName);
-            // console.log(fileExtension);
-
             
             this.manifestationToCreate.imageType = "";
             this.manifestationToCreate.imageBase64 = "";
@@ -432,9 +429,6 @@ Vue.component("createManifestationModal", {
 
 
             var fileExtension = fileData.name.slice((fileData.name.lastIndexOf(".") - 1 >>> 0) + 2);
-            // console.log(fileData.name);
-            // console.log(fileExtension);
-
             if (fileExtension === "") {
                 return;
             }
@@ -470,7 +464,6 @@ Vue.component("createManifestationModal", {
         },
 
         showAlternateImage: function() {
-            // console.log("showAlternateImage");
             this.imageToShow = "/images/no image 2.png";
         },
 
@@ -479,9 +472,7 @@ Vue.component("createManifestationModal", {
         },
 
         geocodeCoordinates: function() {
-
             const successCallback = (coordinates) => {
-                console.log(coordinates);
                 this.manifestationToCreate.latitude = coordinates.latitude;
                 this.manifestationToCreate.longitude = coordinates.longitude;
             };

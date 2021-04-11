@@ -10,7 +10,7 @@ Vue.component("geocodeService", {
             // sr_Latn
             // sr_RS
             // https://zeljko.popivoda.com/medjunarodne-oznake-za-srpski-jezik/
-            baseUrl: "https://geocode-maps.yandex.ru/1.x/?apikey=daf8ca4b-3c4e-4396-9bff-8c6b22f7e69a&lang=sr_Latn&format=json",
+            baseUrl: "https://geocode-maps.yandex.ru/1.x/?apikey=daf8ca4b-3c4e-4396-9bff-8c6b22f7e69a&lang=en_US&format=json",
             
             config: {
                 headers: {
@@ -82,7 +82,7 @@ Vue.component("geocodeService", {
                 }
                 
                 const results = geoCollection.featureMember;
-                console.log(results);
+                // console.log(results);
 
                 let chosenResult = {};
                 var i = 0;
@@ -95,16 +95,22 @@ Vue.component("geocodeService", {
                     }
                 }
 
-                // No results found
+                // No results found through matching description
                 if (i === results.length) {
-                    return {
-                        longitude: 0,
-                        latitude:  0
-                    };
+
+                    // if there are results, choose first one
+                    if (metadata.found != "0") {
+                        chosenResult = results[0].GeoObject;
+                    } else {
+                        return {
+                            longitude: 0,
+                            latitude:  0
+                        };
+                    }
                 }
                 
                 
-                console.log(chosenResult);
+                // console.log(chosenResult);
                 const chosenResultMedatada = chosenResult.metaDataProperty.GeocoderMetaData;
                 const precision = chosenResultMedatada.precision
                 
@@ -142,11 +148,11 @@ Vue.component("geocodeService", {
                 
                 
                 const results = geoCollection.featureMember;
-                console.log(results);
+                // console.log(results);
                 
                 
                 const chosenResult = results[0];
-                console.log(chosenResult);
+                // console.log(chosenResult);
                 const addressArray = chosenResult.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components;
 
                 // Convert adressArray to object
@@ -157,8 +163,11 @@ Vue.component("geocodeService", {
 
                 const number = addressObject.house != null ? Number(addressObject.house)  : 0;
                 const street = addressObject.street != null ? addressObject.street : "";
-                const city   = addressObject.locality != null ? addressObject.locality : "";
-               
+                let city     = addressObject.locality != null ? addressObject.locality : "";
+                if (city === "") {
+                    city = addressObject.area != null ? addressObject.area : "";
+                }
+
                 return {
                     street: street,
                     number: number,

@@ -45,7 +45,5 @@ Vue.component("baseLayout", {
         // }
     },
 
-    mounted() {
-    //   console.log("Base Layout mounted");
-    }
+    mounted() {}
 });

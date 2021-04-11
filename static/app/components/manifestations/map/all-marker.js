@@ -58,7 +58,17 @@ Vue.component("all-marker", {
 
                 
                 <hr/>
-                <p class="card-text scroll scroll-invisible description-scroll">${this.manifestation.description}</p>
+                <p 
+                    class="
+                        scroll 
+                        scroll-invisible 
+                        description-scroll
+                        text-wrap
+                        text-break
+                        "
+                >
+                    ${this.manifestation.description}
+                </p>
                 <hr/>
 
                 <div class="d-flex justify-content-between mt-auto">
@@ -102,7 +112,7 @@ Vue.component("all-marker", {
                 document.getElementById(`${this.manifestation.id.toString() + "btn2"}`)
                     .removeEventListener('click', this.redirectToManifestation);
             } catch(error) {
-                console.log(error);
+                // console.log(error);
             }
         },
 

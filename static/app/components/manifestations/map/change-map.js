@@ -1,21 +1,26 @@
-Vue.component("add-map", {
+Vue.component("change-map", {
     template: `
     <yandex-map 
         v-bind:settings="settings"
-        v-bind:coords="[newManifestation.latitude, newManifestation.longitude]"
-        v-bind:zoom="10" 
+        v-bind:coords="location"
+        v-bind:zoom="zoom"
+        
         v-on:click="moveMarker($event)"
     >
         <ymap-marker 
-            v-bind:coords="[newManifestation.latitude, newManifestation.longitude]" 
             marker-id="123" 
+            v-bind:coords="location"
         />
     </yandex-map>
     `,
 
     props: {
-        newManifestation: {
-            type: Object,
+        location: {
+            type: Array,
+            required: true,
+        },
+        zoom: {
+            type: Number,
             required: true
         }
     },

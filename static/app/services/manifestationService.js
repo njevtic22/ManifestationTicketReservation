@@ -105,6 +105,14 @@ Vue.component("manifestationService", {
                 .put(url, manifestationData)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
+        },
+
+        updateLocation: function(locationData, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${locationData.id}/location`;
+            axios
+                .put(url, locationData)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
         }
     },
 

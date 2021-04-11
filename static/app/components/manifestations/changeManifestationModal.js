@@ -108,7 +108,7 @@ Vue.component("changeManifestationModal", {
                 </div>
             </div>
         </baseForm>
-        
+
         <manifestationService ref="manifestationService"></manifestationService>
     </baseModal>
     `,
@@ -246,8 +246,6 @@ Vue.component("changeManifestationModal", {
             // var fileName = event.target.value.slice(event.target.value.lastIndexOf("\\") + 1);
             // var fileExtension = fileName.slice((fileName.lastIndexOf(".") - 1 >>> 0) + 2);
 
-            // console.log(fileName);
-            // console.log(fileExtension);
 
             
             this.manifestation.imageType = "";
@@ -262,9 +260,6 @@ Vue.component("changeManifestationModal", {
 
 
             var fileExtension = fileData.name.slice((fileData.name.lastIndexOf(".") - 1 >>> 0) + 2);
-            // console.log(fileData.name);
-            // console.log(fileExtension);
-
             if (fileExtension === "") {
                 return;
             }
@@ -300,7 +295,6 @@ Vue.component("changeManifestationModal", {
         },
 
         showAlternateImage: function() {
-            // console.log("showAlternateImage");
             this.imageToShow = "/images/no image 2.png";
         },
 
