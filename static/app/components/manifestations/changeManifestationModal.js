@@ -108,7 +108,7 @@ Vue.component("changeManifestationModal", {
                 </div>
             </div>
         </baseForm>
-        {{JSON.stringify(manifestation)}}
+        
         <manifestationService ref="manifestationService"></manifestationService>
     </baseModal>
     `,

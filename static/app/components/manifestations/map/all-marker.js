@@ -95,11 +95,15 @@ Vue.component("all-marker", {
                 .addEventListener('click', this.redirectToManifestation);
         },
         unbindListener() {
-            document.getElementById(`${this.manifestation.id.toString() + "btn"}`)
-                .removeEventListener('click', this.redirectToManifestation);
-
-            document.getElementById(`${this.manifestation.id.toString() + "btn2"}`)
-                .removeEventListener('click', this.redirectToManifestation);
+            try {
+                document.getElementById(`${this.manifestation.id.toString() + "btn"}`)
+                    .removeEventListener('click', this.redirectToManifestation);
+    
+                document.getElementById(`${this.manifestation.id.toString() + "btn2"}`)
+                    .removeEventListener('click', this.redirectToManifestation);
+            } catch(error) {
+                console.log(error);
+            }
         },
 
         redirectToManifestation: function() {

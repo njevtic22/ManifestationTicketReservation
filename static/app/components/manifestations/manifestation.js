@@ -51,7 +51,17 @@ Vue.component("manifestation", {
                     </div>
 
                     <hr/>
-                    <p class="scroll scroll-invisible manifestation-description-scroll">{{ manifestation.description  }}</p>
+                    <p 
+                        class="
+                            scroll 
+                            scroll-invisible 
+                            manifestation-description-scroll
+                            text-wrap
+                            text-break
+                            "
+                    >
+                        {{ manifestation.description  }}
+                    </p>
                     <hr/>
 
                     

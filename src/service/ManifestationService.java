@@ -177,11 +177,10 @@ public class ManifestationService implements
 
     @Override
     public void updateManifestation(UpdateManifestationCommand command) throws ParseException {
-        final Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.id)
+        Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.id)
                 .orElseThrow(() -> new ManifestationNotFoundException(command.id));
 
-        Manifestation manifestationToCheck = new Manifestation()
-        ensurePlaceAndDateIsValid(manifestationToCheck);
+        manifestation = manifestation.clone();
 
         manifestation.setName(command.name);
 
@@ -197,13 +196,16 @@ public class ManifestationService implements
 
         manifestation.getImage().setLocation(base64ToImageLocation(command.imageBase64, command.imageType, manifestation.getId()));
 
+        ensurePlaceAndDateIsValid(manifestation);
         manifestationRepository.save(manifestation);
     }
 
     @Override
     public void updateLocation(UpdateLocationCommand command) {
-        final Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.manifestationId)
+        Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.manifestationId)
                 .orElseThrow(() -> new ManifestationNotFoundException(command.manifestationId));
+
+        manifestation = manifestation.clone();
 
         final Location location = manifestation.getLocation();
         location.setLongitude(command.longitude);

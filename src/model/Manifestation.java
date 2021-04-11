@@ -151,7 +151,21 @@ public class Manifestation implements Cloneable {
 
     @Override
     public Manifestation clone() {
-        return null;
+        return new Manifestation(
+                this.id,
+                this.name,
+                this.maxNumberOfTickets,
+                this.regularTicketPrice,
+                this.holdingDate,
+                this.description,
+                this.status,
+                this.type,
+                this.archived,
+                this.location,
+                this.image,
+                this.tickets,
+                this.reviews
+        );
     }
 
     @Override
