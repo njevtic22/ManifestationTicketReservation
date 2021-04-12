@@ -3,6 +3,7 @@ package controller;
 import com.google.gson.Gson;
 import filterSearcher.ManifestationFilterSearcher;
 import model.Manifestation;
+import model.ManifestationStatus;
 import model.ManifestationType;
 import model.Salesman;
 import model.User;
@@ -256,6 +257,8 @@ public class ManifestationController {
     };
 
     private void applyFilter(Request request, Collection<Manifestation> manifestations) {
+        if  (request.queryParams("filterStatus") != null)
+            manifestationFilterSearcher.filterByStatus(ManifestationStatus.valueOf(request.queryParams("filterStatus")), manifestations);
         if (request.queryParams("filterType") != null)
             manifestationFilterSearcher.filterByType(ManifestationType.valueOf(request.queryParams("filterType")), manifestations);
         if (request.queryParams("filterAvailable") != null && request.queryParams("filterAvailable").toLowerCase().equals("available"))

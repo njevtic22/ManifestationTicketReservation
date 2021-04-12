@@ -106,35 +106,35 @@ public class ManifestationService implements
 
     @Override
     public Collection<Manifestation> getAllManifestations(User user) {
-        Collection<Manifestation> manifestations;
+        Collection<Manifestation> manifestations = manifestationRepository.findAllByArchivedFalse();
 
-        if (user == null) {
-            manifestations = manifestationRepository.findAllByArchivedFalse()
-                    .stream()
-                    .filter(manifestation -> {
-                        ManifestationStatus status = manifestation.getStatus();
-                        if (status == ManifestationStatus.CREATED || status == ManifestationStatus.REJECTED)
-                            return false;
-                        else
-                            return true;
-                    })
-                    .collect(Collectors.toList());
-
-        } else if (user instanceof Admin) {
-            manifestations = manifestationRepository.findAllByArchivedFalse();
-
-        } else {
-            manifestations = manifestationRepository.findAllByArchivedFalse()
-                    .stream()
-                    .filter(manifestation -> {
-                        ManifestationStatus status = manifestation.getStatus();
-                        if (status == ManifestationStatus.CREATED || status == ManifestationStatus.REJECTED)
-                            return false;
-                        else
-                            return true;
-                    })
-                    .collect(Collectors.toList());
-        }
+//        if (user == null) {
+//            manifestations = manifestationRepository.findAllByArchivedFalse()
+//                    .stream()
+//                    .filter(manifestation -> {
+//                        ManifestationStatus status = manifestation.getStatus();
+//                        if (status == ManifestationStatus.CREATED || status == ManifestationStatus.REJECTED)
+//                            return false;
+//                        else
+//                            return true;
+//                    })
+//                    .collect(Collectors.toList());
+//
+//        } else if (user instanceof Admin) {
+//            manifestations = manifestationRepository.findAllByArchivedFalse();
+//
+//        } else {
+//            manifestations = manifestationRepository.findAllByArchivedFalse()
+//                    .stream()
+//                    .filter(manifestation -> {
+//                        ManifestationStatus status = manifestation.getStatus();
+//                        if (status == ManifestationStatus.CREATED || status == ManifestationStatus.REJECTED)
+//                            return false;
+//                        else
+//                            return true;
+//                    })
+//                    .collect(Collectors.toList());
+//        }
 
         return manifestations;
     }

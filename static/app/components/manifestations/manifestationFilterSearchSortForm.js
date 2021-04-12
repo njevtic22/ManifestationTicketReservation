@@ -85,6 +85,17 @@ Vue.component("manifestationFilterSearchSortForm", {
                 
                 v-on:select="changeAvailable($event)"
             ></selectInput>
+
+            <selectInput
+                name="manStatus"
+                labelText="Status"
+                v-bind:value="statusValue"
+                v-bind:options="statusOptions"
+                class="form-group col-md-12"
+                required
+                
+                v-on:select="changeStatus($event)"
+            ></selectInput>
         </div>
 
         <h4>Sort</h4>
@@ -147,7 +158,8 @@ Vue.component("manifestationFilterSearchSortForm", {
             },
             filterData: {
                 filterType: "",
-                filterAvailable: ""
+                filterAvailable: "",
+                filterStatus: ""
             },
 
 
@@ -163,6 +175,15 @@ Vue.component("manifestationFilterSearchSortForm", {
             availableOptions: [
                 "",
                 "AVAILABLE"
+            ],
+
+            statusValue: "",
+            statusOptions: [
+                "",
+                "CREATED",
+                "REJECTED",
+                "ACTIVE",
+                "INACTIVE"
             ],
 
 
@@ -191,6 +212,11 @@ Vue.component("manifestationFilterSearchSortForm", {
         changeAvailable: function(newAvailable) {
             this.availableValue = newAvailable;
             this.filterData.filterAvailable = newAvailable;
+        },
+
+        changeStatus: function(newStatus) {
+            this.statusValue = newStatus;
+            this.filterData.filterStatus = newStatus;
         },
 
         changeSortBy: function(newSortBy) {

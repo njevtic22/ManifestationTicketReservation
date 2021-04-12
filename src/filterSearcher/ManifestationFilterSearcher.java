@@ -8,6 +8,10 @@ import java.util.Collection;
 import java.util.Date;
 
 public class ManifestationFilterSearcher {
+    public void filterByStatus(ManifestationStatus status, Collection<Manifestation> manifestations) {
+        manifestations.removeIf(manifestation -> manifestation.getStatus() != status);
+    }
+
     public void filterByType(ManifestationType type, Collection<Manifestation> manifestations) {
         manifestations.removeIf(manifestation -> manifestation.getType() != type);
     }
