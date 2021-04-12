@@ -170,7 +170,8 @@ public class TicketService implements
         Ticket ticket = ticketRepository.findByIdAndArchivedFalse(id)
                 .orElseThrow(() -> new TicketNotFoundException(id));
 
-        ticket.archive();
+        // TODO: Implement refusing deletion of ticket if it has user
+        // ticket.archive();
 
         ticketRepository.save(ticket);
     }
