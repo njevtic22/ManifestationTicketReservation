@@ -124,13 +124,14 @@ const isLogIn = (to, from, next) => {
 
 const errorPageUserCheck = (to, from, next) => {
     console.log("errorPageUserCheck");
-    if (localStorage.getItem("role")) {
-        next();
-        return;
-    }
-    next({
-        name: "LogInPage"
-    })
+    // if (localStorage.getItem("role")) {
+    //     next();
+    //     return;
+    // }
+    // next({
+    //     name: "LogInPage"
+    // })
+    next();
 };
 
 const router = new VueRouter({

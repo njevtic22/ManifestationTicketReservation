@@ -113,6 +113,14 @@ Vue.component("manifestationService", {
                 .put(url, locationData)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
+        },
+
+        deleteManifestation: function(manifestationId, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${manifestationId}`;
+            axios
+                .delete(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
         }
     },
 

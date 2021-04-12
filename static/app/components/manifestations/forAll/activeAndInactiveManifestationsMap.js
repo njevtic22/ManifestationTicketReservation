@@ -35,6 +35,7 @@ Vue.component("activeAndInactiveManifestationsMap", {
                     style="height: 800px; width: 100%;"
                     v-bind:manifestations="manifestations.data"
                     v-bind:zoom="5"
+                    v-on:deleteManifestation="deleteManifestation($event)"
                 >
                 </all-map>
             </div>
@@ -196,7 +197,23 @@ Vue.component("activeAndInactiveManifestationsMap", {
                 successCallback,
                 errorCallback
             );
-        }
+        },
+
+        deleteManifestation: function(manifestationId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is deleted")
+                this.getActAndInactManifestations();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.deleteManifestation(
+                manifestationId,
+                successCallback,
+                errorCallback
+            );
+        },
     },
 
     mounted() {

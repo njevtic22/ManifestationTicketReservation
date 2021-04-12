@@ -2,7 +2,7 @@ Vue.component("manifestation", {
     template: `
     <div>
         <div class="form-row border-0 manifestation-details shadow-lg">
-            <div class="row" v-if="belognsToSalesman">
+            <div class="row" v-if="$root.isSalesman() && belognsToSalesman">
                 <div class="col text-right">
                     <button 
                         class="btn btn-primary"
@@ -20,6 +20,20 @@ Vue.component("manifestation", {
                 <br/>
                 <br/>
             </div>
+            <div class="row" v-if="$root.isAdmin()">
+                <div class="col text-right">
+                    <button 
+                        class="btn btn-danger" 
+                        v-on:click="deleteManifestation"
+                    >
+                        Delete manifestation
+                    </button>
+                </div>
+                <br/>
+                <br/>
+            </div>
+
+
             <div class="row">
                 <div class="col d-flex flex-column">
                     <h3>{{ manifestation.name }}</h3>
@@ -332,7 +346,20 @@ Vue.component("manifestation", {
                 this.imageLocationToShow = `data:image/${this.manifestation.imageType};base64, ${this.manifestation.imageBase64}`;
             };
             const errorCallback = (error) => {
-                this.$root.defaultCatchError(error);
+                const status = error.response.status;
+                const msg = error.response.data;
+                const expectedError = `Manifestation with id ${this.$route.params.id} not found`;
+
+                if (status == 404) {
+                    if (msg == expectedError) {
+                        this.$root.failureToast(msg);
+                    } else {
+                        this.$root.defaultCatchError(error);       
+                    }
+                    this.$router.push({
+                        name: "NotFoundPage"
+                    });
+                }
             };
 
             this.$refs.manifestationService.getManifestation(manifestationId, successCallback, errorCallback);
@@ -344,6 +371,7 @@ Vue.component("manifestation", {
                     this.belognsToSalesman = response.data;
                 };
                 const errorCallback = (error) => {
+                    this.belognsToSalesman = false;
                     this.$root.defaultCatchError(error);
                 };
                 this.$refs.manifestationService.belognsToSalesman(
@@ -354,6 +382,43 @@ Vue.component("manifestation", {
             } else {
                 this.belognsToSalesman = false;
             }
+        },
+
+        deleteManifestation: function() {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is deleted")
+                this.redirectToManifestation();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.deleteManifestation(
+                this.manifestation.id,
+                successCallback,
+                errorCallback
+            );
+        },
+
+        redirectToManifestation: function() {
+            // // NOTE: relies on current route
+            // const lastIndex = this.$route.path.lastIndexOf("/");
+            // const pathTo = this.$route.path.substring(0, lastIndex + 1) + this.manifestation.id;
+            // this.$router.push({ path: pathTo });
+
+
+            // NOTE: relies on roles
+            let rolePath = "";
+            if (this.$root.isAdmin())
+                rolePath = "/admin";
+            else if (this.$root.isSalesman())
+                rolePath = "/salesman";
+            else if (this.$root.isCustomer())
+                rolePath = "/customer";
+
+            
+            const pathTo = `${rolePath}/manifestations/map`;
+            this.$router.push({ path: pathTo });
         },
 
         changeDetails: function() {

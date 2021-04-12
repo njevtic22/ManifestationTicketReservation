@@ -45,6 +45,7 @@ Vue.component("activeAndInactiveManifestationsReg", {
 
                 <manifestationCards v-else
                     v-bind:manifestations="manifestations.data"
+                    v-on:deleteManifestation="deleteManifestation($event)"
                 >
                 </manifestationCards>
             </div>
@@ -201,7 +202,23 @@ Vue.component("activeAndInactiveManifestationsReg", {
                 successCallback,
                 errorCallback
             );
-        }
+        },
+
+        deleteManifestation: function(manifestationId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is deleted")
+                this.getActAndInactManifestations();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.deleteManifestation(
+                manifestationId,
+                successCallback,
+                errorCallback
+            );
+        },
     },
 
     mounted() {

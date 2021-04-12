@@ -47,6 +47,7 @@ Vue.component("add-map", {
 
     mounted() {
         // this.coordinates = this.initCoords;
+        // https://vue-yandex-maps.github.io/en/examples/#move-the-marker-by-click
     },
 
     destroyed() {}

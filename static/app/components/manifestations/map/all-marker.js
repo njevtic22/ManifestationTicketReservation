@@ -36,7 +36,7 @@ Vue.component("all-marker", {
 
     computed: {
         balloonTemplate() {
-            // Not working properly vith vue directives (v-if, v-bind)
+            // Not working properly vith vue directives (v-if, v-bind ...)
             return `
             <button id="${this.manifestation.id.toString() + "btn"}" class="btn btn-primary btn-block">View details</button>
             <br/>
@@ -79,7 +79,14 @@ Vue.component("all-marker", {
             </div>
             <br/>
             <button id="${this.manifestation.id.toString() + "btn2"}" class="btn btn-primary btn-block">View details</button>
+            <button
+                id="deleteManifestationBtn" 
+                class="btn btn-danger btn-block"
+            >
+                Delete manifestation
+            </button>
             `;
+            // Not working properly vith vue directives (v-if, v-bind ...)
         },
         
         formattedAddress() {
@@ -103,14 +110,49 @@ Vue.component("all-marker", {
                 
             document.getElementById(`${this.manifestation.id.toString() + "btn2"}`)
                 .addEventListener('click', this.redirectToManifestation);
+
+            // remove delete button if user is not admin
+            if (!this.$root.isAdmin()) {
+                $("#deleteManifestationBtn").remove();
+            } else {
+                document.getElementById("deleteManifestationBtn").addEventListener('click', this.deleteManifestation);
+            }
         },
         unbindListener() {
+            /*
+            
+            // Remove the listener if button exist
+                let button = document.getElementById(`${this.manifestation.id.toString() + "btn"}`);
+                if (button != null) {
+                    button.removeEventListener('click', this.redirectToManifestation);
+                }
+                
+                // Remove the listener if button exist
+                button = document.getElementById(`${this.manifestation.id.toString() + "btn2"}`)
+                if (button != null) {
+                    button.removeEventListener('click', this.redirectToManifestation);
+                }
+
+
+                // Remove the listener if button exist
+                button = document.getElementById("deleteManifestationBtn");
+                if (button != null) {
+                    button.removeEventListener('click', this.deleteManifestation);
+                }
+
+            */
+
             try {
+                // throws error if button does not exist, and it does not exist when baloon is closed 
                 document.getElementById(`${this.manifestation.id.toString() + "btn"}`)
                     .removeEventListener('click', this.redirectToManifestation);
     
                 document.getElementById(`${this.manifestation.id.toString() + "btn2"}`)
                     .removeEventListener('click', this.redirectToManifestation);
+                    
+                document.getElementById("deleteManifestationBtn").
+                    removeEventListener('click', this.deleteManifestation);
+
             } catch(error) {
                 // console.log(error);
             }
@@ -135,6 +177,10 @@ Vue.component("all-marker", {
             
             const pathTo = `${rolePath}/manifestations/${this.manifestation.id}`;
             this.$router.push({ path: pathTo });
+        },
+
+        deleteManifestation: function() {
+            this.$emit('deleteManifestation', this.manifestation.id);
         }
     },
 

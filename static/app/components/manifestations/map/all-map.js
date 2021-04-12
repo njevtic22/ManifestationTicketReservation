@@ -10,6 +10,7 @@ Vue.component("all-map", {
             v-for="(manifestation, index) in manifestations"
             v-bind:key="manifestation.id"
             v-bind:manifestation="manifestation"
+            v-on:deleteManifestation="$emit('deleteManifestation', $event)"
         >
         </all-marker>
     </yandex-map>
@@ -51,7 +52,6 @@ Vue.component("all-map", {
     },
 
     mounted() {
-        // https://vue-yandex-maps.github.io/en/examples/#move-the-marker-by-click
         /*
         
         <script

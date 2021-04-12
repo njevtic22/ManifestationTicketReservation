@@ -5,15 +5,19 @@ Vue.component("manifestationCard", {
         v-bind:id="manifestation.id"
         v-on:mouseenter="addShadow"
         v-on:mouseleave="removeShadow"
-        v-on:click="redirectToManifestation"
+
     >
         <img 
             v-bind:src="imageLocationToShow" 
             class="card-img-top" 
             alt="Image not found"
             v-on:error="showAlternateImage"
+            v-on:click="redirectToManifestation"
         >
-        <div class="card-body d-flex flex-column">
+        <div 
+            class="card-body d-flex flex-column"
+            v-on:click="redirectToManifestation"
+        >
             <div class="d-flex justify-content-between">
                 <h5 class="card-title">{{ manifestation.name }}</h5>
                 <p class="card-title btn text-white" v-bind:style="{'background-color': statusColor}">{{ manifestation.status }}</p>
@@ -38,10 +42,10 @@ Vue.component("manifestationCard", {
                 <em>{{ manifestation.holdingDate }}</em>
             </div>
         </div>
-        <!--
-        <div class="card-footer text-right">
-            <button type="button" class="btn btn-success" v-on:click="redirectToManifestation">View details</button>
-        </div> -->
+        
+        <div class="card-footer text-right" v-if="$root.isAdmin()">
+            <button type="button" class="btn btn-danger" v-on:click="$emit('deleteManifestation', manifestation.id)">Delete manifestation</button>
+        </div>
     </div>
     `,
 
