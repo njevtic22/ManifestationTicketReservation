@@ -21,14 +21,16 @@ Vue.component("manifestation", {
                 <br/>
             </div>
             <div class="row" v-if="$root.isAdmin()">
-                <div class="col text-right">
-                    <button 
-                        class="btn btn-danger" 
-                        v-on:click="deleteManifestation"
-                    >
-                        Delete manifestation
-                    </button>
-                </div>
+                <manifestationOptions
+                    class="btn"
+                    v-bind:manifestation="manifestation"
+                    
+                    v-on:end="endManifestation"
+                    v-on:reject="rejectManifestation"
+                    v-on:approve="approveManifestation"
+                    v-on:deleteManifestation="deleteManifestation"
+                >
+                </manifestationOptions>
                 <br/>
                 <br/>
             </div>
@@ -113,7 +115,11 @@ Vue.component("manifestation", {
             </div>
         </div>
 
-        <div class="form-row" style="margin-top: 20px;" v-if="reviews.data.length !== 0">
+        <div 
+            class="form-row" 
+            style="margin-top: 20px;" 
+            v-if="manifestation.hasEnded && manifestation.status == 'INACTIVE'"
+        >
             <div class="col-sm card border-0 manifestation-details shadow-lg" style="margin-left: 10px; padding: 3%;">
                 <div class="d-flex justify-content-between">
                     <h1>Average rating: {{ manifestation.avgRating }}</h1>
@@ -156,10 +162,13 @@ Vue.component("manifestation", {
                     </pagination>
                 </div>
                 
-                <div>
+                <div v-if="reviews.data.length !== 0">
                     <div v-for="x in reviews.data">
                         {{ x }} TODO: show Review
                     </div>
+                </div>
+                <div v-else>
+                    No reviews
                 </div>
 
                 <br/>
@@ -395,6 +404,56 @@ Vue.component("manifestation", {
 
             this.$refs.manifestationService.deleteManifestation(
                 this.manifestation.id,
+                successCallback,
+                errorCallback
+            );
+        },
+
+        endManifestation: function(manifestationId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is ended");
+                this.getManifestation(this.manifestation.id);
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.endManifestation(
+                manifestationId,
+                successCallback,
+                errorCallback
+            );
+        },
+
+        rejectManifestation: function() {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is rejected");
+                this.getManifestation(this.manifestation.id);
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.approveOrReject(
+                this.manifestation.id,
+                "REJECTED",
+                successCallback,
+                errorCallback
+            );
+        },
+
+        approveManifestation: function() {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is approved");
+                this.getManifestation(this.manifestation.id);
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.approveOrReject(
+                this.manifestation.id,
+                "ACTIVE",
                 successCallback,
                 errorCallback
             );

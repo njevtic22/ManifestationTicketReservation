@@ -6,6 +6,10 @@ Vue.component("manifestationCards", {
             <manifestationCard
                 class="h-100"
                 v-bind:manifestation="man"
+
+                v-on:end="$emit('end', $event)"
+                v-on:reject="$emit('reject', $event)"
+                v-on:approve="$emit('approve', $event)"
                 v-on:deleteManifestation="$emit('deleteManifestation', $event)"
             >
             </manifestationCard>

@@ -121,6 +121,22 @@ Vue.component("manifestationService", {
                 .delete(url)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
+        },
+
+        approveOrReject: function(manifestationId, newStatus, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${manifestationId}/approveOrReject`;
+            axios
+                .put(url, newStatus)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
+        },
+
+        endManifestation: function(manifestationId, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${manifestationId}/setToInactive`;
+            axios
+                .put(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
         }
     },
 

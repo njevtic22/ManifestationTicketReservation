@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Base64;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,7 @@ public class GetAllManifestationsDTO {
     public String status;
     public String type;
     public double avgRating;
+    public boolean hasEnded;
 
     //    public String street;
 //    public long number;
@@ -49,6 +53,17 @@ public class GetAllManifestationsDTO {
 
         this.avgRating = 0;
         manifestation.getReviews().forEach(review -> avgRating += review.getRating());
+
+
+
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(manifestation.getHoldingDate());
+        calendar.add(Calendar.HOUR, 2);
+
+        Date endDate = calendar.getTime();
+        Date currentDate = new Date();
+
+        this.hasEnded = endDate.before(currentDate);
     }
 
     public String imageLocationToBase64(String imageLocation) {

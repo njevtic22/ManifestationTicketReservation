@@ -23,10 +23,10 @@ Vue.component("manifestationCard", {
                 <p class="card-title btn text-white" v-bind:style="{'background-color': statusColor}">{{ manifestation.status }}</p>
             </div>
             <div class="d-flex justify-content-between">
+                <h5 class="card-title">{{ manifestation.type }}</h5>
+
                 <h5 class="card-title" v-if="manifestation.status == 'INACTIVE'">Rating: {{ manifestation.avgRating }}</h5>
                 <h5 class="card-title" v-else></h5>
-
-                <h5 class="card-title">{{ manifestation.type }}</h5>
             </div>
             
             <h6>Regular ticket price: {{ manifestation.regularTicketPrice }} RSD</h6>
@@ -44,7 +44,16 @@ Vue.component("manifestationCard", {
         </div>
         
         <div class="card-footer text-right" v-if="$root.isAdmin()">
-            <button type="button" class="btn btn-danger" v-on:click="$emit('deleteManifestation', manifestation.id)">Delete manifestation</button>
+            
+            <manifestationOptions
+                v-bind:manifestation="manifestation"
+
+                v-on:end="$emit('end', $event)"
+                v-on:reject="$emit('reject', $event)"
+                v-on:approve="$emit('approve', $event)"
+                v-on:deleteManifestation="$emit('deleteManifestation', $event)"
+            >
+            </manifestationOptions>
         </div>
     </div>
     `,

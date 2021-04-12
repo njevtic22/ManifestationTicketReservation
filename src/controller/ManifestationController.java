@@ -21,6 +21,7 @@ import spark.Response;
 import spark.Route;
 import useCase.manifestation.*;
 import useCase.manifestation.command.AddManifestationCommand;
+import useCase.manifestation.command.ApproveOrRejectCommand;
 import useCase.manifestation.command.UpdateLocationCommand;
 import useCase.manifestation.command.UpdateManifestationCommand;
 import utility.PaginatedResponse;
@@ -53,6 +54,7 @@ public class ManifestationController {
     private UpdateLocationUseCase updateLocationUseCase;
     private DeleteManifestationUseCase deleteManifestationUseCase;
     private SetManifestationsToInactiveUseCase setManifestationsToInactiveUseCase;
+    private ApproveOrRejectManifestationUseCase approveOrRejectManifestationUseCase;
     private final ManifestationFilterSearcher manifestationFilterSearcher;
     private final ManifestationSorter manifestationSorter;
     private Pagination pagination;
@@ -74,7 +76,9 @@ public class ManifestationController {
             UpdateManifestationUseCase updateManifestationUseCase,
             UpdateLocationUseCase updateLocationUseCase,
             DeleteManifestationUseCase deleteManifestationUseCase,
-            SetManifestationsToInactiveUseCase setManifestationsToInactiveUseCase, ManifestationFilterSearcher manifestationFilterSearcher,
+            SetManifestationsToInactiveUseCase setManifestationsToInactiveUseCase,
+            ApproveOrRejectManifestationUseCase approveOrRejectManifestationUseCase,
+            ManifestationFilterSearcher manifestationFilterSearcher,
             ManifestationSorter manifestationSorter,
             Pagination pagination
     ) {
@@ -90,6 +94,7 @@ public class ManifestationController {
         this.updateLocationUseCase = updateLocationUseCase;
         this.deleteManifestationUseCase = deleteManifestationUseCase;
         this.setManifestationsToInactiveUseCase = setManifestationsToInactiveUseCase;
+        this.approveOrRejectManifestationUseCase = approveOrRejectManifestationUseCase;
         this.manifestationFilterSearcher = manifestationFilterSearcher;
         this.manifestationSorter = manifestationSorter;
         this.pagination = pagination;
@@ -100,7 +105,6 @@ public class ManifestationController {
         path("api", () -> {
             path("/manifestations", () -> {
                 post("", add);
-                post("/setToInactive", setToInactive);
                 get("", getAll, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
                 get("/forSalesman", getAllForSalesman, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
                 get("/created", getCreated, new GetAllManifestationsTransformer(gson, new GetAllManifestationsMapper(formatter)));
@@ -108,6 +112,8 @@ public class ManifestationController {
                 get("/:id", getById, new GetByIdManifestationTransformer(gson, new GetByIdManifestationMapper(formatter)));
                 put("/:id", updateManifestation);
                 put("/:id/location", updateLocation);
+                put("/:id/setToInactive", setToInactive);
+                put("/:id/approveOrReject", approveOrReject);
                 delete("/:id", delete);
             });
         });
@@ -115,7 +121,19 @@ public class ManifestationController {
 
     public Route setToInactive = (Request request, Response response) -> {
         ensureUserIsAdmin.ensure(request);
-        setManifestationsToInactiveUseCase.setToInactive();
+        setManifestationsToInactiveUseCase.setToInactive(SelfValidating.validId(request.params(":id")));
+        response.status(HttpStatus.OK_200);
+        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
+    };
+
+    public Route approveOrReject = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
+        ApproveOrRejectCommand command = new ApproveOrRejectCommand(
+                SelfValidating.validId(request.params(":id")),
+                request.body()
+        );
+        approveOrRejectManifestationUseCase.approveOrReject(command);
         response.status(HttpStatus.OK_200);
         return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };

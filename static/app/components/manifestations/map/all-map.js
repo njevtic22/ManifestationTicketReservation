@@ -10,6 +10,10 @@ Vue.component("all-map", {
             v-for="(manifestation, index) in manifestations"
             v-bind:key="manifestation.id"
             v-bind:manifestation="manifestation"
+            
+            v-on:end="$emit('end', $event)"
+            v-on:reject="$emit('reject', $event)"
+            v-on:approve="$emit('approve', $event)"
             v-on:deleteManifestation="$emit('deleteManifestation', $event)"
         >
         </all-marker>

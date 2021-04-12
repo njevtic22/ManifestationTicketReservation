@@ -36,7 +36,7 @@ Vue.component("all-marker", {
 
     computed: {
         balloonTemplate() {
-            // Not working properly vith vue directives (v-if, v-bind ...)
+            // Not working properly vith vue directives (v-if, v-bind ...), or custom vue components
             return `
             <button id="${this.manifestation.id.toString() + "btn"}" class="btn btn-primary btn-block">View details</button>
             <br/>
@@ -79,14 +79,43 @@ Vue.component("all-marker", {
             </div>
             <br/>
             <button id="${this.manifestation.id.toString() + "btn2"}" class="btn btn-primary btn-block">View details</button>
-            <button
-                id="deleteManifestationBtn" 
-                class="btn btn-danger btn-block"
+            
+            
+            <div id="dropdownId" class="dropdown btn-block">
+                <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Options
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                    <button id="approveManifestationBtn" class="btn btn-success btn-block">
+                        Approve
+                    </button>
+                    <button id="rejectManifestationBtn" class="btn btn-primary btn-block">
+                        Reject
+                    </button>
+                    <button id="endManifestationBtn" class="btn btn-outline-danger btn-block">
+                        End manifestation
+                    </button>    
+                
+                    <button id="deleteManifestationBtn" class="btn btn-danger btn-block">
+                        Delete manifestation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Not working properly with custom components
+            <deleteManifestationModal 
+                id="deleteManifestationModal"
+                ref="deleteManifestationModal"
+
+                v-bind:manifestationToDelete="manifestation"
+
+                v-on:deleteManifestation="$emit('deleteManifestation', $event)"
             >
-                Delete manifestation
-            </button>
+            </deleteManifestationModal>
+            -->
             `;
-            // Not working properly vith vue directives (v-if, v-bind ...)
+            // Not working properly vith vue directives (v-if, v-bind ...), or custom vue components
         },
         
         formattedAddress() {
@@ -111,11 +140,32 @@ Vue.component("all-marker", {
             document.getElementById(`${this.manifestation.id.toString() + "btn2"}`)
                 .addEventListener('click', this.redirectToManifestation);
 
-            // remove delete button if user is not admin
+            // remove buttons if user is not admin
             if (!this.$root.isAdmin()) {
-                $("#deleteManifestationBtn").remove();
+                $("#dropdownId").remove(); // also deletes subelements
+                // $("#approveManifestationBtn").remove();
+                // $("#rejectManifestationBtn").remove();
+                
+                // $("#endManifestationBtn").remove();
+
+                // $("#deleteManifestationBtn").remove();
+                $("#deleteManifestationModal").remove();
             } else {
                 document.getElementById("deleteManifestationBtn").addEventListener('click', this.deleteManifestation);
+                
+                if (this.manifestation.status == "CREATED") {
+                    document.getElementById("approveManifestationBtn").addEventListener('click', this.approveManifestation);
+                    document.getElementById("rejectManifestationBtn").addEventListener('click', this.rejectManifestation);
+                } else {
+                    $("#approveManifestationBtn").remove();
+                    $("#rejectManifestationBtn").remove();
+                }
+
+                if (this.manifestation.hasEnded && this.manifestation.status == "ACTIVE") {
+                    document.getElementById("endManifestationBtn").addEventListener('click', this.endManifestation);
+                } else {
+                    $("#endManifestationBtn").remove();
+                }
             }
         },
         unbindListener() {
@@ -152,7 +202,19 @@ Vue.component("all-marker", {
                     
                 document.getElementById("deleteManifestationBtn").
                     removeEventListener('click', this.deleteManifestation);
+                
+                if (this.$root.isAdmin()) {
+                    document.getElementById("deleteManifestationBtn").removeEventListener('click', this.deleteManifestation);
 
+                    if (this.manifestation.status != "CREATED") {
+                        document.getElementById("approveManifestationBtn").removeEventListener('click', this.approveManifestation);
+                        document.getElementById("rejectManifestationBtn").removeEventListener('click', this.rejectManifestation);
+                    }
+    
+                    if (!this.manifestation.hasEnded) {
+                        document.getElementById("endManifestationBtn").removeEventListener('click', this.endManifestation);
+                    }   
+                }
             } catch(error) {
                 // console.log(error);
             }
@@ -179,8 +241,22 @@ Vue.component("all-marker", {
             this.$router.push({ path: pathTo });
         },
 
+        approveManifestation: function() {
+            this.$emit('approve', this.manifestation.id);
+        },
+
+        rejectManifestation: function() {
+            this.$emit('reject', this.manifestation.id);
+        },
+
+        endManifestation: function() {
+            this.$emit('end', this.manifestation.id);
+        },
+
         deleteManifestation: function() {
-            this.$emit('deleteManifestation', this.manifestation.id);
+            // not working - see up
+            // $("#deleteManifestationModal").modal("show");
+            this.$emit("deleteManifestation", this.manifestation.id);
         }
     },
 

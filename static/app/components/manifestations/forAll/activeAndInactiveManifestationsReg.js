@@ -45,6 +45,10 @@ Vue.component("activeAndInactiveManifestationsReg", {
 
                 <manifestationCards v-else
                     v-bind:manifestations="manifestations.data"
+                    
+                    v-on:end="endManifestation($event)"
+                    v-on:reject="rejectManifestation($event)"
+                    v-on:approve="approveManifestation($event)"
                     v-on:deleteManifestation="deleteManifestation($event)"
                 >
                 </manifestationCards>
@@ -204,9 +208,59 @@ Vue.component("activeAndInactiveManifestationsReg", {
             );
         },
 
+        endManifestation: function(manifestationId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is ended");
+                this.getActAndInactManifestations();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.endManifestation(
+                manifestationId,
+                successCallback,
+                errorCallback
+            );
+        },
+
+        rejectManifestation: function(manifestationId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is rejected");
+                this.getActAndInactManifestations();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.approveOrReject(
+                manifestationId,
+                "REJECTED",
+                successCallback,
+                errorCallback
+            );
+        },
+
+        approveManifestation: function(manifestationId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is approved");
+                this.getActAndInactManifestations();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.approveOrReject(
+                manifestationId,
+                "ACTIVE",
+                successCallback,
+                errorCallback
+            );
+        },
+
         deleteManifestation: function(manifestationId) {
             const successCallback = (response) => {
-                this.$root.successToast("Manifestation is deleted")
+                this.$root.successToast("Manifestation is deleted");
                 this.getActAndInactManifestations();
             };
             const errorCallback = (error) => {

@@ -8,6 +8,7 @@ import repository.Repository;
 import repository.UserRepository;
 import useCase.manifestation.*;
 import useCase.manifestation.command.AddManifestationCommand;
+import useCase.manifestation.command.ApproveOrRejectCommand;
 import useCase.manifestation.command.UpdateLocationCommand;
 import useCase.manifestation.command.UpdateManifestationCommand;
 
@@ -35,7 +36,8 @@ public class ManifestationService implements
         UpdateManifestationUseCase,
         UpdateLocationUseCase,
         DeleteManifestationUseCase,
-        SetManifestationsToInactiveUseCase {
+        SetManifestationsToInactiveUseCase,
+        ApproveOrRejectManifestationUseCase {
     private final SimpleDateFormat formatter;
     private final Repository<Manifestation, Long> manifestationRepository;
     private final Repository<Ticket, Long> ticketRepository;
@@ -233,14 +235,26 @@ public class ManifestationService implements
     }
 
     @Override
-    public void setToInactive() {
-        Collection<Manifestation> manifestations = manifestationRepository.findAllByArchivedFalse();
-        manifestations.forEach(manifestation -> {
-            if (manifestation.getStatus() == ManifestationStatus.ACTIVE) {
-                manifestation.setStatus(ManifestationStatus.INACTIVE);
-                manifestationRepository.save(manifestation);
-            }
-        });
+    public void setToInactive(Long id) {
+        Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(id)
+                .orElseThrow(() -> new ManifestationNotFoundException(id));
+
+        if (manifestation.getStatus() == ManifestationStatus.ACTIVE) {
+            manifestation.setStatus(ManifestationStatus.INACTIVE);
+            manifestationRepository.save(manifestation);
+        }
+    }
+
+    @Override
+    public void approveOrReject(ApproveOrRejectCommand command) {
+        Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.id)
+                .orElseThrow(() -> new ManifestationNotFoundException(command.id));
+
+        manifestation = manifestation.clone();
+
+        manifestation.setStatus(ManifestationStatus.valueOf(command.newStatus));
+
+        manifestationRepository.save(manifestation);
     }
 
     public void ensurePlaceAndDateIsValid(Manifestation manifestation) {

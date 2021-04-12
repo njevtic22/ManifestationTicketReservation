@@ -35,7 +35,11 @@ Vue.component("activeAndInactiveManifestationsMap", {
                     style="height: 800px; width: 100%;"
                     v-bind:manifestations="manifestations.data"
                     v-bind:zoom="5"
-                    v-on:deleteManifestation="deleteManifestation($event)"
+                    
+                    v-on:end="endManifestation($event)"
+                    v-on:reject="rejectManifestation($event)"
+                    v-on:approve="approveManifestation($event)"
+                    v-on:deleteManifestation="raiseDeleteModal($event)"
                 >
                 </all-map>
             </div>
@@ -50,12 +54,48 @@ Vue.component("activeAndInactiveManifestationsMap", {
         </div>
 
 
+        <deleteManifestationModal 
+            id="deleteManifestationModal"
+            ref="deleteManifestationModal"
+
+            v-bind:manifestationToDelete="manifestationToDelete"
+
+            v-on:deleteManifestation="deleteManifestation($event)"
+        >
+        </deleteManifestationModal>
+        
         <manifestationService ref="manifestationService"></manifestationService>
     </div>
     `,
 
     data: function() {
         return {
+            manifestationToDelete: { 
+                id: 0, 
+                name: "",
+                regularTicketPrice: 0,
+                holdingDate: "",
+                status: "CREATED",
+                type: "CONCERT",
+
+                avgRating: 0,
+
+                location: {
+                    id: 0, 
+                    longitude: null, 
+                    latitude: null, 
+                    address: {
+                        street: "", 
+                        number: 0, 
+                        city: "", 
+                        postalCode: ""
+                    } 
+                }, 
+
+                imageBase64: "",
+                imageType: ""
+            },
+
             loading: true,
             manifestations: {
                 data: [],
@@ -197,6 +237,82 @@ Vue.component("activeAndInactiveManifestationsMap", {
                 successCallback,
                 errorCallback
             );
+        },
+
+        endManifestation: function(manifestationId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is ended");
+                this.getActAndInactManifestations();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.endManifestation(
+                manifestationId,
+                successCallback,
+                errorCallback
+            );
+        },
+
+        rejectManifestation: function(manifestationId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is rejected");
+                this.getActAndInactManifestations();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.approveOrReject(
+                manifestationId,
+                "REJECTED",
+                successCallback,
+                errorCallback
+            );
+        },
+
+        approveManifestation: function(manifestationId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Manifestation is approved");
+                this.getActAndInactManifestations();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.manifestationService.approveOrReject(
+                manifestationId,
+                "ACTIVE",
+                successCallback,
+                errorCallback
+            );
+        },
+
+        raiseDeleteModal: function(manifestationId) {
+            const successCallback = (response) => {
+                this.manifestationToDelete = response.data;
+                $("#deleteManifestationModal").modal("show");
+            };
+
+            const errorCallback = (error) => {
+                const status = error.response.status;
+                const msg = error.response.data;
+                const expectedError = `Manifestation with id ${this.$route.params.id} not found`;
+
+                if (status == 404) {
+                    if (msg == expectedError) {
+                        this.$root.failureToast(msg);
+                    } else {
+                        this.$root.defaultCatchError(error);       
+                    }
+                    this.$router.push({
+                        name: "NotFoundPage"
+                    });
+                }
+            };
+
+            this.$refs.manifestationService.getManifestation(manifestationId, successCallback, errorCallback); 
         },
 
         deleteManifestation: function(manifestationId) {
