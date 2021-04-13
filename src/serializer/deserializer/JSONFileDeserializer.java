@@ -203,6 +203,10 @@ public class JSONFileDeserializer implements FileDeserializer {
 
             jsonManifestation.tickets.forEach(ticketId -> {
                 Ticket ticket = ticketRepository.get(ticketId);
+
+                // Fixing ticket price
+                ticket.setPrice(manifestation.getRegularTicketPrice());
+
                 manifestation.addTicket(ticket);
                 ticket.setManifestation(manifestation);
             });

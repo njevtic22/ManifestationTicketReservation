@@ -231,6 +231,11 @@ public class ManifestationService implements
 
         manifestation.archive();
 
+        manifestation.getTickets().forEach(ticket -> {
+            ticket.archive();
+            ticketRepository.save(ticket);
+        });
+
         manifestationRepository.save(manifestation);
     }
 

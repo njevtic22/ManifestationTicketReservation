@@ -15,11 +15,11 @@
 }
 
 .error-center {
-    position: fixed; /* or absolute */
+    position: relative; /* or absolute */
     width: 20rem;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 50%);
 }
 
 .logout-sidebar-button {
