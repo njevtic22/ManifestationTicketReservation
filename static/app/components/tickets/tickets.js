@@ -51,6 +51,15 @@ Vue.component("tickets", {
             </div>
         </div>
 
+        <deleteTicketModal
+            id="deleteTicketModal"
+            ref="deleteTicketModal"
+
+            v-bind:ticket="ticketToDelete"
+            v-on:deleteTicket="deleteTicket($event)"
+        >
+        </deleteTicketModal>
+
         <ticketService ref="ticketService"></ticketService>
     </div>
     `,
@@ -126,7 +135,23 @@ Vue.component("tickets", {
 
         confirmDeleteTicket: function(ticket) {
             this.ticketToDelete = ticket;
-            console.log(this.ticketToDelete);
+            $("#deleteTicketModal").modal("show");
+        },
+
+        deleteTicket: function(ticketId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Ticket is deleted");
+                this.getTickets();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.ticketService.deleteTicket(
+                ticketId,
+                successCallback,
+                errorCallback
+            );
         },
 
         changeSize: function(event) {

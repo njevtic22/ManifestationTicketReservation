@@ -161,7 +161,7 @@ public class TicketController {
     };
 
     public Route delete = (Request request, Response response) -> {
-        ensureUserIsSalesman.ensure(request);
+        ensureUserIsAdmin.ensure(request);
 
         Long id = SelfValidating.validId(request.params(":id"));
         deleteTicketUseCase.deleteTicket(id);

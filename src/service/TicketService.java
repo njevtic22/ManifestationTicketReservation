@@ -113,9 +113,6 @@ public class TicketService implements
         else if (user instanceof Salesman) {
             Salesman salesman = (Salesman) user;
             for (Manifestation salesmanManifestations : salesman.getManifestations()) {
-//                 TODO: Change to this if deleting tickets is not implemented -> maybe
-//                tickets.addAll(salesmanManifestations.getTickets());
-
                 for (Ticket salesmanTicket : salesmanManifestations.getTickets()) {
                     if (!salesmanTicket.isArchived()) {
                         tickets.add(salesmanTicket);
@@ -204,8 +201,10 @@ public class TicketService implements
         Ticket ticket = ticketRepository.findByIdAndArchivedFalse(id)
                 .orElseThrow(() -> new TicketNotFoundException(id));
 
-        // TODO: Implement refusing deletion of ticket if it has user
-        // ticket.archive();
+        if (ticket.getStatus() == TicketStatus.RESERVED)
+            throw new TicketReservedException("Can not delete reserved ticket.");
+
+         ticket.archive();
 
         ticketRepository.save(ticket);
     }

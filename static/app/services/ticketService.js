@@ -60,6 +60,14 @@ Vue.component("ticketService", {
                 .post(this.baseUrl, ticketsToAdd)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
+        },
+
+        deleteTicket: function(ticketId, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${ticketId}`;
+            axios
+                .delete(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
         }
     },
 

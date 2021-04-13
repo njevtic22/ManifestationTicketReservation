@@ -21,22 +21,35 @@ Vue.component("ticketsTable", {
                 <th>
                     Customer
                 </th>
+                <th v-if="$root.isAdmin()">
+                    Actions
+                </th>
             </tr>
         </thead>
         <tbody v-if="tickets.length !== 0">
             <tr v-for="ticket in tickets">
                 <td>{{ ticket.appId }}</td>
-                <td>{{ ticket.price }}</td>
+                <td>{{ ticket.price }} RSD</td>
                 <td>{{ ticket.status }}</td>
                 <td>{{ ticket.type }}</td>
                 <td>{{ ticket.manifestation }}</td>
                 <td>{{ ticket.customer ? ticket.customer : '/'}}</td>
+                <td class="text-center" v-if="$root.isAdmin() && ticket.status === 'FREE'">
+                    <button 
+                        type="button" 
+                        class="btn btn-link btn-sm"
+                    
+                        v-on:click="$emit('deleteTicket', ticket)"
+                    >
+                        <trash-fill-icon></trash-fill-icon>
+                    </button>
+                </td>
             </tr>
         </tbody>
 
         <tbody v-else>
             <tr>
-                <td colspan="9"><h4 class="text-center">No Results</h4></td>
+                <td v-bind:colspan="colspan"><h4 class="text-center">No Results</h4></td>
             </tr>
         </tbody>
     </table>
@@ -44,6 +57,12 @@ Vue.component("ticketsTable", {
 
     props: {
         tickets: Array
+    },
+
+    computed: {
+        colspan() {
+            return this.$root.isAdmin() ? 7 : 6;
+        }
     },
 
     data: function() {
