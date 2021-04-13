@@ -124,7 +124,11 @@ public class TicketService implements
             }
         } else {
             Customer customer = (Customer) user;
-            tickets = customer.getTickets();
+            for (Ticket ticket : customer.getTickets()) {
+                if (!ticket.isArchived()) {
+                    tickets.add(ticket);
+                }
+            }
         }
 
         return tickets;

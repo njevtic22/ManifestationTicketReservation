@@ -5,8 +5,10 @@ import model.Ticket;
 import responseTransformer.dtoMappers.DTOMapper;
 import spark.ResponseTransformer;
 import useCase.ticket.dto.GetAllTicketsDTO;
+import utility.PaginatedResponse;
 
 import java.util.Collection;
+import java.util.List;
 
 public class GetAllTicketsTransformer implements ResponseTransformer {
     private final Gson gson;
@@ -19,7 +21,16 @@ public class GetAllTicketsTransformer implements ResponseTransformer {
 
     @Override
     public String render(Object o) throws Exception {
-        Collection<Ticket> tickets = (Collection<Ticket>) o;
-        return gson.toJson(mapper.toDTOList(tickets));
+        PaginatedResponse<Ticket> paginatedResponse = (PaginatedResponse<Ticket>) o;
+        List<GetAllTicketsDTO> ticketsDTO = mapper.toDTOList(paginatedResponse.data);
+
+        return gson.toJson(
+                new PaginatedResponse<>(
+                        ticketsDTO,
+                        paginatedResponse.totalNumberOfResults,
+                        paginatedResponse.hasPreviousPage,
+                        paginatedResponse.hasNextPage
+                )
+        );
     }
 }

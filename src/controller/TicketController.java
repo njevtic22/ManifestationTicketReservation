@@ -1,12 +1,18 @@
 package controller;
 
 import com.google.gson.Gson;
+import filterSearcher.TicketFilterSearcher;
 import model.Customer;
+import model.ManifestationStatus;
+import model.Ticket;
+import model.TicketStatus;
+import model.TicketType;
 import model.User;
 import org.eclipse.jetty.http.HttpStatus;
 import request.AddTicketRequest;
 import responseTransformer.GetAllTicketsTransformer;
 import responseTransformer.dtoMappers.GetAllTicketsMapper;
+import sorter.TicketSorter;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -18,10 +24,16 @@ import useCase.ticket.WithdrawTicketUseCase;
 import useCase.ticket.command.AddTicketCommand;
 import useCase.ticket.command.ReserveTicketCommand;
 import useCase.ticket.command.WithdrawTicketCommand;
+import utility.PaginatedResponse;
+import utility.Pagination;
 import utility.RoleEnsure;
 import validation.SelfValidating;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static spark.Spark.delete;
 import static spark.Spark.get;
@@ -36,6 +48,9 @@ public class TicketController {
     private ReserveTicketUseCase reserveTicketUseCase;
     private WithdrawTicketUseCase withdrawTicketUseCase;
     private DeleteTicketUseCase deleteTicketUseCase;
+    private final TicketFilterSearcher ticketFilterSearcher;
+    private final TicketSorter ticketSorter;
+    private Pagination pagination;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
     private RoleEnsure ensureUserIsSalesman = AuthenticationController::ensureUserIsSalesman;
@@ -43,7 +58,18 @@ public class TicketController {
     private RoleEnsure ensureUserIsAdminOrSalesman = AuthenticationController::ensureUserIsAdminOrSalesman;
     private RoleEnsure ensureUserIsAdminOrCustomer = AuthenticationController::ensureUserIsAdminOrCustomer;
 
-    public TicketController(Gson gson, SimpleDateFormat formatter, AddTicketUseCase addTicketUseCase, GetAllTicketsUseCase getAllTicketsUseCase, ReserveTicketUseCase reserveTicketUseCase, WithdrawTicketUseCase withdrawTicketUseCase, DeleteTicketUseCase deleteTicketUseCase) {
+    public TicketController(
+            Gson gson,
+            SimpleDateFormat formatter,
+            AddTicketUseCase addTicketUseCase,
+            GetAllTicketsUseCase getAllTicketsUseCase,
+            ReserveTicketUseCase reserveTicketUseCase,
+            WithdrawTicketUseCase withdrawTicketUseCase,
+            DeleteTicketUseCase deleteTicketUseCase,
+            TicketFilterSearcher ticketFilterSearcher,
+            TicketSorter ticketSorter,
+            Pagination pagination
+    ) {
         this.gson = gson;
         this.formatter = formatter;
         this.addTicketUseCase = addTicketUseCase;
@@ -51,6 +77,9 @@ public class TicketController {
         this.reserveTicketUseCase = reserveTicketUseCase;
         this.withdrawTicketUseCase = withdrawTicketUseCase;
         this.deleteTicketUseCase = deleteTicketUseCase;
+        this.ticketFilterSearcher = ticketFilterSearcher;
+        this.ticketSorter = ticketSorter;
+        this.pagination = pagination;
         this.setUpRoutes();
     }
 
@@ -115,8 +144,20 @@ public class TicketController {
 
     public Route getAll = (Request request, Response response) -> {
         User user = request.attribute("user");
+
+        List<Ticket> tickets = new ArrayList<>(getAllTicketsUseCase.getAllTickets(user));
+        applyFilter(request, tickets);
+        applySearch(request, tickets);
+        applySort(request, tickets);
+
+        PaginatedResponse<Ticket> paginatedTickets = pagination.paginate(
+                tickets,
+                request.queryParams("page"),
+                request.queryParams("size")
+        );
+
         response.status(HttpStatus.OK_200);
-        return getAllTicketsUseCase.getAllTickets(user);
+        return paginatedTickets;
     };
 
     public Route delete = (Request request, Response response) -> {
@@ -127,4 +168,30 @@ public class TicketController {
         response.status(HttpStatus.OK_200);
         return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };
+
+    private void applyFilter(Request request, Collection<Ticket> tickets) {
+        if (request.queryParams("filterType") != null)
+            ticketFilterSearcher.filterByType(TicketType.valueOf(request.queryParams("filterType")), tickets);
+        if (request.queryParams("filterTicketStatus") != null)
+            ticketFilterSearcher.filterByTicketStatus(TicketStatus.valueOf(request.queryParams("filterTicketStatus")), tickets);
+        if (request.queryParams("filterManifestationStatus") != null)
+            ticketFilterSearcher.filterByManifestationStatus(ManifestationStatus.valueOf(request.queryParams("filterManifestationStatus")), tickets);
+    }
+
+    private void applySearch(Request request, Collection<Ticket> tickets) throws ParseException {
+        if (request.queryParams("searchManifestation") != null)
+            ticketFilterSearcher.searchByManifestation(request.queryParams("searchManifestation"), tickets);
+        if (request.queryParams("searchPriceFrom") != null)
+            ticketFilterSearcher.searchByPriceFrom(Long.parseLong(request.queryParams("searchPriceFrom")), tickets);
+        if (request.queryParams("searchPriceTo") != null)
+            ticketFilterSearcher.searchByPriceTo(Long.parseLong(request.queryParams("searchPriceTo")), tickets);
+        if (request.queryParams("searchDateFrom") != null)
+            ticketFilterSearcher.searchByDateFrom(formatter.parse(request.queryParams("searchDateFrom")), tickets);
+        if (request.queryParams("searchDateTo") != null)
+            ticketFilterSearcher.searchByDateTo(formatter.parse(request.queryParams("searchDateTo")), tickets);
+    }
+
+    private void applySort(Request request, List<Ticket> tickets) {
+
+    }
 }

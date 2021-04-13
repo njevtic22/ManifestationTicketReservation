@@ -25,6 +25,13 @@ Vue.component("customerSidebar", {
                         Manifestations map 
                     </router-link>
                 </li>
+                
+                <li class="nav-item">
+                    <router-link class="nav-link nav-link" to="/customer/tickets">
+                        <tags-fill-icon class="sidebar-icon"></tags-fill-icon>
+                        Tickets
+                    </router-link>
+                </li>
             </ul>
             
             <logOutButton class="logout-sidebar-button"></logOutButton> 

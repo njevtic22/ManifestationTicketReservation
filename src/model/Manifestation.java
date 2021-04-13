@@ -194,7 +194,20 @@ public class Manifestation implements Cloneable {
     }
 
     public boolean isSoldOut() {
-        return maxNumberOfTickets == tickets.size();
+
+        long count = tickets
+                .stream()
+                .filter(ticket -> ticket.getStatus() == TicketStatus.FREE && !ticket.isArchived())
+                .count();
+
+        return maxNumberOfTickets == count;
+    }
+
+    public long getNumberOfTicketsLeft() {
+        return tickets
+            .stream()
+            .filter(ticket -> ticket.getStatus() == TicketStatus.FREE && !ticket.isArchived())
+            .count();
     }
 
     public Long getId() {

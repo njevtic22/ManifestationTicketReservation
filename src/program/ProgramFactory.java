@@ -14,6 +14,7 @@ import controller.WithdrawalHistoryController;
 import exception.*;
 import exception.handler.*;
 import filterSearcher.ManifestationFilterSearcher;
+import filterSearcher.TicketFilterSearcher;
 import filterSearcher.UserFilterSearcher;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,6 +31,7 @@ import service.TicketService;
 import service.UserService;
 import service.WithdrawalHistoryService;
 import sorter.ManifestationSorter;
+import sorter.TicketSorter;
 import sorter.UserSorter;
 import spark.ExceptionHandler;
 
@@ -303,7 +305,10 @@ public class ProgramFactory {
                     ticketService,
                     ticketService,
                     ticketService,
-                    ticketService
+                    ticketService,
+                    new TicketFilterSearcher(),
+                    new TicketSorter(),
+                    new Pagination()
             );
         }
         return ticketController;

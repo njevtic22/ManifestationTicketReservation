@@ -24,7 +24,7 @@ public class GetAllTicketsDTO {
         this.manifestationId = ticket.getManifestation().getId();
 
 
-        if (ticket.getStatus() == TicketStatus.FREE)
+        if (ticket.getStatus() == TicketStatus.RESERVED)
             this.customer = ticket.getCustomer().getName() + " " + ticket.getCustomer().getSurname();
         else
             this.customer = null;

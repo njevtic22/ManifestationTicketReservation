@@ -1,7 +1,7 @@
 Vue.component("salesmanManifestationsReg", {
     template: `
     <div>
-        <div class="form-row">
+        <div class="row">
             <div class="form-group col-md-9">
                 <div class="col d-flex justify-content-between">
                     <pageSizeSelect

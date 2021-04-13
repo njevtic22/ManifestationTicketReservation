@@ -7,6 +7,7 @@ const SalesmanManifestationsMap = { template: "<salesmanManifestationsMap></sale
 const Manifestation = { template: "<manifestation></manifestation>" };
 const Profile = { template: "<profile></profile>" };
 const AllUsers = { template: "<allUsers></allUsers>" }
+const Tickets = { template: "<tickets></tickets>" };
 
 const LoginPage = { template: "<logInPage></logInPage>" };
 const RegisterPage = { template: "<registerPage></registerPage>" };
@@ -217,6 +218,12 @@ const router = new VueRouter({
                     component: AllUsers,
                     meta: { title: "Users" }
                 },
+                {
+                    path: "tickets",
+                    name: "AdminTickets",
+                    component: Tickets,
+                    meta: { title: "Tickets" }
+                }
             ],
         },
         {
@@ -261,6 +268,12 @@ const router = new VueRouter({
                     name: "SalesmanManifestation",
                     component: Manifestation,
                     meta: { title: "Manifestation" }
+                },
+                {
+                    path: "tickets",
+                    name: "SalesmanTickets",
+                    component: Tickets,
+                    meta: { title: "Tickets" }
                 }
             ]
         },
@@ -293,6 +306,12 @@ const router = new VueRouter({
                     name: "CustomerManifestation",
                     component: Manifestation,
                     meta: { title: "Manifestation" }
+                },
+                {
+                    path: "tickets",
+                    name: "CustomerTickets",
+                    component: Tickets,
+                    meta: { title: "Tickets" }
                 }
             ]
         },

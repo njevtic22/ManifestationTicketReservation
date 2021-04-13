@@ -25,6 +25,7 @@ public class GetAllManifestationsDTO {
     public String type;
     public double avgRating;
     public boolean hasEnded;
+    public boolean isSoldOut;
 
     //    public String street;
 //    public long number;
@@ -66,11 +67,8 @@ public class GetAllManifestationsDTO {
         this.hasEnded = endDate.before(currentDate);
 
 
-        long count = manifestation.getTickets()
-                .stream()
-                .filter(ticket -> ticket.getStatus() == TicketStatus.FREE)
-                .count();
-        this.numberOfTicketsLeft = count;
+        this.numberOfTicketsLeft = manifestation.getNumberOfTicketsLeft();
+        this.isSoldOut = manifestation.isSoldOut();
     }
 
     public String imageLocationToBase64(String imageLocation) {
