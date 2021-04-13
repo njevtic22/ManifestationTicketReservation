@@ -1,6 +1,7 @@
 package useCase.manifestation.dto;
 
 import model.Manifestation;
+import model.TicketStatus;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +38,6 @@ public class GetByIdManifestationDTO {
     public GetByIdManifestationDTO(Manifestation manifestation, String parsedDate) {
         this.id = manifestation.getId();
         this.name = manifestation.getName();
-        this.numberOfTicketsLeft = manifestation.getMaxNumberOfTickets() - manifestation.getTickets().size();
         this.maxNumberOfTickets = manifestation.getMaxNumberOfTickets();
         this.regularTicketPrice = manifestation.getRegularTicketPrice();
         this.holdingDate = parsedDate;
@@ -73,6 +73,13 @@ public class GetByIdManifestationDTO {
         Date currentDate = new Date();
 
         this.hasEnded = endDate.before(currentDate);
+
+
+        long count = manifestation.getTickets()
+                .stream()
+                .filter(ticket -> ticket.getStatus() == TicketStatus.FREE)
+                .count();
+        this.numberOfTicketsLeft = count;
     }
 
     public String imageLocationToBase64(String imageLocation) {

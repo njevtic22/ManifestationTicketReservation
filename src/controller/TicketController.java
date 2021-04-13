@@ -58,8 +58,8 @@ public class TicketController {
         path("api", () -> {
             path("/tickets", () -> {
                 post("", add);
-                post("/:id", reserve);
-                post("/:id", withdraw);
+                post("/reserve/:id", reserve);
+                post("/withdraw/:id", withdraw);
                 get("", getAll, new GetAllTicketsTransformer(gson, new GetAllTicketsMapper(formatter)));
                 delete("/:id", delete);
             });
@@ -72,8 +72,10 @@ public class TicketController {
         AddTicketRequest requestBody = gson.fromJson(request.body(), AddTicketRequest.class);
 
         AddTicketCommand command = new AddTicketCommand(
-                requestBody.type,
-                requestBody.manifestationId
+                requestBody.manifestationId,
+                requestBody.numberOfRegularTickets,
+                requestBody.numberOfFanPitTickets,
+                requestBody.numberOfVIPTickets
         );
         addTicketUseCase.addTicket(command);
         response.status(HttpStatus.CREATED_201);

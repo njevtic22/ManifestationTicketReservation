@@ -52,25 +52,55 @@ public class TicketService implements
 
     @Override
     public void addTicket(AddTicketCommand command) {
-        // TODO: Think of adding more ticket at same time of same ticket type
         Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.manifestationId)
                 .orElseThrow(() -> new ManifestationNotFoundException(command.manifestationId));
 
-        //
-        Ticket ticket = new Ticket(
-                manifestation.getRegularTicketPrice(),
-                TicketStatus.FREE,
-                TicketType.valueOf(command.type),
-                false,
-                manifestation,
-                null
-        );
+        // Adding regular tickets
+        for (int i = 0; i < command.numberOfRegularTickets; i++) {
+            Ticket ticket = new Ticket(
+                    manifestation.getRegularTicketPrice(),
+                    TicketStatus.FREE,
+                    TicketType.REGULAR,
+                    false,
+                    manifestation,
+                    null
+            );
+            manifestation.addTicket(ticket);
+            ticketRepository.save(ticket);
+        }
+        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + command.numberOfRegularTickets);
 
-        manifestation.addTicket(ticket);
-        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + 1);
+        // Adding fan pit tickets
+        for (int i = 0; i < command.numberOfFanPitTickets; i++) {
+            Ticket ticket = new Ticket(
+                    manifestation.getRegularTicketPrice(),
+                    TicketStatus.FREE,
+                    TicketType.FAN_PIT,
+                    false,
+                    manifestation,
+                    null
+            );
+            manifestation.addTicket(ticket);
+            ticketRepository.save(ticket);
+        }
+        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + command.numberOfFanPitTickets);
 
-        ticketRepository.save(ticket);
-        //
+        // Adding vip tickets
+        for (int i = 0; i < command.numberOfVIPTickets; i++) {
+            Ticket ticket = new Ticket(
+                    manifestation.getRegularTicketPrice(),
+                    TicketStatus.FREE,
+                    TicketType.VIP,
+                    false,
+                    manifestation,
+                    null
+            );
+            manifestation.addTicket(ticket);
+            ticketRepository.save(ticket);
+        }
+        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + command.numberOfVIPTickets);
+
+
         manifestationRepository.save(manifestation);
     }
 

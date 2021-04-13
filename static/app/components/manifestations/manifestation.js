@@ -2,7 +2,10 @@ Vue.component("manifestation", {
     template: `
     <div>
         <div class="form-row border-0 manifestation-details shadow-lg">
-            <div class="row" v-if="$root.isSalesman() && belognsToSalesman">
+            <div 
+                class="row" 
+                v-if="$root.isSalesman() && belognsToSalesman && (manifestation.status == 'CREATED' || manifestation.status == 'ACTIVE')"
+            >
                 <div class="col text-right">
                     <button 
                         class="btn btn-primary"
@@ -15,6 +18,13 @@ Vue.component("manifestation", {
                         v-on:click="changeLocation"
                     >
                         Change location
+                    </button>
+                    <button 
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#addTicketsModal"
+                    >
+                        Add Tickets
                     </button>
                 </div>
                 <br/>
@@ -218,6 +228,15 @@ Vue.component("manifestation", {
             v-on:locationUpdated="getManifestation($route.params.id)"
         ></changeLocationModal>
         
+        <addTicketsModal
+            id="addTicketsModal"
+            ref="addTicketsModal"
+
+            v-bind:manifestationId="manifestation.id"
+            v-bind:manifestationName="manifestation.name"
+            v-on:addedTickets="getManifestation($route.params.id)"
+        ></addTicketsModal>
+
         <manifestationService ref="manifestationService"></manifestationService>
     </div>
     `,
