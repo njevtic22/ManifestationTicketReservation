@@ -178,7 +178,7 @@ public class ManifestationService implements
     }
 
     @Override
-    public void updateManifestation(UpdateManifestationCommand command) throws ParseException {
+    public void updateManifestation(UpdateManifestationCommand command) throws ParseException, CloneNotSupportedException {
         Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.id)
                 .orElseThrow(() -> new ManifestationNotFoundException(command.id));
 
@@ -203,7 +203,7 @@ public class ManifestationService implements
     }
 
     @Override
-    public void updateLocation(UpdateLocationCommand command) {
+    public void updateLocation(UpdateLocationCommand command) throws CloneNotSupportedException {
         Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.manifestationId)
                 .orElseThrow(() -> new ManifestationNotFoundException(command.manifestationId));
 
@@ -251,7 +251,7 @@ public class ManifestationService implements
     }
 
     @Override
-    public void approveOrReject(ApproveOrRejectCommand command) {
+    public void approveOrReject(ApproveOrRejectCommand command) throws CloneNotSupportedException {
         Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.id)
                 .orElseThrow(() -> new ManifestationNotFoundException(command.id));
 

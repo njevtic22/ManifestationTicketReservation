@@ -150,7 +150,8 @@ public class Manifestation implements Cloneable {
     }
 
     @Override
-    public Manifestation clone() {
+    public Manifestation clone() throws CloneNotSupportedException {
+        super.clone();
         return new Manifestation(
                 this.id,
                 this.name,

@@ -27,6 +27,11 @@ public class LongGenerator extends NumberGenerator<Long> {
     }
 
     @Override
+    public Long getCurrent() {
+        return current;
+    }
+
+    @Override
     protected boolean isOverflow() {
         // step is positive
         return current > Long.MAX_VALUE - step;

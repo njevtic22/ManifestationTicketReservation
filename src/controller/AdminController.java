@@ -20,6 +20,7 @@ import useCase.admin.GetByIdAdminUseCase;
 import useCase.admin.UpdateAdminUseCase;
 import useCase.admin.command.AddAdminCommand;
 import useCase.admin.command.UpdateAdminCommand;
+import useCase.database.InitDatabaseUseCase;
 import utility.RoleEnsure;
 import validation.SelfValidating;
 
@@ -40,6 +41,7 @@ public class AdminController {
     private GetByIdAdminUseCase getByIdAdminUseCase;
     private UpdateAdminUseCase updateAdminUseCase;
     private DeleteAdminUseCase deleteAdminUseCase;
+    private InitDatabaseUseCase initDatabaseUseCase;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
 
@@ -50,8 +52,8 @@ public class AdminController {
             GetAllAdminsUseCase getAllAdminsUseCase,
             GetByIdAdminUseCase getByIdAdminUseCase,
             UpdateAdminUseCase updateAdminUseCase,
-            DeleteAdminUseCase deleteAdminUseCase
-    ) {
+            DeleteAdminUseCase deleteAdminUseCase,
+            InitDatabaseUseCase initDatabaseUseCase) {
         this.gson = gson;
         this.formatter = formatter;
         this.addAdminUseCase = addAdminUseCase;
@@ -59,6 +61,7 @@ public class AdminController {
         this.getByIdAdminUseCase = getByIdAdminUseCase;
         this.updateAdminUseCase = updateAdminUseCase;
         this.deleteAdminUseCase = deleteAdminUseCase;
+        this.initDatabaseUseCase = initDatabaseUseCase;
         this.setUpRoutes();
     }
 
@@ -70,6 +73,8 @@ public class AdminController {
                 get("/:id", getById, new GetByIdAdminTransformer(gson, new GetByIdAdminMapper(formatter)));
                 put("/:id", update);
                 delete("/:id", delete);
+
+                post("/database", initDatabase);
             });
         });
     }
@@ -135,6 +140,14 @@ public class AdminController {
 
         Long id = SelfValidating.validId(request.params(":id"));
         deleteAdminUseCase.deleteAdmin(id);
+        response.status(HttpStatus.OK_200);
+        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
+    };
+
+    public Route initDatabase = (Request request, Response response) -> {
+        ensureUserIsAdmin.ensure(request);
+
+        initDatabaseUseCase.initDatabase();
         response.status(HttpStatus.OK_200);
         return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };

@@ -160,7 +160,8 @@ public class ProgramFactory {
                     adminService,
                     adminService,
                     adminService,
-                    adminService
+                    adminService,
+                    jsonDbContext.getInitDatabaseService()
             );
         }
         return adminController;

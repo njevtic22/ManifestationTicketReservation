@@ -8,6 +8,7 @@ import model.Review;
 import model.Salesman;
 import model.Ticket;
 import model.WithdrawalHistory;
+import program.ProgramFactory;
 import serializer.deserializer.JSONFileDeserializer;
 import serializer.serializer.AdminJSONFileSerializer;
 import serializer.serializer.CustomerJSONFileSerializer;
@@ -17,6 +18,8 @@ import serializer.serializer.ReviewJSONFileSerializer;
 import serializer.serializer.SalesmanJSONFileSerializer;
 import serializer.serializer.TicketJSONFileSerializer;
 import serializer.serializer.WithdrawalHistoryJSONFileSerializer;
+import service.InitJSONDatabaseService;
+import useCase.database.InitDatabaseUseCase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,12 +42,16 @@ public class JSONDbContext {
     private FileSerializer<WithdrawalHistory, Long> withdrawalHistoryFileSerializer;
     private FileSerializer<Review, Long> reviewFileSerializer;
 
+    private String directoryPath;
+    private String separator;
 
     private JSONFileDeserializer fileDeserializer;
 
     private Map<String, String> filePaths;
 
     public JSONDbContext(Gson gson, String directoryPath, String separator) {
+        this.directoryPath = directoryPath;
+        this.separator = separator;
 
         initFilePaths(directoryPath, separator);
 
@@ -61,7 +68,8 @@ public class JSONDbContext {
                 ticketRepository.getData(),
                 manifestationRepository.getData(),
                 withdrawalHistoryRepository.getData(),
-                reviewRepository.getData());
+                reviewRepository.getData()
+        );
         fileDeserializer.loadData();
     }
 
@@ -99,6 +107,29 @@ public class JSONDbContext {
         manifestationRepository = new ManifestationJSONRepository(manifestationFileSerializer);
         withdrawalHistoryRepository = new WithdrawalHistoryJSONRepository(withdrawalHistoryFileSerializer);
         reviewRepository = new ReviewJSONRepository(reviewFileSerializer);
+    }
+
+    public InitDatabaseUseCase getInitDatabaseService() {
+        return new InitJSONDatabaseService(
+                this.directoryPath + this.separator + "Locations.csv",
+                ProgramFactory.DATE_FORMAT,
+
+                adminRepository.getData(),
+                salesmanRepository.getData(),
+                customerRepository.getData(),
+                ticketRepository.getData(),
+                manifestationRepository.getData(),
+                withdrawalHistoryRepository.getData(),
+                reviewRepository.getData(),
+
+                adminFileSerializer,
+                salesmanFileSerializer,
+                customerFileSerializer,
+                ticketFileSerializer,
+                manifestationFileSerializer,
+                withdrawalHistoryFileSerializer,
+                reviewFileSerializer
+        );
     }
 
     public UserRepository<Admin> getAdminRepository() {

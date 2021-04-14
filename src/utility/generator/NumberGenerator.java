@@ -15,6 +15,7 @@ public abstract class NumberGenerator<T extends Number> implements Iterator<T> {
     }
 
     public abstract T peakNext() throws NoSuchElementException;
+    public abstract T getCurrent();
 
     protected abstract boolean isOverflow();
     protected abstract boolean isUnderflow();

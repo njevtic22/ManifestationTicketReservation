@@ -33,7 +33,17 @@ public class JSONFileDeserializer implements FileDeserializer {
     private Map<Long, JSONHistory> jsonHistories;
     private Map<Long, JSONReview> jsonReviews;
 
-    public JSONFileDeserializer(Gson gson, Map<String, String> filePaths, Map<Long, Admin> adminRepository, Map<Long, Salesman> salesmanRepository, Map<Long, Customer> customerRepository, Map<Long, Ticket> ticketRepository, Map<Long, Manifestation> manifestationRepository, Map<Long, WithdrawalHistory> withdrawalHistoryRepository, Map<Long, Review> reviewRepository) {
+    public JSONFileDeserializer(
+            Gson gson,
+            Map<String, String> filePaths,
+            Map<Long, Admin> adminRepository,
+            Map<Long, Salesman> salesmanRepository,
+            Map<Long, Customer> customerRepository,
+            Map<Long, Ticket> ticketRepository,
+            Map<Long, Manifestation> manifestationRepository,
+            Map<Long, WithdrawalHistory> withdrawalHistoryRepository,
+            Map<Long, Review> reviewRepository
+    ) {
         this.gson = gson;
         this.filePaths = filePaths;
         this.adminRepository = adminRepository;
