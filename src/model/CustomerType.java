@@ -2,8 +2,8 @@ package model;
 
 public enum CustomerType {
     BRONZE(0, 0.0F),
-    SILVER(2500, 0.25F),
-    GOLD(5000, 0.50F);
+    SILVER(40000, 0.25F),
+    GOLD(55000, 0.50F);
 
     private int minPoints;
     private float discount;

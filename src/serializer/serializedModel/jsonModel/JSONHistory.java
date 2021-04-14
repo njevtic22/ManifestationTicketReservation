@@ -10,5 +10,5 @@ public class JSONHistory {
     public String type;
     public boolean archived;
 
-    public Long manifestationId;
+    public Long manifestation;
 }

@@ -29,6 +29,23 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
     private final long ACTIVE_MAN_PER_SALESMAN   = MAN_PER_SALESMAN / 4 + 1;
     private final long INACTIVE_MAN_PER_SALESMAN = MAN_PER_SALESMAN / 4 + 1;
 
+    // Rejected and Created not included
+    private final long REGULAR_TICKET_PER_MAN_NUM = 10;
+    private final long FAN_PIT_TICKET_PER_MAN_NUM = 8;
+    private final long VIP_TICKET_PER_MAN_NUM = 6;
+    private final long TICKET_NUM = (
+            REGULAR_TICKET_PER_MAN_NUM +
+                    FAN_PIT_TICKET_PER_MAN_NUM +
+                    VIP_TICKET_PER_MAN_NUM) *
+            (
+                    (ACTIVE_MAN_PER_SALESMAN * SALESMAN_NUM) +
+                            (INACTIVE_MAN_PER_SALESMAN * SALESMAN_NUM)
+            );
+
+
+
+
+
     // Injected from repository class
     private final Map<Long, Admin> adminRepository;
     private final Map<Long, Salesman> salesmanRepository;
@@ -117,6 +134,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
         {
             description = "Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor. Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor. Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor. Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor. Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor. Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor. Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor. Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor. Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor. Beatae dicta corporis.Earum et delectus.In velit nobis.Reprehenderit libero laboriosam.Voluptas nam sit sed vitae est aut.Occaecati facere voluptatem eos.Occaecati esse nihil.Mollitia ipsa iusto.Fuga officiis accusamus nesciunt repudiandae.Et cum quia beatae rerum qui.Fugiat sint voluptatum vitae temporibus id quo.Fugiat quos vel sed ex.Voluptatem assumenda doloremque totam.Corporis laudantium dolorum eveniet sint.Qui ipsum est cupiditate libero.Eligendi debitis odit.Aut blanditiis sunt quibusdam et.Culpa enim culpa.Repellendus dolores natus qui explicabo.Minus nostrum tempora maiores.Officia dolorem esse est occaecati laudantium non dolorem.Voluptatem dolores eaque repellat voluptates voluptas.Quasi aut ut repudiandae.Dolorem consectetur quidem nihil sequi.Magni laudantium suscipit impedit ipsa tempore et.Reprehenderit dolores dolor aut qui sit.Sint voluptas ratione odio.Et explicabo odio tempora et esse.Magni enim praesentium omnis deserunt sed earum.Officiis aperiam temporibus dolor.";
         }
+        String reviewText = description.substring(0, description.length() / 2);
 
 
         for (int i = 0; i < ADMIN_NUM; i++) {
@@ -132,7 +150,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
             adminRepository.put(admin.getId(), admin);
         }
 
-        ArrayList<Long> salesmanIds = new ArrayList<>();
+        ArrayList<Long> salesmanIds = new ArrayList<>((int) SALESMAN_NUM);
         for (int i = 0; i < SALESMAN_NUM; i++) {
             Salesman salesman = new Salesman(
                     faker.name().firstName(),
@@ -147,6 +165,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
             salesmanRepository.put(salesman.getId(), salesman);
         }
 
+        ArrayList<Long> customerIds = new ArrayList<>((int) CUSTOMER_NUM);
         for (int i = 0; i < CUSTOMER_NUM; i++) {
             Customer customer = new Customer(
                     faker.name().firstName(),
@@ -159,6 +178,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                     0D,
                     CustomerType.BRONZE
             );
+            customerIds.add(customer.getId());
             customerRepository.put(customer.getId(), customer);
         }
 
@@ -166,6 +186,9 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
         HashMap<Long, Manifestation> rejectedManifestations = new HashMap<>();
         HashMap<Long, Manifestation> activeManifestations = new HashMap<>();
         HashMap<Long, Manifestation> inactiveManifestations = new HashMap<>();
+
+        ArrayList<Long> activeManIds   = new ArrayList<>((int) (ACTIVE_MAN_PER_SALESMAN * SALESMAN_NUM));
+        ArrayList<Long> inactiveManIds = new ArrayList<>((int) (INACTIVE_MAN_PER_SALESMAN * SALESMAN_NUM));
 
         ArrayList<Long> salesmanIdsToClear = new ArrayList<>(salesmanIds);
         while (!salesmanIdsToClear.isEmpty()) {
@@ -240,6 +263,8 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                 activeManifestation.setName(generateManName(activeManifestation.getId()));
                 activeManifestation.getImage().setLocation("images/manifestation/manifestation " + activeManifestation.getId() + ".jpg");
 
+                activeManIds.add(activeManifestation.getId());
+
                 salesman.addManifestation(activeManifestation);
                 activeManifestations.put(activeManifestation.getId(), activeManifestation);
                 manifestationRepository.put(activeManifestation.getId(), activeManifestation);
@@ -264,12 +289,246 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                 inactiveManifestation.setName(generateManName(inactiveManifestation.getId()));
                 inactiveManifestation.getImage().setLocation("images/manifestation/manifestation " + inactiveManifestation.getId() + ".jpg");
 
+                inactiveManIds.add(inactiveManifestation.getId());
+
                 salesman.addManifestation(inactiveManifestation);
                 inactiveManifestations.put(inactiveManifestation.getId(), inactiveManifestation);
                 manifestationRepository.put(inactiveManifestation.getId(), inactiveManifestation);
             }
         }
 
+        ArrayList<Long> regularTicketIds = new ArrayList<>((int) (REGULAR_TICKET_PER_MAN_NUM * MAN_NUM));
+        ArrayList<Long> fanTicketIds     = new ArrayList<>((int) (FAN_PIT_TICKET_PER_MAN_NUM * MAN_NUM));
+        ArrayList<Long> vipTicketIds     = new ArrayList<>((int) (VIP_TICKET_PER_MAN_NUM * MAN_NUM));
+
+        // Adding tickets for active manifestation
+        ArrayList<Long> activeManToClear = new ArrayList<>(activeManIds);
+        while (!activeManToClear.isEmpty()) {
+            int indexToRemove = faker.number().numberBetween(0, activeManToClear.size());
+            Long manId = activeManToClear.remove(indexToRemove);
+            Manifestation manifestation = manifestationRepository.get(manId);
+
+            for (int i = 0; i < REGULAR_TICKET_PER_MAN_NUM; i++) {
+                Ticket ticket = new Ticket(
+                        manifestation.getRegularTicketPrice(),
+                        TicketStatus.FREE,
+                        TicketType.REGULAR,
+                        false,
+                        manifestation,
+                        null
+                );
+                regularTicketIds.add(ticket.getId());
+                manifestation.addTicket(ticket);
+                ticketRepository.put(ticket.getId(), ticket);
+            }
+            manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + REGULAR_TICKET_PER_MAN_NUM);
+
+            for (int i = 0; i < FAN_PIT_TICKET_PER_MAN_NUM; i++) {
+                Ticket ticket = new Ticket(
+                        manifestation.getRegularTicketPrice(),
+                        TicketStatus.FREE,
+                        TicketType.FAN_PIT,
+                        false,
+                        manifestation,
+                        null
+                );
+                fanTicketIds.add(ticket.getId());
+                manifestation.addTicket(ticket);
+                ticketRepository.put(ticket.getId(), ticket);
+            }
+            manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + FAN_PIT_TICKET_PER_MAN_NUM);
+
+            for (int i = 0; i < VIP_TICKET_PER_MAN_NUM; i++) {
+                Ticket ticket = new Ticket(
+                        manifestation.getRegularTicketPrice(),
+                        TicketStatus.FREE,
+                        TicketType.VIP,
+                        false,
+                        manifestation,
+                        null
+                );
+                vipTicketIds.add(ticket.getId());
+                manifestation.addTicket(ticket);
+                ticketRepository.put(ticket.getId(), ticket);
+            }
+            manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + VIP_TICKET_PER_MAN_NUM);
+        }
+
+        // Adding tickets for inactive manifestation
+        ArrayList<Long> inactiveManToClear = new ArrayList<>(inactiveManIds);
+        while (!inactiveManToClear.isEmpty()) {
+            int indexToRemove = faker.number().numberBetween(0, inactiveManToClear.size());
+            Long manId = inactiveManToClear.remove(indexToRemove);
+            Manifestation manifestation = manifestationRepository.get(manId);
+
+            for (int i = 0; i < REGULAR_TICKET_PER_MAN_NUM; i++) {
+                Ticket ticket = new Ticket(
+                        manifestation.getRegularTicketPrice(),
+                        TicketStatus.FREE,
+                        TicketType.REGULAR,
+                        false,
+                        manifestation,
+                        null
+                );
+                regularTicketIds.add(ticket.getId());
+                manifestation.addTicket(ticket);
+                ticketRepository.put(ticket.getId(), ticket);
+            }
+            manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + REGULAR_TICKET_PER_MAN_NUM);
+
+            for (int i = 0; i < FAN_PIT_TICKET_PER_MAN_NUM; i++) {
+                Ticket ticket = new Ticket(
+                        manifestation.getRegularTicketPrice(),
+                        TicketStatus.FREE,
+                        TicketType.FAN_PIT,
+                        false,
+                        manifestation,
+                        null
+                );
+                fanTicketIds.add(ticket.getId());
+                manifestation.addTicket(ticket);
+                ticketRepository.put(ticket.getId(), ticket);
+            }
+            manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + FAN_PIT_TICKET_PER_MAN_NUM);
+
+            for (int i = 0; i < VIP_TICKET_PER_MAN_NUM; i++) {
+                Ticket ticket = new Ticket(
+                        manifestation.getRegularTicketPrice(),
+                        TicketStatus.FREE,
+                        TicketType.VIP,
+                        false,
+                        manifestation,
+                        null
+                );
+                vipTicketIds.add(ticket.getId());
+                manifestation.addTicket(ticket);
+                ticketRepository.put(ticket.getId(), ticket);
+            }
+            manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() + VIP_TICKET_PER_MAN_NUM);
+        }
+
+        long regularToLeave = regularTicketIds.size() / 3;
+        long fanToLeave     = fanTicketIds.size() / 3;
+        long vipToLeave     = vipTicketIds.size() / 3;
+
+        long regularToTake = regularTicketIds.size() - regularToLeave;
+        long fanToTake     = fanTicketIds.size()     - fanToLeave;
+        long vipToTake     = vipTicketIds.size()     - vipToLeave;
+
+        // Reserving tickets
+        for (int i = 0; i < regularToTake; i++) {
+            int idIndex = faker.number().numberBetween(0, customerIds.size());
+            long customerIndex = customerIds.get(idIndex);
+            Customer customer = customerRepository.get(customerIndex);
+            Long ticketId = regularTicketIds.get(i);
+            Ticket ticket = ticketRepository.get(ticketId);
+
+            ticket.setStatus(TicketStatus.RESERVED);
+            ticket.setPriceDiscount(customer.getType().getDiscount());
+
+            ticket.setCustomer(customer);
+            customer.addTicket(ticket);
+            double reward = ticket.getPrice() / 1000 * 133;
+            customer.addPoints(reward);
+        }
+
+        for (int i = 0; i < fanToTake; i++) {
+            int idIndex = faker.number().numberBetween(0, customerIds.size());
+            long customerIndex = customerIds.get(idIndex);
+            Customer customer = customerRepository.get(customerIndex);
+            Long ticketId = fanTicketIds.get(i);
+            Ticket ticket = ticketRepository.get(ticketId);
+
+            ticket.setStatus(TicketStatus.RESERVED);
+            ticket.setPriceDiscount(customer.getType().getDiscount());
+
+            ticket.setCustomer(customer);
+            customer.addTicket(ticket);
+            double reward = ticket.getPrice() / 1000 * 133;
+            customer.addPoints(reward);
+        }
+
+        for (int i = 0; i < vipToTake; i++) {
+            int idIndex = faker.number().numberBetween(0, customerIds.size());
+            long customerIndex = customerIds.get(idIndex);
+            Customer customer = customerRepository.get(customerIndex);
+            Long ticketId = vipTicketIds.get(i);
+            Ticket ticket = ticketRepository.get(ticketId);
+
+            ticket.setStatus(TicketStatus.RESERVED);
+            ticket.setPriceDiscount(customer.getType().getDiscount());
+
+            ticket.setCustomer(customer);
+            customer.addTicket(ticket);
+            double reward = ticket.getPrice() / 1000 * 133;
+            customer.addPoints(reward);
+        }
+
+        inactiveManToClear = new ArrayList<>(inactiveManIds);
+        while (!inactiveManToClear.isEmpty()) {
+            int idIndex = faker.number().numberBetween(0, inactiveManToClear.size());
+            long inactiveManId = inactiveManToClear.remove(idIndex);
+
+            Manifestation inactiveManifestation = manifestationRepository.get(inactiveManId);
+            for (Ticket ticket : inactiveManifestation.getTickets()) {
+                if (ticket.getStatus() == TicketStatus.RESERVED) {
+                    Customer customer = ticket.getCustomer();
+
+                    Review review = new Review(
+                            reviewText,
+                            generateRating(),
+                            faker.options().option(ReviewStatus.class),
+                            false,
+                            customer,
+                            inactiveManifestation
+                    );
+                    reviewRepository.put(review.getId(), review);
+                }
+            }
+        }
+
+        activeManToClear = new ArrayList<>(activeManIds);
+        while (!activeManToClear.isEmpty()) {
+            int idIndex = faker.number().numberBetween(0, activeManToClear.size());
+            long activeManId = activeManToClear.remove(idIndex);
+
+            Manifestation activeManifestation = manifestationRepository.get(activeManId);
+            for (int i = 0; i < activeManifestation.getTickets().size(); i++) {
+                Ticket ticket = activeManifestation.getTickets().get(i);
+                if (ticket.getStatus() == TicketStatus.RESERVED) {
+                    if (i % 3 != 0)
+                        continue;
+
+                    if (ticket.getType() != TicketType.REGULAR)
+                        continue;
+
+                    sleep(1000);
+
+                    Customer customer = ticket.getCustomer();
+
+                    WithdrawalHistory history = new WithdrawalHistory(
+                            new Date(),
+                            ticket,
+                            false
+                    );
+                    withdrawalHistoryRepository.put(history.getId(), history);
+
+                    customer.addHistory(history);
+
+                    // Fix price
+                    double priceToCalculateInFine = ticket.getPrice();
+
+                    ticket.setCustomer(null);
+                    ticket.setStatus(TicketStatus.FREE);
+                    ticket.setPrice(ticket.getManifestation().getRegularTicketPrice());
+
+
+                    customer.getTickets().remove(ticket);
+                    double fine = priceToCalculateInFine / 1000 * 133 * 4;
+                    customer.subtractPoints(fine);
+                }
+            }
+        }
 
 
         adminFileSerializer.save(adminRepository);
@@ -281,16 +540,32 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
         reviewFileSerializer.save(reviewRepository);
     }
 
+    private long howManySlept = 0;
+
+    private void sleep(long milliSeconds) {
+        try {
+            Thread.sleep(milliSeconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(++howManySlept);
+    }
+
+    private float generateRating() {
+        return faker.number().numberBetween(1, 5 + 1);
+    }
+
     private String generateManName(long manId) {
         ManifestationType manType = faker.options().option(ManifestationType.class);
         return toCapitalCase(manType.toString()) + " " + (manId) + ": " + faker.friends().character();
     }
+
     private String toCapitalCase(String name) {
         return name.charAt(0) + name.substring(1).toLowerCase();
     }
 
     private double generateManPrice() {
-        int number = faker.number().numberBetween(40, 90);
+        int number = faker.number().numberBetween(20, 30 + 1);
         return number * 100;
     }
 
@@ -309,7 +584,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
     private Date generateHoldingDateForActiveMan() {
         String timeOfBirth = "2021. 14:00:00";
         // Last changed 14.4.2021.
-        int futureMonth = faker.number().numberBetween(6, 8);
+        int futureMonth = faker.number().numberBetween(6, 8 + 1);
         String dateStr = generateDay() + "." + futureMonth + "." + timeOfBirth;
         return parseDate(dateStr);
     }
@@ -336,11 +611,11 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
     }
 
     private int generateDay() {
-        return faker.number().numberBetween(1, 28);
+        return faker.number().numberBetween(1, 28 + 1);
     }
 
     private int generateMonth() {
-        return faker.number().numberBetween(1, 12);
+        return faker.number().numberBetween(1, 12 + 1);
     }
 
     private void clearDatabase() {

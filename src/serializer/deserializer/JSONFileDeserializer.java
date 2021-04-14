@@ -225,7 +225,7 @@ public class JSONFileDeserializer implements FileDeserializer {
         // building reference between history and manifestation
         jsonHistories.values().forEach(jsonHistory -> {
             WithdrawalHistory history = withdrawalHistoryRepository.get(jsonHistory.id);
-            Manifestation manifestation = manifestationRepository.get(jsonHistory.manifestationId);
+            Manifestation manifestation = manifestationRepository.get(jsonHistory.manifestation);
 
             history.setManifestation(manifestation);
         });

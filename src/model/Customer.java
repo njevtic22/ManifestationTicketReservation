@@ -69,11 +69,11 @@ public class Customer extends User {
     public void addPoints(double points) {
         this.points += points;
 
-        if (points >= CustomerType.GOLD.getMinPoints()) {
+        if (this.points >= CustomerType.GOLD.getMinPoints()) {
             this.type = CustomerType.GOLD;
-        } else if (points >= CustomerType.SILVER.getMinPoints()) {
+        } else if (this.points >= CustomerType.SILVER.getMinPoints()) {
             this.type = CustomerType.SILVER;
-        } else if (points >= CustomerType.BRONZE.getMinPoints()) {
+        } else if (this.points >= CustomerType.BRONZE.getMinPoints()) {
             this.type = CustomerType.BRONZE;
         }
     }
@@ -81,11 +81,11 @@ public class Customer extends User {
     public void subtractPoints(double points) {
         this.points -= points;
 
-        if (points >= CustomerType.GOLD.getMinPoints()) {
+        if (this.points >= CustomerType.GOLD.getMinPoints()) {
             this.type = CustomerType.GOLD;
-        } else if (points >= CustomerType.SILVER.getMinPoints()) {
+        } else if (this.points >= CustomerType.SILVER.getMinPoints()) {
             this.type = CustomerType.SILVER;
-        } else if (points >= CustomerType.BRONZE.getMinPoints()) {
+        } else if (this.points >= CustomerType.BRONZE.getMinPoints()) {
             this.type = CustomerType.BRONZE;
         }
     }

@@ -147,7 +147,7 @@ public class AdminController {
     public Route initDatabase = (Request request, Response response) -> {
         ensureUserIsAdmin.ensure(request);
 
-        initDatabaseUseCase.initDatabase();
+//        initDatabaseUseCase.initDatabase();
         response.status(HttpStatus.OK_200);
         return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };
