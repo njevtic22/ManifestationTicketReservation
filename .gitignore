@@ -72,3 +72,6 @@ bin/
 
 # documentation
 doc/
+
+# locations
+files/Locations.csv
