@@ -84,7 +84,7 @@ Vue.component("profile", {
                                 <label>Points</label>
                             </div>
                             <div class="col-md-6">
-                                <p>{{user.points}}</p>
+                                <p>{{parsePoints}}</p>
                             </div>
                         </div>
                     </div>
@@ -121,6 +121,15 @@ Vue.component("profile", {
                 points: 0,
             }
         };
+    },
+
+    computed: {
+        parsePoints() {
+            // const roundNumber = Math.round(this.user.points * 100) / 100;
+            // const roundNumber = Number(this.user.points);
+            // const roundString = roundNumber.toFixed(2);
+            return this.user.points.toFixed(2);
+        }
     },
 
     methods: {

@@ -57,7 +57,7 @@ Vue.component("usersTable", {
                 <td>{{ user.gender }}</td>
                 <td>{{ user.role }}</td>
                 <td>{{ user.type }}</td>
-                <td>{{ user.points }}</td>
+                <td>{{ user.points.toFixed(2) }}</td>
                 <td class="text-center" v-if="$root.isAdmin()">
                     <button 
                         type="button" 
