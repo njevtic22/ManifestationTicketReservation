@@ -12,15 +12,21 @@ public class GetAllTicketsDTO {
 
     public String customer;
     public String manifestation;
+    public String holdingDate;
+    public String manifestationType;
+    public String manifestationStatus;
     public long manifestationId;
 
-    public GetAllTicketsDTO(Ticket ticket) {
+    public GetAllTicketsDTO(Ticket ticket, String parsedDate) {
         this.id = ticket.getId();
         this.appId = ticket.getAppId();
         this.price = ticket.getPrice();
         this.status = ticket.getStatus().toString();
         this.type = ticket.getType().toString();
         this.manifestation = ticket.getManifestation().getName();
+        this.holdingDate = parsedDate;
+        this.manifestationType = ticket.getManifestation().getType().toString();
+        this.manifestationStatus = ticket.getManifestation().getStatus().toString();
         this.manifestationId = ticket.getManifestation().getId();
 
 

@@ -1,1052 +1,1052 @@
 {
   "1": {
     "id": 1,
-    "withdrawalDate": "15.04.2021. 11:55:07",
-    "ticketId": "0000000529",
-    "price": 2700.0,
+    "withdrawalDate": "15.04.2021. 18:46:36",
+    "ticketId": "0000000241",
+    "price": 2500.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 19
+    "manifestation": 92
   },
   "2": {
     "id": 2,
-    "withdrawalDate": "15.04.2021. 11:55:08",
-    "ticketId": "0000000532",
-    "price": 2700.0,
+    "withdrawalDate": "15.04.2021. 18:46:37",
+    "ticketId": "0000000244",
+    "price": 2500.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 19
+    "manifestation": 92
   },
   "3": {
     "id": 3,
-    "withdrawalDate": "15.04.2021. 11:55:09",
-    "ticketId": "0000000535",
-    "price": 2700.0,
+    "withdrawalDate": "15.04.2021. 18:46:38",
+    "ticketId": "0000000247",
+    "price": 2500.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 19
+    "manifestation": 92
   },
   "4": {
     "id": 4,
-    "withdrawalDate": "15.04.2021. 11:55:10",
-    "ticketId": "0000000538",
+    "withdrawalDate": "15.04.2021. 18:46:39",
+    "ticketId": "0000000250",
+    "price": 2500.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 92
+  },
+  "5": {
+    "id": 5,
+    "withdrawalDate": "15.04.2021. 18:46:40",
+    "ticketId": "0000000913",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 80
+  },
+  "6": {
+    "id": 6,
+    "withdrawalDate": "15.04.2021. 18:46:41",
+    "ticketId": "0000000916",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 80
+  },
+  "7": {
+    "id": 7,
+    "withdrawalDate": "15.04.2021. 18:46:42",
+    "ticketId": "0000000919",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 80
+  },
+  "8": {
+    "id": 8,
+    "withdrawalDate": "15.04.2021. 18:46:43",
+    "ticketId": "0000000922",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 80
+  },
+  "9": {
+    "id": 9,
+    "withdrawalDate": "15.04.2021. 18:46:44",
+    "ticketId": "0000000073",
+    "price": 2100.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 54
+  },
+  "10": {
+    "id": 10,
+    "withdrawalDate": "15.04.2021. 18:46:45",
+    "ticketId": "0000000076",
+    "price": 2100.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 54
+  },
+  "11": {
+    "id": 11,
+    "withdrawalDate": "15.04.2021. 18:46:46",
+    "ticketId": "0000000079",
+    "price": 2100.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 54
+  },
+  "12": {
+    "id": 12,
+    "withdrawalDate": "15.04.2021. 18:46:47",
+    "ticketId": "0000000082",
+    "price": 2100.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 54
+  },
+  "13": {
+    "id": 13,
+    "withdrawalDate": "15.04.2021. 18:46:48",
+    "ticketId": "0000000289",
+    "price": 2900.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 42
+  },
+  "14": {
+    "id": 14,
+    "withdrawalDate": "15.04.2021. 18:46:49",
+    "ticketId": "0000000292",
+    "price": 2900.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 42
+  },
+  "15": {
+    "id": 15,
+    "withdrawalDate": "15.04.2021. 18:46:50",
+    "ticketId": "0000000295",
+    "price": 2900.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 42
+  },
+  "16": {
+    "id": 16,
+    "withdrawalDate": "15.04.2021. 18:46:51",
+    "ticketId": "0000000298",
+    "price": 2900.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 42
+  },
+  "17": {
+    "id": 17,
+    "withdrawalDate": "15.04.2021. 18:46:52",
+    "ticketId": "0000000457",
+    "price": 2000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 32
+  },
+  "18": {
+    "id": 18,
+    "withdrawalDate": "15.04.2021. 18:46:53",
+    "ticketId": "0000000460",
+    "price": 2000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 32
+  },
+  "19": {
+    "id": 19,
+    "withdrawalDate": "15.04.2021. 18:46:54",
+    "ticketId": "0000000463",
+    "price": 2000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 32
+  },
+  "20": {
+    "id": 20,
+    "withdrawalDate": "15.04.2021. 18:46:55",
+    "ticketId": "0000000466",
+    "price": 2000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 32
+  },
+  "21": {
+    "id": 21,
+    "withdrawalDate": "15.04.2021. 18:46:56",
+    "ticketId": "0000000601",
     "price": 2700.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 53
+  },
+  "22": {
+    "id": 22,
+    "withdrawalDate": "15.04.2021. 18:46:57",
+    "ticketId": "0000000604",
+    "price": 2700.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 53
+  },
+  "23": {
+    "id": 23,
+    "withdrawalDate": "15.04.2021. 18:46:58",
+    "ticketId": "0000000607",
+    "price": 2700.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 53
+  },
+  "24": {
+    "id": 24,
+    "withdrawalDate": "15.04.2021. 18:46:59",
+    "ticketId": "0000000610",
+    "price": 2700.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 53
+  },
+  "25": {
+    "id": 25,
+    "withdrawalDate": "15.04.2021. 18:47:00",
+    "ticketId": "0000000817",
+    "price": 2900.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 89
+  },
+  "26": {
+    "id": 26,
+    "withdrawalDate": "15.04.2021. 18:47:01",
+    "ticketId": "0000000820",
+    "price": 2900.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 89
+  },
+  "27": {
+    "id": 27,
+    "withdrawalDate": "15.04.2021. 18:47:02",
+    "ticketId": "0000000823",
+    "price": 2900.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 89
+  },
+  "28": {
+    "id": 28,
+    "withdrawalDate": "15.04.2021. 18:47:03",
+    "ticketId": "0000000826",
+    "price": 2900.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 89
+  },
+  "29": {
+    "id": 29,
+    "withdrawalDate": "15.04.2021. 18:47:04",
+    "ticketId": "0000000169",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 55
+  },
+  "30": {
+    "id": 30,
+    "withdrawalDate": "15.04.2021. 18:47:05",
+    "ticketId": "0000000172",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 55
+  },
+  "31": {
+    "id": 31,
+    "withdrawalDate": "15.04.2021. 18:47:06",
+    "ticketId": "0000000175",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 55
+  },
+  "32": {
+    "id": 32,
+    "withdrawalDate": "15.04.2021. 18:47:07",
+    "ticketId": "0000000178",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 55
+  },
+  "33": {
+    "id": 33,
+    "withdrawalDate": "15.04.2021. 18:47:08",
+    "ticketId": "0000000025",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 29
+  },
+  "34": {
+    "id": 34,
+    "withdrawalDate": "15.04.2021. 18:47:09",
+    "ticketId": "0000000028",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 29
+  },
+  "35": {
+    "id": 35,
+    "withdrawalDate": "15.04.2021. 18:47:10",
+    "ticketId": "0000000031",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 29
+  },
+  "36": {
+    "id": 36,
+    "withdrawalDate": "15.04.2021. 18:47:11",
+    "ticketId": "0000000034",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 29
+  },
+  "37": {
+    "id": 37,
+    "withdrawalDate": "15.04.2021. 18:47:12",
+    "ticketId": "0000000385",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 66
+  },
+  "38": {
+    "id": 38,
+    "withdrawalDate": "15.04.2021. 18:47:13",
+    "ticketId": "0000000388",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 66
+  },
+  "39": {
+    "id": 39,
+    "withdrawalDate": "15.04.2021. 18:47:14",
+    "ticketId": "0000000391",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 66
+  },
+  "40": {
+    "id": 40,
+    "withdrawalDate": "15.04.2021. 18:47:15",
+    "ticketId": "0000000394",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 66
+  },
+  "41": {
+    "id": 41,
+    "withdrawalDate": "15.04.2021. 18:47:16",
+    "ticketId": "0000000121",
+    "price": 2000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 79
+  },
+  "42": {
+    "id": 42,
+    "withdrawalDate": "15.04.2021. 18:47:17",
+    "ticketId": "0000000124",
+    "price": 2000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 79
+  },
+  "43": {
+    "id": 43,
+    "withdrawalDate": "15.04.2021. 18:47:18",
+    "ticketId": "0000000127",
+    "price": 2000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 79
+  },
+  "44": {
+    "id": 44,
+    "withdrawalDate": "15.04.2021. 18:47:19",
+    "ticketId": "0000000130",
+    "price": 2000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 79
+  },
+  "45": {
+    "id": 45,
+    "withdrawalDate": "15.04.2021. 18:47:20",
+    "ticketId": "0000000889",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 8
+  },
+  "46": {
+    "id": 46,
+    "withdrawalDate": "15.04.2021. 18:47:21",
+    "ticketId": "0000000892",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 8
+  },
+  "47": {
+    "id": 47,
+    "withdrawalDate": "15.04.2021. 18:47:22",
+    "ticketId": "0000000895",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 8
+  },
+  "48": {
+    "id": 48,
+    "withdrawalDate": "15.04.2021. 18:47:23",
+    "ticketId": "0000000898",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 8
+  },
+  "49": {
+    "id": 49,
+    "withdrawalDate": "15.04.2021. 18:47:24",
+    "ticketId": "0000000097",
+    "price": 2500.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 6
+  },
+  "50": {
+    "id": 50,
+    "withdrawalDate": "15.04.2021. 18:47:25",
+    "ticketId": "0000000100",
+    "price": 2500.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 6
+  },
+  "51": {
+    "id": 51,
+    "withdrawalDate": "15.04.2021. 18:47:26",
+    "ticketId": "0000000103",
+    "price": 2500.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 6
+  },
+  "52": {
+    "id": 52,
+    "withdrawalDate": "15.04.2021. 18:47:27",
+    "ticketId": "0000000106",
+    "price": 2500.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 6
+  },
+  "53": {
+    "id": 53,
+    "withdrawalDate": "15.04.2021. 18:47:28",
+    "ticketId": "0000000841",
+    "price": 2100.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 7
+  },
+  "54": {
+    "id": 54,
+    "withdrawalDate": "15.04.2021. 18:47:29",
+    "ticketId": "0000000844",
+    "price": 2100.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 7
+  },
+  "55": {
+    "id": 55,
+    "withdrawalDate": "15.04.2021. 18:47:30",
+    "ticketId": "0000000847",
+    "price": 2100.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 7
+  },
+  "56": {
+    "id": 56,
+    "withdrawalDate": "15.04.2021. 18:47:31",
+    "ticketId": "0000000850",
+    "price": 2100.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 7
+  },
+  "57": {
+    "id": 57,
+    "withdrawalDate": "15.04.2021. 18:47:32",
+    "ticketId": "0000000625",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 77
+  },
+  "58": {
+    "id": 58,
+    "withdrawalDate": "15.04.2021. 18:47:33",
+    "ticketId": "0000000628",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 77
+  },
+  "59": {
+    "id": 59,
+    "withdrawalDate": "15.04.2021. 18:47:34",
+    "ticketId": "0000000631",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 77
+  },
+  "60": {
+    "id": 60,
+    "withdrawalDate": "15.04.2021. 18:47:35",
+    "ticketId": "0000000634",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 77
+  },
+  "61": {
+    "id": 61,
+    "withdrawalDate": "15.04.2021. 18:47:36",
+    "ticketId": "0000000433",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 5
+  },
+  "62": {
+    "id": 62,
+    "withdrawalDate": "15.04.2021. 18:47:37",
+    "ticketId": "0000000436",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 5
+  },
+  "63": {
+    "id": 63,
+    "withdrawalDate": "15.04.2021. 18:47:38",
+    "ticketId": "0000000439",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 5
+  },
+  "64": {
+    "id": 64,
+    "withdrawalDate": "15.04.2021. 18:47:39",
+    "ticketId": "0000000442",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 5
+  },
+  "65": {
+    "id": 65,
+    "withdrawalDate": "15.04.2021. 18:47:40",
+    "ticketId": "0000000193",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 104
+  },
+  "66": {
+    "id": 66,
+    "withdrawalDate": "15.04.2021. 18:47:41",
+    "ticketId": "0000000196",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 104
+  },
+  "67": {
+    "id": 67,
+    "withdrawalDate": "15.04.2021. 18:47:42",
+    "ticketId": "0000000199",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 104
+  },
+  "68": {
+    "id": 68,
+    "withdrawalDate": "15.04.2021. 18:47:43",
+    "ticketId": "0000000202",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 104
+  },
+  "69": {
+    "id": 69,
+    "withdrawalDate": "15.04.2021. 18:47:44",
+    "ticketId": "0000000529",
+    "price": 2800.0,
     "type": "REGULAR",
     "archived": false,
     "manifestation": 19
   },
-  "5": {
-    "id": 5,
-    "withdrawalDate": "15.04.2021. 11:55:11",
+  "70": {
+    "id": 70,
+    "withdrawalDate": "15.04.2021. 18:47:45",
+    "ticketId": "0000000532",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 19
+  },
+  "71": {
+    "id": 71,
+    "withdrawalDate": "15.04.2021. 18:47:46",
+    "ticketId": "0000000535",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 19
+  },
+  "72": {
+    "id": 72,
+    "withdrawalDate": "15.04.2021. 18:47:47",
+    "ticketId": "0000000538",
+    "price": 2800.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 19
+  },
+  "73": {
+    "id": 73,
+    "withdrawalDate": "15.04.2021. 18:47:48",
+    "ticketId": "0000000673",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 43
+  },
+  "74": {
+    "id": 74,
+    "withdrawalDate": "15.04.2021. 18:47:49",
+    "ticketId": "0000000676",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 43
+  },
+  "75": {
+    "id": 75,
+    "withdrawalDate": "15.04.2021. 18:47:50",
+    "ticketId": "0000000679",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 43
+  },
+  "76": {
+    "id": 76,
+    "withdrawalDate": "15.04.2021. 18:47:51",
+    "ticketId": "0000000682",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 43
+  },
+  "77": {
+    "id": 77,
+    "withdrawalDate": "15.04.2021. 18:47:52",
+    "ticketId": "0000000481",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 17
+  },
+  "78": {
+    "id": 78,
+    "withdrawalDate": "15.04.2021. 18:47:53",
+    "ticketId": "0000000484",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 17
+  },
+  "79": {
+    "id": 79,
+    "withdrawalDate": "15.04.2021. 18:47:54",
+    "ticketId": "0000000487",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 17
+  },
+  "80": {
+    "id": 80,
+    "withdrawalDate": "15.04.2021. 18:47:55",
+    "ticketId": "0000000490",
+    "price": 2300.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 17
+  },
+  "81": {
+    "id": 81,
+    "withdrawalDate": "15.04.2021. 18:47:56",
+    "ticketId": "0000000553",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 20
+  },
+  "82": {
+    "id": 82,
+    "withdrawalDate": "15.04.2021. 18:47:57",
+    "ticketId": "0000000556",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 20
+  },
+  "83": {
+    "id": 83,
+    "withdrawalDate": "15.04.2021. 18:47:58",
+    "ticketId": "0000000559",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 20
+  },
+  "84": {
+    "id": 84,
+    "withdrawalDate": "15.04.2021. 18:47:59",
+    "ticketId": "0000000562",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 20
+  },
+  "85": {
+    "id": 85,
+    "withdrawalDate": "15.04.2021. 18:48:00",
     "ticketId": "0000000145",
-    "price": 3000.0,
+    "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 7
+    "manifestation": 44
   },
-  "6": {
-    "id": 6,
-    "withdrawalDate": "15.04.2021. 11:55:12",
+  "86": {
+    "id": 86,
+    "withdrawalDate": "15.04.2021. 18:48:01",
     "ticketId": "0000000148",
-    "price": 3000.0,
+    "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 7
+    "manifestation": 44
   },
-  "7": {
-    "id": 7,
-    "withdrawalDate": "15.04.2021. 11:55:13",
+  "87": {
+    "id": 87,
+    "withdrawalDate": "15.04.2021. 18:48:02",
     "ticketId": "0000000151",
-    "price": 3000.0,
+    "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 7
+    "manifestation": 44
   },
-  "8": {
-    "id": 8,
-    "withdrawalDate": "15.04.2021. 11:55:14",
+  "88": {
+    "id": 88,
+    "withdrawalDate": "15.04.2021. 18:48:03",
     "ticketId": "0000000154",
-    "price": 3000.0,
+    "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 7
+    "manifestation": 44
   },
-  "9": {
-    "id": 9,
-    "withdrawalDate": "15.04.2021. 11:55:15",
-    "ticketId": "0000000433",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 6
-  },
-  "10": {
-    "id": 10,
-    "withdrawalDate": "15.04.2021. 11:55:16",
-    "ticketId": "0000000436",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 6
-  },
-  "11": {
-    "id": 11,
-    "withdrawalDate": "15.04.2021. 11:55:17",
-    "ticketId": "0000000439",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 6
-  },
-  "12": {
-    "id": 12,
-    "withdrawalDate": "15.04.2021. 11:55:18",
-    "ticketId": "0000000442",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 6
-  },
-  "13": {
-    "id": 13,
-    "withdrawalDate": "15.04.2021. 11:55:19",
-    "ticketId": "0000000409",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 8
-  },
-  "14": {
-    "id": 14,
-    "withdrawalDate": "15.04.2021. 11:55:20",
-    "ticketId": "0000000412",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 8
-  },
-  "15": {
-    "id": 15,
-    "withdrawalDate": "15.04.2021. 11:55:21",
-    "ticketId": "0000000415",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 8
-  },
-  "16": {
-    "id": 16,
-    "withdrawalDate": "15.04.2021. 11:55:22",
-    "ticketId": "0000000418",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 8
-  },
-  "17": {
-    "id": 17,
-    "withdrawalDate": "15.04.2021. 11:55:23",
-    "ticketId": "0000000217",
-    "price": 2000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 56
-  },
-  "18": {
-    "id": 18,
-    "withdrawalDate": "15.04.2021. 11:55:24",
-    "ticketId": "0000000220",
-    "price": 2000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 56
-  },
-  "19": {
-    "id": 19,
-    "withdrawalDate": "15.04.2021. 11:55:25",
-    "ticketId": "0000000223",
-    "price": 2000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 56
-  },
-  "20": {
-    "id": 20,
-    "withdrawalDate": "15.04.2021. 11:55:26",
-    "ticketId": "0000000226",
-    "price": 2000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 56
-  },
-  "21": {
-    "id": 21,
-    "withdrawalDate": "15.04.2021. 11:55:27",
-    "ticketId": "0000000121",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 67
-  },
-  "22": {
-    "id": 22,
-    "withdrawalDate": "15.04.2021. 11:55:28",
-    "ticketId": "0000000124",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 67
-  },
-  "23": {
-    "id": 23,
-    "withdrawalDate": "15.04.2021. 11:55:29",
-    "ticketId": "0000000127",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 67
-  },
-  "24": {
-    "id": 24,
-    "withdrawalDate": "15.04.2021. 11:55:30",
-    "ticketId": "0000000130",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 67
-  },
-  "25": {
-    "id": 25,
-    "withdrawalDate": "15.04.2021. 11:55:31",
-    "ticketId": "0000000601",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 17
-  },
-  "26": {
-    "id": 26,
-    "withdrawalDate": "15.04.2021. 11:55:32",
-    "ticketId": "0000000604",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 17
-  },
-  "27": {
-    "id": 27,
-    "withdrawalDate": "15.04.2021. 11:55:33",
-    "ticketId": "0000000607",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 17
-  },
-  "28": {
-    "id": 28,
-    "withdrawalDate": "15.04.2021. 11:55:34",
-    "ticketId": "0000000610",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 17
-  },
-  "29": {
-    "id": 29,
-    "withdrawalDate": "15.04.2021. 11:55:35",
-    "ticketId": "0000000889",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 77
-  },
-  "30": {
-    "id": 30,
-    "withdrawalDate": "15.04.2021. 11:55:36",
-    "ticketId": "0000000892",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 77
-  },
-  "31": {
-    "id": 31,
-    "withdrawalDate": "15.04.2021. 11:55:37",
-    "ticketId": "0000000895",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 77
-  },
-  "32": {
-    "id": 32,
-    "withdrawalDate": "15.04.2021. 11:55:38",
-    "ticketId": "0000000898",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 77
-  },
-  "33": {
-    "id": 33,
-    "withdrawalDate": "15.04.2021. 11:55:39",
-    "ticketId": "0000000769",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 66
-  },
-  "34": {
-    "id": 34,
-    "withdrawalDate": "15.04.2021. 11:55:40",
-    "ticketId": "0000000772",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 66
-  },
-  "35": {
-    "id": 35,
-    "withdrawalDate": "15.04.2021. 11:55:41",
-    "ticketId": "0000000775",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 66
-  },
-  "36": {
-    "id": 36,
-    "withdrawalDate": "15.04.2021. 11:55:42",
-    "ticketId": "0000000778",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 66
-  },
-  "37": {
-    "id": 37,
-    "withdrawalDate": "15.04.2021. 11:55:43",
-    "ticketId": "0000000505",
-    "price": 2800.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 54
-  },
-  "38": {
-    "id": 38,
-    "withdrawalDate": "15.04.2021. 11:55:44",
-    "ticketId": "0000000508",
-    "price": 2800.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 54
-  },
-  "39": {
-    "id": 39,
-    "withdrawalDate": "15.04.2021. 11:55:45",
-    "ticketId": "0000000511",
-    "price": 2800.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 54
-  },
-  "40": {
-    "id": 40,
-    "withdrawalDate": "15.04.2021. 11:55:46",
-    "ticketId": "0000000514",
-    "price": 2800.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 54
-  },
-  "41": {
-    "id": 41,
-    "withdrawalDate": "15.04.2021. 11:55:47",
-    "ticketId": "0000000337",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 53
-  },
-  "42": {
-    "id": 42,
-    "withdrawalDate": "15.04.2021. 11:55:48",
-    "ticketId": "0000000340",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 53
-  },
-  "43": {
-    "id": 43,
-    "withdrawalDate": "15.04.2021. 11:55:49",
-    "ticketId": "0000000343",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 53
-  },
-  "44": {
-    "id": 44,
-    "withdrawalDate": "15.04.2021. 11:55:50",
-    "ticketId": "0000000346",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 53
-  },
-  "45": {
-    "id": 45,
-    "withdrawalDate": "15.04.2021. 11:55:51",
-    "ticketId": "0000000721",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 20
-  },
-  "46": {
-    "id": 46,
-    "withdrawalDate": "15.04.2021. 11:55:52",
-    "ticketId": "0000000724",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 20
-  },
-  "47": {
-    "id": 47,
-    "withdrawalDate": "15.04.2021. 11:55:53",
-    "ticketId": "0000000727",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 20
-  },
-  "48": {
-    "id": 48,
-    "withdrawalDate": "15.04.2021. 11:55:54",
-    "ticketId": "0000000730",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 20
-  },
-  "49": {
-    "id": 49,
-    "withdrawalDate": "15.04.2021. 11:55:55",
-    "ticketId": "0000000457",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 55
-  },
-  "50": {
-    "id": 50,
-    "withdrawalDate": "15.04.2021. 11:55:56",
-    "ticketId": "0000000460",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 55
-  },
-  "51": {
-    "id": 51,
-    "withdrawalDate": "15.04.2021. 11:55:57",
-    "ticketId": "0000000463",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 55
-  },
-  "52": {
-    "id": 52,
-    "withdrawalDate": "15.04.2021. 11:55:58",
-    "ticketId": "0000000466",
-    "price": 2300.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 55
-  },
-  "53": {
-    "id": 53,
-    "withdrawalDate": "15.04.2021. 11:55:59",
+  "89": {
+    "id": 89,
+    "withdrawalDate": "15.04.2021. 18:48:04",
     "ticketId": "0000000577",
     "price": 2200.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 115
+    "manifestation": 102
   },
-  "54": {
-    "id": 54,
-    "withdrawalDate": "15.04.2021. 11:56:00",
+  "90": {
+    "id": 90,
+    "withdrawalDate": "15.04.2021. 18:48:05",
     "ticketId": "0000000580",
     "price": 2200.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 115
+    "manifestation": 102
   },
-  "55": {
-    "id": 55,
-    "withdrawalDate": "15.04.2021. 11:56:01",
+  "91": {
+    "id": 91,
+    "withdrawalDate": "15.04.2021. 18:48:06",
     "ticketId": "0000000583",
     "price": 2200.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 115
+    "manifestation": 102
   },
-  "56": {
-    "id": 56,
-    "withdrawalDate": "15.04.2021. 11:56:02",
+  "92": {
+    "id": 92,
+    "withdrawalDate": "15.04.2021. 18:48:07",
     "ticketId": "0000000586",
     "price": 2200.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 115
-  },
-  "57": {
-    "id": 57,
-    "withdrawalDate": "15.04.2021. 11:56:03",
-    "ticketId": "0000000193",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 68
-  },
-  "58": {
-    "id": 58,
-    "withdrawalDate": "15.04.2021. 11:56:04",
-    "ticketId": "0000000196",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 68
-  },
-  "59": {
-    "id": 59,
-    "withdrawalDate": "15.04.2021. 11:56:05",
-    "ticketId": "0000000199",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 68
-  },
-  "60": {
-    "id": 60,
-    "withdrawalDate": "15.04.2021. 11:56:06",
-    "ticketId": "0000000202",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 68
-  },
-  "61": {
-    "id": 61,
-    "withdrawalDate": "15.04.2021. 11:56:07",
-    "ticketId": "0000000673",
-    "price": 2800.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 78
-  },
-  "62": {
-    "id": 62,
-    "withdrawalDate": "15.04.2021. 11:56:08",
-    "ticketId": "0000000676",
-    "price": 2800.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 78
-  },
-  "63": {
-    "id": 63,
-    "withdrawalDate": "15.04.2021. 11:56:09",
-    "ticketId": "0000000679",
-    "price": 2800.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 78
-  },
-  "64": {
-    "id": 64,
-    "withdrawalDate": "15.04.2021. 11:56:10",
-    "ticketId": "0000000682",
-    "price": 2800.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 78
-  },
-  "65": {
-    "id": 65,
-    "withdrawalDate": "15.04.2021. 11:56:11",
-    "ticketId": "0000000745",
-    "price": 2100.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 31
-  },
-  "66": {
-    "id": 66,
-    "withdrawalDate": "15.04.2021. 11:56:12",
-    "ticketId": "0000000748",
-    "price": 2100.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 31
-  },
-  "67": {
-    "id": 67,
-    "withdrawalDate": "15.04.2021. 11:56:13",
-    "ticketId": "0000000751",
-    "price": 2100.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 31
-  },
-  "68": {
-    "id": 68,
-    "withdrawalDate": "15.04.2021. 11:56:14",
-    "ticketId": "0000000754",
-    "price": 2100.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 31
-  },
-  "69": {
-    "id": 69,
-    "withdrawalDate": "15.04.2021. 11:56:15",
-    "ticketId": "0000000385",
-    "price": 2500.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 30
-  },
-  "70": {
-    "id": 70,
-    "withdrawalDate": "15.04.2021. 11:56:16",
-    "ticketId": "0000000388",
-    "price": 2500.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 30
-  },
-  "71": {
-    "id": 71,
-    "withdrawalDate": "15.04.2021. 11:56:17",
-    "ticketId": "0000000391",
-    "price": 2500.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 30
-  },
-  "72": {
-    "id": 72,
-    "withdrawalDate": "15.04.2021. 11:56:18",
-    "ticketId": "0000000394",
-    "price": 2500.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 30
-  },
-  "73": {
-    "id": 73,
-    "withdrawalDate": "15.04.2021. 11:56:19",
-    "ticketId": "0000000913",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 101
-  },
-  "74": {
-    "id": 74,
-    "withdrawalDate": "15.04.2021. 11:56:20",
-    "ticketId": "0000000916",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 101
-  },
-  "75": {
-    "id": 75,
-    "withdrawalDate": "15.04.2021. 11:56:21",
-    "ticketId": "0000000919",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 101
-  },
-  "76": {
-    "id": 76,
-    "withdrawalDate": "15.04.2021. 11:56:22",
-    "ticketId": "0000000922",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 101
-  },
-  "77": {
-    "id": 77,
-    "withdrawalDate": "15.04.2021. 11:56:23",
-    "ticketId": "0000000265",
-    "price": 2100.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 90
-  },
-  "78": {
-    "id": 78,
-    "withdrawalDate": "15.04.2021. 11:56:24",
-    "ticketId": "0000000268",
-    "price": 2100.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 90
-  },
-  "79": {
-    "id": 79,
-    "withdrawalDate": "15.04.2021. 11:56:25",
-    "ticketId": "0000000271",
-    "price": 2100.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 90
-  },
-  "80": {
-    "id": 80,
-    "withdrawalDate": "15.04.2021. 11:56:26",
-    "ticketId": "0000000274",
-    "price": 2100.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 90
-  },
-  "81": {
-    "id": 81,
-    "withdrawalDate": "15.04.2021. 11:56:27",
-    "ticketId": "0000000553",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 18
-  },
-  "82": {
-    "id": 82,
-    "withdrawalDate": "15.04.2021. 11:56:28",
-    "ticketId": "0000000556",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 18
-  },
-  "83": {
-    "id": 83,
-    "withdrawalDate": "15.04.2021. 11:56:29",
-    "ticketId": "0000000559",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 18
-  },
-  "84": {
-    "id": 84,
-    "withdrawalDate": "15.04.2021. 11:56:30",
-    "ticketId": "0000000562",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 18
-  },
-  "85": {
-    "id": 85,
-    "withdrawalDate": "15.04.2021. 11:56:31",
-    "ticketId": "0000000817",
-    "price": 2700.0,
-    "type": "REGULAR",
-    "archived": false,
     "manifestation": 102
-  },
-  "86": {
-    "id": 86,
-    "withdrawalDate": "15.04.2021. 11:56:32",
-    "ticketId": "0000000820",
-    "price": 2700.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 102
-  },
-  "87": {
-    "id": 87,
-    "withdrawalDate": "15.04.2021. 11:56:33",
-    "ticketId": "0000000823",
-    "price": 2700.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 102
-  },
-  "88": {
-    "id": 88,
-    "withdrawalDate": "15.04.2021. 11:56:34",
-    "ticketId": "0000000826",
-    "price": 2700.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 102
-  },
-  "89": {
-    "id": 89,
-    "withdrawalDate": "15.04.2021. 11:56:35",
-    "ticketId": "0000000169",
-    "price": 2000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 42
-  },
-  "90": {
-    "id": 90,
-    "withdrawalDate": "15.04.2021. 11:56:36",
-    "ticketId": "0000000172",
-    "price": 2000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 42
-  },
-  "91": {
-    "id": 91,
-    "withdrawalDate": "15.04.2021. 11:56:37",
-    "ticketId": "0000000175",
-    "price": 2000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 42
-  },
-  "92": {
-    "id": 92,
-    "withdrawalDate": "15.04.2021. 11:56:38",
-    "ticketId": "0000000178",
-    "price": 2000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 42
   },
   "93": {
     "id": 93,
-    "withdrawalDate": "15.04.2021. 11:56:39",
-    "ticketId": "0000000865",
-    "price": 2300.0,
+    "withdrawalDate": "15.04.2021. 18:48:08",
+    "ticketId": "0000000745",
+    "price": 2400.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 104
+    "manifestation": 115
   },
   "94": {
     "id": 94,
-    "withdrawalDate": "15.04.2021. 11:56:40",
-    "ticketId": "0000000868",
-    "price": 2300.0,
+    "withdrawalDate": "15.04.2021. 18:48:09",
+    "ticketId": "0000000748",
+    "price": 2400.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 104
+    "manifestation": 115
   },
   "95": {
     "id": 95,
-    "withdrawalDate": "15.04.2021. 11:56:41",
-    "ticketId": "0000000871",
-    "price": 2300.0,
+    "withdrawalDate": "15.04.2021. 18:48:10",
+    "ticketId": "0000000751",
+    "price": 2400.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 104
+    "manifestation": 115
   },
   "96": {
     "id": 96,
-    "withdrawalDate": "15.04.2021. 11:56:42",
-    "ticketId": "0000000874",
-    "price": 2300.0,
+    "withdrawalDate": "15.04.2021. 18:48:11",
+    "ticketId": "0000000754",
+    "price": 2400.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 104
+    "manifestation": 115
   },
   "97": {
     "id": 97,
-    "withdrawalDate": "15.04.2021. 11:56:43",
-    "ticketId": "0000000073",
-    "price": 2200.0,
+    "withdrawalDate": "15.04.2021. 18:48:12",
+    "ticketId": "0000000793",
+    "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 103
+    "manifestation": 68
   },
   "98": {
     "id": 98,
-    "withdrawalDate": "15.04.2021. 11:56:44",
-    "ticketId": "0000000076",
-    "price": 2200.0,
+    "withdrawalDate": "15.04.2021. 18:48:13",
+    "ticketId": "0000000796",
+    "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 103
+    "manifestation": 68
   },
   "99": {
     "id": 99,
-    "withdrawalDate": "15.04.2021. 11:56:45",
-    "ticketId": "0000000079",
-    "price": 2200.0,
+    "withdrawalDate": "15.04.2021. 18:48:14",
+    "ticketId": "0000000799",
+    "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 103
+    "manifestation": 68
   },
   "100": {
     "id": 100,
-    "withdrawalDate": "15.04.2021. 11:56:46",
-    "ticketId": "0000000082",
+    "withdrawalDate": "15.04.2021. 18:48:15",
+    "ticketId": "0000000802",
+    "price": 2700.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 68
+  },
+  "101": {
+    "id": 101,
+    "withdrawalDate": "15.04.2021. 18:48:16",
+    "ticketId": "0000000049",
     "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 67
+  },
+  "102": {
+    "id": 102,
+    "withdrawalDate": "15.04.2021. 18:48:17",
+    "ticketId": "0000000052",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 67
+  },
+  "103": {
+    "id": 103,
+    "withdrawalDate": "15.04.2021. 18:48:18",
+    "ticketId": "0000000055",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 67
+  },
+  "104": {
+    "id": 104,
+    "withdrawalDate": "15.04.2021. 18:48:19",
+    "ticketId": "0000000058",
+    "price": 2200.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 67
+  },
+  "105": {
+    "id": 105,
+    "withdrawalDate": "15.04.2021. 18:48:20",
+    "ticketId": "0000000217",
+    "price": 2100.0,
     "type": "REGULAR",
     "archived": false,
     "manifestation": 103
   },
-  "101": {
-    "id": 101,
-    "withdrawalDate": "15.04.2021. 11:56:47",
-    "ticketId": "0000000937",
-    "price": 3000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 5
-  },
-  "102": {
-    "id": 102,
-    "withdrawalDate": "15.04.2021. 11:56:48",
-    "ticketId": "0000000940",
-    "price": 3000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 5
-  },
-  "103": {
-    "id": 103,
-    "withdrawalDate": "15.04.2021. 11:56:49",
-    "ticketId": "0000000943",
-    "price": 3000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 5
-  },
-  "104": {
-    "id": 104,
-    "withdrawalDate": "15.04.2021. 11:56:50",
-    "ticketId": "0000000946",
-    "price": 3000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 5
-  },
-  "105": {
-    "id": 105,
-    "withdrawalDate": "15.04.2021. 11:56:51",
-    "ticketId": "0000000025",
-    "price": 2900.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 80
-  },
   "106": {
     "id": 106,
-    "withdrawalDate": "15.04.2021. 11:56:52",
-    "ticketId": "0000000028",
-    "price": 2900.0,
+    "withdrawalDate": "15.04.2021. 18:48:21",
+    "ticketId": "0000000220",
+    "price": 2100.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 80
+    "manifestation": 103
   },
   "107": {
     "id": 107,
-    "withdrawalDate": "15.04.2021. 11:56:53",
-    "ticketId": "0000000031",
-    "price": 2900.0,
+    "withdrawalDate": "15.04.2021. 18:48:22",
+    "ticketId": "0000000223",
+    "price": 2100.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 80
+    "manifestation": 103
   },
   "108": {
     "id": 108,
-    "withdrawalDate": "15.04.2021. 11:56:54",
-    "ticketId": "0000000034",
-    "price": 2900.0,
+    "withdrawalDate": "15.04.2021. 18:48:23",
+    "ticketId": "0000000226",
+    "price": 2100.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 80
+    "manifestation": 103
   },
   "109": {
     "id": 109,
-    "withdrawalDate": "15.04.2021. 11:56:55",
-    "ticketId": "0000000649",
-    "price": 2100.0,
+    "withdrawalDate": "15.04.2021. 18:48:24",
+    "ticketId": "0000000769",
+    "price": 2400.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 113
+    "manifestation": 41
   },
   "110": {
     "id": 110,
-    "withdrawalDate": "15.04.2021. 11:56:56",
-    "ticketId": "0000000652",
-    "price": 2100.0,
+    "withdrawalDate": "15.04.2021. 18:48:25",
+    "ticketId": "0000000772",
+    "price": 2400.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 113
+    "manifestation": 41
   },
   "111": {
     "id": 111,
-    "withdrawalDate": "15.04.2021. 11:56:57",
-    "ticketId": "0000000655",
-    "price": 2100.0,
+    "withdrawalDate": "15.04.2021. 18:48:26",
+    "ticketId": "0000000775",
+    "price": 2400.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 113
+    "manifestation": 41
   },
   "112": {
     "id": 112,
-    "withdrawalDate": "15.04.2021. 11:56:58",
-    "ticketId": "0000000658",
-    "price": 2100.0,
+    "withdrawalDate": "15.04.2021. 18:48:27",
+    "ticketId": "0000000778",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 41
+  },
+  "113": {
+    "id": 113,
+    "withdrawalDate": "15.04.2021. 18:48:28",
+    "ticketId": "0000000505",
+    "price": 2600.0,
     "type": "REGULAR",
     "archived": false,
     "manifestation": 113
   },
-  "113": {
-    "id": 113,
-    "withdrawalDate": "15.04.2021. 11:56:59",
-    "ticketId": "0000000481",
-    "price": 2700.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 41
-  },
   "114": {
     "id": 114,
-    "withdrawalDate": "15.04.2021. 11:57:00",
-    "ticketId": "0000000484",
-    "price": 2700.0,
+    "withdrawalDate": "15.04.2021. 18:48:29",
+    "ticketId": "0000000508",
+    "price": 2600.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 41
+    "manifestation": 113
   },
   "115": {
     "id": 115,
-    "withdrawalDate": "15.04.2021. 11:57:01",
-    "ticketId": "0000000487",
-    "price": 2700.0,
+    "withdrawalDate": "15.04.2021. 18:48:30",
+    "ticketId": "0000000511",
+    "price": 2600.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 41
+    "manifestation": 113
   },
   "116": {
     "id": 116,
-    "withdrawalDate": "15.04.2021. 11:57:02",
-    "ticketId": "0000000490",
-    "price": 2700.0,
+    "withdrawalDate": "15.04.2021. 18:48:31",
+    "ticketId": "0000000514",
+    "price": 2600.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 41
+    "manifestation": 113
   },
   "117": {
     "id": 117,
-    "withdrawalDate": "15.04.2021. 11:57:03",
-    "ticketId": "0000000313",
+    "withdrawalDate": "15.04.2021. 18:48:32",
+    "ticketId": "0000000721",
     "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
@@ -1054,8 +1054,8 @@
   },
   "118": {
     "id": 118,
-    "withdrawalDate": "15.04.2021. 11:57:04",
-    "ticketId": "0000000316",
+    "withdrawalDate": "15.04.2021. 18:48:33",
+    "ticketId": "0000000724",
     "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
@@ -1063,8 +1063,8 @@
   },
   "119": {
     "id": 119,
-    "withdrawalDate": "15.04.2021. 11:57:05",
-    "ticketId": "0000000319",
+    "withdrawalDate": "15.04.2021. 18:48:34",
+    "ticketId": "0000000727",
     "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
@@ -1072,8 +1072,8 @@
   },
   "120": {
     "id": 120,
-    "withdrawalDate": "15.04.2021. 11:57:06",
-    "ticketId": "0000000322",
+    "withdrawalDate": "15.04.2021. 18:48:35",
+    "ticketId": "0000000730",
     "price": 2700.0,
     "type": "REGULAR",
     "archived": false,
@@ -1081,362 +1081,362 @@
   },
   "121": {
     "id": 121,
-    "withdrawalDate": "15.04.2021. 11:57:07",
-    "ticketId": "0000000001",
-    "price": 2600.0,
+    "withdrawalDate": "15.04.2021. 18:48:36",
+    "ticketId": "0000000265",
+    "price": 2300.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 92
+    "manifestation": 90
   },
   "122": {
     "id": 122,
-    "withdrawalDate": "15.04.2021. 11:57:08",
-    "ticketId": "0000000004",
-    "price": 2600.0,
+    "withdrawalDate": "15.04.2021. 18:48:37",
+    "ticketId": "0000000268",
+    "price": 2300.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 92
+    "manifestation": 90
   },
   "123": {
     "id": 123,
-    "withdrawalDate": "15.04.2021. 11:57:09",
-    "ticketId": "0000000007",
-    "price": 2600.0,
+    "withdrawalDate": "15.04.2021. 18:48:38",
+    "ticketId": "0000000271",
+    "price": 2300.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 92
+    "manifestation": 90
   },
   "124": {
     "id": 124,
-    "withdrawalDate": "15.04.2021. 11:57:10",
-    "ticketId": "0000000010",
-    "price": 2600.0,
+    "withdrawalDate": "15.04.2021. 18:48:39",
+    "ticketId": "0000000274",
+    "price": 2300.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 92
+    "manifestation": 90
   },
   "125": {
     "id": 125,
-    "withdrawalDate": "15.04.2021. 11:57:11",
-    "ticketId": "0000000361",
-    "price": 2500.0,
+    "withdrawalDate": "15.04.2021. 18:48:40",
+    "ticketId": "0000000313",
+    "price": 2400.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 116
+    "manifestation": 56
   },
   "126": {
     "id": 126,
-    "withdrawalDate": "15.04.2021. 11:57:12",
-    "ticketId": "0000000364",
-    "price": 2500.0,
+    "withdrawalDate": "15.04.2021. 18:48:41",
+    "ticketId": "0000000316",
+    "price": 2400.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 116
+    "manifestation": 56
   },
   "127": {
     "id": 127,
-    "withdrawalDate": "15.04.2021. 11:57:13",
-    "ticketId": "0000000367",
-    "price": 2500.0,
+    "withdrawalDate": "15.04.2021. 18:48:42",
+    "ticketId": "0000000319",
+    "price": 2400.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 116
+    "manifestation": 56
   },
   "128": {
     "id": 128,
-    "withdrawalDate": "15.04.2021. 11:57:14",
+    "withdrawalDate": "15.04.2021. 18:48:43",
+    "ticketId": "0000000322",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 56
+  },
+  "129": {
+    "id": 129,
+    "withdrawalDate": "15.04.2021. 18:48:44",
+    "ticketId": "0000000649",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 101
+  },
+  "130": {
+    "id": 130,
+    "withdrawalDate": "15.04.2021. 18:48:45",
+    "ticketId": "0000000652",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 101
+  },
+  "131": {
+    "id": 131,
+    "withdrawalDate": "15.04.2021. 18:48:46",
+    "ticketId": "0000000655",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 101
+  },
+  "132": {
+    "id": 132,
+    "withdrawalDate": "15.04.2021. 18:48:47",
+    "ticketId": "0000000658",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 101
+  },
+  "133": {
+    "id": 133,
+    "withdrawalDate": "15.04.2021. 18:48:48",
+    "ticketId": "0000000697",
+    "price": 3000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 78
+  },
+  "134": {
+    "id": 134,
+    "withdrawalDate": "15.04.2021. 18:48:49",
+    "ticketId": "0000000700",
+    "price": 3000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 78
+  },
+  "135": {
+    "id": 135,
+    "withdrawalDate": "15.04.2021. 18:48:50",
+    "ticketId": "0000000703",
+    "price": 3000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 78
+  },
+  "136": {
+    "id": 136,
+    "withdrawalDate": "15.04.2021. 18:48:51",
+    "ticketId": "0000000706",
+    "price": 3000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 78
+  },
+  "137": {
+    "id": 137,
+    "withdrawalDate": "15.04.2021. 18:48:52",
+    "ticketId": "0000000361",
+    "price": 3000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 31
+  },
+  "138": {
+    "id": 138,
+    "withdrawalDate": "15.04.2021. 18:48:53",
+    "ticketId": "0000000364",
+    "price": 3000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 31
+  },
+  "139": {
+    "id": 139,
+    "withdrawalDate": "15.04.2021. 18:48:54",
+    "ticketId": "0000000367",
+    "price": 3000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 31
+  },
+  "140": {
+    "id": 140,
+    "withdrawalDate": "15.04.2021. 18:48:55",
     "ticketId": "0000000370",
-    "price": 2500.0,
+    "price": 3000.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 31
+  },
+  "141": {
+    "id": 141,
+    "withdrawalDate": "15.04.2021. 18:48:56",
+    "ticketId": "0000000001",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 65
+  },
+  "142": {
+    "id": 142,
+    "withdrawalDate": "15.04.2021. 18:48:57",
+    "ticketId": "0000000004",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 65
+  },
+  "143": {
+    "id": 143,
+    "withdrawalDate": "15.04.2021. 18:48:58",
+    "ticketId": "0000000007",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 65
+  },
+  "144": {
+    "id": 144,
+    "withdrawalDate": "15.04.2021. 18:48:59",
+    "ticketId": "0000000010",
+    "price": 2400.0,
+    "type": "REGULAR",
+    "archived": false,
+    "manifestation": 65
+  },
+  "145": {
+    "id": 145,
+    "withdrawalDate": "15.04.2021. 18:49:00",
+    "ticketId": "0000000337",
+    "price": 2900.0,
     "type": "REGULAR",
     "archived": false,
     "manifestation": 116
   },
-  "129": {
-    "id": 129,
-    "withdrawalDate": "15.04.2021. 11:57:15",
-    "ticketId": "0000000241",
-    "price": 2500.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 43
-  },
-  "130": {
-    "id": 130,
-    "withdrawalDate": "15.04.2021. 11:57:16",
-    "ticketId": "0000000244",
-    "price": 2500.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 43
-  },
-  "131": {
-    "id": 131,
-    "withdrawalDate": "15.04.2021. 11:57:17",
-    "ticketId": "0000000247",
-    "price": 2500.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 43
-  },
-  "132": {
-    "id": 132,
-    "withdrawalDate": "15.04.2021. 11:57:18",
-    "ticketId": "0000000250",
-    "price": 2500.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 43
-  },
-  "133": {
-    "id": 133,
-    "withdrawalDate": "15.04.2021. 11:57:19",
-    "ticketId": "0000000049",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 44
-  },
-  "134": {
-    "id": 134,
-    "withdrawalDate": "15.04.2021. 11:57:20",
-    "ticketId": "0000000052",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 44
-  },
-  "135": {
-    "id": 135,
-    "withdrawalDate": "15.04.2021. 11:57:21",
-    "ticketId": "0000000055",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 44
-  },
-  "136": {
-    "id": 136,
-    "withdrawalDate": "15.04.2021. 11:57:22",
-    "ticketId": "0000000058",
-    "price": 2200.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 44
-  },
-  "137": {
-    "id": 137,
-    "withdrawalDate": "15.04.2021. 11:57:23",
-    "ticketId": "0000000625",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 65
-  },
-  "138": {
-    "id": 138,
-    "withdrawalDate": "15.04.2021. 11:57:24",
-    "ticketId": "0000000628",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 65
-  },
-  "139": {
-    "id": 139,
-    "withdrawalDate": "15.04.2021. 11:57:25",
-    "ticketId": "0000000631",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 65
-  },
-  "140": {
-    "id": 140,
-    "withdrawalDate": "15.04.2021. 11:57:26",
-    "ticketId": "0000000634",
-    "price": 2400.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 65
-  },
-  "141": {
-    "id": 141,
-    "withdrawalDate": "15.04.2021. 11:57:27",
-    "ticketId": "0000000841",
-    "price": 2700.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 114
-  },
-  "142": {
-    "id": 142,
-    "withdrawalDate": "15.04.2021. 11:57:28",
-    "ticketId": "0000000844",
-    "price": 2700.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 114
-  },
-  "143": {
-    "id": 143,
-    "withdrawalDate": "15.04.2021. 11:57:29",
-    "ticketId": "0000000847",
-    "price": 2700.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 114
-  },
-  "144": {
-    "id": 144,
-    "withdrawalDate": "15.04.2021. 11:57:30",
-    "ticketId": "0000000850",
-    "price": 2700.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 114
-  },
-  "145": {
-    "id": 145,
-    "withdrawalDate": "15.04.2021. 11:57:31",
-    "ticketId": "0000000097",
-    "price": 2000.0,
-    "type": "REGULAR",
-    "archived": false,
-    "manifestation": 89
-  },
   "146": {
     "id": 146,
-    "withdrawalDate": "15.04.2021. 11:57:32",
-    "ticketId": "0000000100",
-    "price": 2000.0,
+    "withdrawalDate": "15.04.2021. 18:49:01",
+    "ticketId": "0000000340",
+    "price": 2900.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 89
+    "manifestation": 116
   },
   "147": {
     "id": 147,
-    "withdrawalDate": "15.04.2021. 11:57:33",
-    "ticketId": "0000000103",
-    "price": 2000.0,
+    "withdrawalDate": "15.04.2021. 18:49:02",
+    "ticketId": "0000000343",
+    "price": 2900.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 89
+    "manifestation": 116
   },
   "148": {
     "id": 148,
-    "withdrawalDate": "15.04.2021. 11:57:34",
-    "ticketId": "0000000106",
-    "price": 2000.0,
+    "withdrawalDate": "15.04.2021. 18:49:03",
+    "ticketId": "0000000346",
+    "price": 2900.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 89
+    "manifestation": 116
   },
   "149": {
     "id": 149,
-    "withdrawalDate": "15.04.2021. 11:57:35",
-    "ticketId": "0000000697",
-    "price": 2300.0,
+    "withdrawalDate": "15.04.2021. 18:49:04",
+    "ticketId": "0000000937",
+    "price": 2000.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 29
+    "manifestation": 18
   },
   "150": {
     "id": 150,
-    "withdrawalDate": "15.04.2021. 11:57:36",
-    "ticketId": "0000000700",
-    "price": 2300.0,
+    "withdrawalDate": "15.04.2021. 18:49:05",
+    "ticketId": "0000000940",
+    "price": 2000.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 29
+    "manifestation": 18
   },
   "151": {
     "id": 151,
-    "withdrawalDate": "15.04.2021. 11:57:37",
-    "ticketId": "0000000703",
-    "price": 2300.0,
+    "withdrawalDate": "15.04.2021. 18:49:06",
+    "ticketId": "0000000943",
+    "price": 2000.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 29
+    "manifestation": 18
   },
   "152": {
     "id": 152,
-    "withdrawalDate": "15.04.2021. 11:57:38",
-    "ticketId": "0000000706",
-    "price": 2300.0,
+    "withdrawalDate": "15.04.2021. 18:49:07",
+    "ticketId": "0000000946",
+    "price": 2000.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 29
+    "manifestation": 18
   },
   "153": {
     "id": 153,
-    "withdrawalDate": "15.04.2021. 11:57:39",
-    "ticketId": "0000000289",
-    "price": 2800.0,
+    "withdrawalDate": "15.04.2021. 18:49:08",
+    "ticketId": "0000000865",
+    "price": 2200.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 32
+    "manifestation": 114
   },
   "154": {
     "id": 154,
-    "withdrawalDate": "15.04.2021. 11:57:40",
-    "ticketId": "0000000292",
-    "price": 2800.0,
+    "withdrawalDate": "15.04.2021. 18:49:09",
+    "ticketId": "0000000868",
+    "price": 2200.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 32
+    "manifestation": 114
   },
   "155": {
     "id": 155,
-    "withdrawalDate": "15.04.2021. 11:57:41",
-    "ticketId": "0000000295",
-    "price": 2800.0,
+    "withdrawalDate": "15.04.2021. 18:49:10",
+    "ticketId": "0000000871",
+    "price": 2200.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 32
+    "manifestation": 114
   },
   "156": {
     "id": 156,
-    "withdrawalDate": "15.04.2021. 11:57:42",
-    "ticketId": "0000000298",
-    "price": 2800.0,
+    "withdrawalDate": "15.04.2021. 18:49:11",
+    "ticketId": "0000000874",
+    "price": 2200.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 32
+    "manifestation": 114
   },
   "157": {
     "id": 157,
-    "withdrawalDate": "15.04.2021. 11:57:43",
-    "ticketId": "0000000793",
-    "price": 2000.0,
+    "withdrawalDate": "15.04.2021. 18:49:12",
+    "ticketId": "0000000409",
+    "price": 2300.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 79
+    "manifestation": 30
   },
   "158": {
     "id": 158,
-    "withdrawalDate": "15.04.2021. 11:57:44",
-    "ticketId": "0000000796",
-    "price": 2000.0,
+    "withdrawalDate": "15.04.2021. 18:49:13",
+    "ticketId": "0000000412",
+    "price": 2300.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 79
+    "manifestation": 30
   },
   "159": {
     "id": 159,
-    "withdrawalDate": "15.04.2021. 11:57:45",
-    "ticketId": "0000000799",
-    "price": 2000.0,
+    "withdrawalDate": "15.04.2021. 18:49:14",
+    "ticketId": "0000000415",
+    "price": 2300.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 79
+    "manifestation": 30
   },
   "160": {
     "id": 160,
-    "withdrawalDate": "15.04.2021. 11:57:46",
-    "ticketId": "0000000802",
-    "price": 2000.0,
+    "withdrawalDate": "15.04.2021. 18:49:15",
+    "ticketId": "0000000418",
+    "price": 2300.0,
     "type": "REGULAR",
     "archived": false,
-    "manifestation": 79
+    "manifestation": 30
   }
 }

@@ -61,6 +61,39 @@ public class TicketSorter {
         tickets.sort(ticketComparator);
     }
 
+    public void sortByManifestationDate(List<Ticket> tickets, int order) {
+        Comparator<Ticket> ticketComparator = new Comparator<Ticket>() {
+            @Override
+            public int compare(Ticket o1, Ticket o2) {
+                return order * o1.getManifestation().getHoldingDate().compareTo(o2.getManifestation().getHoldingDate());
+            }
+        };
+
+        tickets.sort(ticketComparator);
+    }
+
+    public void sortByManifestationType(List<Ticket> tickets, int order) {
+        Comparator<Ticket> ticketComparator = new Comparator<Ticket>() {
+            @Override
+            public int compare(Ticket o1, Ticket o2) {
+                return order * o1.getManifestation().getType().compareTo(o2.getManifestation().getType());
+            }
+        };
+
+        tickets.sort(ticketComparator);
+    }
+
+    public void sortByManifestationStatus(List<Ticket> tickets, int order) {
+        Comparator<Ticket> ticketComparator = new Comparator<Ticket>() {
+            @Override
+            public int compare(Ticket o1, Ticket o2) {
+                return order * o1.getManifestation().getStatus().compareTo(o2.getManifestation().getStatus());
+            }
+        };
+
+        tickets.sort(ticketComparator);
+    }
+
     public void sortByCustomer(List<Ticket> tickets, int order) {
         Comparator<Ticket> ticketComparator = new Comparator<Ticket>() {
             @Override

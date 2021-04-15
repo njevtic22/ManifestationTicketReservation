@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import filterSearcher.TicketFilterSearcher;
 import model.Customer;
 import model.ManifestationStatus;
+import model.ManifestationType;
 import model.Ticket;
 import model.TicketStatus;
 import model.TicketType;
@@ -174,6 +175,8 @@ public class TicketController {
             ticketFilterSearcher.filterByType(TicketType.valueOf(request.queryParams("filterType")), tickets);
         if (request.queryParams("filterTicketStatus") != null)
             ticketFilterSearcher.filterByTicketStatus(TicketStatus.valueOf(request.queryParams("filterTicketStatus")), tickets);
+        if (request.queryParams("filterManifestationType") != null)
+            ticketFilterSearcher.filterByManifestationType(ManifestationType.valueOf(request.queryParams("filterManifestationType")), tickets);
         if (request.queryParams("filterManifestationStatus") != null)
             ticketFilterSearcher.filterByManifestationStatus(ManifestationStatus.valueOf(request.queryParams("filterManifestationStatus")), tickets);
     }
@@ -206,6 +209,17 @@ public class TicketController {
         switch (sortBy) {
             case "id":
                 ticketSorter.sortById(tickets, sortOrder);
+            case "manifestation":
+                ticketSorter.sortByManifestation(tickets, sortOrder);
+                break;
+            case "manifestationdate":
+                ticketSorter.sortByManifestationDate(tickets, sortOrder);
+                break;
+            case "manifestationtype":
+                ticketSorter.sortByManifestationType(tickets, sortOrder);
+                break;
+            case "manifestationstatus":
+                ticketSorter.sortByManifestationStatus(tickets, sortOrder);
                 break;
             case "price":
                 ticketSorter.sortByPrice(tickets, sortOrder);
@@ -215,9 +229,6 @@ public class TicketController {
                 break;
             case "type":
                 ticketSorter.sortByType(tickets, sortOrder);
-                break;
-            case "manifestation":
-                ticketSorter.sortByManifestation(tickets, sortOrder);
                 break;
             case "customer":
                 ticketSorter.sortByCustomer(tickets, sortOrder);

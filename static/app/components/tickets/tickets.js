@@ -71,6 +71,14 @@ Vue.component("tickets", {
                     </pagination>
                 </div>
             </div>
+
+            
+            <div class="form-group col-md-3">
+                <ticketSearchFilterForm
+                    v-on:submitSearchFilter="submitSearchFilter($event)"
+                    v-on:resetSearchFilter="resetSearchFilter"
+                ></ticketSearchFilterForm>
+            </div>
         </div>
 
         <deleteTicketModal
@@ -121,15 +129,24 @@ Vue.component("tickets", {
                 "All"
             ],
             
-            sortBy: "appId",
+            sortBy: "manifestationDate",
             sortOrder: "asc",
 
             searchData: {
+                searchManifestation: "",
 
+                searchPriceFrom: "",
+                searchPriceTo: "",
+
+                searchDateFrom: "",
+                searchDateTo: ""
             },
             filterData: {
-
-            }
+                filterType: "",
+                filterTicketStatus: "",
+                filterManifestationType: "",
+                filterManifestationStatus: ""
+            },
         };
     },
 
@@ -187,47 +204,36 @@ Vue.component("tickets", {
             this.getTickets();
         },
 
-        submitSearchFilterSort: function(searchFilterSortEvent) {
-            
-            // const myData = JSON.parse(JSON.stringify(searchFilterSortEvent));
+        submitSearchFilter: function(searchFilterEvent) {
+            const myData = JSON.parse(JSON.stringify(searchFilterEvent));
 
-            // this.searchData = myData.searchData;
-            // this.filterData = myData.filterData;
-            // this.sortBy = myData.sortBy;
-            // this.sortOrder = myData.sortOrder;
+            this.searchData = myData.searchData;
+            this.filterData = myData.filterData;
 
-        
-            // if (this.searchData.searchDateFrom)
-            //     this.searchData.searchDateFrom += " 00:00:00";
-            // if (this.searchData.searchDateTo)
-            //     this.searchData.searchDateTo += " 23:59:59";
-
-            console.log("submitSearchFilterSort");
+            if (this.searchData.searchDateFrom)
+                this.searchData.searchDateFrom += " 00:00:00";
+            if (this.searchData.searchDateTo)
+                this.searchData.searchDateTo += " 23:59:59";
             
             this.getTickets();
         },
 
-        resetSearchFilterSort: function() {
-            // this.sortBy = "date";
-            // this.sortOrder = "asc";
+        resetSearchFilter: function() {
+            this.searchData = {
+                searchManifestation: "",
 
-            // this.searchData = {
-            //     searchName: "",
-            //     searchCity: "",
-            //     searchStreet: "",
+                searchPriceFrom: "",
+                searchPriceTo: "",
 
-            //     searchDateFrom: "",
-            //     searchDateTo: "",
-                
-            //     searchPriceFrom: 0,
-            //     searchPriceTo: 0
-            // },
-            // this.filterData = {
-            //     filterType: "",
-            //     filterAvailable: ""
-            // },
-
-            console.log("resetSearchFilterSort");
+                searchDateFrom: "",
+                searchDateTo: ""
+            };
+            this.filterData = {
+                filterType: "",
+                filterTicketStatus: "",
+                filterManifestationType: "",
+                filterManifestationStatus: ""
+            };
 
             this.getTickets();
         },

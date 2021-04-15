@@ -1,6 +1,7 @@
 package filterSearcher;
 
 import model.ManifestationStatus;
+import model.ManifestationType;
 import model.Ticket;
 import model.TicketStatus;
 import model.TicketType;
@@ -17,12 +18,16 @@ public class TicketFilterSearcher {
         tickets.removeIf(ticket -> ticket.getStatus() != status);
     }
 
+    public void filterByManifestationType(ManifestationType type, Collection<Ticket> tickets) {
+        tickets.removeIf(ticket -> ticket.getManifestation().getType() != type);
+    }
+
     public void filterByManifestationStatus(ManifestationStatus status, Collection<Ticket> tickets) {
         tickets.removeIf(ticket -> ticket.getManifestation().getStatus() != status);
     }
 
     public void searchByManifestation(String manifestationName, Collection<Ticket> tickets) {
-        tickets.removeIf(ticket -> ticket.getManifestation().getName().toLowerCase().contains(manifestationName.toLowerCase()));
+        tickets.removeIf(ticket -> !ticket.getManifestation().getName().toLowerCase().contains(manifestationName.toLowerCase()));
     }
 
     public void searchByPriceFrom(long priceFrom, Collection<Ticket> tickets) {

@@ -3,30 +3,45 @@ Vue.component("ticketsTable", {
     <table border="5" class="table table-light table-striped table-hover table-borderless">
         <thead class="thead-dark">
             <tr>
-                <th>
+                <!-- <th>
                     <caret-up-square-fill-icon v-if="sortIdAsc" v-on:click="sortId('desc')"></caret-up-square-fill-icon>
                     <caret-down-square-fill-icon v-else v-on:click="sortId('asc')"></caret-down-square-fill-icon>
                     Ticket ID
-                </th>
-                <th>
-                    <caret-up-square-fill-icon v-if="sortPriceAsc" v-on:click="sortPrice('desc')"></caret-up-square-fill-icon>
-                    <caret-down-square-fill-icon v-else v-on:click="sortPrice('asc')"></caret-down-square-fill-icon>
-                    Price (RSD)
-                </th>
-                <th>
-                    <caret-up-square-fill-icon v-if="sortStatusAsc" v-on:click="sortStatus('desc')"></caret-up-square-fill-icon>
-                    <caret-down-square-fill-icon v-else v-on:click="sortStatus('asc')"></caret-down-square-fill-icon>
-                    Status
-                </th>
-                <th>
-                    <caret-up-square-fill-icon v-if="sortTypeAsc" v-on:click="sortType('desc')"></caret-up-square-fill-icon>
-                    <caret-down-square-fill-icon v-else v-on:click="sortType('asc')"></caret-down-square-fill-icon>
-                    Type
-                </th>
+                </th> -->
                 <th>
                     <caret-up-square-fill-icon v-if="sortManAsc" v-on:click="sortMan('desc')"></caret-up-square-fill-icon>
                     <caret-down-square-fill-icon v-else v-on:click="sortMan('asc')"></caret-down-square-fill-icon>
                     Manifestation
+                </th>
+                <th>
+                    <caret-up-square-fill-icon v-if="sortManTypeAsc" v-on:click="sortManType('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortManType('asc')"></caret-down-square-fill-icon>
+                    Manifestation type
+                </th>
+                <th>
+                    <caret-up-square-fill-icon v-if="sortManStatusAsc" v-on:click="sortManStatus('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortManStatus('asc')"></caret-down-square-fill-icon>
+                    Manifestation status
+                </th>
+                <th>
+                    <caret-up-square-fill-icon v-if="sortManDateAsc" v-on:click="sortManDate('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortManDate('asc')"></caret-down-square-fill-icon>
+                    Holding date
+                </th>
+                <th>
+                    <caret-up-square-fill-icon v-if="sortPriceAsc" v-on:click="sortPrice('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortPrice('asc')"></caret-down-square-fill-icon>
+                    Ticket price (RSD)
+                </th>
+                <th>
+                    <caret-up-square-fill-icon v-if="sortStatusAsc" v-on:click="sortStatus('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortStatus('asc')"></caret-down-square-fill-icon>
+                    Ticket status
+                </th>
+                <th>
+                    <caret-up-square-fill-icon v-if="sortTypeAsc" v-on:click="sortType('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortType('asc')"></caret-down-square-fill-icon>
+                    Ticket type
                 </th>
                 <th>
                     <caret-up-square-fill-icon v-if="sortCustomerAsc" v-on:click="sortCustomer('desc')"></caret-up-square-fill-icon>
@@ -40,11 +55,14 @@ Vue.component("ticketsTable", {
         </thead>
         <tbody v-if="tickets.length !== 0">
             <tr v-for="ticket in tickets">
-                <td>{{ ticket.appId }}</td>
+                <!-- <td>{{ ticket.appId }}</td> -->
+                <td>{{ ticket.manifestation }}</td>
+                <td>{{ ticket.manifestationType }}</td>
+                <td>{{ ticket.manifestationStatus }}</td>
+                <td>{{ ticket.holdingDate }}</td>
                 <td>{{ ticket.price }}</td>
                 <td>{{ ticket.status }}</td>
                 <td>{{ ticket.type }}</td>
-                <td>{{ ticket.manifestation }}</td>
                 <td>{{ ticket.customer ? ticket.customer : '/'}}</td>
                 <td class="text-center" v-if="$root.isAdmin()">
                     <button 
@@ -91,7 +109,7 @@ Vue.component("ticketsTable", {
 
     computed: {
         colspan() {
-            return this.$root.isAdmin() ? 7 : 6;
+            return this.$root.isAdmin() ? 9 : 8;
         }
     },
 
@@ -102,18 +120,26 @@ Vue.component("ticketsTable", {
             sortStatusAsc: true,
             sortTypeAsc: true,
             sortManAsc: true,
-            sortCustomerAsc: true
+            sortCustomerAsc: true,
+
+            sortManTypeAsc: true,
+            sortManStatusAsc: true,
+            sortManDateAsc: true 
         };
     },
 
     methods: {
         resetSort: function() {
-            this.sortIdAsc = true,
-            this.sortPriceAsc = true,
-            this.sortStatusAsc = true,
-            this.sortTypeAsc = true,
-            this.sortManAsc = true,
-            this.sortCustomerAsc = true
+            this.sortIdAsc = true;
+            this.sortPriceAsc = true;
+            this.sortStatusAsc = true;
+            this.sortTypeAsc = true;
+            this.sortManAsc = true;
+            this.sortCustomerAsc = true;
+
+            this.sortManTypeAsc = true;
+            this.sortManStatusAsc = true;
+            this.sortManDateAsc = true;
         },
 
         sortId: function(sortOrder) {
@@ -150,7 +176,26 @@ Vue.component("ticketsTable", {
             this.resetSort();
             this.sortCustomerAsc = sortOrder === "asc";
             this.$emit("sort", { sortBy: "customer", sortOrder: sortOrder });
-        }
+        },
+
+        sortManType: function(sortOrder) {
+            this.resetSort();
+            this.sortManTypeAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "manifestationType", sortOrder: sortOrder });
+        },
+
+        sortManStatus: function(sortOrder) {
+            this.resetSort();
+            this.sortManStatusAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "manifestationStatus", sortOrder: sortOrder });
+        },
+
+        sortManDate: function(sortOrder) {
+            this.resetSort();
+            this.sortManDateAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "manifestationDate", sortOrder: sortOrder });
+        },
+        
     },
 
     mounted() {},

@@ -17,7 +17,7 @@ public class GetAllTicketsMapper implements DTOMapper<Ticket, GetAllTicketsDTO> 
 
     @Override
     public GetAllTicketsDTO toDTO(Ticket ticket) {
-        return new GetAllTicketsDTO(ticket);
+        return new GetAllTicketsDTO(ticket, formatter.format(ticket.getManifestation().getHoldingDate()));
     }
 
     @Override

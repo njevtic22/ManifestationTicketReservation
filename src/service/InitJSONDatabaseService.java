@@ -197,6 +197,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
             Salesman salesman = salesmanRepository.get(salesmanId);
 
             for (int i = 0; i < CREATED_MAN_PER_SALESMAN; i++) {
+                ManifestationType type = faker.options().option(ManifestationType.class);
                 Manifestation createdManifestation = new Manifestation(
                         "", // generateManName(i + 1),
                         0,
@@ -204,7 +205,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                         generateHoldingDateForCreatedMan(),
                         description,
                         ManifestationStatus.CREATED,
-                        faker.options().option(ManifestationType.class),
+                        type,
                         false,
                         locationIterator.next(),
                         new Image(
@@ -212,7 +213,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                         )
                 );
                 // Fix
-                createdManifestation.setName(generateManName(createdManifestation.getId()));
+                createdManifestation.setName(generateManName(createdManifestation.getId(), type));
                 createdManifestation.getImage().setLocation("images/manifestation/manifestation " + createdManifestation.getId() + ".jpg");
 
                 salesman.addManifestation(createdManifestation);
@@ -221,6 +222,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
             }
 
             for (int i = 0; i < REJECTED_MAN_PER_SALESMAN; i++) {
+                ManifestationType type = faker.options().option(ManifestationType.class);
                 Manifestation rejectedManifestation = new Manifestation(
                         "", // generateManName(i + 1),
                         0,
@@ -228,7 +230,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                         generateHoldingDateForRejectedMan(),
                         description,
                         ManifestationStatus.REJECTED,
-                        faker.options().option(ManifestationType.class),
+                        type,
                         false,
                         locationIterator.next(),
                         new Image(
@@ -236,7 +238,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                         )
                 );
                 // Fix
-                rejectedManifestation.setName(generateManName(rejectedManifestation.getId()));
+                rejectedManifestation.setName(generateManName(rejectedManifestation.getId(), type));
                 rejectedManifestation.getImage().setLocation("images/manifestation/manifestation " + rejectedManifestation.getId() + ".jpg");
 
                 salesman.addManifestation(rejectedManifestation);
@@ -245,6 +247,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
             }
 
             for (int i = 0; i < ACTIVE_MAN_PER_SALESMAN; i++) {
+                ManifestationType type = faker.options().option(ManifestationType.class);
                 Manifestation activeManifestation = new Manifestation(
                         "", // generateManName(i + 1),
                         0,
@@ -252,7 +255,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                         generateHoldingDateForActiveMan(),
                         description,
                         ManifestationStatus.ACTIVE,
-                        faker.options().option(ManifestationType.class),
+                        type,
                         false,
                         locationIterator.next(),
                         new Image(
@@ -260,7 +263,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                         )
                 );
                 // Fix
-                activeManifestation.setName(generateManName(activeManifestation.getId()));
+                activeManifestation.setName(generateManName(activeManifestation.getId(), type));
                 activeManifestation.getImage().setLocation("images/manifestation/manifestation " + activeManifestation.getId() + ".jpg");
 
                 activeManIds.add(activeManifestation.getId());
@@ -271,6 +274,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
             }
 
             for (int i = 0; i < INACTIVE_MAN_PER_SALESMAN; i++) {
+                ManifestationType type = faker.options().option(ManifestationType.class);
                 Manifestation inactiveManifestation = new Manifestation(
                         "", // generateManName(i + 1),
                         0,
@@ -278,7 +282,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                         generateHoldingDateForInactiveMan(),
                         description,
                         ManifestationStatus.INACTIVE,
-                        faker.options().option(ManifestationType.class),
+                        type,
                         false,
                         locationIterator.next(),
                         new Image(
@@ -286,7 +290,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                         )
                 );
                 // Fix
-                inactiveManifestation.setName(generateManName(inactiveManifestation.getId()));
+                inactiveManifestation.setName(generateManName(inactiveManifestation.getId(), type));
                 inactiveManifestation.getImage().setLocation("images/manifestation/manifestation " + inactiveManifestation.getId() + ".jpg");
 
                 inactiveManIds.add(inactiveManifestation.getId());
@@ -556,8 +560,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
         return faker.number().numberBetween(1, 5 + 1);
     }
 
-    private String generateManName(long manId) {
-        ManifestationType manType = faker.options().option(ManifestationType.class);
+    private String generateManName(long manId, ManifestationType manType) {
         return toCapitalCase(manType.toString()) + " " + (manId) + ": " + faker.friends().character();
     }
 

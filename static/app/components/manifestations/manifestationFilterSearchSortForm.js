@@ -76,25 +76,25 @@ Vue.component("manifestationFilterSearchSortForm", {
             ></selectInput>
 
             <selectInput
-                name="manAvailable"
-                labelText="Available (not sold)"
-                v-bind:value="availableValue"
-                v-bind:options="availableOptions"
-                class="form-group col-md-6"
-                required
-                
-                v-on:select="changeAvailable($event)"
-            ></selectInput>
-
-            <selectInput
                 name="manStatus"
                 labelText="Status"
                 v-bind:value="statusValue"
                 v-bind:options="statusOptions"
-                class="form-group col-md-12"
+                class="form-group col-md-6"
                 required
                 
                 v-on:select="changeStatus($event)"
+            ></selectInput>
+
+            <selectInput
+                name="manAvailable"
+                labelText="Available (not sold)"
+                v-bind:value="availableValue"
+                v-bind:options="availableOptions"
+                class="form-group col-md-12"
+                required
+                
+                v-on:select="changeAvailable($event)"
             ></selectInput>
         </div>
 
