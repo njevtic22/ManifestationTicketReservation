@@ -29,7 +29,6 @@ Vue.component("tickets", {
                     >
                     </pagination>
                 </div>
-
                 <br/>
 
 
@@ -48,6 +47,35 @@ Vue.component("tickets", {
                     ref="ticketsTable"
                 >
                 </ticketsTable>
+
+                
+                <br/>
+                <div class="col d-flex justify-content-between">
+                    <pageSizeSelect
+                        name="sizeInput"
+                        v-bind:value="sizeStr"
+                        v-bind:options="sizes"
+                        v-bind:page="page"
+                        v-bind:size="size"
+                        v-bind:currentDataSize="tickets.data.length"
+                        v-bind:totalNumberOfResults="tickets.totalNumberOfResults"
+                        ref="pageSizeSelect"
+
+                        v-on:select="changeSize($event)"
+                    >
+                    </pageSizeSelect>
+
+                    <pagination
+                        v-bind:currentPage="page"
+                        v-bind:hasPrevious="tickets.hasPreviousPage"
+                        v-bind:hasNext="tickets.hasNextPage"
+
+                        v-on:previous="previousPage"
+                        v-on:next="nextPage"
+                        v-on:to="toPage($event)"
+                    >
+                    </pagination>
+                </div>
             </div>
         </div>
 

@@ -37,7 +37,6 @@ Vue.component("allUsers", {
                         Add salesman
                     </button>
                 </div>
-
                 <br/>
 
                 <usersTable
@@ -47,6 +46,43 @@ Vue.component("allUsers", {
 
                     ref="usersTable"
                 ></usersTable>
+
+                
+                <br/>
+                <div class="col d-flex justify-content-between">
+                    <pageSizeSelect 
+                        name="sizeInput"
+                        v-bind:value="sizeStr"
+                        v-bind:options="sizes"
+                        v-bind:page="page"
+                        v-bind:size="size"
+                        v-bind:currentDataSize="users.data.length"
+                        v-bind:totalNumberOfResults="users.totalNumberOfResults"
+                        ref="pageSizeSelect"
+
+                        v-on:select="changeSize($event)"
+                    ></pageSizeSelect>
+
+                    <pagination
+                        v-bind:currentPage="page"
+                        v-bind:hasPrevious="users.hasPreviousPage"
+                        v-bind:hasNext="users.hasNextPage"
+
+                        v-on:previous="previousPage"
+                        v-on:next="nextPage"
+                        v-on:to="toPage($event)"
+
+                    ></pagination>
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#addSalesmanModalId"
+                    >
+                        Add salesman
+                    </button>
+                </div>
             </div>
 
 

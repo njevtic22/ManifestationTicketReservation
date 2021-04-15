@@ -38,7 +38,6 @@ Vue.component("salesmanManifestationsReg", {
                         Create Manifestation
                     </button>
                 </div>
-
                 <br/>
 
 
@@ -56,6 +55,44 @@ Vue.component("salesmanManifestationsReg", {
                     v-bind:manifestations="manifestations.data"
                 >
                 </manifestationCards>
+
+                
+                <br/>
+                <div class="col d-flex justify-content-between">
+                    <pageSizeSelect
+                        name="sizeInput"
+                        v-bind:value="sizeStr"
+                        v-bind:options="sizes"
+                        v-bind:page="page"
+                        v-bind:size="size"
+                        v-bind:currentDataSize="manifestations.data.length"
+                        v-bind:totalNumberOfResults="manifestations.totalNumberOfResults"
+                        ref="pageSizeSelect"
+
+                        v-on:select="changeSize($event)"
+                    >
+                    </pageSizeSelect>
+
+                    <pagination
+                        v-bind:currentPage="page"
+                        v-bind:hasPrevious="manifestations.hasPreviousPage"
+                        v-bind:hasNext="manifestations.hasNextPage"
+
+                        v-on:previous="previousPage"
+                        v-on:next="nextPage"
+                        v-on:to="toPage($event)"
+                    >
+                    </pagination>
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#createManifestationModalId"
+                    >
+                        Create Manifestation
+                    </button>
+                </div>
             </div>
         
             <div class="form-group col-md-3">
