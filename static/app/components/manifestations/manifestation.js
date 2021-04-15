@@ -44,6 +44,19 @@ Vue.component("manifestation", {
                 <br/>
                 <br/>
             </div>
+            <div class="row" v-if="$root.isCustomer() && manifestation.status == 'ACTIVE'">
+                <div class="col text-right">
+                    <button 
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#reserveTicketsModal"
+                    >
+                        Reserve tickets
+                    </button>
+                </div>
+                <br/>
+                <br/>
+            </div>
 
 
             <div class="row">
@@ -236,6 +249,12 @@ Vue.component("manifestation", {
             v-bind:manifestationName="manifestation.name"
             v-on:addedTickets="getManifestation($route.params.id)"
         ></addTicketsModal>
+
+        <reserveTicketsModal
+            id="reserveTicketsModal"
+            ref="reserveTicketsModal"
+
+        ></reserveTicketsModal>
 
         <manifestationService ref="manifestationService"></manifestationService>
     </div>
