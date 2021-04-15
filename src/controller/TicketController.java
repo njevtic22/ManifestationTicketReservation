@@ -192,6 +192,38 @@ public class TicketController {
     }
 
     private void applySort(Request request, List<Ticket> tickets) {
+        String sortBy = request.queryParams("sortBy");
+        if (sortBy == null)
+            return;
+        sortBy = sortBy.toLowerCase();
+
+        String sortOrderStr = request.queryParams("sortOrder");
+        if (sortOrderStr == null)
+            return;
+
+        int sortOrder = sortOrderStr.equals("asc") ? 1 : -1;
+
+        switch (sortBy) {
+            case "id":
+                ticketSorter.sortById(tickets, sortOrder);
+                break;
+            case "price":
+                ticketSorter.sortByPrice(tickets, sortOrder);
+                break;
+            case "status":
+                ticketSorter.sortByStatus(tickets, sortOrder);
+                break;
+            case "type":
+                ticketSorter.sortByType(tickets, sortOrder);
+                break;
+            case "manifestation":
+                ticketSorter.sortByManifestation(tickets, sortOrder);
+                break;
+            case "customer":
+                ticketSorter.sortByCustomer(tickets, sortOrder);
+                break;
+        }
+
 
     }
 }

@@ -32,14 +32,8 @@ Vue.component("tickets", {
                 <br/>
 
 
-                <div class="d-flex justify-content-center" v-if="loading">
-                    <div class="spinner-grow text-secondary" role="status" style="width: 3rem; height: 3rem;">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </div>
-
-
-                <ticketsTable v-else
+                <ticketsTable
+                    v-bind:loading="loading"
                     v-bind:tickets="tickets.data"
                     v-on:sort="performSort($event)"
                     v-on:deleteTicket="confirmDeleteTicket($event)"
