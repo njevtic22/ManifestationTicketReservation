@@ -74,7 +74,7 @@ public class AdminController {
                 put("/:id", update);
                 delete("/:id", delete);
 
-                post("/database", initDatabase);
+//                post("/database", initDatabase);
             });
         });
     }

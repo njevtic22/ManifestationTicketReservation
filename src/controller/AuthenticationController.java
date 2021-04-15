@@ -119,7 +119,13 @@ public class AuthenticationController {
                 // Ignoring
             } else if (request.uri().equals("/api/authentication/registerCustomer")) {
                 // Ignoring
-            } else if (request.uri().equals("/api/manifestations")) {
+            }
+
+//            else if (request.uri().equals("/api/admins/database")) {
+//                // Ignoring
+//            }
+
+            else if (request.uri().equals("/api/manifestations")) {
                 if (!request.requestMethod().equals("GET")) {
                     throw new TokenNotFoundException("No token id found");
                 }

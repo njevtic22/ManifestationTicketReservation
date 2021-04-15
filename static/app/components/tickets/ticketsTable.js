@@ -34,11 +34,12 @@ Vue.component("ticketsTable", {
                 <td>{{ ticket.type }}</td>
                 <td>{{ ticket.manifestation }}</td>
                 <td>{{ ticket.customer ? ticket.customer : '/'}}</td>
-                <td class="text-center" v-if="$root.isAdmin() && ticket.status === 'FREE'">
+                <td class="text-center" v-if="$root.isAdmin()">
                     <button 
                         type="button" 
                         class="btn btn-link btn-sm"
-                    
+                        v-if="ticket.status === 'FREE'"
+
                         v-on:click="$emit('deleteTicket', ticket)"
                     >
                         <trash-fill-icon></trash-fill-icon>

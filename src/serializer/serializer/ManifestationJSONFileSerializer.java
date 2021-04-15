@@ -6,12 +6,13 @@ import com.google.gson.reflect.TypeToken;
 import model.Image;
 import model.Location;
 import model.Manifestation;
+import model.Review;
 import model.Ticket;
 import program.ProgramFactory;
 import serializer.gsonSerializer.ImageSerializer;
 import serializer.gsonSerializer.LocationSerializer;
+import serializer.gsonSerializer.ReviewListSerializer;
 import serializer.gsonSerializer.TicketListSerializer;
-import serializer.gsonSerializer.WithdrawalHistoryListSerializer;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -30,6 +31,7 @@ public class ManifestationJSONFileSerializer implements FileSerializer<Manifesta
     @Override
     public void save(Map<Long, Manifestation> data) {
         Type ticketsType = new TypeToken<List<Ticket>>() {}.getType();
+        Type reviewsType = new TypeToken<List<Review>>() {}.getType();
 
         Gson gson = new GsonBuilder()
                 .setDateFormat(ProgramFactory.DATE_FORMAT)
@@ -38,6 +40,7 @@ public class ManifestationJSONFileSerializer implements FileSerializer<Manifesta
                 .registerTypeAdapter(Location.class, new LocationSerializer())
                 .registerTypeAdapter(Image.class, new ImageSerializer())
                 .registerTypeAdapter(ticketsType, new TicketListSerializer())
+                .registerTypeAdapter(reviewsType, new ReviewListSerializer())
                 .create();
 
         try {

@@ -63,6 +63,7 @@ public class GetByIdManifestationDTO {
 
 
         this.avgRating = 0;
+        // TODO: fix
         manifestation.getReviews().forEach(review -> avgRating += review.getRating());
 
 

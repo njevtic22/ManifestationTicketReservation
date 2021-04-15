@@ -482,6 +482,7 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
                             customer,
                             inactiveManifestation
                     );
+                    inactiveManifestation.addReview(review);
                     reviewRepository.put(review.getId(), review);
                 }
             }

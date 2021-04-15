@@ -2,19 +2,19 @@ package program;
 
 import exception.*;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.security.SignatureException;
 
 import java.io.File;
 import java.io.IOException;
-import io.jsonwebtoken.security.SignatureException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static spark.Spark.after;
 import static spark.Spark.before;
+import static spark.Spark.exception;
 import static spark.Spark.path;
 import static spark.Spark.port;
-import static spark.Spark.exception;
 import static spark.Spark.staticFiles;
 
 public class Program {

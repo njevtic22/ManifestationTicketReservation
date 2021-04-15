@@ -53,6 +53,7 @@ public class GetAllManifestationsDTO {
         this.imageType = imageLocation.substring(dotIndex + 1);
 
         this.avgRating = 0;
+        // TODO: fix
         manifestation.getReviews().forEach(review -> avgRating += review.getRating());
 
 
