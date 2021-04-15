@@ -75,17 +75,28 @@ Vue.component("manifestation", {
                         </p>
                         </div>
                     </div>
-                    
+
                     <div class='row' style="margin-left: 1px">
-                        <div class="col-md-6"> 
-                            <div class="row">Total number of tickets:</div>
-                            <div class="row">Tickets left:</div>
-                            <div class="row">Regular ticket price:</div>
+                        <div class="col-md-4"> 
+                            <div class="row"><br/></div>
+                            <div class="row">Regular tickets:</div>
+                            <div class="row">Fan pit tickets:</div>
+                            <div class="row">VIP tickets:</div>
+            
                         </div>
                         <div class="col-md-4"> 
-                            <div class="row">{{ manifestation.maxNumberOfTickets }}</div>
-                            <div class="row">{{ manifestation.numberOfTicketsLeft }}</div>
+                            <div class="row">Left</div>
+                            <div class="row">{{ manifestation.numberOfRegularTicketsLeft }}</div>
+                            <div class="row">{{ manifestation.numberOfFanTicketsLeft }}</div>
+                            <div class="row">{{ manifestation.numberOfVipTicketsLeft }}</div>
+            
+                        </div>
+                        <div class="col-md-4"> 
+                            <div class="row">Price</div>
                             <div class="row">{{ manifestation.regularTicketPrice }} RSD</div>
+                            <div class="row">{{ manifestation.fanTicketPrice }} RSD</div>
+                            <div class="row">{{ manifestation.vipTicketPrice }} RSD</div>
+
                         </div>
                     </div>
 
@@ -254,6 +265,18 @@ Vue.component("manifestation", {
             id="reserveTicketsModal"
             ref="reserveTicketsModal"
 
+            v-bind:manifestationId="manifestation.id"
+            v-bind:manifestationName="manifestation.name"
+
+            v-bind:regularPrice="manifestation.regularTicketPrice"
+            v-bind:fanPrice="manifestation.fanTicketPrice"
+            v-bind:vipPrice="manifestation.vipTicketPrice"
+
+            v-bind:regularLeft="manifestation.numberOfRegularTicketsLeft"
+            v-bind:fanLeft="manifestation.numberOfFanTicketsLeft"
+            v-bind:vipLeft="manifestation.numberOfVipTicketsLeft"
+
+            v-on:ticketsReserved="getManifestation($route.params.id)"
         ></reserveTicketsModal>
 
         <manifestationService ref="manifestationService"></manifestationService>
@@ -270,11 +293,19 @@ Vue.component("manifestation", {
                 name: "",
                 numberOfTicketsLeft: 0,
                 maxNumberOfTickets: 0,
+
                 regularTicketPrice: 0,
+                fanTicketPrice: 0,
+                vipTicketPrice: 0,
+
                 holdingDate: "",
                 description: "",
                 status: "CREATED",
                 type: "CONCERT",
+
+                numberOfRegularTicketsLeft: 0,
+                numberOfFanTicketsLeft: 0,
+                numberOfVipTicketsLeft: 0,
 
                 avgRating: 0,
 
@@ -400,12 +431,10 @@ Vue.component("manifestation", {
                 if (status == 404) {
                     if (msg == expectedError) {
                         this.$root.failureToast(msg);
-                    } else {
-                        this.$root.defaultCatchError(error);       
                     }
-                    this.$router.push({
-                        name: "NotFoundPage"
-                    });
+                    this.$root.defaultCatchError(error);       
+                } else {
+                    this.$root.defaultCatchError(error); 
                 }
             };
 

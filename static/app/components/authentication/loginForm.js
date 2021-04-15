@@ -111,9 +111,13 @@ Vue.component("loginForm", {
                 const successCallback = (response) => {
                     const token = response.data.token;
                     const role = response.data.role;
+                    const customerType = response.data.customerType;
+                    const customerDiscount = response.data.customerDiscount;
 
                     localStorage.setItem("token", token);
                     localStorage.setItem("role", role);
+                    localStorage.setItem("customerType", customerType);
+                    localStorage.setItem("customerDiscount", customerDiscount);
 
                     // make axios send token as default header
                     axios.defaults.headers.common["Authorization"] =

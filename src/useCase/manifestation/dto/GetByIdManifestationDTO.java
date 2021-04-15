@@ -23,7 +23,11 @@ public class GetByIdManifestationDTO {
     public long numberOfVipTicketsLeft;
 
     public long maxNumberOfTickets;
+
     public double regularTicketPrice;
+    public double fanTicketPrice;
+    public double vipTicketPrice;
+
     public String holdingDate;
     public String description;
     public String status;
@@ -45,7 +49,11 @@ public class GetByIdManifestationDTO {
         this.id = manifestation.getId();
         this.name = manifestation.getName();
         this.maxNumberOfTickets = manifestation.getMaxNumberOfTickets();
+
         this.regularTicketPrice = manifestation.getRegularTicketPrice();
+        this.fanTicketPrice = manifestation.getFanTicketPrice();
+        this.vipTicketPrice = manifestation.getVipTicketPrice();
+
         this.holdingDate = parsedDate;
         this.description = manifestation.getDescription();
         this.status = manifestation.getStatus().toString();

@@ -62,6 +62,14 @@ Vue.component("ticketService", {
                 .catch(error => { errorCallback(error); });
         },
 
+        reserveTickets: function(ticketsToReserve, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/reserve/${ticketsToReserve.manifestationId}`;
+            axios
+                .post(url, ticketsToReserve)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
+        },
+
         deleteTicket: function(ticketId, successCallback, errorCallback) {
             const url = `${this.baseUrl}/${ticketId}`;
             axios

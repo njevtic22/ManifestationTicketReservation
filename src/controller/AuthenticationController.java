@@ -156,9 +156,17 @@ public class AuthenticationController {
         String jwt = createTokenAuthenticationCase.createToken(requestBody.username, requestBody.password);
 
         User user = getUserFromTokenAuthenticationCase.getUserFromToken(jwt);
+        String customerType = null;
+        float customerDiscount = 0;
+
+        if (user instanceof Customer) {
+            Customer customer = (Customer) user;
+            customerType = customer.getType().toString();
+            customerDiscount = customer.getType().getDiscount();
+        }
 
         response.status(HttpStatus.OK_200);
-        return gson.toJson(new TokenResponse(jwt, user.getClass().getSimpleName().toUpperCase()));
+        return gson.toJson(new TokenResponse(jwt, user.getClass().getSimpleName().toUpperCase(), customerType, customerDiscount));
 
     };
 
@@ -178,7 +186,7 @@ public class AuthenticationController {
         String jwt = createTokenAuthenticationCase.createToken(customer.getUsername(), command.password);
 
         response.status(HttpStatus.OK_200);
-        return gson.toJson(new TokenResponse(jwt, customer.getClass().getSimpleName().toUpperCase()));
+        return gson.toJson(new TokenResponse(jwt, customer.getClass().getSimpleName().toUpperCase(), customer.getType().toString(), customer.getType().getDiscount()));
     };
 
     public Route registerSalesman = (Request request, Response response) -> {

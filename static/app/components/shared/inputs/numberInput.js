@@ -9,6 +9,7 @@ Vue.component("numberInput", {
                     type="number"
                     class="form-control"
                     v-bind:min="min"
+                    v-bind:max="max"
                     v-bind:class="{'is-invalid': isInvalid}"
                     v-bind:name="name"
                     v-bind:value="value"
@@ -30,6 +31,10 @@ Vue.component("numberInput", {
         min: {
             type: Number,
             default: 0
+        },
+        max: {
+            type: Number,
+            default: Infinity
         },
         errorMessage: String,
         labelText: {

@@ -256,6 +256,16 @@ public class Manifestation implements Cloneable {
         return regularTicketPrice;
     }
 
+    public double getFanTicketPrice() {
+        int multiplyBy = TicketType.FAN_PIT.getMultiplyBy();
+        return regularTicketPrice * multiplyBy;
+    }
+
+    public double getVipTicketPrice() {
+        int multiplyBy = TicketType.VIP.getMultiplyBy();
+        return regularTicketPrice * multiplyBy;
+    }
+
     public void setRegularTicketPrice(double regularTicketPrice) {
         this.regularTicketPrice = regularTicketPrice;
     }
