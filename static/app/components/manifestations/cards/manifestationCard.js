@@ -25,7 +25,7 @@ Vue.component("manifestationCard", {
             <div class="d-flex justify-content-between">
                 <h5 class="card-title">{{ manifestation.type }}</h5>
 
-                <h5 class="card-title" v-if="manifestation.status == 'INACTIVE'">Rating: {{ manifestation.avgRating }}</h5>
+                <h5 class="card-title" v-if="manifestation.status == 'INACTIVE'">Rating: {{ parseRating }}</h5>
                 <h5 class="card-title" v-else></h5>
             </div>
             
@@ -115,6 +115,13 @@ Vue.component("manifestationCard", {
         formattedAddress() {
             const address = this.manifestation.location.address;
             return address.street + " " + address.number + ", " + address.city + ", " + address.postalCode;
+        },
+        
+        parseRating() {
+            // const roundNumber = Math.round(this.manifestation.avgRating * 100) / 100;
+            // const roundNumber = Number(this.manifestation.avgRating);
+            // const roundString = roundNumber.toFixed(2);
+            return this.manifestation.avgRating.toFixed(2);
         }
     },
 

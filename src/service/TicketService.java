@@ -133,33 +133,77 @@ public class TicketService implements
 
     @Override
     public void reserveTicket(ReserveTicketCommand command) {
-        Ticket ticket = ticketRepository.findByIdAndArchivedFalse(command.ticketId)
-                .orElseThrow(() -> new TicketNotFoundException(command.ticketId));
-
         Customer customer = customerRepository.findByIdAndArchivedFalse(command.customerId)
                 .orElseThrow(() -> new CustomerNotFoundException(command.customerId));
 
-        Manifestation manifestation = ticket.getManifestation();
+        Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(command.manifestationId)
+                .orElseThrow(() -> new ManifestationNotFoundException(command.manifestationId));
+
         if (manifestation.isSoldOut())
             throw new SoldOutException(manifestation.getName());
 
-//        Ticket already has manifestation
-//        manifestation.setMaxNumberOfTickets(manifestation.getMaxNumberOfTickets() - 1);
+        long numberOfRegularTicketsLeft = manifestation.getNumberOfRegularTicketsLeft();
+        long numberOfFanTicketsLeft = manifestation.getNumberOfFanTicketsLeft();
+        long numberOfVipTicketsLeft = manifestation.getNumberOfVipTicketsLeft();
 
-        if (ticket.getStatus() == TicketStatus.RESERVED)
-            throw new TicketReservedException(ticket.getId());
+        if (command.numberOfRegularTickets > numberOfRegularTicketsLeft)
+            throw new IllegalArgumentException("Manifestation does not have enough regular tickets left");
+        if (command.numberOfFanTickets > numberOfFanTicketsLeft)
+            throw new IllegalArgumentException("Manifestation does not have enough fan pit tickets left");
+        if (command.numberOfVipTickets > numberOfVipTicketsLeft)
+            throw new IllegalArgumentException("Manifestation does not have enough vip tickets left");
 
-        ticket.setStatus(TicketStatus.RESERVED);
-        ticket.setPriceDiscount(customer.getType().getDiscount());
 
-        ticket.setCustomer(customer);
-        customer.addTicket(ticket);
-        double reward = ticket.getPrice() / 1000 * 133;
-        customer.addPoints(reward);
+        long regularBought = 0;
+        long fanBought = 0;
+        long vipBought = 0;
+        for (Ticket ticket : manifestation.getTickets()) {
+            if (ticket.getType() == TicketType.REGULAR) {
+                if (regularBought < command.numberOfRegularTickets) {
+                    ticket.setStatus(TicketStatus.RESERVED);
+                    ticket.setPriceDiscount(customer.getType().getDiscount());
+                    ticket.setCustomer(customer);
 
-        ticketRepository.save(ticket);
+                    customer.addTicket(ticket);
+                    double reward = ticket.getPrice() / 1000 * 133;
+                    customer.addPoints(reward);
+
+
+                    regularBought++;
+                    ticketRepository.save(ticket);
+                }
+            } else if (ticket.getType() == TicketType.FAN_PIT) {
+                if (fanBought < command.numberOfFanTickets) {
+                    ticket.setStatus(TicketStatus.RESERVED);
+                    ticket.setPriceDiscount(customer.getType().getDiscount());
+                    ticket.setCustomer(customer);
+
+                    customer.addTicket(ticket);
+                    double reward = ticket.getPrice() / 1000 * 133;
+                    customer.addPoints(reward);
+
+
+                    fanBought++;
+                    ticketRepository.save(ticket);
+                }
+            } else if (ticket.getType() == TicketType.VIP) {
+                if (vipBought < command.numberOfVipTickets) {
+                    ticket.setStatus(TicketStatus.RESERVED);
+                    ticket.setPriceDiscount(customer.getType().getDiscount());
+                    ticket.setCustomer(customer);
+
+                    customer.addTicket(ticket);
+                    double reward = ticket.getPrice() / 1000 * 133;
+                    customer.addPoints(reward);
+
+
+                    vipBought++;
+                    ticketRepository.save(ticket);
+                }
+            }
+        }
+
         customerRepository.save(customer);
-//        manifestationRepository.save(manifestation);
     }
 
     @Override

@@ -11,6 +11,7 @@ import model.TicketType;
 import model.User;
 import org.eclipse.jetty.http.HttpStatus;
 import request.AddTicketRequest;
+import request.ReserveTicketRequest;
 import responseTransformer.GetAllTicketsTransformer;
 import responseTransformer.dtoMappers.GetAllTicketsMapper;
 import sorter.TicketSorter;
@@ -88,7 +89,7 @@ public class TicketController {
         path("api", () -> {
             path("/tickets", () -> {
                 post("", add);
-                post("/reserve/:id", reserve);
+                post("/reserve/:manifestationId", reserve);
                 post("/withdraw/:id", withdraw);
                 get("", getAll, new GetAllTicketsTransformer(gson, new GetAllTicketsMapper(formatter)));
                 delete("/:id", delete);
@@ -117,11 +118,15 @@ public class TicketController {
         ensureUserIsCustomer.ensure(request);
 
         Customer customer = request.attribute("user");
-        Long id = SelfValidating.validId(request.params(":id"));
+        Long manifestationId = SelfValidating.validId(request.params(":manifestationId"));
+        ReserveTicketRequest requestBody = gson.fromJson(request.body(), ReserveTicketRequest.class);
 
         ReserveTicketCommand command = new ReserveTicketCommand(
-                id,
-                customer.getId()
+                customer.getId(),
+                manifestationId,
+                requestBody.numberOfRegularTickets,
+                requestBody.numberOfFanTickets,
+                requestBody.numberOfVipTickets
         );
         reserveTicketUseCase.reserveTicket(command);
         response.status(HttpStatus.OK_200);

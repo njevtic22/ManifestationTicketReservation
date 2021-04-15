@@ -1,6 +1,8 @@
 package request;
 
 public class ReserveTicketRequest {
-//    public Long ticketId;
-//    public Long customerId;
+    public long manifestationId;
+    public long numberOfRegularTickets;
+    public long numberOfFanTickets;
+    public long numberOfVipTickets;
 }

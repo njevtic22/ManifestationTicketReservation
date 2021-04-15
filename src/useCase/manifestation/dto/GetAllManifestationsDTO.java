@@ -1,7 +1,6 @@
 package useCase.manifestation.dto;
 
 import model.Manifestation;
-import model.TicketStatus;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,8 +9,6 @@ import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class GetAllManifestationsDTO {
     public long id;
@@ -53,8 +50,10 @@ public class GetAllManifestationsDTO {
         this.imageType = imageLocation.substring(dotIndex + 1);
 
         this.avgRating = 0;
-        // TODO: fix
-        manifestation.getReviews().forEach(review -> avgRating += review.getRating());
+        if (!manifestation.getReviews().isEmpty()) {
+            manifestation.getReviews().forEach(review -> avgRating += review.getRating());
+            this.avgRating = this.avgRating / manifestation.getReviews().size();
+        }
 
 
 

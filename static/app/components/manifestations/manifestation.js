@@ -132,7 +132,7 @@ Vue.component("manifestation", {
         >
             <div class="col-sm card border-0 manifestation-details shadow-lg" style="margin-left: 10px; padding: 3%;">
                 <div class="d-flex justify-content-between">
-                    <h1>Average rating: {{ manifestation.avgRating }}</h1>
+                    <h1>Average rating: {{ parseRating }}</h1>
                     <button 
                         class="btn btn-primary" 
                         v-if="$root.isCustomer() && manifestation.status === 'INACTIVE'"
@@ -514,6 +514,13 @@ Vue.component("manifestation", {
         formattedAddress() {
             const address = this.address;
             return address.street + " " + address.number + ", " + address.city + ", " + address.postalCode;
+        },
+        
+        parseRating() {
+            // const roundNumber = Math.round(this.manifestation.avgRating * 100) / 100;
+            // const roundNumber = Number(this.manifestation.avgRating);
+            // const roundString = roundNumber.toFixed(2);
+            return this.manifestation.avgRating.toFixed(2);
         }
     },
 

@@ -17,6 +17,11 @@ public class GetByIdManifestationDTO {
     public long id;
     public String name;
     public long numberOfTicketsLeft;
+
+    public long numberOfRegularTicketsLeft;
+    public long numberOfFanTicketsLeft;
+    public long numberOfVipTicketsLeft;
+
     public long maxNumberOfTickets;
     public double regularTicketPrice;
     public String holdingDate;
@@ -63,8 +68,10 @@ public class GetByIdManifestationDTO {
 
 
         this.avgRating = 0;
-        // TODO: fix
-        manifestation.getReviews().forEach(review -> avgRating += review.getRating());
+        if (!manifestation.getReviews().isEmpty()) {
+            manifestation.getReviews().forEach(review -> avgRating += review.getRating());
+            this.avgRating = this.avgRating / manifestation.getReviews().size();
+        }
 
 
         GregorianCalendar calendar = new GregorianCalendar();
@@ -79,6 +86,11 @@ public class GetByIdManifestationDTO {
 
         this.numberOfTicketsLeft = manifestation.getNumberOfTicketsLeft();
         this.isSoldOut = manifestation.isSoldOut();
+
+
+        this.numberOfRegularTicketsLeft = manifestation.getNumberOfRegularTicketsLeft();
+        this.numberOfFanTicketsLeft = manifestation.getNumberOfFanTicketsLeft();
+        this.numberOfVipTicketsLeft = manifestation.getNumberOfVipTicketsLeft();
     }
 
     public String imageLocationToBase64(String imageLocation) {

@@ -207,7 +207,7 @@ public class ManifestationController {
 
     public Route getCreated = (Request request, Response response) -> {
         ensureUserIsAdmin.ensure(request);
-        // TODO: Implement pagination, sorting, filtering, searching
+        // If used, implement pagination, sort, search, filter
         response.status(HttpStatus.OK_200);
         return getAllCreatedManifestationsUseCase.getCreatedManifestations();
     };

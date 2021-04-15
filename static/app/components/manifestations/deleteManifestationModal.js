@@ -27,7 +27,7 @@ Vue.component("deleteManifestationModal", {
             <div class="d-flex justify-content-between">
                 <h5 class="card-title">{{ manifestationToDelete.type }}</h5>
 
-                <h5 class="card-title" v-if="manifestationToDelete.status == 'INACTIVE'">Rating: {{ manifestationToDelete.avgRating }}</h5>
+                <h5 class="card-title" v-if="manifestationToDelete.status == 'INACTIVE'">Rating: {{ parseRating }}</h5>
                 <h5 class="card-title" v-else></h5>
             </div>
             
@@ -127,6 +127,13 @@ Vue.component("deleteManifestationModal", {
         formattedAddress() {
             const address = this.manifestationToDelete.location.address;
             return address.street + " " + address.number + ", " + address.city + ", " + address.postalCode;
+        },
+        
+        parseRating() {
+            // const roundNumber = Math.round(this.manifestationToDelete.avgRating * 100) / 100;
+            // const roundNumber = Number(this.manifestationToDelete.avgRating);
+            // const roundString = roundNumber.toFixed(2);
+            return this.manifestationToDelete.avgRating.toFixed(2);
         }
     },
 

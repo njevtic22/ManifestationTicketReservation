@@ -206,9 +206,30 @@ public class Manifestation implements Cloneable {
 
     public long getNumberOfTicketsLeft() {
         return tickets
-            .stream()
-            .filter(ticket -> ticket.getStatus() == TicketStatus.FREE && !ticket.isArchived())
-            .count();
+                .stream()
+                .filter(ticket -> ticket.getStatus() == TicketStatus.FREE && !ticket.isArchived())
+                .count();
+    }
+
+    public long getNumberOfRegularTicketsLeft() {
+        return tickets
+                .stream()
+                .filter(ticket -> ticket.getStatus() == TicketStatus.FREE && !ticket.isArchived() && ticket.getType() == TicketType.REGULAR)
+                .count();
+    }
+
+    public long getNumberOfFanTicketsLeft() {
+        return tickets
+                .stream()
+                .filter(ticket -> ticket.getStatus() == TicketStatus.FREE && !ticket.isArchived() && ticket.getType() == TicketType.FAN_PIT)
+                .count();
+    }
+
+    public long getNumberOfVipTicketsLeft() {
+        return tickets
+                .stream()
+                .filter(ticket -> ticket.getStatus() == TicketStatus.FREE && !ticket.isArchived() && ticket.getType() == TicketType.VIP)
+                .count();
     }
 
     public Long getId() {

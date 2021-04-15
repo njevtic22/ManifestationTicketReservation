@@ -125,7 +125,7 @@ Vue.component("all-marker", {
 
         rating() {
             if (this.manifestation.status === "INACTIVE") {
-                return "Rating: " + this.manifestation.avgRating;   
+                return "Rating: " + this.manifestation.avgRating.toFixed(2);   
             } else {
                 return " ";
             }
