@@ -535,6 +535,36 @@ public class InitJSONDatabaseService implements InitDatabaseUseCase {
             }
         }
 
+        activeManToClear = new ArrayList<>(activeManIds);
+        while (!activeManToClear.isEmpty()) {
+            int idIndex = faker.number().numberBetween(0, activeManToClear.size());
+            long activeManId = activeManToClear.remove(idIndex);
+            Manifestation activeManifestation = manifestationRepository.get(activeManId);
+
+            int howManyMoreTickets = faker.number().numberBetween(1, 5 + 1);
+            for (int i = 0; i < howManyMoreTickets; i++) {
+                Ticket ticket = new Ticket(
+                        activeManifestation.getRegularTicketPrice(),
+                        TicketStatus.FREE,
+                        faker.options().option(TicketType.FAN_PIT, TicketType.VIP),
+                        false,
+                        activeManifestation,
+                        null
+                );
+                // not added
+//                regularTicketIds.add(ticket.getId());
+                activeManifestation.addTicket(ticket);
+                ticketRepository.put(ticket.getId(), ticket);
+            }
+        }
+
+
+        customerRepository.values().forEach(customer -> {
+            customer.getTickets().forEach(ticket -> {
+                ticket.setPriceDiscount(ticket.getCustomer().getType().getDiscount());
+            });
+        });
+
 
         adminFileSerializer.save(adminRepository);
         salesmanFileSerializer.save(salesmanRepository);

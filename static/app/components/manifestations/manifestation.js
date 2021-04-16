@@ -44,12 +44,11 @@ Vue.component("manifestation", {
                 <br/>
                 <br/>
             </div>
-            <div class="row" v-if="$root.isCustomer() && manifestation.status == 'ACTIVE'">
+            <div class="row" v-if="$root.isCustomer() && manifestation.status == 'ACTIVE' && !manifestation.isSoldOut">
                 <div class="col text-right">
                     <button 
                         class="btn btn-primary"
-                        data-toggle="modal"
-                        data-target="#reserveTicketsModal"
+                        v-on:click="showReserveTicketsModal"
                     >
                         Reserve tickets
                     </button>
@@ -77,6 +76,9 @@ Vue.component("manifestation", {
                     </div>
 
                     <div class='row' style="margin-left: 1px">
+                        Max number of tickets: {{ manifestation.maxNumberOfTickets }}
+                    </div>
+                    <div class='row' style="margin-left: 1px">
                         <div class="col-md-4"> 
                             <div class="row"><br/></div>
                             <div class="row">Regular tickets:</div>
@@ -91,7 +93,7 @@ Vue.component("manifestation", {
                             <div class="row">{{ manifestation.numberOfVipTicketsLeft }}</div>
             
                         </div>
-                        <div class="col-md-4"> 
+                        <div class="col-md-4">
                             <div class="row">Price</div>
                             <div class="row">{{ manifestation.regularTicketPrice }} RSD</div>
                             <div class="row">{{ manifestation.fanTicketPrice }} RSD</div>
@@ -555,7 +557,12 @@ Vue.component("manifestation", {
         changeLocation: function() {
             this.$refs.changeLocationModal.getManifestation(this.manifestation.id);
             $("#changeLocationModal").modal("show");
-        }
+        },
+
+        showReserveTicketsModal: function() {
+            this.$refs.reserveTicketsModal.calculatePricesWithDiscount();
+            $("#reserveTicketsModal").modal("show");
+        } 
     },
 
     computed: {

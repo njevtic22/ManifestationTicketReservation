@@ -192,21 +192,6 @@ public class JSONFileDeserializer implements FileDeserializer {
             });
         });
 
-        // building reference between customer and ticket and history
-        jsonCustomers.values().forEach(jsonCustomer -> {
-            Customer customer = customerRepository.get(jsonCustomer.id);
-
-            jsonCustomer.tickets.forEach(ticketId -> {
-                Ticket ticket = ticketRepository.get(ticketId);
-                customer.addTicket(ticket);
-                ticket.setCustomer(customer);
-            });
-            jsonCustomer.withdrawalHistory.forEach(historyId -> {
-                WithdrawalHistory history = withdrawalHistoryRepository.get(historyId);
-                customer.addHistory(history);
-            });
-        });
-
         // building reference between manifestation and ticket
         jsonManifestations.values().forEach(jsonManifestation -> {
             Manifestation manifestation = manifestationRepository.get(jsonManifestation.id);
@@ -219,6 +204,24 @@ public class JSONFileDeserializer implements FileDeserializer {
 
                 manifestation.addTicket(ticket);
                 ticket.setManifestation(manifestation);
+            });
+        });
+
+        // building reference between customer and ticket and history
+        jsonCustomers.values().forEach(jsonCustomer -> {
+            Customer customer = customerRepository.get(jsonCustomer.id);
+
+            jsonCustomer.tickets.forEach(ticketId -> {
+                Ticket ticket = ticketRepository.get(ticketId);
+                customer.addTicket(ticket);
+                ticket.setCustomer(customer);
+
+                // Fixing price again
+                ticket.setPriceDiscount(customer.getType().getDiscount());
+            });
+            jsonCustomer.withdrawalHistory.forEach(historyId -> {
+                WithdrawalHistory history = withdrawalHistoryRepository.get(historyId);
+                customer.addHistory(history);
             });
         });
 
@@ -351,7 +354,7 @@ public class JSONFileDeserializer implements FileDeserializer {
         return new Ticket(
                 jsonTicket.id,
                 jsonTicket.appId,
-                jsonTicket.price,
+                0,
                 TicketStatus.valueOf(jsonTicket.status),
                 TicketType.valueOf(jsonTicket.type),
                 jsonTicket.archived,

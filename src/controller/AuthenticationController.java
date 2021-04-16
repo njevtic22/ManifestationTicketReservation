@@ -72,11 +72,6 @@ public class AuthenticationController {
                 post("/login", logIn);
                 post("/registerCustomer", registerCustomer);
                 post("/registerSalesman", registerSalesman);
-//                get("", getAll, new GetAllCustomersTransformer(gson, new GetAllCustomersMapper(formatter)));
-//                get("/:id", getById, new GetByIdCustomerTransformer(gson, new GetByIdCustomerMapper(formatter)));
-//                put("/:id", update);
-//                put("/:id/password", updatePassword);
-//                delete("/:id", delete);
             });
         });
     }

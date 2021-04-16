@@ -5,7 +5,7 @@ Vue.component("reserveTicketsModal", {
         headerClass="bg-success"
         btnSuccessClass="btn-success"
         modalTitle="Reserve tickets"
-        modalClass=""
+        modalClass="modal-lg"
         successBtnText="Reserve"
         cancelBtnText="Cancel"
 
@@ -14,30 +14,39 @@ Vue.component("reserveTicketsModal", {
     >
         <h4>Reserve tickets for: {{manifestationName}}</h4>
         <hr/>
-            {{ customerType }}
-            <br/>
-            {{ customerDiscount }}
+            <div class="d-flex justify-content-around">
+                <div>Customer type: {{ customerType }}</div>
+                <div>Customer discount: {{ customerDiscount * 100 }} %</div>
+            </div>
         <hr/>
+
         <div class='row' style="margin-left: 1px">
-            <div class="col-md-4"> 
+            <div class="col-md-3"> 
                 <div class="row"><br/></div>
                 <div class="row">Regular tickets:</div>
                 <div class="row">Fan pit tickets:</div>
                 <div class="row">VIP tickets:</div>
 
             </div>
-            <div class="col-md-4"> 
+            <div class="col-md-3"> 
                 <div class="row">Left</div>
                 <div class="row">{{ regularLeft }}</div>
                 <div class="row">{{ fanLeft }}</div>
                 <div class="row">{{ vipLeft }}</div>
 
             </div>
-            <div class="col-md-4"> 
+            <div class="col-md-3"> 
                 <div class="row">Price</div>
                 <div class="row">{{ regularPrice }} RSD</div>
                 <div class="row">{{ fanPrice }} RSD</div>
                 <div class="row">{{ vipPrice }} RSD</div>
+
+            </div>
+            <div class="col-md-3"> 
+                <div class="row">Price with discount</div>
+                <div class="row">{{ regularWithDiscount }} RSD</div>
+                <div class="row">{{ fanWithDiscount }} RSD</div>
+                <div class="row">{{ vipWithDiscount }} RSD</div>
 
             </div>
         </div>
@@ -83,6 +92,16 @@ Vue.component("reserveTicketsModal", {
                 </numberInput>
             </div>
         </baseForm>
+        <hr/>
+
+        <div class="text-right">
+            Number of tickets chosen: {{ ticketsChosen }},
+            &nbsp;
+            Total price: {{ totalPrice }} RSD,
+            &nbsp;
+            Reward points: {{ rewardPoints }}
+
+        </div>
         
         <ticketService ref="ticketService"></ticketService>
     </baseModal>
@@ -135,11 +154,45 @@ Vue.component("reserveTicketsModal", {
             },
 
             customerType: "",
-            customerDiscount: ""
+            customerDiscount: "",
+
+            regularWithDiscount: 0,
+            fanWithDiscount: 0,
+            vipWithDiscount: 0,
         };
     },
 
+    computed: {
+        ticketsChosen() {
+            return this.ticketsToReserve.numberOfRegularTickets + 
+                   this.ticketsToReserve.numberOfFanPitTickets + 
+                   this.ticketsToReserve.numberOfVIPTickets;
+        },
+
+        totalPrice() {
+            return this.ticketsToReserve.numberOfRegularTickets * this.regularWithDiscount + 
+                   this.ticketsToReserve.numberOfFanPitTickets * this.fanWithDiscount + 
+                   this.ticketsToReserve.numberOfVIPTickets * this.vipWithDiscount;
+        },
+
+        rewardPoints() {
+            return this.ticketsToReserve.numberOfRegularTickets * this.regularWithDiscount / 1000 * 133 + 
+                   this.ticketsToReserve.numberOfFanPitTickets * this.fanWithDiscount / 1000 * 133 + 
+                   this.ticketsToReserve.numberOfVIPTickets * this.vipWithDiscount / 1000 * 133;
+        }
+    },
+
     methods: {
+        calculatePricesWithDiscount: function() {
+            // this.price -= (this.price * discount);
+            // y = x - x*a
+            // y = x * (1 - a)
+
+            this.regularWithDiscount = this.regularPrice - (this.regularPrice * this.customerDiscount);
+            this.fanWithDiscount = this.fanPrice - (this.fanPrice * this.customerDiscount);
+            this.vipWithDiscount = this.vipPrice - (this.vipPrice * this.customerDiscount);
+        },
+
         reserveTickets: function() {
             const requestBody = {
                 manifestationId: this.manifestationId,
@@ -168,12 +221,11 @@ Vue.component("reserveTicketsModal", {
                 }
             };
             
-            // this.$refs.ticketService.reserveTickets(
-            //     requestBody,
-            //     successCallback,
-            //     errorcallback
-            // );
-            console.log(requestBody);
+            this.$refs.ticketService.reserveTickets(
+                requestBody,
+                successCallback,
+                errorcallback
+            );
         },
 
         cancel: function() {

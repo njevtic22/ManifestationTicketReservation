@@ -27,13 +27,13 @@ public class ReserveTicketCommand implements SelfValidating {
         if (manifestationId == null || manifestationId <= 0)
             throw new ConstraintViolationException("Manifestation id must be positive number.");
 
-        if (numberOfRegularTickets == null || numberOfRegularTickets <= 0)
-            throw new ConstraintViolationException("Number of regular tickets must be positive number.");
+        if (numberOfRegularTickets == null || numberOfRegularTickets < 0)
+            throw new ConstraintViolationException("Number of regular tickets must be positive number or zero.");
 
-        if (numberOfFanTickets == null || numberOfFanTickets <= 0)
-            throw new ConstraintViolationException("Number of fan pit tickets must be positive number.");
+        if (numberOfFanTickets == null || numberOfFanTickets < 0)
+            throw new ConstraintViolationException("Number of fan pit tickets must be positive number or zero.");
 
-        if (numberOfVipTickets == null || numberOfVipTickets <= 0)
-            throw new ConstraintViolationException("Number of vip tickets must be positive number.");
+        if (numberOfVipTickets == null || numberOfVipTickets < 0)
+            throw new ConstraintViolationException("Number of vip tickets must be positive number or zero.");
     }
 }
