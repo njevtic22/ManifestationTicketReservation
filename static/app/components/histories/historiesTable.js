@@ -3,11 +3,13 @@ Vue.component("historiesTable", {
     <table border="5" class="table table-light table-striped table-hover table-borderless">
         <thead class="thead-dark">
             <tr>
+                <!--
                 <th>
                     <caret-up-square-fill-icon v-if="sortTicketIdAsc" v-on:click="sortTicketId('desc')"></caret-up-square-fill-icon>
                     <caret-down-square-fill-icon v-else v-on:click="sortTicketId('asc')"></caret-down-square-fill-icon>
                     Ticket ID
                 </th>
+                -->
                 <th>
                     <caret-up-square-fill-icon v-if="sortWithdrawalDateAsc" v-on:click="sortHistoryDate('desc')"></caret-up-square-fill-icon>
                     <caret-down-square-fill-icon v-else v-on:click="sortHistoryDate('asc')"></caret-down-square-fill-icon>
@@ -47,7 +49,7 @@ Vue.component("historiesTable", {
         </thead>
         <tbody v-if="histories.length !== 0">
             <tr v-for="history in histories">
-                <td>{{ history.ticketId }}</td>
+                <!-- <td>{{ history.ticketId }}</td> -->
                 <td>{{ history.withdrawalDate }}</td>
                 <td>{{ history.price }}</td>
                 <td>{{ history.ticketType }}</td>

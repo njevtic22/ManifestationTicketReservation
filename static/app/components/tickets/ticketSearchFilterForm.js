@@ -73,7 +73,8 @@ Vue.component("ticketSearchFilterForm", {
                 
                 v-on:select="changeTicketStatus($event)"
             ></selectInput>
-
+        </div>
+        <div class="row">
             <selectInput
                 name="manType"
                 labelText="Manfiestation type"
@@ -227,7 +228,7 @@ Vue.component("ticketSearchFilterForm", {
             this.$emit('submitSearchFilter', {
                 searchData: this.searchData,
                 filterData: this.filterData
-            })
+            });
         }
     },
 
