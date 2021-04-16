@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Manifestation implements Cloneable {
     private Long id;
@@ -328,6 +329,13 @@ public class Manifestation implements Cloneable {
 
     public List<Ticket> getTickets() {
         return tickets;
+    }
+
+    public List<Ticket> getFreeTickets() {
+        return tickets
+                .stream()
+                .filter(ticket -> ticket.getStatus() == TicketStatus.FREE)
+                .collect(Collectors.toList());
     }
 
     public void setTickets(List<Ticket> tickets) {

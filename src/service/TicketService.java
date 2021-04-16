@@ -157,10 +157,7 @@ public class TicketService implements
         long regularBought = 0;
         long fanBought = 0;
         long vipBought = 0;
-        for (Ticket ticket : manifestation.getTickets()) {
-            if (ticket.getStatus() == TicketStatus.RESERVED)
-                continue;
-
+        for (Ticket ticket : manifestation.getFreeTickets()) {
             if (ticket.getType() == TicketType.REGULAR) {
                 if (regularBought < command.numberOfRegularTickets) {
                     ticket.setStatus(TicketStatus.RESERVED);

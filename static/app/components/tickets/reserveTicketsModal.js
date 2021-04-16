@@ -176,9 +176,9 @@ Vue.component("reserveTicketsModal", {
         },
 
         rewardPoints() {
-            return this.ticketsToReserve.numberOfRegularTickets * this.regularWithDiscount / 1000 * 133 + 
+            return (this.ticketsToReserve.numberOfRegularTickets * this.regularWithDiscount / 1000 * 133 + 
                    this.ticketsToReserve.numberOfFanPitTickets * this.fanWithDiscount / 1000 * 133 + 
-                   this.ticketsToReserve.numberOfVIPTickets * this.vipWithDiscount / 1000 * 133;
+                   this.ticketsToReserve.numberOfVIPTickets * this.vipWithDiscount / 1000 * 133).toFixed(2);
         }
     },
 

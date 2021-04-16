@@ -125,8 +125,8 @@ public class TicketController {
                 customer.getId(),
                 manifestationId,
                 requestBody.numberOfRegularTickets,
-                requestBody.numberOfFanTickets,
-                requestBody.numberOfVipTickets
+                requestBody.numberOfFanPitTickets,
+                requestBody.numberOfVIPTickets
         );
         reserveTicketUseCase.reserveTicket(command);
         response.status(HttpStatus.OK_200);
