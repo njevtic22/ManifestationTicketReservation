@@ -126,6 +126,9 @@ public class WithdrawalHistoryController {
         int sortOrder = sortOrderStr.equals("asc") ? 1 : -1;
 
         switch (sortBy) {
+            case "ticketappid":
+                historySorter.sortByTicketAppId(histories, sortOrder);
+                break;
             case "historydate":
                 historySorter.sortByWithdrawalDate(histories, sortOrder);
                 break;

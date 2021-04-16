@@ -2,11 +2,21 @@ package sorter;
 
 import model.WithdrawalHistory;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
 public class HistorySorter {
+    public void sortByTicketAppId(List<WithdrawalHistory> histories, int order) {
+        Comparator<WithdrawalHistory> historyComparator = new Comparator<WithdrawalHistory>() {
+            @Override
+            public int compare(WithdrawalHistory o1, WithdrawalHistory o2) {
+                return order * o1.getTicketId().compareToIgnoreCase(o2.getTicketId());
+            }
+        };
+
+        histories.sort(historyComparator);
+    }
+
     public void sortByWithdrawalDate(List<WithdrawalHistory> histories, int order) {
         Comparator<WithdrawalHistory> historyComparator = new Comparator<WithdrawalHistory>() {
             @Override

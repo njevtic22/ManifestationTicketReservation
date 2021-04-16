@@ -318,7 +318,7 @@ const router = new VueRouter({
                     path: "histories",
                     name: "Histories",
                     component: Histories,
-                    meta: { title: "Withdrawal History" }
+                    meta: { title: "Withdrawal Histories" }
                 }
             ]
         },
