@@ -32,6 +32,13 @@ Vue.component("customerSidebar", {
                         Tickets
                     </router-link>
                 </li>
+                
+                <li class="nav-item">
+                    <router-link class="nav-link nav-link" to="/customer/histories">
+                        <clock-history-icon class="sidebar-icon"></clock-history-icon>
+                        Histories
+                    </router-link>
+                </li>
             </ul>
             
             <logOutButton class="logout-sidebar-button"></logOutButton> 

@@ -8,6 +8,7 @@ const Manifestation = { template: "<manifestation></manifestation>" };
 const Profile = { template: "<profile></profile>" };
 const AllUsers = { template: "<allUsers></allUsers>" }
 const Tickets = { template: "<tickets></tickets>" };
+const Histories = { template: "<histories></histories>" };
 
 const LoginPage = { template: "<logInPage></logInPage>" };
 const RegisterPage = { template: "<registerPage></registerPage>" };
@@ -312,6 +313,12 @@ const router = new VueRouter({
                     name: "CustomerTickets",
                     component: Tickets,
                     meta: { title: "Tickets" }
+                },
+                {
+                    path: "histories",
+                    name: "Histories",
+                    component: Histories,
+                    meta: { title: "Withdrawal History" }
                 }
             ]
         },

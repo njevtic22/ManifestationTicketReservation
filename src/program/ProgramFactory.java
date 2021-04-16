@@ -13,6 +13,7 @@ import controller.UserController;
 import controller.WithdrawalHistoryController;
 import exception.*;
 import exception.handler.*;
+import filterSearcher.HistoryFilterSearcher;
 import filterSearcher.ManifestationFilterSearcher;
 import filterSearcher.TicketFilterSearcher;
 import filterSearcher.UserFilterSearcher;
@@ -30,6 +31,7 @@ import service.SalesmanService;
 import service.TicketService;
 import service.UserService;
 import service.WithdrawalHistoryService;
+import sorter.HistorySorter;
 import sorter.ManifestationSorter;
 import sorter.TicketSorter;
 import sorter.UserSorter;
@@ -236,7 +238,10 @@ public class ProgramFactory {
             withdrawalHistoryController = new WithdrawalHistoryController(
                     gson,
                     formatter,
-                    withdrawalHistoryService
+                    withdrawalHistoryService,
+                    new HistoryFilterSearcher(),
+                    new HistorySorter(),
+                    new Pagination()
             );
         }
         return withdrawalHistoryController;

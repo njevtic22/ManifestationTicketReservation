@@ -17,7 +17,11 @@ public class GetAllHistoriesMapper implements DTOMapper<WithdrawalHistory, GetAl
 
     @Override
     public GetAllHistoriesDTO toDTO(WithdrawalHistory history) {
-        return new GetAllHistoriesDTO(history, formatter.format(history.getWithdrawalDate()));
+        return new GetAllHistoriesDTO(
+                history,
+                formatter.format(history.getWithdrawalDate()),
+                formatter.format(history.getManifestation().getHoldingDate())
+        );
     }
 
     @Override

@@ -5,8 +5,10 @@ import model.WithdrawalHistory;
 import responseTransformer.dtoMappers.DTOMapper;
 import spark.ResponseTransformer;
 import useCase.withdrawalHistory.dto.GetAllHistoriesDTO;
+import utility.PaginatedResponse;
 
 import java.util.Collection;
+import java.util.List;
 
 public class GetAllHistoriesTransformer implements ResponseTransformer {
     private final Gson gson;
@@ -19,7 +21,16 @@ public class GetAllHistoriesTransformer implements ResponseTransformer {
 
     @Override
     public String render(Object o) throws Exception {
-        Collection<WithdrawalHistory> histories = (Collection<WithdrawalHistory>) o;
-        return gson.toJson(mapper.toDTOList(histories));
+        PaginatedResponse<WithdrawalHistory> paginatedResponse = (PaginatedResponse<WithdrawalHistory>) o;
+        List<GetAllHistoriesDTO> historiesDTO = mapper.toDTOList(paginatedResponse.data);
+
+        return gson.toJson(
+                new PaginatedResponse<>(
+                        historiesDTO,
+                        paginatedResponse.totalNumberOfResults,
+                        paginatedResponse.hasPreviousPage,
+                        paginatedResponse.hasNextPage
+                )
+        );
     }
 }

@@ -4,21 +4,26 @@ import model.WithdrawalHistory;
 
 public class GetAllHistoriesDTO {
     private Long id;
-    private String withdrawalDate;
     private String ticketId;
-    private double price;
-    private String type;
-    private boolean archived;
 
-    private String manifestation;
+    private String withdrawalDate; // search --
+    private double price;         // search --
+    private String ticketType;   // filter --
 
-    public GetAllHistoriesDTO(WithdrawalHistory history, String parsedDate) {
+    private String manifestation;           // search --
+    private String manifestationStatus;    // filter --
+    private String manifestationType;     // filter --
+    private String manifestationDate;    // search
+
+    public GetAllHistoriesDTO(WithdrawalHistory history, String parsedDate, String manifestationDate) {
         this.id = history.getId();
         this.withdrawalDate = parsedDate;
         this.ticketId = history.getTicketId();
         this.price = history.getPrice();
-        this.type = history.getType().toString();
-        this.archived = history.isArchived();
+        this.ticketType = history.getType().toString();
         this.manifestation = history.getManifestation().getName();
+        this.manifestationDate = manifestationDate;
+        this.manifestationStatus = history.getManifestation().getStatus().toString();
+        this.manifestationType = history.getManifestation().getType().toString();
     }
 }
