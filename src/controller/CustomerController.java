@@ -20,6 +20,7 @@ import useCase.customer.GetByIdCustomerUseCase;
 import useCase.customer.UpdateCustomerUseCase;
 import useCase.customer.command.AddCustomerCommand;
 import useCase.customer.command.UpdateCustomerCommand;
+import useCase.customer.dto.TypeDiscountDTO;
 import utility.RoleEnsure;
 import validation.SelfValidating;
 
@@ -69,6 +70,7 @@ public class CustomerController {
             path("/customers", () -> {
                 post("", add);
                 get("", getAll, new GetAllCustomersTransformer(gson, new GetAllCustomersMapper(formatter)));
+                get("/type", getType);
                 get("/:id", getById, new GetByIdCustomerTransformer(gson, new GetByIdCustomerMapper(formatter)));
                 put("/:id", update);
                 delete("/:id", delete);
@@ -109,6 +111,18 @@ public class CustomerController {
         Customer customer = getByIdCustomerUseCase.getByIdCustomer(id);
         response.status(HttpStatus.OK_200);
         return customer;
+    };
+
+    public Route getType = (Request request, Response response) -> {
+        ensureUserIsCustomer.ensure(request);
+
+        Customer customer = request.attribute("user");
+        TypeDiscountDTO responseDTO = new TypeDiscountDTO(
+                customer.getType().toString(),
+                customer.getType().getDiscount()
+        );
+        response.status(HttpStatus.OK_200);
+        return gson.toJson(responseDTO);
     };
 
     public Route update = (Request request, Response response) -> {

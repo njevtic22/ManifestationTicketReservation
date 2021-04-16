@@ -1,15 +1,15 @@
-Vue.component("deleteTicketModal", {
+Vue.component("withdrawTicketModal", {
     template: `
     <baseModal
         v-bind:id="id"
         headerClass="bg-danger"
         btnSuccessClass="btn-danger"
-        modalTitle="Delete ticket"
+        modalTitle="Withdraw ticket"
         modalClass=""
-        successBtnText="Delete"
+        successBtnText="Withdraw"
         cancelBtnText="Cancel"
 
-        v-on:successEvent="deleteTicket"
+        v-on:successEvent="withdrawTicket"
         v-on:cancelEvent="cancel"
     >
         <div class='row' style="margin-left: 1px">
@@ -20,6 +20,7 @@ Vue.component("deleteTicketModal", {
                 <div class="row">Type:</div>
                 <div class="row">Manifestation:</div>
                 <div class="row">Customer:</div>
+                <div class="row">Penalty points:</div>
             </div>
             <div class="col-md-6"> 
                 <!-- <div class="row">{{ ticket.appId }}</div> -->
@@ -28,8 +29,10 @@ Vue.component("deleteTicketModal", {
                 <div class="row">{{ ticket.type }}</div>
                 <div class="row">{{ ticket.manifestation }}</div>
                 <div class="row">{{ ticket.customer ? ticket.customer : '/' }}</div>
+                <div class="row"><strong>{{ penaltyPoints }}</strong></div>
             </div>
         </div>
+
         
         <hr/>
         Are you sure you want to permanently delete this ticket?
@@ -50,10 +53,16 @@ Vue.component("deleteTicketModal", {
         return {};
     },
 
+    computed: {
+        penaltyPoints() {
+            return (this.ticket.price / 1000 * 133 * 4).toFixed(2);
+        }
+    },
+
     methods: {
-        deleteTicket: function() {
+        withdrawTicket: function() {
             this.closeModal();
-            this.$emit('deleteTicket', this.ticket.id);
+            this.$emit("withdrawTicket", this.ticket.id);
         },
 
         cancel: function() {

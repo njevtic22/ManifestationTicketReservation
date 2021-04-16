@@ -35,7 +35,9 @@ Vue.component("tickets", {
                 <ticketsTable
                     v-bind:loading="loading"
                     v-bind:tickets="tickets.data"
+
                     v-on:sort="performSort($event)"
+                    v-on:withdrawTicket="confirmWithdrawTicket($event)"
                     v-on:deleteTicket="confirmDeleteTicket($event)"
 
                     ref="ticketsTable"
@@ -81,6 +83,15 @@ Vue.component("tickets", {
             </div>
         </div>
 
+        <withdrawTicketModal
+            id="withdrawTicketModal"
+            ref="withdrawTicketModal"
+            
+            v-bind:ticket="ticketToWithdraw"
+            v-on:withdrawTicket="withdrawTicket($event)"
+        >
+        </withdrawTicketModal>
+
         <deleteTicketModal
             id="deleteTicketModal"
             ref="deleteTicketModal"
@@ -105,6 +116,18 @@ Vue.component("tickets", {
             },
 
             ticketToDelete: {
+                id: 0,
+                appId: "0000000000",
+                price: 0,
+                status: "FREE",
+                type: "REGULAR",
+
+                customer: "",
+                manifestation: "",
+                manifestationId: 0
+            },
+
+            ticketToWithdraw: {
                 id: 0,
                 appId: "0000000000",
                 price: 0,
@@ -170,6 +193,27 @@ Vue.component("tickets", {
             this.sortBy = sortDetails.sortBy;
             this.sortOrder = sortDetails.sortOrder;
             this.getTickets();
+        },
+
+        confirmWithdrawTicket: function(ticket) {
+            this.ticketToWithdraw = ticket;
+            $("#withdrawTicketModal").modal("show");
+        },
+
+        withdrawTicket: function(ticketId) {
+            const successCallback = (response) => {
+                this.$root.successToast("Ticket is withdrawed");
+                this.getTickets();
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.ticketService.withdrawTicket(
+                ticketId,
+                successCallback,
+                errorCallback
+            );
         },
 
         confirmDeleteTicket: function(ticket) {

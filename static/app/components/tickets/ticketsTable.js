@@ -48,7 +48,7 @@ Vue.component("ticketsTable", {
                     <caret-down-square-fill-icon v-else v-on:click="sortCustomer('asc')"></caret-down-square-fill-icon>
                     Customer
                 </th>
-                <th v-if="$root.isAdmin()">
+                <th v-if="!$root.isSalesman()">
                     Actions
                 </th>
             </tr>
@@ -64,6 +64,7 @@ Vue.component("ticketsTable", {
                 <td>{{ ticket.status }}</td>
                 <td>{{ ticket.type }}</td>
                 <td>{{ ticket.customer ? ticket.customer : '/'}}</td>
+
                 <td class="text-center" v-if="$root.isAdmin()">
                     <button 
                         type="button" 
@@ -71,6 +72,17 @@ Vue.component("ticketsTable", {
                         v-if="ticket.status === 'FREE'"
 
                         v-on:click="$emit('deleteTicket', ticket)"
+                    >
+                        <trash-fill-icon></trash-fill-icon>
+                    </button>
+                </td>
+                <td v-else-if="$root.isCustomer()">
+                    <button 
+                        type="button" 
+                        class="btn btn-link btn-sm"
+                        v-if="ticket.daysToManLeft >= 7"
+
+                        v-on:click="$emit('withdrawTicket', ticket)"
                     >
                         <trash-fill-icon></trash-fill-icon>
                     </button>
@@ -109,7 +121,7 @@ Vue.component("ticketsTable", {
 
     computed: {
         colspan() {
-            return this.$root.isAdmin() ? 9 : 8;
+            return this.$root.isSalesman() ? 8 : 9;
         }
     },
 

@@ -76,6 +76,14 @@ Vue.component("ticketService", {
                 .delete(url)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
+        },
+
+        withdrawTicket: function(ticketId, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/withdraw/${ticketId}`;
+            axios
+                .post(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
         }
     },
 

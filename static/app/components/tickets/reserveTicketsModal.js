@@ -94,16 +94,15 @@ Vue.component("reserveTicketsModal", {
         </baseForm>
         <hr/>
 
-        <div class="text-right">
-            Number of tickets chosen: {{ ticketsChosen }},
-            &nbsp;
-            Total price: {{ totalPrice }} RSD,
-            &nbsp;
-            Reward points: {{ rewardPoints }}
+        <div class="d-flex justify-content-around">
+            <div>Number of tickets chosen: {{ ticketsChosen }}</div>
+            <div>Total price: {{ totalPrice }} RSD</div>
+            <div>Reward points: {{ rewardPoints }}</div>
 
         </div>
         
         <ticketService ref="ticketService"></ticketService>
+        <customerService ref="customerService"></customerService>
     </baseModal>
     `,
 
@@ -243,12 +242,26 @@ Vue.component("reserveTicketsModal", {
                 numberOfFanPitTickets: 0,
                 numberOfVIPTickets: 0
             };
+        },
+
+        getCustomerType: function() {
+            const successCallback = (response) => {
+                this.customerType = response.data.type;
+                this.customerDiscount = response.data.discount;
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error); 
+            };
+            
+            this.$refs.customerService.getType(
+                successCallback,
+                errorCallback
+            );
         }
     },
 
     mounted() {
-        this.customerType = localStorage.getItem("customerType");
-        this.customerDiscount = localStorage.getItem("customerDiscount");
+        this.getCustomerType();
     },
 
     destroyed() {}

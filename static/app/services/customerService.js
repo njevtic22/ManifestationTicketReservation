@@ -20,6 +20,14 @@ Vue.component("customerService", {
         //         .catch(error => { errorCallback(error); });
         // },
 
+        getType: function(successCallback, errorCallback) {
+            const url = `${this.baseCustomersUrl}/type`;
+            axios
+                .get(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error) });
+        },
+
         updateCustomer: function(customerId, customerToUpdate, successCallback, errorCallback) {
             const url = `${this.baseCustomersUrl}/${customerId}`;
             axios
