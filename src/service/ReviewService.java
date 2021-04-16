@@ -5,11 +5,15 @@ import exception.ManifestationNotFoundException;
 import exception.ReviewNotFoundException;
 import model.Customer;
 import model.Manifestation;
+import model.ManifestationStatus;
 import model.Review;
 import model.ReviewStatus;
+import model.Ticket;
+import model.User;
 import repository.Repository;
 import repository.UserRepository;
 import useCase.review.AddReviewUseCase;
+import useCase.review.CanLeaveReviewUseCase;
 import useCase.review.DeleteReviewUseCase;
 import useCase.review.GetAllReviewsUseCase;
 import useCase.review.UpdateReviewUseCase;
@@ -22,7 +26,8 @@ public class ReviewService implements
         AddReviewUseCase,
         GetAllReviewsUseCase,
         UpdateReviewUseCase,
-        DeleteReviewUseCase {
+        DeleteReviewUseCase,
+        CanLeaveReviewUseCase {
     private final Repository<Review, Long> reviewRepository;
     private final Repository<Manifestation, Long> manifestationRepository;
     private final UserRepository<Customer> customerRepository;
@@ -81,5 +86,25 @@ public class ReviewService implements
         review.archive();
 
         reviewRepository.save(review);
+    }
+
+    @Override
+    public boolean canLeaveReview(User user, Long manifestationId) {
+        if (!(user instanceof Customer))
+            return false;
+
+        Manifestation manifestation = manifestationRepository.findByIdAndArchivedFalse(manifestationId)
+                .orElseThrow(() -> new ManifestationNotFoundException(manifestationId));
+
+        if (manifestation.getStatus() != ManifestationStatus.INACTIVE)
+            return false;
+
+        Customer customer = (Customer) user;
+        for (Ticket ticket : customer.getTickets()) {
+            Manifestation canMan = ticket.getManifestation();
+            if (canMan.equals(manifestation))
+                return true;
+        }
+        return false;
     }
 }

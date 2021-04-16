@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import model.User;
 import org.eclipse.jetty.http.HttpStatus;
 import request.AddReviewRequest;
 import request.UpdateReviewRequest;
@@ -10,6 +11,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import useCase.review.AddReviewUseCase;
+import useCase.review.CanLeaveReviewUseCase;
 import useCase.review.DeleteReviewUseCase;
 import useCase.review.GetAllReviewsUseCase;
 import useCase.review.UpdateReviewUseCase;
@@ -30,6 +32,7 @@ public class ReviewController {
     private GetAllReviewsUseCase getAllReviewsUseCase;
     private UpdateReviewUseCase updateReviewUseCase;
     private DeleteReviewUseCase deleteReviewUseCase;
+    private CanLeaveReviewUseCase canLeaveReviewUseCase;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
     private RoleEnsure ensureUserIsSalesman = AuthenticationController::ensureUserIsSalesman;
@@ -37,12 +40,13 @@ public class ReviewController {
     private RoleEnsure ensureUserIsAdminOrSalesman = AuthenticationController::ensureUserIsAdminOrSalesman;
     private RoleEnsure ensureUserIsAdminOrCustomer = AuthenticationController::ensureUserIsAdminOrCustomer;
 
-    public ReviewController(Gson gson, AddReviewUseCase addReviewUseCase, GetAllReviewsUseCase getAllReviewsUseCase, UpdateReviewUseCase updateReviewUseCase, DeleteReviewUseCase deleteReviewUseCase) {
+    public ReviewController(Gson gson, AddReviewUseCase addReviewUseCase, GetAllReviewsUseCase getAllReviewsUseCase, UpdateReviewUseCase updateReviewUseCase, DeleteReviewUseCase deleteReviewUseCase, CanLeaveReviewUseCase canLeaveReviewUseCase) {
         this.gson = gson;
         this.addReviewUseCase = addReviewUseCase;
         this.getAllReviewsUseCase = getAllReviewsUseCase;
         this.updateReviewUseCase = updateReviewUseCase;
         this.deleteReviewUseCase = deleteReviewUseCase;
+        this.canLeaveReviewUseCase = canLeaveReviewUseCase;
         this.setUpRoutes();
     }
 
@@ -51,8 +55,7 @@ public class ReviewController {
             path("/reviews", () -> {
                 post("", add);
                 get("", getAll, new GetAllReviewsTransformer(gson, new GetAllReviewsMapper()));
-                // TODO: forManifestation getForManifestationUseCase.get(User user)
-                // TODO: createdForSalesman
+                get("/canLeaveReview/:manifestationId", canLeaveReview);
                 put("/:id", update);
                 delete("/:id", delete);
             });
@@ -80,6 +83,14 @@ public class ReviewController {
         response.status(HttpStatus.OK_200);
         return getAllReviewsUseCase.getAllReviews();
 
+    };
+
+    public Route canLeaveReview = (Request request, Response response) -> {
+        Long manifestationId = SelfValidating.validId(request.params(":manifestationId"));
+        User user = request.attribute("user");
+
+        response.status(HttpStatus.OK_200);
+        return canLeaveReviewUseCase.canLeaveReview(user, manifestationId);
     };
 
     public Route update = (Request request, Response response) -> {

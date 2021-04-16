@@ -161,7 +161,10 @@ Vue.component("manifestation", {
                     <h1>Average rating: {{ parseRating }}</h1>
                     <button 
                         class="btn btn-primary" 
-                        v-if="$root.isCustomer() && manifestation.status === 'INACTIVE'"
+                        v-if="$root.isCustomer() && manifestation.status === 'INACTIVE' && canLeaveReview"
+
+                        data-toggle="modal"
+                        data-target="#addReviewModal"
                     >
                         Add review
                     </button>
@@ -281,6 +284,13 @@ Vue.component("manifestation", {
             v-on:ticketsReserved="getManifestation($route.params.id)"
         ></reserveTicketsModal>
 
+        <addReviewModal
+            id="addReviewModal"
+            ref="addReviewModal"
+        >
+        </addReviewModal>
+
+        <reviewService ref="reviewService"></reviewService>
         <manifestationService ref="manifestationService"></manifestationService>
     </div>
     `,
@@ -288,6 +298,7 @@ Vue.component("manifestation", {
     data: function() {
         return {
             belognsToSalesman: false,
+            canLeaveReview: false,
 
             imageLocationToShow: "",
             manifestation: { 
@@ -443,6 +454,26 @@ Vue.component("manifestation", {
             this.$refs.manifestationService.getManifestation(manifestationId, successCallback, errorCallback);
         },
 
+        getCanLeaveReview: function() {
+            if (this.$root.isCustomer()) {
+                const successCallback = (response) => {
+                    this.canLeaveReview = response.data;
+                };
+                const errorCallback = (error) => {
+                    this.canLeaveReview = false;
+                    this.$root.defaultCatchError(error);
+                };
+
+                this.$refs.reviewService.canLeaveReview(
+                    this.$route.params.id,
+                    successCallback,
+                    errorCallback
+                );
+            } else {
+                this.canLeaveReview = false;
+            }
+        },
+
         getBelongsToSalesman: function() {
             if (this.$root.isSalesman()) {
                 const successCallback = (response) => {
@@ -585,6 +616,7 @@ Vue.component("manifestation", {
         this.getReviews();
 
         this.getBelongsToSalesman();
+        this.getCanLeaveReview();
     },
 
     destroyed() {}
