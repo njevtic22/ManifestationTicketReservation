@@ -4,27 +4,43 @@ Vue.component("historiesTable", {
         <thead class="thead-dark">
             <tr>
                 <th>
+                    <caret-up-square-fill-icon v-if="sortTicketIdAsc" v-on:click="sortTicketId('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortTicketId('asc')"></caret-down-square-fill-icon>
                     Ticket ID
                 </th>
                 <th>
+                    <caret-up-square-fill-icon v-if="sortWithdrawalDateAsc" v-on:click="sortHistoryDate('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortHistoryDate('asc')"></caret-down-square-fill-icon>
                     Withdrawal date
                 </th>
                 <th>
+                    <caret-up-square-fill-icon v-if="sortTicketPriceAsc" v-on:click="sortPrice('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortPrice('asc')"></caret-down-square-fill-icon>
                     Ticket price
                 </th>
                 <th>
+                    <caret-up-square-fill-icon v-if="sortTicketTypeAsc" v-on:click="sortType('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortType('asc')"></caret-down-square-fill-icon>
                     Ticket type
                 </th>
                 <th>
+                    <caret-up-square-fill-icon v-if="sortManAsc" v-on:click="sortMan('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortMan('asc')"></caret-down-square-fill-icon>
                     Manifestation
                 </th>
                 <th>
-                    Manifestation status
-                </th>
-                <th>
+                    <caret-up-square-fill-icon v-if="sortManTypeAsc" v-on:click="sortManType('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortManType('asc')"></caret-down-square-fill-icon>
                     Manifestation type
                 </th>
                 <th>
+                    <caret-up-square-fill-icon v-if="sortManStatusAsc" v-on:click="sortManStatus('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortManStatus('asc')"></caret-down-square-fill-icon>
+                    Manifestation status
+                </th>
+                <th>
+                    <caret-up-square-fill-icon v-if="sortManDateAsc" v-on:click="sortManDate('desc')"></caret-up-square-fill-icon>
+                    <caret-down-square-fill-icon v-else v-on:click="sortManDate('asc')"></caret-down-square-fill-icon>
                     Manifestation date
                 </th>
             </tr>
@@ -36,8 +52,8 @@ Vue.component("historiesTable", {
                 <td>{{ history.price }}</td>
                 <td>{{ history.ticketType }}</td>
                 <td>{{ history.manifestation }}</td>
-                <td>{{ history.manifestationStatus }}</td>
                 <td>{{ history.manifestationType }}</td>
+                <td>{{ history.manifestationStatus }}</td>
                 <td>{{ history.manifestationDate }}</td>
             </tr>
         </tbody>
@@ -79,24 +95,78 @@ Vue.component("historiesTable", {
 
     data: function() {
         return {
-            /*
-                private Long id;
-    private String ticketId;
+            sortTicketIdAsc: true,
+            sortWithdrawalDateAsc: true,
+            sortTicketPriceAsc: true,
+            sortTicketTypeAsc: true,
 
-    private String withdrawalDate; // search --
-    private double price;         // search --
-    private String ticketType;   // filter --
-
-    private String manifestation;           // search --
-    private String manifestationStatus;    // filter --
-    private String manifestationType;     // filter --
-    private String manifestationDate;    // search
-            
-            */
+            sortManAsc: true,
+            sortManTypeAsc: true,
+            sortManStatusAsc: true,
+            sortManDateAsc: true 
         };
     },
 
     methods: {
+        resetSort: function() {
+            this.sortTicketIdAsc = true;
+            this.sortWithdrawalDateAsc = true;
+            this.sortTicketPriceAsc = true;
+            this.sortTicketTypeAsc = true;
+
+            this.sortManAsc = true;
+            this.sortManTypeAsc = true;
+            this.sortManStatusAsc = true;
+            this.sortManDateAsc = true;
+        },
+
+        sortTicketId: function(sortOrder) {
+            this.resetSort();
+            this.sortTicketIdAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "ticketAppId", sortOrder: sortOrder });
+        },
+
+        sortHistoryDate: function(sortOrder) {
+            this.resetSort();
+            this.sortWithdrawalDateAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "historyDate", sortOrder: sortOrder });
+        },
+
+        sortPrice: function(sortOrder) {
+            this.resetSort();
+            this.sortTicketPriceAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "price", sortOrder: sortOrder });
+        },
+
+        sortType: function(sortOrder) {
+            this.resetSort();
+            this.sortTicketTypeAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "ticketType", sortOrder: sortOrder });
+        },
+        
+        sortMan: function(sortOrder) {
+            this.resetSort();
+            this.sortManAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "manifestation", sortOrder: sortOrder });
+        },
+
+        sortManType: function(sortOrder) {
+            this.resetSort();
+            this.sortManTypeAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "manifestationType", sortOrder: sortOrder });
+        },
+
+        sortManStatus: function(sortOrder) {
+            this.resetSort();
+            this.sortManStatusAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "manifestationStatus", sortOrder: sortOrder });
+        },
+
+        sortManDate: function(sortOrder) {
+            this.resetSort();
+            this.sortManDateAsc = sortOrder === "asc";
+            this.$emit("sort", { sortBy: "manifestationDate", sortOrder: sortOrder });
+        },
     },
 
     mounted() {},
