@@ -12,6 +12,7 @@ import useCase.customer.AddCustomerUseCase;
 import useCase.customer.DeleteCustomerUseCase;
 import useCase.customer.GetAllCustomersUseCase;
 import useCase.customer.GetByIdCustomerUseCase;
+import useCase.customer.GetSuspiciousCustomersUseCase;
 import useCase.customer.UpdateCustomerUseCase;
 import useCase.customer.command.AddCustomerCommand;
 import useCase.customer.command.UpdateCustomerCommand;
@@ -26,7 +27,8 @@ public class CustomerService implements
         GetAllCustomersUseCase,
         GetByIdCustomerUseCase,
         UpdateCustomerUseCase,
-        DeleteCustomerUseCase
+        DeleteCustomerUseCase,
+        GetSuspiciousCustomersUseCase
 {
     private final SimpleDateFormat formatter;
     private final UserRepository<Customer> customerRepository;
@@ -106,6 +108,12 @@ public class CustomerService implements
         customer.archive();
 
         customerRepository.save(customer);
+    }
+
+    @Override
+    public Collection<Customer> getSuspiciousCustomers() {
+        // TODO: change this
+        return customerRepository.findAllByArchivedFalse();
     }
 
     private boolean isUsernameAdminTaken(String usernameToValidate) {

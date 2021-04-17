@@ -36,6 +36,13 @@ Vue.component("adminSidebar", {
                 </li>
                 
                 <li class="nav-item">
+                    <router-link class="nav-link nav-link" to="/admin/suspicious">
+                        <people-fill-icon class="sidebar-icon"></people-fill-icon>
+                        Suspicious users
+                    </router-link>
+                </li>
+                
+                <li class="nav-item">
                     <router-link class="nav-link nav-link" to="/admin/tickets">
                         <tags-fill-icon class="sidebar-icon"></tags-fill-icon>
                         Tickets

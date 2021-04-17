@@ -78,7 +78,11 @@ public class UserController {
         applyFilter(request, users);
         applySearch(request, users);
         applySort(request, users);
-        PaginatedResponse<User> paginatedUsers = pagination.doPagination(users, request.queryParams("page"), request.queryParams("size"));
+        PaginatedResponse<User> paginatedUsers = pagination.doPagination(
+                users,
+                request.queryParams("page"),
+                request.queryParams("size")
+        );
 
         response.status(HttpStatus.OK_200);
         return paginatedUsers;

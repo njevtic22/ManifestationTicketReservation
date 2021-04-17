@@ -10,6 +10,7 @@ public class GetAllCustomersDTO {
     public String dateOfBirth;
     public String gender;
 
+    public String role;
     public double points;
     public String type;
 
@@ -22,5 +23,6 @@ public class GetAllCustomersDTO {
         this.gender = customer.getGender().toString();
         this.points = customer.getPoints();
         this.type = customer.getType().toString();
+        this.role = customer.getClass().getSimpleName().toUpperCase();
     }
 }

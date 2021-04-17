@@ -6,7 +6,8 @@ const SalesmanManifestationsMap = { template: "<salesmanManifestationsMap></sale
 
 const Manifestation = { template: "<manifestation></manifestation>" };
 const Profile = { template: "<profile></profile>" };
-const AllUsers = { template: "<allUsers></allUsers>" }
+const AllUsers = { template: "<allUsers></allUsers>" };
+const SuspiciousUsers = { template: "<suspiciousUsers></suspiciousUsers>" };
 const Tickets = { template: "<tickets></tickets>" };
 const Histories = { template: "<histories></histories>" };
 
@@ -218,6 +219,12 @@ const router = new VueRouter({
                     name: "AllUsers",
                     component: AllUsers,
                     meta: { title: "Users" }
+                },
+                {
+                    path: "suspicious",
+                    name: "SuspiciousUsers",
+                    component: SuspiciousUsers,
+                    meta: { title: "Suspicious users" }
                 },
                 {
                     path: "tickets",

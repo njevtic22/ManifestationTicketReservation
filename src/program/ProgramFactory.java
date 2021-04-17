@@ -13,6 +13,7 @@ import controller.UserController;
 import controller.WithdrawalHistoryController;
 import exception.*;
 import exception.handler.*;
+import filterSearcher.CustomerFilterSearcher;
 import filterSearcher.HistoryFilterSearcher;
 import filterSearcher.ManifestationFilterSearcher;
 import filterSearcher.ReviewFilterSearcher;
@@ -32,6 +33,7 @@ import service.SalesmanService;
 import service.TicketService;
 import service.UserService;
 import service.WithdrawalHistoryService;
+import sorter.CustomerSorter;
 import sorter.HistorySorter;
 import sorter.ManifestationSorter;
 import sorter.TicketSorter;
@@ -205,7 +207,11 @@ public class ProgramFactory {
                     customerService,
                     customerService,
                     customerService,
-                    customerService
+                    customerService,
+                    customerService,
+                    new CustomerFilterSearcher(),
+                    new CustomerSorter(),
+                    new Pagination()
             );
         }
         return customerController;
