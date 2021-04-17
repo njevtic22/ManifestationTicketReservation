@@ -19,7 +19,7 @@ username: [usertype][1-10]
 password: 123
 
 ## How to run
-Simply run main located in src/program/Program.java
+Simply run main method located in src/program/Program.java
 ```
 ManifestationTicketReservation
 │    README.md
