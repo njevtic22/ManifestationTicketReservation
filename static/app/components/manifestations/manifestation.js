@@ -227,6 +227,7 @@ Vue.component("manifestation", {
 
                             v-on:approveReview="approveReview($event)"
                             v-on:rejectReview="rejectReview($event)"
+                            v-on:deleteReview="deleteReview($event)"
                         >
                         </review>
                     </div>
@@ -682,6 +683,23 @@ Vue.component("manifestation", {
             this.$refs.reviewService.approveOrReject(
                 reviewId,
                 "REJECTED",
+                successCallback,
+                errorCallback
+            );
+        },
+
+        deleteReview: function(reviewId) {
+            const successCallback = (response) => {
+                this.getReviews();
+                this.getManifestation(this.manifestation.id);
+                this.$root.successToast("Review is deleted");
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.reviewService.deleteReview(
+                reviewId,
                 successCallback,
                 errorCallback
             );

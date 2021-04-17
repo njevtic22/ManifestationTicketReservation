@@ -62,6 +62,14 @@ Vue.component("reviewService", {
                 .put(url, newStatus)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
+        },
+
+        deleteReview: function(reviewId, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${reviewId}`;
+            axios
+                .delete(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
         }
     },
 

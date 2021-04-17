@@ -81,12 +81,13 @@ public class GetByIdManifestationDTO {
         if (!manifestation.getReviews().isEmpty()) {
             int reviewToDivide = 0;
             for (Review review : manifestation.getReviews()) {
-                if (review.getStatus() == ReviewStatus.APPROVED) {
+                if (review.getStatus() == ReviewStatus.APPROVED && !review.isArchived()) {
                     avgRating += review.getRating();
                     reviewToDivide++;
                 }
             }
-            this.avgRating = this.avgRating / reviewToDivide;
+            if (avgRating > 0)
+                this.avgRating = this.avgRating / reviewToDivide;
         }
 
 

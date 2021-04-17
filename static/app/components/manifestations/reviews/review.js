@@ -24,15 +24,19 @@ Vue.component("review", {
             </p>
 
             <div class="d-flex justify-content-between">
-                <div v-if="belognsToSalesman && review.status === 'CREATED'">
+                <div class="btn text-white" style="cursor: default;" v-bind:style="{'background-color': getStatusColor}">
+                    {{ review.status }}
+                </div>
+                
+                <div v-if="$root.isSalesman() && belognsToSalesman && review.status === 'CREATED'">
                     <button class="btn btn-success" v-on:click="$emit('approveReview', review.id)">Approve</button>
                     <button class="btn btn-danger" v-on:click="$emit('rejectReview', review.id)">Reject</button>
                 </div>
-                <div v-else>
-
+                <div v-else-if="$root.isAdmin()">
+                    <button class="btn btn-danger" v-on:click="$emit('deleteReview', review.id)">Delete</button>
                 </div>
-                <div class="btn text-white" style="cursor: default;" v-bind:style="{'background-color': getStatusColor}">
-                    {{ review.status }}
+                <div v-else>
+                
                 </div>
             </div>
         </div>
