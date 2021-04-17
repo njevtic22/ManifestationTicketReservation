@@ -7,6 +7,7 @@ import model.Customer;
 import model.CustomerType;
 import model.Gender;
 import model.Salesman;
+import model.WithdrawalHistory;
 import repository.UserRepository;
 import useCase.customer.AddCustomerUseCase;
 import useCase.customer.DeleteCustomerUseCase;
@@ -19,8 +20,13 @@ import useCase.customer.command.UpdateCustomerCommand;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 public class CustomerService implements
         AddCustomerUseCase,
@@ -112,8 +118,50 @@ public class CustomerService implements
 
     @Override
     public Collection<Customer> getSuspiciousCustomers() {
-        // TODO: change this
-        return customerRepository.findAllByArchivedFalse();
+        Collection<Customer> customers = customerRepository.findAllByArchivedFalse();
+
+
+        Collection<Customer> suspiciousCustomers = new ArrayList<>();
+
+
+        for (Customer customer : customers) {
+            if (customer.getWithdrawalHistory().size() == 0)
+                continue;
+
+
+            List<Integer> months = new ArrayList<>(customer.getWithdrawalHistory().size());
+
+            for (WithdrawalHistory history : customer.getWithdrawalHistory()) {
+
+                String formattedDate = formatter.format(history.getWithdrawalDate());
+                String[] splitDate = formattedDate.split("\\.");
+                String monthStr = splitDate[1];
+
+                int month = Integer.parseInt(monthStr);
+                months.add(month);
+            }
+
+
+            Collections.sort(months);
+
+            int withdrawalNum = 1;
+            int previousMonth = months.get(0);
+            for (int i = 1; i < months.size(); i++) {
+                int currentMonth = months.get(i);
+                if (previousMonth == currentMonth) {
+                    withdrawalNum++;
+                }
+
+                if (withdrawalNum > 5) {
+                    suspiciousCustomers.add(customer);
+                    break;
+                }
+
+                previousMonth = currentMonth;
+            }
+        }
+
+        return suspiciousCustomers;
     }
 
     private boolean isUsernameAdminTaken(String usernameToValidate) {
