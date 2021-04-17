@@ -12,8 +12,28 @@ Vue.component("reviewService", {
     },
 
     methods: {
-        getReviews: function(manifestationId, page, size, successCallback, errorCallback) {
-            const url = `${this.baseUrl}/${manifestationId}?page=${page}&size=${size}`;
+        formSearchFilterUrl: function(searchFilterData) {
+            let url = "";
+            for (const key of Object.keys(searchFilterData)) {
+                if (searchFilterData[key]) {
+                    url += key + "=" + searchFilterData[key] + "&";
+                }
+            }
+
+            // Remove trailing &
+            if (url.length != 0) {
+                url = url.slice(0, -1);
+            }
+            return url;
+        },
+
+        getReviews: function(manifestationId, page, size, /* sortBy, sortOrder, searchData, */ filterData, successCallback, errorCallback) {
+            const filterUrl = this.formSearchFilterUrl(filterData);
+
+            let url = `${this.baseUrl}/${manifestationId}?page=${page}&size=${size}`;
+            if (filterUrl.length != 0)
+                url += `&${filterUrl}`;
+                
             axios
                 .get(url)
                 .then(response => { successCallback(response); })

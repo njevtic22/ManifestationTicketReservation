@@ -15,6 +15,7 @@ import exception.*;
 import exception.handler.*;
 import filterSearcher.HistoryFilterSearcher;
 import filterSearcher.ManifestationFilterSearcher;
+import filterSearcher.ReviewFilterSearcher;
 import filterSearcher.TicketFilterSearcher;
 import filterSearcher.UserFilterSearcher;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -291,6 +292,7 @@ public class ProgramFactory {
                     reviewService,
                     reviewService,
                     reviewService,
+                    new ReviewFilterSearcher(),
                     new Pagination()
             );
         }

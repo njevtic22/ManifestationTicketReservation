@@ -383,6 +383,7 @@ a#mainAnchor {
 
 .g-bg-secondary {
     background-color: #fafafa !important;
+    border-radius: 3%;
 }
 
 .u-shadow-v18 {
@@ -390,5 +391,6 @@ a#mainAnchor {
 }
 
 .media-comment {
-    margin-top: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }

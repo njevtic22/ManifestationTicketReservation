@@ -1,7 +1,9 @@
 package controller;
 
 import com.google.gson.Gson;
+import filterSearcher.ReviewFilterSearcher;
 import model.Review;
+import model.ReviewStatus;
 import model.User;
 import org.eclipse.jetty.http.HttpStatus;
 import request.AddReviewRequest;
@@ -40,6 +42,7 @@ public class ReviewController {
     private UpdateReviewUseCase updateReviewUseCase;
     private DeleteReviewUseCase deleteReviewUseCase;
     private CanLeaveReviewUseCase canLeaveReviewUseCase;
+    private final ReviewFilterSearcher reviewFilterSearcher;
     private Pagination pagination;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
@@ -48,13 +51,23 @@ public class ReviewController {
     private RoleEnsure ensureUserIsAdminOrSalesman = AuthenticationController::ensureUserIsAdminOrSalesman;
     private RoleEnsure ensureUserIsAdminOrCustomer = AuthenticationController::ensureUserIsAdminOrCustomer;
 
-    public ReviewController(Gson gson, AddReviewUseCase addReviewUseCase, GetAllReviewsUseCase getAllReviewsUseCase, UpdateReviewUseCase updateReviewUseCase, DeleteReviewUseCase deleteReviewUseCase, CanLeaveReviewUseCase canLeaveReviewUseCase, Pagination pagination) {
+    public ReviewController(
+            Gson gson,
+            AddReviewUseCase addReviewUseCase,
+            GetAllReviewsUseCase getAllReviewsUseCase,
+            UpdateReviewUseCase updateReviewUseCase,
+            DeleteReviewUseCase deleteReviewUseCase,
+            CanLeaveReviewUseCase canLeaveReviewUseCase,
+            ReviewFilterSearcher reviewFilterSearcher,
+            Pagination pagination
+    ) {
         this.gson = gson;
         this.addReviewUseCase = addReviewUseCase;
         this.getAllReviewsUseCase = getAllReviewsUseCase;
         this.updateReviewUseCase = updateReviewUseCase;
         this.deleteReviewUseCase = deleteReviewUseCase;
         this.canLeaveReviewUseCase = canLeaveReviewUseCase;
+        this.reviewFilterSearcher = reviewFilterSearcher;
         this.pagination = pagination;
         this.setUpRoutes();
     }
@@ -89,7 +102,9 @@ public class ReviewController {
 
     public Route getAll = (Request request, Response response) -> {
         Long manifestationId = SelfValidating.validId(request.params(":manifestationId"));
+
         List<Review> reviews = new ArrayList<>(getAllReviewsUseCase.getAllReviews(manifestationId));
+        applyFilter(request, reviews);
 
         PaginatedResponse<Review> paginatedReviews = pagination.doPagination(
                 reviews,
@@ -133,4 +148,9 @@ public class ReviewController {
         response.status(HttpStatus.OK_200);
         return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };
+
+    private void applyFilter(Request request, Collection<Review> reviews) {
+        if (request.queryParams("filterStatus") != null)
+            reviewFilterSearcher.filterByStatus(ReviewStatus.valueOf(request.queryParams("filterStatus")), reviews);
+    }
 }

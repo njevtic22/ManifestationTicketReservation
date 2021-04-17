@@ -174,6 +174,21 @@ Vue.component("manifestation", {
                         >
                             Add review
                         </button>
+                        <selectInput
+                            name="reviewType"
+                            labelText="Review type"
+                            v-bind:value="reviewTypeValueComputed"
+                            v-bind:options="reviewTypeOptionscomputed"
+                            class="form-group"
+                            style="width: 20%;"
+                            required
+
+                            
+                            v-if="$root.isAdmin() && $root.isSalesman()"
+
+                            v-on:select="changeReviewType($event)"
+                        >
+                        </selectInput>
                     </div>
                     <br/>
                     <div class="d-flex justify-content-between">
@@ -387,7 +402,8 @@ Vue.component("manifestation", {
                 totalNumberOfResults: 0,
                 hasPreviousPage: null,
                 hasNextPage: null
-            }
+            },
+            reviewTypeValue: "APPROVED"
         };
     },
 
@@ -434,6 +450,9 @@ Vue.component("manifestation", {
                 this.$route.params.id,
                 this.reviewPage,
                 this.reviewSizeStr,
+                {
+                    filterStatus: this.reviewTypeValue
+                },
                 successCallback,
                 errorCallback
             )
@@ -605,7 +624,12 @@ Vue.component("manifestation", {
         showReserveTicketsModal: function() {
             this.$refs.reserveTicketsModal.calculatePricesWithDiscount();
             $("#reserveTicketsModal").modal("show");
-        } 
+        },
+
+        changeReviewType: function(newReviewType) {
+            this.reviewTypeValue = newReviewType;
+            this.getReviews();
+        }
     },
 
     computed: {
@@ -619,10 +643,45 @@ Vue.component("manifestation", {
             // const roundNumber = Number(this.manifestation.avgRating);
             // const roundString = roundNumber.toFixed(2);
             return this.manifestation.avgRating.toFixed(2);
+        },
+
+        reviewTypeValueComputed() {
+            if (this.$root.isUserLoggedIn()) {
+                if (this.$root.isCustomer()) {
+                    return "APPROVED";
+                } else {
+                    return this.reviewTypeValue;
+                }
+            } else {
+                return "APPROVED";
+            }
+        },
+
+        reviewTypeOptionscomputed() {
+            if (this.$root.isUserLoggedIn()) {
+                if (this.$root.isCustomer()) {
+                    return ["APPROVED"];
+                } else {
+                    return [
+                        "",
+                        "CREATED",
+                        "APPROVED",
+                        "REJECTED"
+                    ];
+                }
+            } else {
+                return ["APPROVED"];
+            }
         }
     },
 
     mounted() {
+        if (this.$root.isCustomer()) {
+            this.reviewTypeValue = "APPROVED";
+        } else {
+            this.reviewTypeValue = "";
+        }
+
         const id = this.$route.params.id;
         this.getManifestation(id);
         this.getReviews();
