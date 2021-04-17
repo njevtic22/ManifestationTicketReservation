@@ -1,16 +1,15 @@
 # ManifestationTicketReservation
-Application for browsing and managing manifestations and reserving tickets.
+This is university project for course _Web Programming_. The purpose of application is to enable customers to browse manifestations and reserve tickets for them.
 
 ## Technologies
 * Java 12
-* Spark java backend framework
-* Vue.js v2.6.12 frontend framework
+* [Spark java](http://sparkjava.com/) backend framework
+* [Vue.js v2.6.12](https://vuejs.org/) frontend framework
 * [vue-yandex-maps](https://vue-yandex-maps.github.io/)
 * [jQuery v1.9.1](https://jquery.com/)
 * [Bootstrap v4.6 CSS framework](https://getbootstrap.com/)
 * [Gson v2.2.2](https://github.com/google/gson)
 * File system database - data is saved in json files
-* [Java faker](https://github.com/DiUS/java-faker) - for generating database
 
 ### Predefined data
 Database has test data to work with. Credentials for all users are 
