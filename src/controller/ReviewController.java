@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import model.Review;
 import model.User;
 import org.eclipse.jetty.http.HttpStatus;
 import request.AddReviewRequest;
@@ -17,8 +18,14 @@ import useCase.review.GetAllReviewsUseCase;
 import useCase.review.UpdateReviewUseCase;
 import useCase.review.command.AddReviewCommand;
 import useCase.review.command.UpdateReviewCommand;
+import utility.PaginatedResponse;
+import utility.Pagination;
 import utility.RoleEnsure;
 import validation.SelfValidating;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static spark.Spark.delete;
 import static spark.Spark.get;
@@ -33,6 +40,7 @@ public class ReviewController {
     private UpdateReviewUseCase updateReviewUseCase;
     private DeleteReviewUseCase deleteReviewUseCase;
     private CanLeaveReviewUseCase canLeaveReviewUseCase;
+    private Pagination pagination;
 
     private RoleEnsure ensureUserIsAdmin = AuthenticationController::ensureUserIsAdmin;
     private RoleEnsure ensureUserIsSalesman = AuthenticationController::ensureUserIsSalesman;
@@ -40,13 +48,14 @@ public class ReviewController {
     private RoleEnsure ensureUserIsAdminOrSalesman = AuthenticationController::ensureUserIsAdminOrSalesman;
     private RoleEnsure ensureUserIsAdminOrCustomer = AuthenticationController::ensureUserIsAdminOrCustomer;
 
-    public ReviewController(Gson gson, AddReviewUseCase addReviewUseCase, GetAllReviewsUseCase getAllReviewsUseCase, UpdateReviewUseCase updateReviewUseCase, DeleteReviewUseCase deleteReviewUseCase, CanLeaveReviewUseCase canLeaveReviewUseCase) {
+    public ReviewController(Gson gson, AddReviewUseCase addReviewUseCase, GetAllReviewsUseCase getAllReviewsUseCase, UpdateReviewUseCase updateReviewUseCase, DeleteReviewUseCase deleteReviewUseCase, CanLeaveReviewUseCase canLeaveReviewUseCase, Pagination pagination) {
         this.gson = gson;
         this.addReviewUseCase = addReviewUseCase;
         this.getAllReviewsUseCase = getAllReviewsUseCase;
         this.updateReviewUseCase = updateReviewUseCase;
         this.deleteReviewUseCase = deleteReviewUseCase;
         this.canLeaveReviewUseCase = canLeaveReviewUseCase;
+        this.pagination = pagination;
         this.setUpRoutes();
     }
 
@@ -54,8 +63,8 @@ public class ReviewController {
         path("api", () -> {
             path("/reviews", () -> {
                 post("", add);
-                get("", getAll, new GetAllReviewsTransformer(gson, new GetAllReviewsMapper()));
-                get("/canLeaveReview/:manifestationId", canLeaveReview);
+                get("/:manifestationId", getAll, new GetAllReviewsTransformer(gson, new GetAllReviewsMapper()));
+                post("/canLeaveReview/:manifestationId", canLeaveReview);
                 put("/:id", update);
                 delete("/:id", delete);
             });
@@ -79,13 +88,23 @@ public class ReviewController {
     };
 
     public Route getAll = (Request request, Response response) -> {
-        ensureUserIsAdminOrSalesman.ensure(request);
+        Long manifestationId = SelfValidating.validId(request.params(":manifestationId"));
+        List<Review> reviews = new ArrayList<>(getAllReviewsUseCase.getAllReviews(manifestationId));
+
+        PaginatedResponse<Review> paginatedReviews = pagination.doPagination(
+                reviews,
+                request.queryParams("page"),
+                request.queryParams("size")
+        );
+
         response.status(HttpStatus.OK_200);
-        return getAllReviewsUseCase.getAllReviews();
+        return paginatedReviews;
 
     };
 
     public Route canLeaveReview = (Request request, Response response) -> {
+        ensureUserIsCustomer.ensure(request);
+
         Long manifestationId = SelfValidating.validId(request.params(":manifestationId"));
         User user = request.attribute("user");
 

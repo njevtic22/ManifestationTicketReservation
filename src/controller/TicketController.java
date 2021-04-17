@@ -156,7 +156,7 @@ public class TicketController {
         applySearch(request, tickets);
         applySort(request, tickets);
 
-        PaginatedResponse<Ticket> paginatedTickets = pagination.paginate(
+        PaginatedResponse<Ticket> paginatedTickets = pagination.doPagination(
                 tickets,
                 request.queryParams("page"),
                 request.queryParams("size")

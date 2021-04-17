@@ -157,89 +157,94 @@ Vue.component("manifestation", {
             v-if="manifestation.hasEnded && manifestation.status == 'INACTIVE'"
         >
             <div class="col-sm card border-0 manifestation-details shadow-lg" style="margin-left: 10px; padding: 3%;">
-                <div class="d-flex justify-content-between">
+                <div v-if="reviews.data.length === 0">
                     <h1>Average rating: {{ parseRating }}</h1>
-                    <button 
-                        class="btn btn-primary" 
-                        v-if="$root.isCustomer() && manifestation.status === 'INACTIVE' && canLeaveReview"
-
-                        data-toggle="modal"
-                        data-target="#addReviewModal"
-                    >
-                        Add review
-                    </button>
-                </div>
-                <br/>
-                <div class="d-flex justify-content-between">
-                    <pageSizeSelect
-                        class="d-flex justify-content-center"
-
-                        name="sizeInput"
-                        v-bind:value="reviewSizeStr"
-                        v-bind:options="reivewSizeOptions"
-                        v-bind:page="reviewPage"
-                        v-bind:size="reviewSize"
-                        v-bind:currentDataSize="reviews.data.length"
-                        v-bind:totalNumberOfResults="reviews.totalNumberOfResults"
-                        ref="pageSizeSelect"
-
-                        v-on:select="changeSize($event)"
-                    >
-                    </pageSizeSelect>
-
-                    <pagination
-                        class="d-flex justify-content-center"
-
-                        v-bind:currentPage="reviewPage"
-                        v-bind:hasPrevious="reviews.hasPreviousPage"
-                        v-bind:hasNext="reviews.hasNextPage"
-
-                        v-on:previous="previousPage"
-                        v-on:next="nextPage"
-                        v-on:to="toPage($event)"
-                    >
-                    </pagination>
-                </div>
-                
-                <div v-if="reviews.data.length !== 0">
-                    <div v-for="x in reviews.data">
-                        {{ x }} TODO: show Review
-                    </div>
+                    <br/>
+                    <h3>No reivews</h3>
                 </div>
                 <div v-else>
-                    No reviews
-                </div>
+                    <div class="d-flex justify-content-between">
+                        <h1>Average rating: {{ parseRating }}</h1>
+                        <button 
+                            class="btn btn-primary" 
+                            v-if="$root.isCustomer() && manifestation.status === 'INACTIVE' && canLeaveReview"
 
-                <br/>
-                <div class="d-flex justify-content-between">
-                    <pageSizeSelect
-                        class="d-flex justify-content-center"
+                            data-toggle="modal"
+                            data-target="#addReviewModal"
+                        >
+                            Add review
+                        </button>
+                    </div>
+                    <br/>
+                    <div class="d-flex justify-content-between">
+                        <pageSizeSelect
+                            class="d-flex justify-content-center"
 
-                        name="sizeInput"
-                        v-bind:value="reviewSizeStr"
-                        v-bind:options="reivewSizeOptions"
-                        v-bind:page="reviewPage"
-                        v-bind:size="reviewSize"
-                        v-bind:currentDataSize="reviews.data.length"
-                        v-bind:totalNumberOfResults="reviews.totalNumberOfResults"
-                        ref="pageSizeSelect"
+                            name="sizeInput"
+                            v-bind:value="reviewSizeStr"
+                            v-bind:options="reivewSizeOptions"
+                            v-bind:page="reviewPage"
+                            v-bind:size="reviewSize"
+                            v-bind:currentDataSize="reviews.data.length"
+                            v-bind:totalNumberOfResults="reviews.totalNumberOfResults"
+                            ref="pageSizeSelect"
 
-                        v-on:select="changeSize($event)"
-                    >
-                    </pageSizeSelect>
+                            v-on:select="changeSize($event)"
+                        >
+                        </pageSizeSelect>
 
-                    <pagination
-                        class="d-flex justify-content-center"
+                        <pagination
+                            class="d-flex justify-content-center"
 
-                        v-bind:currentPage="reviewPage"
-                        v-bind:hasPrevious="reviews.hasPreviousPage"
-                        v-bind:hasNext="reviews.hasNextPage"
+                            v-bind:currentPage="reviewPage"
+                            v-bind:hasPrevious="reviews.hasPreviousPage"
+                            v-bind:hasNext="reviews.hasNextPage"
 
-                        v-on:previous="previousPage"
-                        v-on:next="nextPage"
-                        v-on:to="toPage($event)"
-                    >
-                    </pagination>
+                            v-on:previous="previousPage"
+                            v-on:next="nextPage"
+                            v-on:to="toPage($event)"
+                        >
+                        </pagination>
+                    </div>
+                    
+                    <div v-for="oneReview in reviews.data">
+                        <review
+                            v-bind:review="oneReview"
+                        >
+                        </review>
+                    </div>
+
+                    <br/>
+                    <div class="d-flex justify-content-between">
+                        <pageSizeSelect
+                            class="d-flex justify-content-center"
+
+                            name="sizeInput"
+                            v-bind:value="reviewSizeStr"
+                            v-bind:options="reivewSizeOptions"
+                            v-bind:page="reviewPage"
+                            v-bind:size="reviewSize"
+                            v-bind:currentDataSize="reviews.data.length"
+                            v-bind:totalNumberOfResults="reviews.totalNumberOfResults"
+                            ref="pageSizeSelect"
+
+                            v-on:select="changeSize($event)"
+                        >
+                        </pageSizeSelect>
+
+                        <pagination
+                            class="d-flex justify-content-center"
+
+                            v-bind:currentPage="reviewPage"
+                            v-bind:hasPrevious="reviews.hasPreviousPage"
+                            v-bind:hasNext="reviews.hasNextPage"
+
+                            v-on:previous="previousPage"
+                            v-on:next="nextPage"
+                            v-on:to="toPage($event)"
+                        >
+                        </pagination>
+                    </div>
                 </div>
             </div>
         </div>
@@ -378,16 +383,10 @@ Vue.component("manifestation", {
             ],
 
             reviews: {
-                data: [
-                    0, 
-                    1, 
-                    2, 
-                    3, 
-                    4
-                ],
-                totalNumberOfResults: 10,
-                hasPreviousPage: true,
-                hasNextPage: true
+                data: [],
+                totalNumberOfResults: 0,
+                hasPreviousPage: null,
+                hasNextPage: null
             }
         };
     },
@@ -424,7 +423,20 @@ Vue.component("manifestation", {
         },
 
         getReviews: function() {
-            console.log("Implement this");
+            const successCallback = (response) => {
+                this.reviews = response.data;
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.reviewService.getReviews(
+                this.$route.params.id,
+                this.reviewPage,
+                this.reviewSizeStr,
+                successCallback,
+                errorCallback
+            )
         },
 
         getManifestation: function(manifestationId) {

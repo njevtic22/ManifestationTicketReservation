@@ -62,8 +62,10 @@ public class ReviewService implements
     }
 
     @Override
-    public Collection<Review> getAllReviews() {
-        return reviewRepository.findAllByArchivedFalse();
+    public Collection<Review> getAllReviews(Long manifestationId) {
+        Collection<Review> reviews = reviewRepository.findAllByArchivedFalse();
+        reviews.removeIf(review -> !review.getManifestation().getId().equals(manifestationId));
+        return reviews;
     }
 
     @Override

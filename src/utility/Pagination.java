@@ -30,7 +30,7 @@ public class Pagination {
         return size;
     }
 
-    public <T> PaginatedResponse<T> paginate(List<T> elements, String pageStr, String sizeStr) {
+    public <T> PaginatedResponse<T> doPagination(List<T> elements, String pageStr, String sizeStr) {
         int page = parsePage(pageStr);
 
         if (sizeStr.toLowerCase().equals("all"))
@@ -43,10 +43,10 @@ public class Pagination {
 
         int size = parseSize(sizeStr);
 
-        return paginate(elements, page, size);
+        return doPagination(elements, page, size);
     }
 
-    public <T> PaginatedResponse<T> paginate(List<T> elements, int page, int size) {
+    public <T> PaginatedResponse<T> doPagination(List<T> elements, int page, int size) {
         if (page < 0 || size < 1)
             throw new IllegalArgumentException("Invalid page and size arguments.");
 

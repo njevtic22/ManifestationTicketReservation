@@ -5,5 +5,5 @@ import model.Review;
 import java.util.Collection;
 
 public interface GetAllReviewsUseCase {
-    Collection<Review> getAllReviews();
+    Collection<Review> getAllReviews(Long manifestationId);
 }

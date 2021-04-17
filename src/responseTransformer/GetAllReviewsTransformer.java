@@ -5,8 +5,10 @@ import model.Review;
 import responseTransformer.dtoMappers.DTOMapper;
 import spark.ResponseTransformer;
 import useCase.review.dto.GetAllReviewsDTO;
+import utility.PaginatedResponse;
 
 import java.util.Collection;
+import java.util.List;
 
 public class GetAllReviewsTransformer implements ResponseTransformer {
     private final Gson gson;
@@ -19,7 +21,16 @@ public class GetAllReviewsTransformer implements ResponseTransformer {
 
     @Override
     public String render(Object o) throws Exception {
-        Collection<Review> reviews = (Collection<Review>) o;
-        return gson.toJson(mapper.toDTOList(reviews));
+        PaginatedResponse<Review> paginatedResponse = (PaginatedResponse<Review>) o;
+        List<GetAllReviewsDTO> reviewsDTO = mapper.toDTOList(paginatedResponse.data);
+
+        return gson.toJson(
+                new PaginatedResponse<>(
+                        reviewsDTO,
+                        paginatedResponse.totalNumberOfResults,
+                        paginatedResponse.hasPreviousPage,
+                        paginatedResponse.hasNextPage
+                )
+        );
     }
 }

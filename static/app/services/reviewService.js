@@ -12,10 +12,18 @@ Vue.component("reviewService", {
     },
 
     methods: {
+        getReviews: function(manifestationId, page, size, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${manifestationId}?page=${page}&size=${size}`;
+            axios
+                .get(url)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
+        },
+
         canLeaveReview: function(manifestationId, successCallback, errorCallback) {
             const url = `${this.baseUrl}/canLeaveReview/${manifestationId}`;
             axios
-                .get(url)
+                .post(url)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
         }

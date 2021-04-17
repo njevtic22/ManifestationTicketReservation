@@ -355,3 +355,40 @@ a#mainAnchor {
 .manifestation-description-scroll {
     height: 800px;
 }
+
+.review-description-scroll {
+    height: 300px;
+}
+
+/* Review source https://www.bootdey.com/snippets/view/bs4-beta-comment-list */
+.g-mr-15 {
+    margin-right: 1rem !important;
+}
+
+.g-mt-3 {
+    margin-top: 0.2rem !important;
+}
+
+.g-height-50 {
+    height: 50px;
+}
+
+.g-width-50 {
+    width: 50px !important;
+}
+
+.g-pa-30 {
+    padding: 2rem !important;
+}
+
+.g-bg-secondary {
+    background-color: #fafafa !important;
+}
+
+.u-shadow-v18 {
+    /* box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15); */
+}
+
+.media-comment {
+    margin-top: 20px;
+}

@@ -176,7 +176,7 @@ public class ManifestationController {
         applySearch(request, manifestations);
         applySort(request, manifestations);
 
-        PaginatedResponse<Manifestation> paginatedManifestations = pagination.paginate(
+        PaginatedResponse<Manifestation> paginatedManifestations = pagination.doPagination(
                 manifestations,
                 request.queryParams("page"),
                 request.queryParams("size")
@@ -195,7 +195,7 @@ public class ManifestationController {
         applySearch(request, manifestations);
         applySort(request, manifestations);
 
-        PaginatedResponse<Manifestation> paginatedManifestations = pagination.paginate(
+        PaginatedResponse<Manifestation> paginatedManifestations = pagination.doPagination(
                 manifestations,
                 request.queryParams("page"),
                 request.queryParams("size")

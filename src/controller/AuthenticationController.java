@@ -115,6 +115,11 @@ public class AuthenticationController {
             } else if (request.uri().equals("/api/authentication/registerCustomer")) {
                 // Ignoring
             }
+            else if (request.uri().startsWith("/api/reviews")) {
+                if (!request.requestMethod().equals("GET")) {
+                    throw new TokenNotFoundException("No token id found");
+                }
+            }
 
 //            else if (request.uri().equals("/api/admins/database")) {
 //                // Ignoring

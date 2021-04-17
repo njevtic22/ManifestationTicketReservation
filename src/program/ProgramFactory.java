@@ -290,7 +290,8 @@ public class ProgramFactory {
                     reviewService,
                     reviewService,
                     reviewService,
-                    reviewService
+                    reviewService,
+                    new Pagination()
             );
         }
         return reviewController;

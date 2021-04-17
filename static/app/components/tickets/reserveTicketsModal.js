@@ -261,7 +261,9 @@ Vue.component("reserveTicketsModal", {
     },
 
     mounted() {
-        this.getCustomerType();
+        if (this.$root.isCustomer()) {
+            this.getCustomerType();
+        }
     },
 
     destroyed() {}

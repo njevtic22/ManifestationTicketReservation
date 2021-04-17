@@ -76,7 +76,7 @@ public class WithdrawalHistoryController {
         applySearch(request, histories);
         applySort(request, histories);
 
-        PaginatedResponse<WithdrawalHistory> paginatedHistories = pagination.paginate(
+        PaginatedResponse<WithdrawalHistory> paginatedHistories = pagination.doPagination(
                 histories,
                 request.queryParams("page"),
                 request.queryParams("size")
