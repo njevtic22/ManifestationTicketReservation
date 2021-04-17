@@ -40,6 +40,14 @@ Vue.component("reviewService", {
                 .catch(error => { errorCallback(error); });
         },
 
+        addReview: function(manifestationId, reviewToAdd, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${manifestationId}`;
+            axios
+                .post(url, reviewToAdd)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
+        },
+
         canLeaveReview: function(manifestationId, successCallback, errorCallback) {
             const url = `${this.baseUrl}/canLeaveReview/${manifestationId}`;
             axios

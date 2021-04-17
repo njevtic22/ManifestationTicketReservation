@@ -18,6 +18,7 @@ Vue.component("review", {
                     text-wrap
                     text-break
                     "
+                v-bind:style="{'height': reviewHeight}"
             >
                 {{ review.comment }}
             </p>
@@ -52,6 +53,17 @@ Vue.component("review", {
     computed: {
         getStatusColor() {
             return this.StatusColors[this.review.status];
+        },
+
+        reviewHeight() {
+            const revLength = this.review.comment.length;
+            if (revLength <= 300) {
+                return "50px";
+            } else if (revLength <= 1000) {
+                return "100px";
+            } else {
+                return "";
+            }
         }
     },
 

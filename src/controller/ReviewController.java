@@ -2,6 +2,7 @@ package controller;
 
 import com.google.gson.Gson;
 import filterSearcher.ReviewFilterSearcher;
+import model.Customer;
 import model.Review;
 import model.ReviewStatus;
 import model.User;
@@ -75,7 +76,7 @@ public class ReviewController {
     private void setUpRoutes() {
         path("api", () -> {
             path("/reviews", () -> {
-                post("", add);
+                post("/:manifestationId", add);
                 get("/:manifestationId", getAll, new GetAllReviewsTransformer(gson, new GetAllReviewsMapper()));
                 post("/canLeaveReview/:manifestationId", canLeaveReview);
                 put("/:id", update);
@@ -87,12 +88,16 @@ public class ReviewController {
     public Route add = (Request request, Response response) -> {
         ensureUserIsCustomer.ensure(request);
 
+
+        Customer customer = request.attribute("user");
+        Long manifestationId = SelfValidating.validId(request.params(":manifestationId"));
+
         AddReviewRequest requestBody = gson.fromJson(request.body(), AddReviewRequest.class);
         AddReviewCommand command = new AddReviewCommand(
                 requestBody.comment,
                 requestBody.rating,
-                requestBody.authorId,
-                requestBody.manifestationId
+                customer.getId(),
+                manifestationId
         );
         addReviewUseCase.addReview(command);
         response.status(HttpStatus.CREATED_201);

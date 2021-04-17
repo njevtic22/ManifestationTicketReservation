@@ -306,6 +306,8 @@ Vue.component("manifestation", {
         <addReviewModal
             id="addReviewModal"
             ref="addReviewModal"
+
+            v-on:addReview="addReview($event)"
         >
         </addReviewModal>
 
@@ -629,6 +631,24 @@ Vue.component("manifestation", {
             this.reviewTypeValue = newReviewType;
             this.reviewPage = 0;
             this.getReviews();
+        },
+
+        addReview: function(reviewToAdd) {
+            const successCallback = (response) => {
+                this.getManifestation(this.manifestation.id);
+                this.getReviews();
+                this.$root.successToast("Manifestation is rejected");
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.reviewService.addReview(
+                this.$route.params.id,
+                reviewToAdd,
+                successCallback,
+                errorCallback
+            );
         }
     },
 
