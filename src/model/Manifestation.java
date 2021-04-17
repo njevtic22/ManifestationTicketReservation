@@ -163,6 +163,7 @@ public class Manifestation implements Cloneable {
                 this.status,
                 this.type,
                 this.archived,
+                // Shallow copy
                 this.location,
                 this.image,
                 this.tickets,

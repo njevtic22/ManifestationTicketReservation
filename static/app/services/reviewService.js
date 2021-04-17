@@ -54,6 +54,14 @@ Vue.component("reviewService", {
                 .post(url)
                 .then(response => { successCallback(response); })
                 .catch(error => { errorCallback(error); });
+        },
+
+        approveOrReject: function(reviewId, newStatus, successCallback, errorCallback) {
+            const url = `${this.baseUrl}/${reviewId}/approveOrReject`;
+            axios
+                .put(url, newStatus)
+                .then(response => { successCallback(response); })
+                .catch(error => { errorCallback(error); });
         }
     },
 

@@ -223,6 +223,10 @@ Vue.component("manifestation", {
                     <div v-for="oneReview in reviews.data">
                         <review
                             v-bind:review="oneReview"
+                            v-bind:belognsToSalesman="belognsToSalesman"
+
+                            v-on:approveReview="approveReview($event)"
+                            v-on:rejectReview="rejectReview($event)"
                         >
                         </review>
                     </div>
@@ -634,9 +638,7 @@ Vue.component("manifestation", {
 
         addReview: function(reviewToAdd) {
             const successCallback = (response) => {
-                this.getManifestation(this.manifestation.id);
-                this.getReviews();
-                this.$root.successToast("Manifestation is rejected");
+                this.$root.successToast("Review is created. But salesman must approve it.");
             };
             const errorCallback = (error) => {
                 this.$root.defaultCatchError(error);
@@ -645,6 +647,41 @@ Vue.component("manifestation", {
             this.$refs.reviewService.addReview(
                 this.$route.params.id,
                 reviewToAdd,
+                successCallback,
+                errorCallback
+            );
+        },
+
+        approveReview: function(reviewId) {
+            const successCallback = (response) => {
+                this.getReviews();
+                this.getManifestation(this.manifestation.id);
+                this.$root.successToast("Review is approved");
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.reviewService.approveOrReject(
+                reviewId,
+                "APPROVED",
+                successCallback,
+                errorCallback
+            );
+        },
+
+        rejectReview: function(reviewId) {
+            const successCallback = (response) => {
+                this.getReviews();
+                this.$root.successToast("Review is rejected");
+            };
+            const errorCallback = (error) => {
+                this.$root.defaultCatchError(error);
+            };
+
+            this.$refs.reviewService.approveOrReject(
+                reviewId,
+                "REJECTED",
                 successCallback,
                 errorCallback
             );

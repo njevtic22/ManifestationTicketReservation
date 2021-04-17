@@ -125,11 +125,11 @@ Vue.component("addReviewModal", {
         addReview: function() {
             if (this.validateForm()) {
                 this.removeValidation();
-                this.closeModal();
                 this.$emit("addReview", {
                     rating: Number(this.reviewToAdd.rating),
                     comment: this.reviewToAdd.comment
                 });
+                this.closeModal();
             }
         },
 
@@ -143,7 +143,10 @@ Vue.component("addReviewModal", {
         },
 
         clearModal: function() {
-
+            this.reviewToAdd = {
+                rating: 3,
+                comment: ""
+            };
         }
     },
 

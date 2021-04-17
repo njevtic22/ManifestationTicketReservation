@@ -13,11 +13,13 @@ import model.User;
 import repository.Repository;
 import repository.UserRepository;
 import useCase.review.AddReviewUseCase;
+import useCase.review.ApproveOrRejectReviewUseCase;
 import useCase.review.CanLeaveReviewUseCase;
 import useCase.review.DeleteReviewUseCase;
 import useCase.review.GetAllReviewsUseCase;
 import useCase.review.UpdateReviewUseCase;
 import useCase.review.command.AddReviewCommand;
+import useCase.review.command.ApproveOrRejectReviewCommand;
 import useCase.review.command.UpdateReviewCommand;
 
 import java.util.Collection;
@@ -27,7 +29,8 @@ public class ReviewService implements
         GetAllReviewsUseCase,
         UpdateReviewUseCase,
         DeleteReviewUseCase,
-        CanLeaveReviewUseCase {
+        CanLeaveReviewUseCase,
+        ApproveOrRejectReviewUseCase {
     private final Repository<Review, Long> reviewRepository;
     private final Repository<Manifestation, Long> manifestationRepository;
     private final UserRepository<Customer> customerRepository;
@@ -108,5 +111,15 @@ public class ReviewService implements
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void approveOrReject(ApproveOrRejectReviewCommand command) {
+        Review review = reviewRepository.findByIdAndArchivedFalse(command.id)
+                .orElseThrow(() -> new ReviewNotFoundException(command.id));
+
+        review.setStatus(ReviewStatus.valueOf(command.newStatus));
+
+        reviewRepository.save(review);
     }
 }

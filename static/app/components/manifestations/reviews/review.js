@@ -23,12 +23,18 @@ Vue.component("review", {
                 {{ review.comment }}
             </p>
 
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-between">
+                <div v-if="belognsToSalesman && review.status === 'CREATED'">
+                    <button class="btn btn-success" v-on:click="$emit('approveReview', review.id)">Approve</button>
+                    <button class="btn btn-danger" v-on:click="$emit('rejectReview', review.id)">Reject</button>
+                </div>
+                <div v-else>
+
+                </div>
                 <div class="btn text-white" style="cursor: default;" v-bind:style="{'background-color': getStatusColor}">
                     {{ review.status }}
                 </div>
             </div>
-        
         </div>
     </div>
     `,
@@ -36,6 +42,10 @@ Vue.component("review", {
     props: {
         review: {
             type: Object,
+            required: true
+        },
+        belognsToSalesman: {
+            type: Boolean,
             required: true
         }
     },

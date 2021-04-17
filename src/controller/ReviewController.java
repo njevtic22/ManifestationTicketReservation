@@ -15,11 +15,13 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import useCase.review.AddReviewUseCase;
+import useCase.review.ApproveOrRejectReviewUseCase;
 import useCase.review.CanLeaveReviewUseCase;
 import useCase.review.DeleteReviewUseCase;
 import useCase.review.GetAllReviewsUseCase;
 import useCase.review.UpdateReviewUseCase;
 import useCase.review.command.AddReviewCommand;
+import useCase.review.command.ApproveOrRejectReviewCommand;
 import useCase.review.command.UpdateReviewCommand;
 import utility.PaginatedResponse;
 import utility.Pagination;
@@ -43,6 +45,7 @@ public class ReviewController {
     private UpdateReviewUseCase updateReviewUseCase;
     private DeleteReviewUseCase deleteReviewUseCase;
     private CanLeaveReviewUseCase canLeaveReviewUseCase;
+    private ApproveOrRejectReviewUseCase approveOrRejectUseCase;
     private final ReviewFilterSearcher reviewFilterSearcher;
     private Pagination pagination;
 
@@ -59,7 +62,7 @@ public class ReviewController {
             UpdateReviewUseCase updateReviewUseCase,
             DeleteReviewUseCase deleteReviewUseCase,
             CanLeaveReviewUseCase canLeaveReviewUseCase,
-            ReviewFilterSearcher reviewFilterSearcher,
+            ApproveOrRejectReviewUseCase approveOrRejectUseCase, ReviewFilterSearcher reviewFilterSearcher,
             Pagination pagination
     ) {
         this.gson = gson;
@@ -68,6 +71,7 @@ public class ReviewController {
         this.updateReviewUseCase = updateReviewUseCase;
         this.deleteReviewUseCase = deleteReviewUseCase;
         this.canLeaveReviewUseCase = canLeaveReviewUseCase;
+        this.approveOrRejectUseCase = approveOrRejectUseCase;
         this.reviewFilterSearcher = reviewFilterSearcher;
         this.pagination = pagination;
         this.setUpRoutes();
@@ -80,6 +84,7 @@ public class ReviewController {
                 get("/:manifestationId", getAll, new GetAllReviewsTransformer(gson, new GetAllReviewsMapper()));
                 post("/canLeaveReview/:manifestationId", canLeaveReview);
                 put("/:id", update);
+                put("/:id/approveOrReject", approveOrReject);
                 delete("/:id", delete);
             });
         });
@@ -150,6 +155,19 @@ public class ReviewController {
     public Route delete = (Request request, Response response) -> {
         Long id = SelfValidating.validId(request.params(":id"));
         deleteReviewUseCase.deleteReview(id);
+        response.status(HttpStatus.OK_200);
+        return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
+    };
+
+
+    public Route approveOrReject = (Request request, Response response) -> {
+        ensureUserIsSalesman.ensure(request);
+
+        ApproveOrRejectReviewCommand command = new ApproveOrRejectReviewCommand(
+                SelfValidating.validId(request.params(":id")),
+                request.body()
+        );
+        approveOrRejectUseCase.approveOrReject(command);
         response.status(HttpStatus.OK_200);
         return HttpStatus.OK_200 + " " + HttpStatus.Code.OK.getMessage();
     };

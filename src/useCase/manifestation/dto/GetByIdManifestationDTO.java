@@ -1,6 +1,8 @@
 package useCase.manifestation.dto;
 
 import model.Manifestation;
+import model.Review;
+import model.ReviewStatus;
 import model.TicketStatus;
 
 import java.io.File;
@@ -77,8 +79,14 @@ public class GetByIdManifestationDTO {
 
         this.avgRating = 0;
         if (!manifestation.getReviews().isEmpty()) {
-            manifestation.getReviews().forEach(review -> avgRating += review.getRating());
-            this.avgRating = this.avgRating / manifestation.getReviews().size();
+            int reviewToDivide = 0;
+            for (Review review : manifestation.getReviews()) {
+                if (review.getStatus() == ReviewStatus.APPROVED) {
+                    avgRating += review.getRating();
+                    reviewToDivide++;
+                }
+            }
+            this.avgRating = this.avgRating / reviewToDivide;
         }
 
 
