@@ -184,8 +184,7 @@ Vue.component("manifestation", {
                             required
 
                             
-                            v-if="$root.isAdmin() && $root.isSalesman()"
-
+                            v-if="$root.isAdmin() || $root.isSalesman()"
                             v-on:select="changeReviewType($event)"
                         >
                         </selectInput>
@@ -403,7 +402,7 @@ Vue.component("manifestation", {
                 hasPreviousPage: null,
                 hasNextPage: null
             },
-            reviewTypeValue: "APPROVED"
+            reviewTypeValue: ""
         };
     },
 
@@ -628,6 +627,7 @@ Vue.component("manifestation", {
 
         changeReviewType: function(newReviewType) {
             this.reviewTypeValue = newReviewType;
+            this.reviewPage = 0;
             this.getReviews();
         }
     },
@@ -676,11 +676,7 @@ Vue.component("manifestation", {
     },
 
     mounted() {
-        if (this.$root.isCustomer()) {
-            this.reviewTypeValue = "APPROVED";
-        } else {
-            this.reviewTypeValue = "";
-        }
+        this.reviewTypeValue = this.reviewTypeValueComputed;
 
         const id = this.$route.params.id;
         this.getManifestation(id);
