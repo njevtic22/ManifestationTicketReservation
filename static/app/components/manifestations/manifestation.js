@@ -157,108 +157,107 @@ Vue.component("manifestation", {
             v-if="manifestation.hasEnded && manifestation.status == 'INACTIVE'"
         >
             <div class="col-sm card border-0 manifestation-details shadow-lg" style="margin-left: 10px; padding: 3%;">
-                <div v-if="reviews.data.length === 0">
+                
+                <div class="d-flex justify-content-between">
                     <h1>Average rating: {{ parseRating }}</h1>
-                    <br/>
+                    <button 
+                        class="btn btn-primary" 
+                        v-if="$root.isCustomer() && manifestation.status === 'INACTIVE' && canLeaveReview"
+
+                        data-toggle="modal"
+                        data-target="#addReviewModal"
+                    >
+                        Add review
+                    </button>
+                    <selectInput
+                        name="reviewType"
+                        labelText="Review type"
+                        v-bind:value="reviewTypeValueComputed"
+                        v-bind:options="reviewTypeOptionscomputed"
+                        class="form-group"
+                        style="width: 20%;"
+                        required
+
+                        
+                        v-if="$root.isAdmin() || $root.isSalesman()"
+                        v-on:select="changeReviewType($event)"
+                    >
+                    </selectInput>
+                </div>
+                <br/>
+                <div class="d-flex justify-content-between">
+                    <pageSizeSelect
+                        class="d-flex justify-content-center"
+
+                        name="sizeInput"
+                        v-bind:value="reviewSizeStr"
+                        v-bind:options="reivewSizeOptions"
+                        v-bind:page="reviewPage"
+                        v-bind:size="reviewSize"
+                        v-bind:currentDataSize="reviews.data.length"
+                        v-bind:totalNumberOfResults="reviews.totalNumberOfResults"
+                        ref="pageSizeSelect"
+
+                        v-on:select="changeSize($event)"
+                    >
+                    </pageSizeSelect>
+
+                    <pagination
+                        class="d-flex justify-content-center"
+
+                        v-bind:currentPage="reviewPage"
+                        v-bind:hasPrevious="reviews.hasPreviousPage"
+                        v-bind:hasNext="reviews.hasNextPage"
+
+                        v-on:previous="previousPage"
+                        v-on:next="nextPage"
+                        v-on:to="toPage($event)"
+                    >
+                    </pagination>
+                </div>
+
+                <div v-if="reviews.data.length === 0">
                     <h3>No reivews</h3>
                 </div>
                 <div v-else>
-                    <div class="d-flex justify-content-between">
-                        <h1>Average rating: {{ parseRating }}</h1>
-                        <button 
-                            class="btn btn-primary" 
-                            v-if="$root.isCustomer() && manifestation.status === 'INACTIVE' && canLeaveReview"
-
-                            data-toggle="modal"
-                            data-target="#addReviewModal"
-                        >
-                            Add review
-                        </button>
-                        <selectInput
-                            name="reviewType"
-                            labelText="Review type"
-                            v-bind:value="reviewTypeValueComputed"
-                            v-bind:options="reviewTypeOptionscomputed"
-                            class="form-group"
-                            style="width: 20%;"
-                            required
-
-                            
-                            v-if="$root.isAdmin() || $root.isSalesman()"
-                            v-on:select="changeReviewType($event)"
-                        >
-                        </selectInput>
-                    </div>
-                    <br/>
-                    <div class="d-flex justify-content-between">
-                        <pageSizeSelect
-                            class="d-flex justify-content-center"
-
-                            name="sizeInput"
-                            v-bind:value="reviewSizeStr"
-                            v-bind:options="reivewSizeOptions"
-                            v-bind:page="reviewPage"
-                            v-bind:size="reviewSize"
-                            v-bind:currentDataSize="reviews.data.length"
-                            v-bind:totalNumberOfResults="reviews.totalNumberOfResults"
-                            ref="pageSizeSelect"
-
-                            v-on:select="changeSize($event)"
-                        >
-                        </pageSizeSelect>
-
-                        <pagination
-                            class="d-flex justify-content-center"
-
-                            v-bind:currentPage="reviewPage"
-                            v-bind:hasPrevious="reviews.hasPreviousPage"
-                            v-bind:hasNext="reviews.hasNextPage"
-
-                            v-on:previous="previousPage"
-                            v-on:next="nextPage"
-                            v-on:to="toPage($event)"
-                        >
-                        </pagination>
-                    </div>
-                    
                     <div v-for="oneReview in reviews.data">
                         <review
                             v-bind:review="oneReview"
                         >
                         </review>
                     </div>
+                </div>
 
-                    <br/>
-                    <div class="d-flex justify-content-between">
-                        <pageSizeSelect
-                            class="d-flex justify-content-center"
+                <br/>
+                <div class="d-flex justify-content-between">
+                    <pageSizeSelect
+                        class="d-flex justify-content-center"
 
-                            name="sizeInput"
-                            v-bind:value="reviewSizeStr"
-                            v-bind:options="reivewSizeOptions"
-                            v-bind:page="reviewPage"
-                            v-bind:size="reviewSize"
-                            v-bind:currentDataSize="reviews.data.length"
-                            v-bind:totalNumberOfResults="reviews.totalNumberOfResults"
-                            ref="pageSizeSelect"
+                        name="sizeInput"
+                        v-bind:value="reviewSizeStr"
+                        v-bind:options="reivewSizeOptions"
+                        v-bind:page="reviewPage"
+                        v-bind:size="reviewSize"
+                        v-bind:currentDataSize="reviews.data.length"
+                        v-bind:totalNumberOfResults="reviews.totalNumberOfResults"
+                        ref="pageSizeSelect"
 
-                            v-on:select="changeSize($event)"
-                        >
-                        </pageSizeSelect>
+                        v-on:select="changeSize($event)"
+                    >
+                    </pageSizeSelect>
 
-                        <pagination
-                            class="d-flex justify-content-center"
+                    <pagination
+                        class="d-flex justify-content-center"
 
-                            v-bind:currentPage="reviewPage"
-                            v-bind:hasPrevious="reviews.hasPreviousPage"
-                            v-bind:hasNext="reviews.hasNextPage"
+                        v-bind:currentPage="reviewPage"
+                        v-bind:hasPrevious="reviews.hasPreviousPage"
+                        v-bind:hasNext="reviews.hasNextPage"
 
-                            v-on:previous="previousPage"
-                            v-on:next="nextPage"
-                            v-on:to="toPage($event)"
-                        >
-                        </pagination>
-                    </div>
+                        v-on:previous="previousPage"
+                        v-on:next="nextPage"
+                        v-on:to="toPage($event)"
+                    >
+                    </pagination>
                 </div>
             </div>
         </div>
