@@ -70,8 +70,5 @@ bin/
 .idea/**/dbnavigator.xml
 
 
-# documentation
-doc/
-
 # locations
 files/Locations.csv
