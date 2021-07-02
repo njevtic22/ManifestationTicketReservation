@@ -110,26 +110,27 @@ public class JSONDbContext {
     }
 
     public InitDatabaseUseCase getInitDatabaseService() {
-        return new InitJSONDatabaseService(
-                this.directoryPath + this.separator + "Locations.csv",
-                ProgramFactory.DATE_FORMAT,
-
-                adminRepository.getData(),
-                salesmanRepository.getData(),
-                customerRepository.getData(),
-                ticketRepository.getData(),
-                manifestationRepository.getData(),
-                withdrawalHistoryRepository.getData(),
-                reviewRepository.getData(),
-
-                adminFileSerializer,
-                salesmanFileSerializer,
-                customerFileSerializer,
-                ticketFileSerializer,
-                manifestationFileSerializer,
-                withdrawalHistoryFileSerializer,
-                reviewFileSerializer
-        );
+//        return new InitJSONDatabaseService(
+//                this.directoryPath + this.separator + "Locations.csv",
+//                ProgramFactory.DATE_FORMAT,
+//
+//                adminRepository.getData(),
+//                salesmanRepository.getData(),
+//                customerRepository.getData(),
+//                ticketRepository.getData(),
+//                manifestationRepository.getData(),
+//                withdrawalHistoryRepository.getData(),
+//                reviewRepository.getData(),
+//
+//                adminFileSerializer,
+//                salesmanFileSerializer,
+//                customerFileSerializer,
+//                ticketFileSerializer,
+//                manifestationFileSerializer,
+//                withdrawalHistoryFileSerializer,
+//                reviewFileSerializer
+//        );
+        return null;
     }
 
     public UserRepository<Admin> getAdminRepository() {
