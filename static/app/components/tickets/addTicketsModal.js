@@ -24,6 +24,7 @@ Vue.component("addTicketsModal", {
                     class="col-sm-6"
                     name="regularInput"
                     v-model="ticketToAdd.numberOfRegularTickets"
+                    v-bind:max="1000"
                     required
                 >
                 </numberInput>
@@ -35,6 +36,7 @@ Vue.component("addTicketsModal", {
                     class="col-sm-6"
                     name="fanPitInput"
                     v-model="ticketToAdd.numberOfFanPitTickets"
+                    v-bind:max="1000"
                     required
                 >
                 </numberInput>
@@ -46,6 +48,7 @@ Vue.component("addTicketsModal", {
                     class="col-sm-6"
                     name="vipInput"
                     v-model="ticketToAdd.numberOfVIPTickets"
+                    v-bind:max="1000"
                     required
                 >
                 </numberInput>
@@ -60,33 +63,33 @@ Vue.component("addTicketsModal", {
         id: String,
         manifestationId: {
             type: Number,
-            required: true
+            required: true,
         },
         manifestationName: {
             type: String,
-            required: true
-        }
+            required: true,
+        },
     },
 
-    data: function() {
+    data: function () {
         return {
             ticketToAdd: {
                 numberOfRegularTickets: 0,
                 numberOfFanPitTickets: 0,
-                numberOfVIPTickets: 0
+                numberOfVIPTickets: 0,
             },
         };
     },
 
     methods: {
-        addTickets: function() {
+        addTickets: function () {
             const requestBody = {
                 manifestationId: this.manifestationId,
                 numberOfRegularTickets: this.ticketToAdd.numberOfRegularTickets,
                 numberOfFanPitTickets: this.ticketToAdd.numberOfFanPitTickets,
-                numberOfVIPTickets: this.ticketToAdd.numberOfVIPTickets
-            }
-            
+                numberOfVIPTickets: this.ticketToAdd.numberOfVIPTickets,
+            };
+
             const successCallback = (response) => {
                 this.closeModal();
                 this.$emit("addedTickets");
@@ -95,7 +98,7 @@ Vue.component("addTicketsModal", {
             const errorCallback = (error) => {
                 this.$root.defaultCatchError(error);
             };
-            
+
             this.$refs.ticketService.addTickets(
                 requestBody,
                 successCallback,
@@ -103,26 +106,25 @@ Vue.component("addTicketsModal", {
             );
         },
 
-        cancel: function() {
+        cancel: function () {
             this.closeModal();
         },
 
-        closeModal: function() {
+        closeModal: function () {
             $("#" + this.id).modal("hide");
             this.clearModal();
         },
 
-        clearModal: function() {
+        clearModal: function () {
             this.ticketToAdd = {
                 numberOfRegularTickets: 0,
                 numberOfFanPitTickets: 0,
-                numberOfVIPTickets: 0
+                numberOfVIPTickets: 0,
             };
-        }
+        },
     },
 
-    mounted() {
-    },
+    mounted() {},
 
-    destroyed() {}
+    destroyed() {},
 });
