@@ -14,9 +14,11 @@ This is university project for course _Web Programming_. The purpose of applicat
 ### Predefined data
 Database has test data to work with. Credentials for all users are 
 
-username: [usertype][1-10]
+username: [userrole][1-10]
 
 password: 123
+
+Possible user roles: Admin, Salesman, Customer
 
 ## How to run
 Simply run main method located in src/program/Program.java
